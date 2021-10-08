@@ -1,0 +1,586 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: T’au Empire — Kroot Hounds (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 9 edition, T’au Empire, Kroot, Beast, Kroot Hounds, Voracious Predators">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Kroot Hounds</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowSpecialistDetachments;
+	if (data == undefined) {data = 'true'; localStorage.ShowSpecialistDetachments = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowSpecialistDetachments').prop('checked', StrData);
+
+	$('.ShowSpecialistDetachments').change(function () {
+      localStorage.ShowSpecialistDetachments = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowCrusadeRules;
+	if (data == undefined) {data = 'true'; localStorage.ShowCrusadeRules = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowCrusadeRules').prop('checked', StrData);
+
+	$('.ShowCrusadeRules').change(function () {
+      localStorage.ShowCrusadeRules = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.PrimarisFilter;
+	if (data == undefined) {data = ''; localStorage.PrimarisFilter = data};
+
+	$('.PrimarisSelect').prop('value', data);
+
+	$('.PrimarisSelect').change(function () {
+      localStorage.PrimarisFilter = $(this).prop('value');
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld, .sSpecialistDetachments, .sPrimaris, .sNotPrimaris, .sCrusadeRules';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+if (localStorage.ShowSpecialistDetachments == 'false') {clFlags = clFlags + comma + '.sSpecialistDetachments'; comma = ', ';};
+if (localStorage.ShowCrusadeRules == 'false') {clFlags = clFlags + comma + '.sCrusadeRules'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sPrimaris') {clFlags = clFlags + comma + '.sNotPrimaris'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sNotPrimaris') {clFlags = clFlags + comma + '.sPrimaris'; comma = ', ';};
+$('.abVisChk').css('display', ''); $('.abVisChk2').css('display', '');
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Datasheets</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><a href="Aun-Shi.html" class="contentColor">Aun’Shi</a></div></div><div class="i15 ArmyType_line "><a href="Aun-Va.html" class="contentColor">Aun’Va</a></div><div class="i15 ArmyType_line "><a href="Cadre-Fireblade.html" class="contentColor">Cadre Fireblade</a></div><div class="i15 ArmyType_line "><a href="Commander-Farsight.html" class="contentColor">Commander Farsight</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV8-Crisis-Battlesuit.html" class="contentColor">Commander in XV8 Crisis Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV85-Enforcer-Battlesuit.html" class="contentColor">Commander in XV85 Enforcer Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV86-Coldstar-Battlesuit.html" class="contentColor">Commander in XV86 Coldstar Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Darkstrider.html" class="contentColor">Darkstrider</a></div><div class="i15 ArmyType_line "><a href="Ethereal.html" class="contentColor">Ethereal</a></div><div class="i15 ArmyType_line "><a href="Longstrike.html" class="contentColor">Longstrike</a></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="Commander-Shadowsun.html" class="contentColor">Commander Shadowsun</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Shas-o-R-alai.html" class="contentColor">Shas’o R’alai</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV81-Crisis-Battlesuit.html" class="contentColor">Commander in XV81 Crisis Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV84-Crisis-Battlesuit.html" class="contentColor">Commander in XV84 Crisis Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Shas-o-R-myr.html" class="contentColor">Shas’o R’myr</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Troops</b></span></div><div class="i15 ArmyType_line "><a href="Breacher-Team.html" class="contentColor">Breacher Team</a></div></div><div class="i15 ArmyType_line "><a href="Kroot-Carnivores.html" class="contentColor">Kroot Carnivores</a></div><div class="i15 ArmyType_line "><a href="Strike-Team.html" class="contentColor">Strike Team</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Dedicated Transport</b></span></div><div class="i15 ArmyType_line "><a href="TY7-Devilfish.html" class="contentColor">TY7 Devilfish</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Elites</b></span></div><div class="i15 ArmyType_line "><a href="Firesight-Marksman.html" class="contentColor">Firesight Marksman</a></div></div><div class="i15 ArmyType_line "><a href="Kroot-Shaper.html" class="contentColor">Kroot Shaper</a></div><div class="i15 ArmyType_line "><a href="Krootox-Riders.html" class="contentColor">Krootox Riders</a></div><div class="i15 ArmyType_line "><a href="XV104-Riptide-Battlesuit.html" class="contentColor">XV104 Riptide Battlesuit</a></div><div class="i15 ArmyType_line "><a href="XV25-Stealth-Battlesuits.html" class="contentColor">XV25 Stealth Battlesuits</a></div><div class="i15 ArmyType_line "><a href="XV8-Crisis-Battlesuits.html" class="contentColor">XV8 Crisis Battlesuits</a></div><div class="i15 ArmyType_line "><a href="XV8-Crisis-Bodyguards.html" class="contentColor">XV8 Crisis Bodyguards</a></div><div class="i15 ArmyType_line "><a href="XV95-Ghostkeel-Battlesuit.html" class="contentColor">XV95 Ghostkeel Battlesuit</a></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV9-Hazard-Battlesuits.html" class="contentColor">XV9 Hazard Battlesuits</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="DX4-Technical-Drones.html" class="contentColor">DX4 Technical Drones</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fast Attack</b></span></div><div class="i15 ArmyType_line "><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div class="i15 ArmyType_line "><a href="Pathfinder-Team.html" class="contentColor">Pathfinder Team</a></div><div class="i15 ArmyType_line "><a href="Tactical-Drones.html" class="contentColor">Tactical Drones</a></div><div class="i15 ArmyType_line "><a href="TX4-Piranhas.html" class="contentColor">TX4 Piranhas</a></div><div class="i15 ArmyType_line "><a href="Vespid-Stingwings.html" class="contentColor">Vespid Stingwings</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tetras.html" class="contentColor">Tetras</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV107-R-varna-Battlesuit.html" class="contentColor">XV107 R’varna Battlesuit</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV109-Y-vahra-Battlesuit.html" class="contentColor">XV109 Y’vahra Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX42-Piranhas.html" class="contentColor">TX42 Piranhas</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Flyers</b></span></div><div class="i15 ArmyType_line "><a href="AX3-Razorshark-Strike-Fighter.html" class="contentColor">AX3 Razorshark Strike Fighter</a></div></div><div class="i15 ArmyType_line "><a href="AX39-Sun-Shark-Bomber.html" class="contentColor">AX39 Sun Shark Bomber</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-1-0-Tiger-Shark.html" class="contentColor">AX-1-0 Tiger Shark</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-5-2-Barracuda.html" class="contentColor">AX-5-2 Barracuda</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="DX-6-Remora-Stealth-Drones.html" class="contentColor">DX-6 Remora Stealth Drones</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tiger-Shark.html" class="contentColor">Tiger Shark</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Heavy Support</b></span></div><div class="i15 ArmyType_line "><a href="MV71-Sniper-Drones.html" class="contentColor">MV71 Sniper Drones</a></div></div><div class="i15 ArmyType_line "><a href="TX7-Hammerhead-Gunship.html" class="contentColor">TX7 Hammerhead Gunship</a></div><div class="i15 ArmyType_line "><a href="TX78-Sky-Ray-Gunship.html" class="contentColor">TX78 Sky Ray Gunship</a></div><div class="i15 ArmyType_line "><a href="XV88-Broadside-Battlesuits.html" class="contentColor">XV88 Broadside Battlesuits</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Great-Knarloc.html" class="contentColor">Great Knarloc</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Heavy-Gun-Drones.html" class="contentColor">Heavy Gun Drones</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX7-Hammerhead-Gunship-Legendary-.html" class="contentColor">TX7 Hammerhead Gunship (Legendary)</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Lords of War</b></span></div><div class="i15 ArmyType_line "><a href="KV128-Stormsurge.html" class="contentColor">KV128 Stormsurge</a></div></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="The-Eight.html" class="contentColor">The Eight</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="KX139-Ta-unar-Supremacy-Armour.html" class="contentColor">KX139 Ta’unar Supremacy Armour</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Manta.html" class="contentColor">Manta</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Orca-Dropship.html" class="contentColor">Orca Dropship</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fortifications</b></span></div><div class="i15 ArmyType_line "><a href="Tidewall-Droneport.html" class="contentColor">Tidewall Droneport</a></div></div><div class="i15 ArmyType_line "><a href="Tidewall-Gunrig.html" class="contentColor">Tidewall Gunrig</a></div><div class="i15 ArmyType_line "><a href="Tidewall-Shieldline.html" class="contentColor">Tidewall Shieldline</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Drone-Sentry-Turret.html" class="contentColor">Drone Sentry Turret</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Remote-Sensor-Tower.html" class="contentColor">Remote Sensor Tower</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowSpecialistDetachments">
+	<span class="checkmark"></span>Show Specialist Detachments
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowCrusadeRules">
+	<span class="checkmark"></span>Show Crusade Rules
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/core-rules/index.htm">Core Rules</a><a href="../../the-rules/open-play/index.htm">Open Play</a><a href="../../the-rules/matched-play/index.htm">Matched Play</a><a href="../../the-rules/narrative-play/index.htm">Narrative Play</a><a href="../../the-rules/advanced-rules/index.htm">Advanced Rules</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Mission Packs</div><a href="../../the-rules/beyond-the-veil/index.htm">Beyond the Veil</a><a href="../../the-rules/grand-tournament-2021/index.htm">Grand Tournament 2021</a><a href="../../the-rules/tactical-deployment/index.htm">Tactical Deployment</a><a href="../../the-rules/psychic-awakening/index.htm">Psychic Awakening</a><a href="../../the-rules/piety-and-pain/index.htm">Piety and Pain</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">War Zones</div><a href="../../the-rules/war-zone-charadon/index.htm">War Zone Charadon</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a href="../adepta-sororitas/index.htm">Adepta Sororitas</a><a href="../adeptus-custodes/index.htm">Adeptus Custodes</a><a href="../adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a href="../astra-militarum/index.htm">Astra Militarum</a><a href="../grey-knights/index.htm">Grey Knights</a><a href="../imperial-knights/index.htm">Imperial Knights</a><a href="../inquisition/index.htm">Inquisition</a><a href="../officio-assassinorum/index.htm">Officio Assassinorum</a><a href="../rogue-traders/index.htm">Rogue Traders</a><a href="../sisters-of-silence/index.htm">Sisters of Silence</a><a href="../space-marines/index.htm">Space Marines</a><a href="../titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a href="../chaos-daemons/index.htm">Chaos Daemons</a><a href="../chaos-knights/index.htm">Chaos Knights</a><a href="../chaos-space-marines/index.htm">Chaos Space Marines</a><a href="../death-guard/index.htm">Death Guard</a><a href="../heretic-titan-legions/index.htm">Heretic Titan Legions</a><a href="../renegades-and-heretics/index.htm">Renegades and Heretics</a><a href="../thousand-sons/index.htm">Thousand Sons</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a href="../craftworlds/index.htm">Craftworlds</a><a href="../drukhari/index.htm">Drukhari</a><a href="../harlequins/index.htm">Harlequins</a><a href="../ynnari/index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a href="../genestealer-cults/index.htm">Genestealer Cults</a><a href="../necrons/index.htm">Necrons</a><a href="../orks/index.htm">Orks</a><a href="index.htm">T’au Empire</a><a href="../tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a href="../unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">T’au Empire</span><span class="page_header_span2"> – Kroot Hounds</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This datasheet does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+
+<div class="datasheet  " style="position:relative">
+<div class="dsOuterFrame">
+<div style="float:left" class="pTable_no_dam">
+<div><img border="0" class="img-opa tooltip" data-tooltip-content="#tooltip_contentFastAttack" src="../../img/Role_FastAttack.png" style="float:left;margin-left:4px"><div class="img-opa PowerPrice">1</div><img class="tooltip img-opa logo3" title="Codex. T’au Empire (8th edition, version Indomitus 1.2)" src="../../img/expansions/TauEmpire_logo3.png"><h3 class="pTable_h3 pTable_no_dam"><div>Kroot Hounds<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Warhammer%2040000%20T’au%20Empire%20Kroot%20Hounds%20miniature"><div class="picSearch"></div></a></div></h3></div>
+<table class="pTable_no_dam pTable_border" cellpadding="0" cellspacing="0">
+<tr class="wTable3">
+<td class="pTable1 pad4">No</td><td class="pTable1_"><span class="pTable_left">NAME</span><span class="pTable_left">&nbsp;</span></td>
+<td class="pTable2 pad4">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable2 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td class="pTable1b pad4 ShowBaseSize">Base</td>
+
+</tr>
+<tr class="pTable2_short"><td class="pTable2_pad" colspan="12"><div class="PriceTag">6</div>Kroot Hound<span class="ShowBaseSize"> (base: 25mm)</span></td>
+</tr>
+<tr>
+<td class="pTable2">4&#8209;12</td><td class="pTable2_"><span class="pTable2_long"><div class="PriceTag">6</div>Kroot Hound</span></td>
+<td class="pTable1">12"</td>
+<td class="pTable2">3+</td>
+<td class="pTable2">-</td>
+<td class="pTable2">3</td>
+<td class="pTable2">3</td>
+<td class="pTable1">1</td>
+<td class="pTable2">2</td>
+<td class="pTable2">5</td>
+<td class="pTable2">6+</td>
+<td class="pTable2b ShowBaseSize">25mm</td>
+
+</tr>
+</table>
+<div style="padding:4px;">This unit contains 4 Kroot Hounds. It can include up to 4 additional Kroot Hounds (<b>Power Rating +1</b>) or up to 8 additional Kroot Hounds (<b>Power Rating +2</b>). Each model attacks with its ripping fangs.</div>
+</div>
+<div style="clear:both"></div>
+<div class="dsline"></div>
+<div class="wtOuterFrame"><table class="wTable" width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="wTable_WEAPON" style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1"><span class="wTable1_short">ABILITIES</span><span class="wTable1_short_space">&nbsp;</span></div></td></tr><tbody class=" bkg"><tr class="wTable2_long"><td colspan="7" class="pad2626"><span>Ripping fangs</span></td></tr><tr class=""><td class="wTable2_short pad2626"><span>Ripping fangs</span></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00241"><span class="tt kwbu">Melee</span></span></div></td><td><div class="ct pad2626">User</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><span class="wTable1_short pad2626">-</span></td></tr></tbody></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="abVisChk dsAbilityHeader_long"><td><div class="dsHeader">ABILITIES</div></td></tr>
+<tr class="abVisChk">
+<td class="dsAbilityHeader"><div class="dsHeader">ABILITIES</div></td>
+<td class="dsAbilityData">
+<div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Voracious Predators</span><b>: </b>You can re-roll failed <span class="tooltip" data-tooltip-content="#tooltip_content00966"><span class="tt kwbu">charge</span> <span class="tt kwbu">rolls</span></span> for this unit when targeting a unit that has suffered any <span class="tooltip" data-tooltip-content="#tooltip_content00967"><span class="tt kwbu">unsaved</span> <span class="tt kwbu">wounds</span></span> this turn.<div class="a_indent"></div></div>
+</td>
+</tr>
+<tr><td colspan="2" style="vertical-align:middle;border-top: 2px ridge #888;padding:4px;">
+<span class="dsKeywordHeader">FACTION KEYWORDS: </span><span class="dsKeywordData"><span class="tooltip" data-tooltip-content="#tooltip_contentTauEmpire" data-tooltip-anchor="#tooltip_contentTauEmpire"><span class="kwb kwbu">T’AU</span> <span class="kwb kwbu">EMPIRE</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentKroot" data-tooltip-anchor="#tooltip_contentKroot"><span class="kwb kwbu">KROOT</span></span></span>
+</td></tr>
+<tr><td colspan="2" style="padding:4px;">
+<span class="dsKeywordHeader">KEYWORDS: </span><span class="dsKeywordData"><span class="kwb">BEAST</span>, <span class="kwb">KROOT</span> <span class="kwb">HOUNDS</span></span>
+</td></tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+<div style="height:8px"></div><h2 class=" outline_header">Datasheet-related Stratagems</h2><div class="Columns2"><div class="" style="position:relative;margin:2px 8px 2px 8px"><div style="top:14px;left:-13px;position:absolute"><div class="BreakInsideAvoid Corner6" style="padding:6px;"><table class="frameLight collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k9ed/img/corners/Corner6_1.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_2.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_3.png" style="width:7px;height:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_8.png" style="width:7px"></td><td bgcolor="#101010" style="color:#fefefe"><div class="stratPts">1CP</div></td><td background="/wh40k9ed/img/corners/Corner6_4.png" style="width:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_7.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_6.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_5.png" style="width:7px;height:7px"></td></tr></tbody></table></div></div><div class="BreakInsideAvoid Corner7" style="padding:6px;max-width:460px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner7_1"></td><td class="Corner7_2"></td><td class="Corner7_3"></td></tr><tr><td class="Corner7_8"></td><td class="Corner7_9"><p class="stratName">AMBUSHING PREDATORS</p><p class="stratFaction">T’au Empire Stratagem</p><p class="ShowFluff stratLegend">Kroot are fierce predators who have learned over millennia the most effective ways to hunt for prey.</p>Use this Stratagem in your opponent’s <a href="../../the-rules/core-rules/index.htm#CHARGE-PHASE">Charge phase</a>. Select one <span class="tooltip" data-tooltip-content="#tooltip_content00063" data-tooltip-anchor="#tooltip_content00063"><span class="kwb kwbu">KROOT</span></span> unit from your army. Until the end of that phase, that unit can perform a <span class="tooltip" data-tooltip-content="#tooltip_content00968"><span class="tt kwbu">Heroic</span> <span class="tt kwbu">Intervention</span></span> as if it were a <span class="tooltip" data-tooltip-content="#tooltip_content00040"><span class="tt kwbu">CHARACTER</span></span>. In addition, if that unit performs a Heroic Intervention in that phase it can do so if there are any enemy units within 6" of them instead of 3", and when doing so can move up to 6" instead of 3".</td><td class="Corner7_4"></td></tr><tr><td class="Corner7_7"></td><td class="Corner7_6"></td><td class="Corner7_5"></td></tr></tbody></table></div></div><div class="" style="position:relative;margin:2px 8px 2px 8px"><div style="top:14px;left:-13px;position:absolute"><div class="BreakInsideAvoid Corner6" style="padding:6px;"><table class="frameLight collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k9ed/img/corners/Corner6_1.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_2.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_3.png" style="width:7px;height:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_8.png" style="width:7px"></td><td bgcolor="#101010" style="color:#fefefe"><div class="stratPts">1CP</div></td><td background="/wh40k9ed/img/corners/Corner6_4.png" style="width:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_7.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_6.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_5.png" style="width:7px;height:7px"></td></tr></tbody></table></div></div><div class="BreakInsideAvoid Corner7" style="padding:6px;max-width:460px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner7_1"></td><td class="Corner7_2"></td><td class="Corner7_3"></td></tr><tr><td class="Corner7_8"></td><td class="Corner7_9"><p class="stratName">HIDDEN HUNTERS</p><p class="stratFaction">T’au Empire Stratagem</p><p class="ShowFluff stratLegend">The Kroot are experts in camouflage and concealment, and utilise cover in ways most would never consider.</p>Use this Stratagem at the start of your opponent’s <a href="../../the-rules/core-rules/index.htm#SHOOTING-PHASE">Shooting phase</a>. Select one <span class="tooltip" data-tooltip-content="#tooltip_content00063" data-tooltip-anchor="#tooltip_content00063"><span class="kwb kwbu">KROOT</span></span> unit from your army. Until the end of that phase, when resolving an attack made with a ranged weapon against that unit whilst it is receiving the <span class="tooltip" data-tooltip-content="#tooltip_content00969"><span class="tt kwbu">benefit</span> <span class="tt kwbu">of</span> <span class="tt kwbu">cover</span></span>, subtract 1 from the <span class="tooltip" data-tooltip-content="#tooltip_content00005"><span class="tt kwbu">hit</span> <span class="tt kwbu">roll</span></span> and add 1 to the <span class="tooltip" data-tooltip-content="#tooltip_content00970"><span class="tt kwbu">saving</span> <span class="tt kwbu">throw</span></span>.</td><td class="Corner7_4"></td></tr><tr><td class="Corner7_7"></td><td class="Corner7_6"></td><td class="Corner7_5"></td></tr></tbody></table></div></div><div class="" style="position:relative;margin:2px 8px 2px 8px"><div style="top:14px;left:-13px;position:absolute"><div class="BreakInsideAvoid Corner6" style="padding:6px;"><table class="frameLight collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k9ed/img/corners/Corner6_1.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_2.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_3.png" style="width:7px;height:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_8.png" style="width:7px"></td><td bgcolor="#101010" style="color:#fefefe"><div class="stratPts">1CP</div></td><td background="/wh40k9ed/img/corners/Corner6_4.png" style="width:7px"></td></tr><tr><td background="/wh40k9ed/img/corners/Corner6_7.png" style="width:7px;height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_6.png" style="height:7px"></td><td background="/wh40k9ed/img/corners/Corner6_5.png" style="width:7px;height:7px"></td></tr></tbody></table></div></div><div class="BreakInsideAvoid Corner7" style="padding:6px;max-width:460px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner7_1"></td><td class="Corner7_2"></td><td class="Corner7_3"></td></tr><tr><td class="Corner7_8"></td><td class="Corner7_9"><p class="stratName">HUNTING HOUNDS</p><p class="stratFaction">T’au Empire Stratagem</p><p class="ShowFluff stratLegend">The Kroot unleash their razor-beaked hounds, and a tide of mottled green flesh tears into the enemy ranks.</p>Use this Stratagem when a <a href="Kroot-Hounds.html">Kroot Hound</a> unit from your army completes a charge against an enemy unit. Until the end of the phase, you can re-roll failed <span class="tooltip" data-tooltip-content="#tooltip_content00972"><span class="tt kwbu">charge</span> <span class="tt kwbu">rolls</span></span> for other friendly <span class="tooltip" data-tooltip-content="#tooltip_content00063" data-tooltip-anchor="#tooltip_content00063"><span class="kwb kwbu">KROOT</span></span> units that are within 12" of that Kroot Hound unit after it completes its charge move.</td><td class="Corner7_4"></td></tr><tr><td class="Corner7_7"></td><td class="Corner7_6"></td><td class="Corner7_5"></td></tr></tbody></table></div></div></div>
+</div>
+<div style="clear:both"></div>
+
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_contentFastAttack"><p><b>This datasheet has <span class="redfont">Fast Attack</span> <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Role">Battlefield Role</a>. Full list of T’au Empire units sharing same Battlefield Role follows:</b></p><span class="contents"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fast Attack</b></span></div><div class="i15 ArmyType_line "><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div class="i15 ArmyType_line "><a href="Pathfinder-Team.html" class="contentColor">Pathfinder Team</a></div><div class="i15 ArmyType_line "><a href="Tactical-Drones.html" class="contentColor">Tactical Drones</a></div><div class="i15 ArmyType_line "><a href="TX4-Piranhas.html" class="contentColor">TX4 Piranhas</a></div><div class="i15 ArmyType_line "><a href="Vespid-Stingwings.html" class="contentColor">Vespid Stingwings</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tetras.html" class="contentColor">Tetras</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV107-R-varna-Battlesuit.html" class="contentColor">XV107 R’varna Battlesuit</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV109-Y-vahra-Battlesuit.html" class="contentColor">XV109 Y’vahra Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX42-Piranhas.html" class="contentColor">TX42 Piranhas</a></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_content00241"><div class="tooltip_header">Select Weapon</div><a href="../../the-rules/core-rules/index.htm#Select-Weapon"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes a close combat attack, it must do so using a melee weapon (i.e. a weapon that has the ‘Melee’ type). The weapons a model is equipped with are described on its datasheet. If a model is not equipped with any melee weapons, or if it cannot make an attack with any of the melee weapons it is equipped with, then that model makes its attacks using a close combat weapon, which has the following profile:<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td style="border-width:0 0 1px 0;text-align:left;vertical-align:middle;font-size:22px;width:179px;height:0px;"><b>WEAPON</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:93px;height:0px;"><b>RANGE</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:91px;height:0px;"><b>TYPE</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>S</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>AP</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>D</b></td></tr><tr><td style="border-width:0 0 0 0;vertical-align:middle;font-size:18px;width:179px;height:0px;">Close combat weapon</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:93px;height:0px;">Melee</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:91px;height:0px;">Melee</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">User</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">0</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">1</td></tr></tbody></table></td></tr></tbody></table></div></font><br>If a model has more than one melee weapon, select which it will use before resolving any attacks. If a model has more than one melee weapon and can make several attacks, it can split them between these weapons however you wish – declare which attacks are being made with which weapons before any attacks are resolved. If the selected weapon has more than one profile that you must choose between, you must declare which profile is being used at the same time. Different attacks made with such a weapon can be made using different profiles if you wish.<br><br>If your unit is <a href="../../the-rules/core-rules/index.htm#Making-Attacks">making attacks</a> with more than one melee weapon against a unit, and those weapons have different characteristics profiles, then after you have resolved an attack with one of those weapons you must, if any other weapons with the same characteristics profile are also being used to make attacks against that unit, resolve those attacks before resolving any attacks against the target with a weapon that has a different characteristics profile. Note that all the attacks you have declared are always resolved against the target unit even if, when you come to resolve an individual attack, no models in the target unit remain in range (this can happen because of models being destroyed and removed from the battlefield as the result of resolving other attacks made by the attacking model’s unit first).<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Each close combat attack is made with a melee weapon.</li><li>A model makes attacks using the close combat weapon profile if it has no other melee weapons.</li><li>If a unit attacks with multiple weapons, all attacks made with weapons that have the same profile must be resolved before resolving attacks with the next.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00965"><div class="tooltip_header">Engagement Range</div><a href="../../the-rules/core-rules/index.htm#Engagement-Range"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Engagement Range represents the zone of threat that models present to their enemies. While a model is within 1" horizontally and 5" vertically of an enemy model, those models are within Engagement Range of each other. While two enemy models are within Engagement Range of each other, those models’ units are also within Engagement Range of each other. Models cannot be set up within Engagement Range of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Engagement Range:</b> 1" horizontally + 5" vertically.</li><li>Models cannot be set up within Engagement Range of enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00966"><div class="tooltip_header">Charging with a Unit</div><a href="../../the-rules/core-rules/index.htm#Charging-with-a-Unit"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Once you have chosen an eligible unit to declare a charge with, you must select one or more enemy units within 12" of it as the targets of its charge. The target(s) of this charge do not need to be visible to the charging unit. You then make a charge roll for your unit by rolling 2D6. This is the maximum number of inches each model in the charging unit can now be moved if they can make the charge move. To make a charge move, the unit’s charge roll must be sufficient that it is able to end that move in <a href="../../the-rules/core-rules/index.htm#Unit-Coherency">unit coherency</a> and within <a href="../../the-rules/core-rules/index.htm#Engagement-Range">Engagement Range</a> of every unit that was a target of its charge, without moving within Engagement Range of any enemy units that were not a target of its charge. If this is possible, then the charge is successful and the models in the unit make a charge move so as to fulfil the above conditions. If this is impossible, the charge fails and no models in the charging unit move this phase.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Declare targets of the charge (must be within 12").</li><li>Charge roll = 2D6".</li><li>If insufficient to move charging unit into <span class="tooltip" data-tooltip-content="#tooltip_content00965"><span class="tt kwbu">Engagement</span> <span class="tt kwbu">Range</span></span> of all targets, charge fails.</li><li>If charge successful, models make their charge move.</li><li>Cannot make a charge move within Engagement Range of any unit that was not the target of the charge.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00967"><div class="tooltip_header">Saving Throw</div><a href="../../the-rules/core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentTauEmpire"><b><p>The <a href="index.htm"><span class="kwb">T’AU</span> <span class="kwb">EMPIRE</span></a> keyword is used in the following T’au Empire datasheets:</p></b><span class="contents"><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Aun-Shi.html" class="contentColor">Aun’Shi</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Aun-Va.html" class="contentColor">Aun’Va</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Cadre-Fireblade.html" class="contentColor">Cadre Fireblade</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Commander-Farsight.html" class="contentColor">Commander Farsight</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Commander-in-XV8-Crisis-Battlesuit.html" class="contentColor">Commander in XV8 Crisis Battlesuit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Commander-in-XV85-Enforcer-Battlesuit.html" class="contentColor">Commander in XV85 Enforcer Battlesuit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Commander-in-XV86-Coldstar-Battlesuit.html" class="contentColor">Commander in XV86 Coldstar Battlesuit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Darkstrider.html" class="contentColor">Darkstrider</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Ethereal.html" class="contentColor">Ethereal</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Longstrike.html" class="contentColor">Longstrike</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="Commander-Shadowsun.html" class="contentColor">Commander Shadowsun</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Shas-o-R-alai.html" class="contentColor">Shas’o R’alai</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV81-Crisis-Battlesuit.html" class="contentColor">Commander in XV81 Crisis Battlesuit</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV84-Crisis-Battlesuit.html" class="contentColor">Commander in XV84 Crisis Battlesuit</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Shas-o-R-myr.html" class="contentColor">Shas’o R’myr</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Breacher-Team.html" class="contentColor">Breacher Team</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Carnivores.html" class="contentColor">Kroot Carnivores</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Strike-Team.html" class="contentColor">Strike Team</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="TY7-Devilfish.html" class="contentColor">TY7 Devilfish</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Firesight-Marksman.html" class="contentColor">Firesight Marksman</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Shaper.html" class="contentColor">Kroot Shaper</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Krootox-Riders.html" class="contentColor">Krootox Riders</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV104-Riptide-Battlesuit.html" class="contentColor">XV104 Riptide Battlesuit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV25-Stealth-Battlesuits.html" class="contentColor">XV25 Stealth Battlesuits</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV8-Crisis-Battlesuits.html" class="contentColor">XV8 Crisis Battlesuits</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV8-Crisis-Bodyguards.html" class="contentColor">XV8 Crisis Bodyguards</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV95-Ghostkeel-Battlesuit.html" class="contentColor">XV95 Ghostkeel Battlesuit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV9-Hazard-Battlesuits.html" class="contentColor">XV9 Hazard Battlesuits</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="DX4-Technical-Drones.html" class="contentColor">DX4 Technical Drones</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Pathfinder-Team.html" class="contentColor">Pathfinder Team</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Tactical-Drones.html" class="contentColor">Tactical Drones</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="TX4-Piranhas.html" class="contentColor">TX4 Piranhas</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Vespid-Stingwings.html" class="contentColor">Vespid Stingwings</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tetras.html" class="contentColor">Tetras</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV107-R-varna-Battlesuit.html" class="contentColor">XV107 R’varna Battlesuit</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV109-Y-vahra-Battlesuit.html" class="contentColor">XV109 Y’vahra Battlesuit</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX42-Piranhas.html" class="contentColor">TX42 Piranhas</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Flyers</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="AX3-Razorshark-Strike-Fighter.html" class="contentColor">AX3 Razorshark Strike Fighter</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="AX39-Sun-Shark-Bomber.html" class="contentColor">AX39 Sun Shark Bomber</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-1-0-Tiger-Shark.html" class="contentColor">AX-1-0 Tiger Shark</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-5-2-Barracuda.html" class="contentColor">AX-5-2 Barracuda</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="DX-6-Remora-Stealth-Drones.html" class="contentColor">DX-6 Remora Stealth Drones</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tiger-Shark.html" class="contentColor">Tiger Shark</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="MV71-Sniper-Drones.html" class="contentColor">MV71 Sniper Drones</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="TX7-Hammerhead-Gunship.html" class="contentColor">TX7 Hammerhead Gunship</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="TX78-Sky-Ray-Gunship.html" class="contentColor">TX78 Sky Ray Gunship</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="XV88-Broadside-Battlesuits.html" class="contentColor">XV88 Broadside Battlesuits</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Great-Knarloc.html" class="contentColor">Great Knarloc</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Heavy-Gun-Drones.html" class="contentColor">Heavy Gun Drones</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX7-Hammerhead-Gunship-Legendary-.html" class="contentColor">TX7 Hammerhead Gunship (Legendary)</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Lords of War</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="KV128-Stormsurge.html" class="contentColor">KV128 Stormsurge</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="The-Eight.html" class="contentColor">The Eight</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="KX139-Ta-unar-Supremacy-Armour.html" class="contentColor">KX139 Ta’unar Supremacy Armour</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Manta.html" class="contentColor">Manta</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Orca-Dropship.html" class="contentColor">Orca Dropship</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Fortifications</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Tidewall-Droneport.html" class="contentColor">Tidewall Droneport</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Tidewall-Gunrig.html" class="contentColor">Tidewall Gunrig</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Tidewall-Shieldline.html" class="contentColor">Tidewall Shieldline</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Drone-Sentry-Turret.html" class="contentColor">Drone Sentry Turret</a></div><div style="clear:both"></div><br><b>and others...</b></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentKroot"><b><p>The <span class="kwb">KROOT</span> keyword is used in the following T’au Empire datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Carnivores.html" class="contentColor">Kroot Carnivores</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Shaper.html" class="contentColor">Kroot Shaper</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Krootox-Riders.html" class="contentColor">Krootox Riders</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Heavy Support</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Great-Knarloc.html" class="contentColor">Great Knarloc</a></div></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_content00063"><b><p>The <span class="kwb">KROOT</span> keyword is used in the following T’au Empire datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Carnivores.html" class="contentColor">Kroot Carnivores</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Shaper.html" class="contentColor">Kroot Shaper</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Krootox-Riders.html" class="contentColor">Krootox Riders</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Heavy Support</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Great-Knarloc.html" class="contentColor">Great Knarloc</a></div></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_content00968"><div class="tooltip_header">Performing a Heroic Intervention</div><a href="../../the-rules/core-rules/index.htm#Performing-a-Heroic-Intervention"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a unit performs a Heroic Intervention, you can move each model in that unit up to 3" – this is a Heroic Intervention move. Each model in the unit must finish its Heroic Intervention move closer to the closest enemy model. Remember that a unit must finish any type of move in <a href="../../the-rules/core-rules/index.htm#Unit-Coherency">unit coherency</a>.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Heroic Intervention</b>: Move up to 3".</li><li>Must end closer to the closest enemy model.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00040"><div class="tooltip_header">Characters</div><a href="../../the-rules/core-rules/index.htm#Characters"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have the <span class="kwb">CHARACTER</span> keyword. These models can make <a href="../../the-rules/core-rules/index.htm#2.-Heroic-Interventions">Heroic Interventions</a> in <a href="../../the-rules/core-rules/index.htm#CHARGE-PHASE">Charge Phase</a> and are not easy targets in the <a href="../../the-rules/core-rules/index.htm#SHOOTING-PHASE">Shooting Phase</a> (see <a href="../../the-rules/core-rules/index.htm#Look-out-Sir">Look out, Sir</a>, rule). If your <a href="../../the-rules/core-rules/index.htm#The-Warlord">Warlord</a> has the <span class="kwb">CHARACTER</span> keyword he may be able to have a <a href="../../the-rules/core-rules/index.htm#Warlord-Traits">Warlord Trait</a> (see Warlord Trait section on model’s faction page).<br><br>Note that <span class="kwb">CHARACTERS</span> cannot use their <a href="../../the-rules/core-rules/index.htm#Aura-Abilities">Aura Abilities</a> while <a href="../../the-rules/advanced-rules/index.htm#Performing-Actions">performing actions</a>.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00969"><div class="tooltip_header">Terrain and Cover</div><a href="../../the-rules/core-rules/index.htm#Terrain-and-Cover"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some pieces of terrain can provide certain bonuses to units in your army. Each bonus and how to acquire it is described in the <a href="../../the-rules/advanced-rules/index.htm#TERRAIN-FEATURES">Terrain Features</a> section of the Core Rules. If a model has acquired such a bonus (to it's Save, Leadership or other characteristics), it is considered as receiving the benefit of cover. There are ways for some models to ignore such bonuses while making an attack, but it should be known what kind of benefit is ignored (see the <a href="../../the-rules/advanced-rules/index.htm#RARE-RULES">Rare Rules</a> for clarification).
+</span></div><div class="tooltip_templates"><span id="tooltip_content00005"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/core-rules/index.htm#1.-Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes an attack, make one hit roll for that attack by rolling one D6. If the result of the hit roll is equal to or greater than the attacking model’s Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon) or its Weapon Skill (WS) characteristic (if the attack is being made with a melee weapon), then that attack scores one hit against the target unit. If not, the attack fails and the attack sequence ends.<br><br>If an attack is made with a weapon that has an ability that says it ‘automatically hits the target’, no hit roll is made – that attack simply scores one hit on the target unit. An unmodified hit roll of 6 always scores a hit, and an unmodified hit roll of 1 always fails. A hit roll can never be modified by more than -1 or +1. This means that if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be -2 or worse, it is changed to be -1. Similarly, if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be +2 or better, it is changed to be +1.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00970"><div class="tooltip_header">Saving Throw</div><a href="../../the-rules/core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00971"><div class="tooltip_header">Engagement Range</div><a href="../../the-rules/core-rules/index.htm#Engagement-Range"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Engagement Range represents the zone of threat that models present to their enemies. While a model is within 1" horizontally and 5" vertically of an enemy model, those models are within Engagement Range of each other. While two enemy models are within Engagement Range of each other, those models’ units are also within Engagement Range of each other. Models cannot be set up within Engagement Range of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Engagement Range:</b> 1" horizontally + 5" vertically.</li><li>Models cannot be set up within Engagement Range of enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00972"><div class="tooltip_header">Charging with a Unit</div><a href="../../the-rules/core-rules/index.htm#Charging-with-a-Unit"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Once you have chosen an eligible unit to declare a charge with, you must select one or more enemy units within 12" of it as the targets of its charge. The target(s) of this charge do not need to be visible to the charging unit. You then make a charge roll for your unit by rolling 2D6. This is the maximum number of inches each model in the charging unit can now be moved if they can make the charge move. To make a charge move, the unit’s charge roll must be sufficient that it is able to end that move in <a href="../../the-rules/core-rules/index.htm#Unit-Coherency">unit coherency</a> and within <a href="../../the-rules/core-rules/index.htm#Engagement-Range">Engagement Range</a> of every unit that was a target of its charge, without moving within Engagement Range of any enemy units that were not a target of its charge. If this is possible, then the charge is successful and the models in the unit make a charge move so as to fulfil the above conditions. If this is impossible, the charge fails and no models in the charging unit move this phase.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Declare targets of the charge (must be within 12").</li><li>Charge roll = 2D6".</li><li>If insufficient to move charging unit into <span class="tooltip" data-tooltip-content="#tooltip_content00971"><span class="tt kwbu">Engagement</span> <span class="tt kwbu">Range</span></span> of all targets, charge fails.</li><li>If charge successful, models make their charge move.</li><li>Cannot make a charge move within Engagement Range of any unit that was not the target of the charge.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><a href="Aun-Shi.html" class="contentColor">Aun’Shi</a></div></div><div class="i15 ArmyType_line "><a href="Aun-Va.html" class="contentColor">Aun’Va</a></div><div class="i15 ArmyType_line "><a href="Cadre-Fireblade.html" class="contentColor">Cadre Fireblade</a></div><div class="i15 ArmyType_line "><a href="Commander-Farsight.html" class="contentColor">Commander Farsight</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV8-Crisis-Battlesuit.html" class="contentColor">Commander in XV8 Crisis Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV85-Enforcer-Battlesuit.html" class="contentColor">Commander in XV85 Enforcer Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Commander-in-XV86-Coldstar-Battlesuit.html" class="contentColor">Commander in XV86 Coldstar Battlesuit</a></div><div class="i15 ArmyType_line "><a href="Darkstrider.html" class="contentColor">Darkstrider</a></div><div class="i15 ArmyType_line "><a href="Ethereal.html" class="contentColor">Ethereal</a></div><div class="i15 ArmyType_line "><a href="Longstrike.html" class="contentColor">Longstrike</a></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="Commander-Shadowsun.html" class="contentColor">Commander Shadowsun</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Shas-o-R-alai.html" class="contentColor">Shas’o R’alai</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV81-Crisis-Battlesuit.html" class="contentColor">Commander in XV81 Crisis Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Commander-in-XV84-Crisis-Battlesuit.html" class="contentColor">Commander in XV84 Crisis Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Shas-o-R-myr.html" class="contentColor">Shas’o R’myr</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Troops</b></span></div><div class="i15 ArmyType_line "><a href="Breacher-Team.html" class="contentColor">Breacher Team</a></div></div><div class="i15 ArmyType_line "><a href="Kroot-Carnivores.html" class="contentColor">Kroot Carnivores</a></div><div class="i15 ArmyType_line "><a href="Strike-Team.html" class="contentColor">Strike Team</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Dedicated Transport</b></span></div><div class="i15 ArmyType_line "><a href="TY7-Devilfish.html" class="contentColor">TY7 Devilfish</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Elites</b></span></div><div class="i15 ArmyType_line "><a href="Firesight-Marksman.html" class="contentColor">Firesight Marksman</a></div></div><div class="i15 ArmyType_line "><a href="Kroot-Shaper.html" class="contentColor">Kroot Shaper</a></div><div class="i15 ArmyType_line "><a href="Krootox-Riders.html" class="contentColor">Krootox Riders</a></div><div class="i15 ArmyType_line "><a href="XV104-Riptide-Battlesuit.html" class="contentColor">XV104 Riptide Battlesuit</a></div><div class="i15 ArmyType_line "><a href="XV25-Stealth-Battlesuits.html" class="contentColor">XV25 Stealth Battlesuits</a></div><div class="i15 ArmyType_line "><a href="XV8-Crisis-Battlesuits.html" class="contentColor">XV8 Crisis Battlesuits</a></div><div class="i15 ArmyType_line "><a href="XV8-Crisis-Bodyguards.html" class="contentColor">XV8 Crisis Bodyguards</a></div><div class="i15 ArmyType_line "><a href="XV95-Ghostkeel-Battlesuit.html" class="contentColor">XV95 Ghostkeel Battlesuit</a></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV9-Hazard-Battlesuits.html" class="contentColor">XV9 Hazard Battlesuits</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="DX4-Technical-Drones.html" class="contentColor">DX4 Technical Drones</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fast Attack</b></span></div><div class="i15 ArmyType_line "><a href="Kroot-Hounds.html" class="contentColor">Kroot Hounds</a></div></div><div class="i15 ArmyType_line "><a href="Pathfinder-Team.html" class="contentColor">Pathfinder Team</a></div><div class="i15 ArmyType_line "><a href="Tactical-Drones.html" class="contentColor">Tactical Drones</a></div><div class="i15 ArmyType_line "><a href="TX4-Piranhas.html" class="contentColor">TX4 Piranhas</a></div><div class="i15 ArmyType_line "><a href="Vespid-Stingwings.html" class="contentColor">Vespid Stingwings</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tetras.html" class="contentColor">Tetras</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV107-R-varna-Battlesuit.html" class="contentColor">XV107 R’varna Battlesuit</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="XV109-Y-vahra-Battlesuit.html" class="contentColor">XV109 Y’vahra Battlesuit</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Knarloc-Riders.html" class="contentColor">Knarloc Riders</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX42-Piranhas.html" class="contentColor">TX42 Piranhas</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Flyers</b></span></div><div class="i15 ArmyType_line "><a href="AX3-Razorshark-Strike-Fighter.html" class="contentColor">AX3 Razorshark Strike Fighter</a></div></div><div class="i15 ArmyType_line "><a href="AX39-Sun-Shark-Bomber.html" class="contentColor">AX39 Sun Shark Bomber</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-1-0-Tiger-Shark.html" class="contentColor">AX-1-0 Tiger Shark</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="AX-5-2-Barracuda.html" class="contentColor">AX-5-2 Barracuda</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="DX-6-Remora-Stealth-Drones.html" class="contentColor">DX-6 Remora Stealth Drones</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Tiger-Shark.html" class="contentColor">Tiger Shark</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Heavy Support</b></span></div><div class="i15 ArmyType_line "><a href="MV71-Sniper-Drones.html" class="contentColor">MV71 Sniper Drones</a></div></div><div class="i15 ArmyType_line "><a href="TX7-Hammerhead-Gunship.html" class="contentColor">TX7 Hammerhead Gunship</a></div><div class="i15 ArmyType_line "><a href="TX78-Sky-Ray-Gunship.html" class="contentColor">TX78 Sky Ray Gunship</a></div><div class="i15 ArmyType_line "><a href="XV88-Broadside-Battlesuits.html" class="contentColor">XV88 Broadside Battlesuits</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Great-Knarloc.html" class="contentColor">Great Knarloc</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Heavy-Gun-Drones.html" class="contentColor">Heavy Gun Drones</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="TX7-Hammerhead-Gunship-Legendary-.html" class="contentColor">TX7 Hammerhead Gunship (Legendary)</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Lords of War</b></span></div><div class="i15 ArmyType_line "><a href="KV128-Stormsurge.html" class="contentColor">KV128 Stormsurge</a></div></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="The-Eight.html" class="contentColor">The Eight</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="KX139-Ta-unar-Supremacy-Armour.html" class="contentColor">KX139 Ta’unar Supremacy Armour</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="Manta.html" class="contentColor">Manta</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Orca-Dropship.html" class="contentColor">Orca Dropship</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fortifications</b></span></div><div class="i15 ArmyType_line "><a href="Tidewall-Droneport.html" class="contentColor">Tidewall Droneport</a></div></div><div class="i15 ArmyType_line "><a href="Tidewall-Gunrig.html" class="contentColor">Tidewall Gunrig</a></div><div class="i15 ArmyType_line "><a href="Tidewall-Shieldline.html" class="contentColor">Tidewall Shieldline</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Drone-Sentry-Turret.html" class="contentColor">Drone Sentry Turret</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="Remote-Sensor-Tower.html" class="contentColor">Remote Sensor Tower</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><a href="index.htm#Keywords" class="contentColor">Keywords</a></div><div class="w1 i15"><a href="index.htm#Abilities" class="contentColor">Abilities</a></div><div class="w1 i15"><a href="index.htm#Markerlights" class="contentColor">Markerlights</a></div><div class="w1 i15"><a href="index.htm#Detachment-Rules" class="contentColor">Detachment Rules</a></div><div class="w1 i15"><a href="index.htm#Sept-Tenets" class="contentColor">Sept Tenets</a></div><div class="w1 i15"><a href="index.htm#Stratagems-by-Phase" class="contentColor">Stratagems by Phase</a></div><div class="w1 i15"><a href="index.htm#Stratagems" class="contentColor">Stratagems</a></div><div class="w1 i15"><a href="index.htm#Warlord-Traits" class="contentColor">Warlord Traits</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Using-the-Eight-in-Battle" class="contentColor">Using the Eight in Battle</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Farsight-Enclaves-Detachment-Rules" class="contentColor">Farsight Enclaves Detachment Rules</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Custom-Sept-Tenets" class="contentColor">Custom Sept Tenets</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Stratagems-The-Greater-Good-" class="contentColor">Stratagems (The Greater Good)</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Farsight-Enclaves-Stratagems" class="contentColor">Farsight Enclaves Stratagems</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Farsight-Enclaves-Warlord-Traits" class="contentColor">Farsight Enclaves Warlord Traits</a></div><div class="w1 i15"><a href="index.htm#Signature-Systems" class="contentColor">Signature Systems</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Prototype-Weapons-Systems" class="contentColor">Prototype Weapons Systems</a></div><div class="w1 i15"><img class="tooltip logo2" title="Expansion. Psychic Awakening: The Greater Good (8th edition, version Indomitus 1.3)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="index.htm#Enclave-Relics" class="contentColor">Enclave Relics</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

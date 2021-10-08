@@ -1,0 +1,474 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Blades of Khorne — Skull Altar (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, ">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2.css">
+<link rel="stylesheet" href="../../css/main2.css">
+<link rel="stylesheet" href="../../css/header2.css">
+<link rel="stylesheet" href="../../css/profile2.css">
+<link rel="stylesheet" href="../../css/noprint2.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2.css">
+<title>Skull Altar</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodcrushers.html" class="contentColor">Bloodcrushers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Garrek-s-Reavers.html" class="contentColor">Garrek’s Reavers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Karanak.html" class="contentColor">Karanak</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Khorgoraths.html" class="contentColor">Khorgoraths</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magore-s-Fiends.html" class="contentColor">Magore’s Fiends</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mighty-Skullcrushers.html" class="contentColor">Mighty Skullcrushers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Riptooth.html" class="contentColor">Riptooth</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullreapers.html" class="contentColor">Skullreapers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrathmongers.html" class="contentColor">Wrathmongers</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Skin-Wolves.html" class="contentColor">Skin Wolves</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Artillery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skull-Cannons.html" class="contentColor">Skull Cannons</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Warriors.html" class="contentColor">Blood Warriors</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodletters.html" class="contentColor">Bloodletters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodreavers.html" class="contentColor">Bloodreavers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Flesh-Hounds.html" class="contentColor">Flesh Hounds</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aspiring-Deathbringer.html" class="contentColor">Aspiring Deathbringer</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodmaster-Herald-of-Khorne.html" class="contentColor">Bloodmaster, Herald of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodsecrator.html" class="contentColor">Bloodsecrator</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodstoker.html" class="contentColor">Bloodstoker</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Deathbringer.html" class="contentColor">Exalted Deathbringer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Herald-of-Khorne-on-Blood-Throne.html" class="contentColor">Herald of Khorne on Blood Throne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Korghos-Khul.html" class="contentColor">Korghos Khul</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Khorne-on-Juggernaut.html" class="contentColor">Lord of Khorne on Juggernaut</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mighty-Lord-of-Khorne.html" class="contentColor">Mighty Lord of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Scyla-Anfingrimm.html" class="contentColor">Scyla Anfingrimm</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skarr-Bloodwrath.html" class="contentColor">Skarr Bloodwrath</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullgrinder.html" class="contentColor">Skullgrinder</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullmaster-Herald-of-Khorne.html" class="contentColor">Skullmaster, Herald of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skulltaker.html" class="contentColor">Skulltaker</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughterpriest.html" class="contentColor">Slaughterpriest</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Valkia-the-Bloody.html" class="contentColor">Valkia the Bloody</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthirster-of-Insensate-Rage.html" class="contentColor">Bloodthirster of Insensate Rage</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthirster-of-Unfettered-Fury.html" class="contentColor">Bloodthirster of Unfettered Fury</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skarbrand.html" class="contentColor">Skarbrand</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrath-of-Khorne-Bloodthirster.html" class="contentColor">Wrath of Khorne Bloodthirster</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Exalted-Greater-Daemon-of-Khorne.html" class="contentColor">Exalted Greater Daemon of Khorne</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Skaarac-the-Bloodborn.html" class="contentColor">Skaarac the Bloodborn</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Vorgaroth-the-Scarred-on-Skalok-the-Skull-Host-of-Khorne.html" class="contentColor">Vorgaroth the Scarred on Skalok the Skull Host of Khorne</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Mazarall-the-Butcher.html" class="contentColor">Mazarall the Butcher</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Chaos-Siege-Gargant.html" class="contentColor">Chaos Siege Gargant</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Chaos-War-Mammoth.html" class="contentColor">Chaos War Mammoth</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Curs-d-Ettin.html" class="contentColor">Curs’d Ettin</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Gigantic-Chaos-Spawn.html" class="contentColor">Gigantic Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Warpfire-Dragon.html" class="contentColor">Warpfire Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Host.html" class="contentColor">Blood Host</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Hunt.html" class="contentColor">Blood Hunt</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Legion.html" class="contentColor">Blood Legion</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodbound-Warhorde.html" class="contentColor">Bloodbound Warhorde</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodforged.html" class="contentColor">Bloodforged</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodmad-Warband.html" class="contentColor">Bloodmad Warband</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthunder-Stampede.html" class="contentColor">Bloodthunder Stampede</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Brass-Stampede.html" class="contentColor">Brass Stampede</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Charnel-Host.html" class="contentColor">Charnel Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Dark-Feast.html" class="contentColor">Dark Feast</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gore-Pilgrims.html" class="contentColor">Gore Pilgrims</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gorethunder-Cohort.html" class="contentColor">Gorethunder Cohort</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Murderhost.html" class="contentColor">Murderhost</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Red-Headsmen.html" class="contentColor">Red Headsmen</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullseeker-Host.html" class="contentColor">Skullseeker Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skulltake.html" class="contentColor">Skulltake</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughterborn.html" class="contentColor">Slaughterborn</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Gorechosen.html" class="contentColor">The Gorechosen</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrants-of-Blood.html" class="contentColor">Tyrants of Blood</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Judgement of Khorne</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bleeding-Icon.html" class="contentColor">Bleeding Icon</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hexgorger-Skulls.html" class="contentColor">Hexgorger Skulls</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrath-Axe.html" class="contentColor">Wrath-Axe</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Faction Terrain Feature</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skull-Altar.html" class="contentColor">Skull Altar</a></div></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../fyreslayers/index.htm">Fyreslayers</a><a href="../idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../seraphon/index.htm">Seraphon</a><a href="../stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="index.htm">Blades of Khorne</a><a href="../disciples-of-tzeentch/index.htm">Disciples of Tzeentch</a><a href="../hedonites-of-slaanesh/index.htm">Hedonites of Slaanesh</a><a href="../legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../maggotkin-of-nurgle/index.htm">Maggotkin of Nurgle</a><a href="../skaven/index.htm">Skaven</a><a href="../slaves-to-darkness/index.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../nighthaunt/index.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index.htm">Orruk Warclans</a><a href="../sons-of-behemat/index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../endless-spells/index.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Blades of Khorne</span><span class="page_header_span2"> – Skull Altar</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  " style="position:relative"><div class="BreakInsideAvoid Corner4" style="padding:0px;max-width:988px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner4_1"></td><td class="Corner4_2"></td><td class="Corner4_3"></td></tr><tr><td class="Corner4_8"></td><td class="Corner4_9"><div><div class="nails-header"><span class="nails"></span>FACTION TERRAIN WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Skull Altar<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Blades%20of%20Khorne%20Skull%20Altar%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">Rising from the ground, the Skull Altar is formed out of the violent tributes heaped in offering for Khorne’s Throne. From atop the grisly pedestal a priest of Khorne roars out invectives, evoking the judgements of the Blood God to smite down all signs of weakness or wizardry</div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/the-core-rules/index.htm#Pitched-Battle-Profiles"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>0<br><span class="redfont">Battlefield Role</span><b>: </b>Faction Terrain Feature<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>Use model</span><br class="ShowBaseSize"></div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="BreakInsideAvoid"><span class="redfont">FACTION TERRAIN</span><b>: </b>Only Blades of Khorne armies can include this <a href="../../the-rules/the-core-rules/index.htm#Faction-Terrain">faction terrain feature</a>.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">SET-UP</span><b>: </b>After territories are determined, you can set up this faction terrain feature wholly within your territory and more than 3" from all <a href="../../the-rules/the-core-rules/index.htm#Objectives">objectives</a> and other <a href="../../the-rules/the-core-rules/index.htm#Terrain-1">terrain features</a>. If both players can set up faction terrain features at the same time, they must <span class="tooltip" data-tooltip-content="#tooltip_content00328"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> and the winner chooses who sets up their faction terrain features first.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">DEFENSIBLE</span><b>: </b>This terrain feature is a <a href="../../the-rules/the-core-rules/index.htm#Defensible-Terrain">defensible terrain</a> feature that can be <a href="../../the-rules/the-core-rules/index.htm#Garrisons">garrisoned</a> by 1 <span class="kwb">HERO</span> with a Wounds characteristic of 8 or less.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Words of Hate</span><b>: </b><span class="ShowFluff legend4">As much a platform for violent oratory as bloody sacrifice, the exhortations of Khorne’s priests echo from this brass-clad edifice like the tolling of infernal bells.<br><div class="spc"></div></span>You can re-roll <span class="tooltip" data-tooltip-content="#tooltip_content00329"><span class="tt kwbu">chanting</span> <span class="tt kwbu">rolls</span></span> for friendly <span class="tooltip" data-tooltip-content="#tooltip_content00330" data-tooltip-anchor="#tooltip_content00330"><span class="kwb kwbu">KHORNE</span> <span class="kwb kwbu">PRIESTS</span></span> wholly within 8" of this terrain feature.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Witchbane</span><b>: </b><span class="ShowFluff legend4">The Skull Altar devours arcane power like a whirlpool dragging ships to their doom.<br><div class="spc"></div></span>Subtract 1 from <span class="tooltip" data-tooltip-content="#tooltip_content00331"><span class="tt kwbu">casting</span> <span class="tt kwbu">rolls</span></span> for <a href="../../the-rules/the-core-rules/index.htm#Wizards"><span class="kwb">WIZARDS</span></a> within 16" of this terrain feature.</div></div></td><td class="Corner4_4"></td></tr><tr><td class="Corner4_7"></td><td class="Corner4_6"></td><td class="Corner4_5"></td></tr></tbody></table></div></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00328"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../../the-rules/the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00329"><div class="tooltip_header">20.1 Chanting Prayers</div><a href="../../the-rules/the-core-rules/index.htm#Chanting-Prayers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+In your hero phase, you can <span class="term">chant</span> prayers with friendly <span class="kwb">PRIESTS</span>. You cannot chant the same prayer more than once in the same hero phase, even with a different <span class="kwb">PRIEST</span>. In order to chant a prayer, pick a friendly <span class="kwb">PRIEST</span>, say which of the prayers that they know will be chanted, and then make a <span class="term">chanting roll</span> by rolling a dice. If the chanting roll is equal to or greater than the <span class="term">answer value</span> of the prayer, the prayer is <span class="term">answered</span>.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00330"><b><p>The <span class="kwb">KHORNE</span> and <a href="../../the-rules/the-core-rules/index.htm#Priests"><span class="kwb">PRIEST</span></a> keywords are used in the following Blades of Khorne warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaughterpriest.html" class="contentColor">Slaughterpriest</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00331"><div class="tooltip_header">19.1 Casting Spells</div><a href="../../the-rules/the-core-rules/index.htm#Casting-Spells"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+In your <a href="../../the-rules/the-core-rules/index.htm#Hero-Phase">hero phase</a>, you can <span class="term">attempt to cast</span> spells with friendly <span class="kwb">WIZARDS</span>. You cannot attempt to cast the same spell more than once in the same hero phase, even with a different <span class="kwb">WIZARD</span>. In order to attempt to cast a spell, pick a friendly <span class="kwb">WIZARD</span>, say which of the spells that they know will be attempted, and then make a casting roll by rolling 2D6. If the <span class="term">casting roll</span> is equal to or greater than the <span class="term">casting value</span> of the spell, the spell is <span class="term">successfully cast</span>.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodcrushers.html" class="contentColor">Bloodcrushers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Garrek-s-Reavers.html" class="contentColor">Garrek’s Reavers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Karanak.html" class="contentColor">Karanak</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Khorgoraths.html" class="contentColor">Khorgoraths</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magore-s-Fiends.html" class="contentColor">Magore’s Fiends</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mighty-Skullcrushers.html" class="contentColor">Mighty Skullcrushers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Riptooth.html" class="contentColor">Riptooth</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullreapers.html" class="contentColor">Skullreapers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrathmongers.html" class="contentColor">Wrathmongers</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Skin-Wolves.html" class="contentColor">Skin Wolves</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Artillery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skull-Cannons.html" class="contentColor">Skull Cannons</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Warriors.html" class="contentColor">Blood Warriors</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodletters.html" class="contentColor">Bloodletters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodreavers.html" class="contentColor">Bloodreavers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Flesh-Hounds.html" class="contentColor">Flesh Hounds</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aspiring-Deathbringer.html" class="contentColor">Aspiring Deathbringer</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodmaster-Herald-of-Khorne.html" class="contentColor">Bloodmaster, Herald of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodsecrator.html" class="contentColor">Bloodsecrator</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodstoker.html" class="contentColor">Bloodstoker</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Deathbringer.html" class="contentColor">Exalted Deathbringer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Herald-of-Khorne-on-Blood-Throne.html" class="contentColor">Herald of Khorne on Blood Throne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Korghos-Khul.html" class="contentColor">Korghos Khul</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Khorne-on-Juggernaut.html" class="contentColor">Lord of Khorne on Juggernaut</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mighty-Lord-of-Khorne.html" class="contentColor">Mighty Lord of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Scyla-Anfingrimm.html" class="contentColor">Scyla Anfingrimm</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skarr-Bloodwrath.html" class="contentColor">Skarr Bloodwrath</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullgrinder.html" class="contentColor">Skullgrinder</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullmaster-Herald-of-Khorne.html" class="contentColor">Skullmaster, Herald of Khorne</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skulltaker.html" class="contentColor">Skulltaker</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughterpriest.html" class="contentColor">Slaughterpriest</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Valkia-the-Bloody.html" class="contentColor">Valkia the Bloody</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthirster-of-Insensate-Rage.html" class="contentColor">Bloodthirster of Insensate Rage</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthirster-of-Unfettered-Fury.html" class="contentColor">Bloodthirster of Unfettered Fury</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skarbrand.html" class="contentColor">Skarbrand</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrath-of-Khorne-Bloodthirster.html" class="contentColor">Wrath of Khorne Bloodthirster</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Exalted-Greater-Daemon-of-Khorne.html" class="contentColor">Exalted Greater Daemon of Khorne</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Skaarac-the-Bloodborn.html" class="contentColor">Skaarac the Bloodborn</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Vorgaroth-the-Scarred-on-Skalok-the-Skull-Host-of-Khorne.html" class="contentColor">Vorgaroth the Scarred on Skalok the Skull Host of Khorne</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Mazarall-the-Butcher.html" class="contentColor">Mazarall the Butcher</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Chaos-Siege-Gargant.html" class="contentColor">Chaos Siege Gargant</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Chaos-War-Mammoth.html" class="contentColor">Chaos War Mammoth</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Curs-d-Ettin.html" class="contentColor">Curs’d Ettin</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Gigantic-Chaos-Spawn.html" class="contentColor">Gigantic Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Warpfire-Dragon.html" class="contentColor">Warpfire Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Host.html" class="contentColor">Blood Host</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Hunt.html" class="contentColor">Blood Hunt</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blood-Legion.html" class="contentColor">Blood Legion</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodbound-Warhorde.html" class="contentColor">Bloodbound Warhorde</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodforged.html" class="contentColor">Bloodforged</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodmad-Warband.html" class="contentColor">Bloodmad Warband</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bloodthunder-Stampede.html" class="contentColor">Bloodthunder Stampede</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Brass-Stampede.html" class="contentColor">Brass Stampede</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Charnel-Host.html" class="contentColor">Charnel Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Dark-Feast.html" class="contentColor">Dark Feast</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gore-Pilgrims.html" class="contentColor">Gore Pilgrims</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gorethunder-Cohort.html" class="contentColor">Gorethunder Cohort</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Murderhost.html" class="contentColor">Murderhost</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Red-Headsmen.html" class="contentColor">Red Headsmen</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skullseeker-Host.html" class="contentColor">Skullseeker Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skulltake.html" class="contentColor">Skulltake</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughterborn.html" class="contentColor">Slaughterborn</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Gorechosen.html" class="contentColor">The Gorechosen</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrants-of-Blood.html" class="contentColor">Tyrants of Blood</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Judgement of Khorne</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bleeding-Icon.html" class="contentColor">Bleeding Icon</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hexgorger-Skulls.html" class="contentColor">Hexgorger Skulls</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wrath-Axe.html" class="contentColor">Wrath-Axe</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Faction Terrain Feature</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skull-Altar.html" class="contentColor">Skull Altar</a></div></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Command-Traits" class="contentColor">Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Artefacts-of-Power" class="contentColor">Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Prayer-Scriptures" class="contentColor">Prayer Scriptures</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Judgements-of-Khorne" class="contentColor">Judgements of Khorne</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Slaughterhosts" class="contentColor">Slaughterhosts</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Patronage-of-Khorne-Rewards" class="contentColor">Patronage of Khorne Rewards</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Soul Wars: Wrath of the Everchosen (2nd edition, version 1.3)" src="../../img/expansions/WoE_logo2.png"><a href="index.htm#Hosts-of-Chaos" class="contentColor">Hosts of Chaos</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

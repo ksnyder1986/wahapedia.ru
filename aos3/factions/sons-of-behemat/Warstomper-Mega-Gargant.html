@@ -1,0 +1,490 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Sons of Behemat — Warstomper Mega-Gargant (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, MEGA-GARGANT, SONS OF BEHEMAT, DESTRUCTION, HERO, GARGANT, WARSTOMPER, MONSTER">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2.css">
+<link rel="stylesheet" href="../../css/main2.css">
+<link rel="stylesheet" href="../../css/header2.css">
+<link rel="stylesheet" href="../../css/profile2.css">
+<link rel="stylesheet" href="../../css/noprint2.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2.css">
+<title>Warstomper Mega-Gargant</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline, Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Dread-Maw.html" class="contentColor">Dread Maw</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Beasts.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Fire.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Magma-Dragon.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Merwyrm.html" class="contentColor">Merwyrm</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../fyreslayers/index.htm">Fyreslayers</a><a href="../idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../seraphon/index.htm">Seraphon</a><a href="../stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="../blades-of-khorne/index.htm">Blades of Khorne</a><a href="../disciples-of-tzeentch/index.htm">Disciples of Tzeentch</a><a href="../hedonites-of-slaanesh/index.htm">Hedonites of Slaanesh</a><a href="../legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../maggotkin-of-nurgle/index.htm">Maggotkin of Nurgle</a><a href="../skaven/index.htm">Skaven</a><a href="../slaves-to-darkness/index.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../nighthaunt/index.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index.htm">Orruk Warclans</a><a href="index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../endless-spells/index.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Sons of Behemat</span><span class="page_header_span2"> – Warstomper Mega-Gargant</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  " style="position:relative"><div class="AoS_profile"><div class="wsMoveCt"><img src="../../img/asterix.png"></div><div class="wsWounds">35</div><div class="wsSave">4+</div><div class="wsBravery">7</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Warstomper Mega-Gargant<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Sons%20of%20Behemat%20Warstomper%20Mega-Gargant%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">The veteran warmongers of the gargant race seek out the thrill and clangour of battle wherever they can find it. They love smashing battlelines into disarray, and once they are in the thick of the fight, their rampage is all but impossible to stop.</div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Death Grip</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Death Grip</td><td class="wsDataCell">3"</td><td class="wsDataCell">1</td><td class="wsDataCell">3+</td><td class="wsDataCell">2+</td><td class="wsDataCell">-3</td><td class="wsDataCell">D6</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Jump Up and Down</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Jump Up and Down</td><td class="wsDataCell">3"</td><td class="wsDataCell">4</td><td class="wsDataCell">3+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-2</td><td class="wsDataCell">D3</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Titanic Boulderclub</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Titanic Boulderclub</td><td class="wsLastDataCell">3"</td><td class="wsLastDataCell"><img class="ast" src="../../img/asterix.png"></td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">-2</td><td class="wsLastDataCell">2</td></tr></table></div><div class="wsTable"><div class="wsDamageHeader">DAMAGE</div><table border="1" cellspacing="0" cellpadding="2" class="wsDamageTable"><tr class="wsHeaderRow"><td class="wsDamageWidth wsHeaderCell">Wounds Suffered</td><td class="wsDamageWidth wsHeaderCell">Move</td><td class="wsDamageWidth wsHeaderCell">Titanic Boulderclub</td><td class="wsDamageWidth wsHeaderCell">Hurled Body</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">0-12</td><td class="wsDamageWidth wsDataCell">10"</td><td class="wsDamageWidth wsDataCell">+4</td><td class="wsDamageWidth wsDataCell">+2</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">13-18</td><td class="wsDamageWidth wsDataCell">9"</td><td class="wsDamageWidth wsDataCell">+3</td><td class="wsDamageWidth wsDataCell">+1</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">19-24</td><td class="wsDamageWidth wsDataCell">8"</td><td class="wsDamageWidth wsDataCell">+2</td><td class="wsDamageWidth wsDataCell">0</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">25-30</td><td class="wsDamageWidth wsDataCell">7"</td><td class="wsDamageWidth wsDataCell">+1</td><td class="wsDamageWidth wsDataCell">-1</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsLastDataCell">31+</td><td class="wsDamageWidth wsLastDataCell">6"</td><td class="wsDamageWidth wsLastDataCell">0</td><td class="wsDamageWidth wsLastDataCell">-2</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/the-core-rules/index.htm#Pitched-Battle-Profiles"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>470<br><span class="redfont">Battlefield Role</span><b>: </b>Battleline, Leader, Behemoth<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>130mm</span><br class="ShowBaseSize"><span class="redfont">Notes</span><b>: </b>Single</div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">A Warstomper Mega-Gargant is a single model armed with a Death Grip, Jump Up and Down and Titanic Boulderclub.<div><br></div></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Almighty Jump</span><b>: </b><span class="ShowFluff legend4">A Mega-Gargant’s massive, stomping feet are devastating against smaller opponents.<br><div class="spc"></div></span>You can re-roll <span class="tooltip" data-tooltip-content="#tooltip_content00115"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span> of 1 for Jump Up and Down attacks unless the target is a MONSTER.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Crushing Charge</span><b>: </b><span class="ShowFluff legend4">When a Mega-Gargant charges, its incredible bulk flattens any foe that fails to get out of the way.<br><div class="spc"></div></span>After this model makes a <span class="tooltip" data-tooltip-content="#tooltip_content00031"><span class="tt kwbu">charge</span> <span class="tt kwbu">move</span></span>, roll a dice for each enemy unit within 1" of this model. On a 2+, that unit suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00116"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span> if it is a MONSTER, or D6 mortal wounds if it is not a MONSTER.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Death Grip</span><b>: </b><span class="ShowFluff legend4">Mega-Gargants are perfectly capable of squeezing the life out of even the largest opponent.<br><div class="spc"></div></span>You can re-roll <span class="tooltip" data-tooltip-content="#tooltip_content00117"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span> of 1 for Death Grip attacks that target a MONSTER.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Hurled Body</span><b>: </b><span class="ShowFluff legend4">Warstomper Mega-Gargants wade into the thick of battle, and will pick up smaller opponents to hurl at other enemies.<br><div class="spc"></div></span>Once per <a href="../../the-rules/the-core-rules/index.htm#Combat-Phase">combat phase</a>, you can pick 1 enemy model within 3" of this model and roll a dice. Add the Hurled Body modifier shown on this model’s damage table to the roll. If the roll is at least double that enemy model’s Wounds characteristic, it is slain and you can roll another dice. On a 4+, you can pick an enemy unit within 12" of this model and visible to it. That unit suffers a number of <span class="tooltip" data-tooltip-content="#tooltip_content00118"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span> equal to the Wounds characteristic of the slain model.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Longshanks</span><b>: </b><span class="ShowFluff legend4">A Mega-Gargant towers high above the battlefield, and with its long powerful legs it can step over most obstacles.<br><div class="spc"></div></span>When this unit makes a <span class="tooltip" data-tooltip-content="#tooltip_content00119"><span class="tt kwbu">normal</span> <span class="tt kwbu">move</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_content00120"><span class="tt kwbu">run</span></span> or <span class="tooltip" data-tooltip-content="#tooltip_content00121"><span class="tt kwbu">retreat</span></span>, it can ignore other models and <a href="../../the-rules/the-core-rules/index.htm#Terrain-1">terrain features</a> when you trace the path of its move across the battlefield, but it cannot finish that move within 3" of an enemy unit.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Son of Behemat</span><b>: </b><span class="ShowFluff legend4">The Sons of Behemat are nearly as difficult to kill as their mighty progenitor.<br><div class="spc"></div></span>If a spell or ability would slay this model without any wounds or <span class="tooltip" data-tooltip-content="#tooltip_content00122"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span> being inflicted by the spell or ability, this model suffers D6 mortal wounds instead.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Terror</span><b>: </b><span class="ShowFluff legend4">This terrifying monstrosity strikes fear into the hearts of its foes.<br><div class="spc"></div></span>Subtract 1 from the Bravery characteristic of enemy units if they are within 3" of any friendly units with this ability.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Timberrrrr!</span><b>: </b><span class="ShowFluff legend4">A dying Mega-Gargant is a weapon of ruin in its own right, though it is anyone’s guess where – and on whom – their body falls.<br><div class="spc"></div></span>If this model is slain, before removing the model from the battlefield, the players must <span class="tooltip" data-tooltip-content="#tooltip_content00123"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span>. The winner must pick a point on the battlefield 5" from this model. Each unit within 3" of that point suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00124"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span> unless it is a <span class="tooltip" data-tooltip-content="#tooltip_content00004" data-tooltip-anchor="#tooltip_content00004"><span class="kwb kwbu">MEGA-GARGANT</span></span>. This model is then removed from the battlefield.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Titanic Boulderclub</span><b>: </b><span class="ShowFluff legend4">A Warstomper Mega- Gargant will drive straight into the midst of the foe, swinging their titanic boulderclub in great sweeping arcs that smash foes in all directions.<br><div class="spc"></div></span>The Attacks characteristic of a Titanic Boulderclub is equal to the number of enemy models within 3" of the attacking model. Add the Titanic Boulderclub value on the attacking model’s damage table to the total, and add 4 to the total for each enemy MONSTER within 3" of the attacking model. If the modified Attacks characteristic of the Titanic Boulderclub is less than 1, count it as being 1, and if the modified Attacks characteristic of the Titanic Boulderclub is more than 10, count it as being 10.</div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentDESTRUCTION" data-tooltip-anchor="#tooltip_contentDESTRUCTION"><span class="kwb kwbu">DESTRUCTION</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentSONSOFBEHEMAT" data-tooltip-anchor="#tooltip_contentSONSOFBEHEMAT"><span class="kwb kwbu">SONS</span> <span class="kwb2 kwbu">OF</span> <span class="kwb kwbu">BEHEMAT</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentGARGANT" data-tooltip-anchor="#tooltip_contentGARGANT"><span class="kwb kwbu">GARGANT</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentMEGA-GARGANT" data-tooltip-anchor="#tooltip_contentMEGA-GARGANT"><span class="kwb kwbu">MEGA-GARGANT</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentMONSTER" data-tooltip-anchor="#tooltip_contentMONSTER"><span class="kwb kwbu">MONSTER</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentHERO" data-tooltip-anchor="#tooltip_contentHERO"><span class="kwb kwbu">HERO</span></span>, <span class="kwb">WARSTOMPER</span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00115"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/the-core-rules/index.htm#Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Hit</span> characteristic, the attack scores a <span class="term">hit</span> and you must make a <span class="term">wound roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified hit roll of 1 always fails and an unmodified hit roll of 6 always hits. A hit roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).<br><br>Sometimes an ability will allow a single hit roll to score two or more hits. If this is the case, make all of the wound and save rolls for those hits at the same time.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00031"><div class="tooltip_header">11.1 Charge Moves</div><a href="../../the-rules/the-core-rules/index.htm#Charge-Moves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you attempt a charge with a unit, make a <span class="term">charge roll</span> for the unit by rolling 2D6. You can then make a <span class="term">charge move</span> with each model in that unit by moving the model a distance in inches that is equal to or less than the charge roll. The first model you move in a unit attempting a charge must finish the move within 1/2" of an enemy unit. If this is impossible, no models in the unit can make a charge move.<br><br><div class="BreakInsideAvoid Corner22" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner22_1"></td><td class="Corner22_2"></td><td class="Corner22_3"></td></tr><tr><td class="Corner22_8"></td><td class="Corner22_9"><i>You do not have to pick a target for a charge attempt before making the charge roll.</i></td><td class="Corner22_4"></td></tr><tr><td class="Corner22_7"></td><td class="Corner22_6"></td><td class="Corner22_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00116"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00117"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/the-core-rules/index.htm#Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Hit</span> characteristic, the attack scores a <span class="term">hit</span> and you must make a <span class="term">wound roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified hit roll of 1 always fails and an unmodified hit roll of 6 always hits. A hit roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).<br><br>Sometimes an ability will allow a single hit roll to score two or more hits. If this is the case, make all of the wound and save rolls for those hits at the same time.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00118"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00119"><div class="tooltip_header">8.1 Normal Move</div><a href="../../the-rules/the-core-rules/index.htm#Normal-Move"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to make a <span class="term">normal move</span>, you can move each model in that unit a distance in inches equal to or less than the <span class="term">Move</span> characteristic shown on the unit’s warscroll. Units cannot move within 3" of enemy units when making a normal move.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00120"><div class="tooltip_header">8.3 Run</div><a href="../../the-rules/the-core-rules/index.htm#Run"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to <span class="term">run</span>, you must make a <span class="term">run roll</span> for the unit by rolling a dice. Add the run roll to the Move characteristic of all models in the unit until the end of that phase. You can then move each model in that unit a distance in inches equal to or less than their modified Move characteristic. No part of a run can be within 3" of an enemy unit. You cannot shoot or attempt a charge later in the turn with a unit that has run.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00121"><div class="tooltip_header">8.2 Retreat</div><a href="../../the-rules/the-core-rules/index.htm#Retreat"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to <span class="term">retreat</span>, you can move each model in that unit a distance in inches equal to or less than the Move characteristic shown on the unit’s warscroll. The unit must end the move more than 3" from all enemy units. You cannot shoot or attempt a charge later in the turn with a unit that has retreated.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00122"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00123"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../../the-rules/the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00124"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00004"><b><p>The <span class="kwb">MEGA-GARGANT</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentDESTRUCTION"><b><p>The <span class="kwb">DESTRUCTION</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentSONSOFBEHEMAT"><b><p>The <span class="kwb">SONS</span> <span class="kwb2">OF</span> <span class="kwb">BEHEMAT</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentGARGANT"><b><p>The <span class="kwb">GARGANT</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentMEGA-GARGANT"><b><p>The <span class="kwb">MEGA-GARGANT</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentMONSTER"><b><p>The <a href="../../the-rules/the-core-rules/index.htm#Monsters"><span class="kwb">MONSTER</span></a> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Dread-Maw.html" class="contentColor">Dread Maw</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Beasts.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Fire.html" class="contentColor">Incarnate Elemental of Fire</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Magma-Dragon.html" class="contentColor">Magma Dragon</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Merwyrm.html" class="contentColor">Merwyrm</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentHERO"><b><p>The <span class="kwb">HERO</span> keyword is used in the following Sons of Behemat warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline, Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mancrusher-Gargants.html" class="contentColor">Mancrusher Gargants</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline, Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gatebreaker-Mega-Gargant.html" class="contentColor">Gatebreaker Mega-Gargant</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kraken-eater-Mega-Gargant.html" class="contentColor">Kraken-eater Mega-Gargant</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Warstomper-Mega-Gargant.html" class="contentColor">Warstomper Mega-Gargant</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Bonegrinder-Mega-Gargant-1.html" class="contentColor">Bonegrinder Mega-Gargant</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Dread-Maw.html" class="contentColor">Dread Maw</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Beasts.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Fire.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Magma-Dragon.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Merwyrm.html" class="contentColor">Merwyrm</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Taker-Tribes-Battle-Traits" class="contentColor">Taker Tribes Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Taker-Tribes-Command-Traits" class="contentColor">Taker Tribes Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Taker-Tribes-Artefacts-of-Power" class="contentColor">Taker Tribes Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Stomper-Tribes-Battle-Traits" class="contentColor">Stomper Tribes Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Stomper-Tribes-Command-Traits" class="contentColor">Stomper Tribes Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Stomper-Tribes-Artefacts-of-Power" class="contentColor">Stomper Tribes Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Breaker-Tribes-Battle-Traits" class="contentColor">Breaker Tribes Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Breaker-Tribes-Command-Traits" class="contentColor">Breaker Tribes Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Breaker-Tribes-Artefacts-of-Power" class="contentColor">Breaker Tribes Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Mega-gargant-Mercenaries" class="contentColor">Mega-gargant Mercenaries</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

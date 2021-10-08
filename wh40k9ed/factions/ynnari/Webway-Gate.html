@@ -1,0 +1,568 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Ynnari — Webway Gate (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 9 edition, Ynnari, Aeldari">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Webway Gate</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowSpecialistDetachments;
+	if (data == undefined) {data = 'true'; localStorage.ShowSpecialistDetachments = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowSpecialistDetachments').prop('checked', StrData);
+
+	$('.ShowSpecialistDetachments').change(function () {
+      localStorage.ShowSpecialistDetachments = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowCrusadeRules;
+	if (data == undefined) {data = 'true'; localStorage.ShowCrusadeRules = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowCrusadeRules').prop('checked', StrData);
+
+	$('.ShowCrusadeRules').change(function () {
+      localStorage.ShowCrusadeRules = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.PrimarisFilter;
+	if (data == undefined) {data = ''; localStorage.PrimarisFilter = data};
+
+	$('.PrimarisSelect').prop('value', data);
+
+	$('.PrimarisSelect').change(function () {
+      localStorage.PrimarisFilter = $(this).prop('value');
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld, .sSpecialistDetachments, .sPrimaris, .sNotPrimaris, .sCrusadeRules';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+if (localStorage.ShowSpecialistDetachments == 'false') {clFlags = clFlags + comma + '.sSpecialistDetachments'; comma = ', ';};
+if (localStorage.ShowCrusadeRules == 'false') {clFlags = clFlags + comma + '.sCrusadeRules'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sPrimaris') {clFlags = clFlags + comma + '.sNotPrimaris'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sNotPrimaris') {clFlags = clFlags + comma + '.sPrimaris'; comma = ', ';};
+$('.abVisChk').css('display', ''); $('.abVisChk2').css('display', '');
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Datasheets</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><a href="The-Visarch.html" class="contentColor">The Visarch</a></div></div><div class="i15 ArmyType_line "><a href="The-Yncarne.html" class="contentColor">The Yncarne</a></div><div class="i15 ArmyType_line "><a href="Yvraine.html" class="contentColor">Yvraine</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fortifications</b></span></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" class="contentColor">Webway Gate</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowSpecialistDetachments">
+	<span class="checkmark"></span>Show Specialist Detachments
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowCrusadeRules">
+	<span class="checkmark"></span>Show Crusade Rules
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/core-rules/index.htm">Core Rules</a><a href="../../the-rules/open-play/index.htm">Open Play</a><a href="../../the-rules/matched-play/index.htm">Matched Play</a><a href="../../the-rules/narrative-play/index.htm">Narrative Play</a><a href="../../the-rules/advanced-rules/index.htm">Advanced Rules</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Mission Packs</div><a href="../../the-rules/beyond-the-veil/index.htm">Beyond the Veil</a><a href="../../the-rules/grand-tournament-2021/index.htm">Grand Tournament 2021</a><a href="../../the-rules/tactical-deployment/index.htm">Tactical Deployment</a><a href="../../the-rules/psychic-awakening/index.htm">Psychic Awakening</a><a href="../../the-rules/piety-and-pain/index.htm">Piety and Pain</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">War Zones</div><a href="../../the-rules/war-zone-charadon/index.htm">War Zone Charadon</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a href="../adepta-sororitas/index.htm">Adepta Sororitas</a><a href="../adeptus-custodes/index.htm">Adeptus Custodes</a><a href="../adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a href="../astra-militarum/index.htm">Astra Militarum</a><a href="../grey-knights/index.htm">Grey Knights</a><a href="../imperial-knights/index.htm">Imperial Knights</a><a href="../inquisition/index.htm">Inquisition</a><a href="../officio-assassinorum/index.htm">Officio Assassinorum</a><a href="../rogue-traders/index.htm">Rogue Traders</a><a href="../sisters-of-silence/index.htm">Sisters of Silence</a><a href="../space-marines/index.htm">Space Marines</a><a href="../titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a href="../chaos-daemons/index.htm">Chaos Daemons</a><a href="../chaos-knights/index.htm">Chaos Knights</a><a href="../chaos-space-marines/index.htm">Chaos Space Marines</a><a href="../death-guard/index.htm">Death Guard</a><a href="../heretic-titan-legions/index.htm">Heretic Titan Legions</a><a href="../renegades-and-heretics/index.htm">Renegades and Heretics</a><a href="../thousand-sons/index.htm">Thousand Sons</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a href="../craftworlds/index.htm">Craftworlds</a><a href="../drukhari/index.htm">Drukhari</a><a href="../harlequins/index.htm">Harlequins</a><a href="index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a href="../genestealer-cults/index.htm">Genestealer Cults</a><a href="../necrons/index.htm">Necrons</a><a href="../orks/index.htm">Orks</a><a href="../t-au-empire/index.htm">T’au Empire</a><a href="../tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a href="../unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Ynnari</span><span class="page_header_span2"> – Webway Gate</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This datasheet does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+
+<div class="datasheet  " style="position:relative">
+<div class="dsOuterFrame">
+<div style="float:left" class="pTable_no_dam">
+<div><img border="0" class="img-opa tooltip" data-tooltip-content="#tooltip_contentFortifications" src="../../img/Role_Fortifications.png" style="float:left;margin-left:4px"><div class="img-opa PowerPrice">5</div><img class="tooltip img-opa logo3" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo3.png"><h3 class="pTable_h3 pTable_no_dam"><div>Webway Gate<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Warhammer%2040000%20Ynnari%20Webway%20Gate%20miniature"><div class="picSearch"></div></a></div></h3></div>
+<table class="pTable_no_dam pTable_border" cellpadding="0" cellspacing="0">
+<tr class="wTable3">
+<td class="pTable1 pad4">No</td><td class="pTable1_"><span class="pTable_left">NAME</span><span class="pTable_left">&nbsp;</span></td>
+<td class="pTable2w pad4">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable2 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td class="pTable1b pad4 ShowBaseSize">Base</td>
+
+</tr>
+<tr class="pTable2_short"><td class="pTable2_pad" colspan="12"><div class="PriceTag">95</div>Webway Gate<span class="ShowBaseSize"> (base: Use model)</span></td>
+</tr>
+<tr>
+<td class="pTable2">1</td><td class="pTable2_"><span class="pTable2_long"><div class="PriceTag">95</div>Webway Gate</span></td>
+<td class="pTable1w">-</td>
+<td class="pTable2">-</td>
+<td class="pTable2">-</td>
+<td class="pTable2">-</td>
+<td class="pTable2">8</td>
+<td class="pTable1">14</td>
+<td class="pTable2">-</td>
+<td class="pTable2">-</td>
+<td class="pTable2">3+</td>
+<td class="pTable2b ShowBaseSize">Use model</td>
+
+</tr>
+</table>
+<div style="padding:4px;">A Webway Gate is a single model formed from two separate pieces. When setting up these pieces, place them so that an arch is formed, with the bases 5" apart.</div>
+</div>
+<div style="clear:both"></div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="abVisChk dsAbilityHeader_long"><td><div class="dsHeader">ABILITIES</div></td></tr>
+<tr class="abVisChk">
+<td class="dsAbilityHeader"><div class="dsHeader">ABILITIES</div></td>
+<td class="dsAbilityData">
+<div class="Col2"><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Shimmering Arrival</span><b>: </b>When you set up this model during deployment, it can be set up anywhere on the battlefield that is more than 12" from the enemy deployment zone and any enemy models, and more than 3" from any other <a href="../../the-rules/advanced-rules/index.htm#TERRAIN-FEATURES">terrain features</a> or the centre of any <a href="../../the-rules/core-rules/index.htm#Objective-Markers">objective markers</a>.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Eldritch Aura</span><b>: </b>This model has a 5+ <span class="tooltip" data-tooltip-content="#tooltip_content00116"><span class="tt kwbu">invulnerable</span> <span class="tt kwbu">save</span></span>.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Immobile</span><b>: </b>This model cannot move for any reason, nor can it fight in the <a href="../../the-rules/core-rules/index.htm#FIGHT-PHASE">Fight phase</a>. Enemy models automatically hit this model in the Fight phase – do not make <span class="tooltip" data-tooltip-content="#tooltip_content00007"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span>. However, friendly units can still target enemy units that are within 1" of this model.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Webway Strike</span><b>: </b>After you set up this model, any <span class="tooltip" data-tooltip-content="#tooltip_content00117" data-tooltip-anchor="#tooltip_content00117"><span class="kwb kwbu">AELDARI</span></span> units you have not yet set up during deployment, other than Fortifications, can be set up in a webway spar rather than being set up on the battlefield. One unit in a webway spar can emerge from each friendly Webway Gate at the end of each of your <a href="../../the-rules/core-rules/index.htm#MOVEMENT-PHASE">Movement phases</a> – set them up wholly within 3" of the Webway Gate and more than 9" away from any enemy models. If all friendly Webway Gates have been destroyed, any units that have not yet arrived from a webway spar are considered to be slain.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Webway Gate</span><b>: </b>When measuring distances to and from a Webway Gate, measure from the closest point of the model. If a Webway Gate is destroyed, remove both arch pieces from the battlefield.<div class="a_indent"></div></div></div>
+</td>
+</tr>
+<tr><td colspan="2" style="vertical-align:middle;border-top: 2px ridge #888;padding:4px;">
+<span class="dsKeywordHeader">FACTION KEYWORDS: </span><span class="dsKeywordData"><span class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari"><span class="kwb kwbu">AELDARI</span></span></span>
+</td></tr>
+<tr><td colspan="2" style="padding:4px;">
+<span class="dsKeywordHeader">KEYWORDS: </span><span class="dsKeywordData"><span class="kwb">VEHICLE</span>, <span class="kwb">BUILDING</span>, <span class="kwb">WEBWAY</span> <span class="kwb">GATE</span></span>
+</td></tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_contentFortifications"><p><b>This datasheet has <span class="redfont">Fortifications</span> <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Role">Battlefield Role</a>. Full list of Ynnari units sharing same Battlefield Role follows:</b></p><span class="contents"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fortifications</b></span></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" class="contentColor">Webway Gate</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_content00115"><div class="tooltip_header">Saving Throw</div><a href="../../the-rules/core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00116"><div class="tooltip_header">Invulnerable Saves</div><a href="../../the-rules/core-rules/index.htm#Invulnerable-Saves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have an invulnerable save. Each time an attack is allocated to a model with an invulnerable save, you can choose to use either its normal Save (Sv) characteristic or its invulnerable save, but not both. If a model has more than one invulnerable save, it can only use one of them – choose which it will use. If you use a model’s invulnerable save, it is never modified by a weapon’s Armour Penetration value.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Invulnerable save</b>: <span class="tooltip" data-tooltip-content="#tooltip_content00115"><span class="tt kwbu">Saving</span> <span class="tt kwbu">throw</span></span> that is never modified by attacking weapon’s AP.</li><li>A model with an invulnerable save can use it instead of its normal Sv.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00007"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/core-rules/index.htm#1.-Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes an attack, make one hit roll for that attack by rolling one D6. If the result of the hit roll is equal to or greater than the attacking model’s Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon) or its Weapon Skill (WS) characteristic (if the attack is being made with a melee weapon), then that attack scores one hit against the target unit. If not, the attack fails and the attack sequence ends.<br><br>If an attack is made with a weapon that has an ability that says it ‘automatically hits the target’, no hit roll is made – that attack simply scores one hit on the target unit. An unmodified hit roll of 6 always scores a hit, and an unmodified hit roll of 1 always fails. A hit roll can never be modified by more than -1 or +1. This means that if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be -2 or worse, it is changed to be -1. Similarly, if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be +2 or better, it is changed to be +1.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00117"><b><p>The datasheets using <span class="kwb">AELDARI</span> keyword can be found in the following Factions:</p></b><span class="BatRole">Imperium</span>: <a href="../adepta-sororitas/index.htm">Adepta Sororitas</a>, <a href="../rogue-traders/index.htm">Rogue Traders</a>.<br><span class="BatRole">Aeldari</span>: <a href="../craftworlds/index.htm">Craftworlds</a>, <a href="../drukhari/index.htm">Drukhari</a>, <a href="../harlequins/index.htm">Harlequins</a>, <a href="index.htm">Ynnari</a>.<br><br><b><p>The <span class="kwb">AELDARI</span> keyword is used in the following  datasheets:</p></b><span class="contents"><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Archon.html" class="contentColor">Archon</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Asurmen.html" class="contentColor">Asurmen</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Autarch.html" class="contentColor">Autarch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Autarch-Skyrunner.html" class="contentColor">Autarch Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Autarch-with-Swooping-Hawk-Wings.html" class="contentColor">Autarch with Swooping Hawk Wings</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Avatar-of-Khaine.html" class="contentColor">Avatar of Khaine</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Baharroth.html" class="contentColor">Baharroth</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Drazhar.html" class="contentColor">Drazhar</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Eldrad-Ulthran.html" class="contentColor">Eldrad Ulthran</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Adepta Sororitas (9th edition, version Indomitus 1.0)" src="../../img/expansions/AdeptaSororitas_logo2.png"><a href="../adepta-sororitas/Ephrael-Stern-and-Kyganil-of-the-Bloody-Tears.html" class="contentColor">Ephrael Stern and Kyganil of the Bloody Tears</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Farseer.html" class="contentColor">Farseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Farseer-Skyrunner.html" class="contentColor">Farseer Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Fuegan.html" class="contentColor">Fuegan</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Haemonculus.html" class="contentColor">Haemonculus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Illic-Nightspear.html" class="contentColor">Illic Nightspear</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Karandras.html" class="contentColor">Karandras</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Lelith-Hesperax.html" class="contentColor">Lelith Hesperax</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Maugan-Ra.html" class="contentColor">Maugan Ra</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Prince-Yriel.html" class="contentColor">Prince Yriel</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="../harlequins/Shadowseer.html" class="contentColor">Shadowseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Spiritseer.html" class="contentColor">Spiritseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Succubus.html" class="contentColor">Succubus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="../harlequins/Troupe-Master.html" class="contentColor">Troupe Master</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Urien-Rakarth.html" class="contentColor">Urien Rakarth</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Warlock.html" class="contentColor">Warlock</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Warlock-Conclave.html" class="contentColor">Warlock Conclave</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Warlock-Skyrunner.html" class="contentColor">Warlock Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Warlock-Skyrunner-Conclave.html" class="contentColor">Warlock Skyrunner Conclave</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition, version Indomitus 1.2)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../craftworlds/Jain-Zar.html" class="contentColor">Jain Zar</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition, version Indomitus 1.2)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="The-Visarch.html" class="contentColor">The Visarch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition, version Indomitus 1.2)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="The-Yncarne.html" class="contentColor">The Yncarne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition, version Indomitus 1.2)" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="Yvraine.html" class="contentColor">Yvraine</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Imperial Armour: Compendium (9th edition, version Indomitus 1.1)" src="../../img/expansions/FW_logo2.png"><a href="../craftworlds/Irillyth.html" class="contentColor">Irillyth</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Drukhari (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../drukhari/Archon-Legendary-.html" class="contentColor">Archon (Legendary)</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Craftworlds (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../craftworlds/Autarch-Legendary-.html" class="contentColor">Autarch (Legendary)</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Craftworlds (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../craftworlds/Autarch-Skyrunner-Legendary-.html" class="contentColor">Autarch Skyrunner (Legendary)</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Craftworlds (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../craftworlds/Autarch-with-Swooping-Hawk-Wings-Legendary-.html" class="contentColor">Autarch with Swooping Hawk Wings (Legendary)</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Craftworlds (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../craftworlds/Autarch-with-Warp-Jump-Generator.html" class="contentColor">Autarch with Warp Jump Generator</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Dire-Avengers.html" class="contentColor">Dire Avengers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Guardian-Defenders.html" class="contentColor">Guardian Defenders</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Kabalite-Warriors.html" class="contentColor">Kabalite Warriors</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Rangers.html" class="contentColor">Rangers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Craftworlds (8th edition, version Indomitus 1.2)" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/Storm-Guardians.html" class="contentColor">Storm Guardians</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="../harlequins/Troupe.html" class="contentColor">Troupe</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Wracks.html" class="contentColor">Wracks</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Drukhari (9th edition, version Indomitus 1.1)" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/Wyches.html" class="contentColor">Wyches</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Craftworlds (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../craftworlds/Storm-Guardians-Legendary-.html" class="contentColor">Storm Guardians (Legendary)</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="../craftworlds/Corsair-Reaver-Band.html" class="contentColor">Corsair Reaver Band</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Index. Warhammer Legends: Forge World (9th edition, version 1.0)" src="../../img/expansions/FWL_logo2.png"><a href="../drukhari/Corsair-Reaver-Band.html" class="contentColor">Corsair Reaver Band</a></div><div style="clear:both"></div><br><b>and others...</b></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentAeldari"><b><p>The <span class="kwb">AELDARI</span> keyword is used in the following Ynnari datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="The-Visarch.html" class="contentColor">The Visarch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="The-Yncarne.html" class="contentColor">The Yncarne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Yvraine.html" class="contentColor">Yvraine</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Fortifications</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" class="contentColor">Webway Gate</a></div></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><a href="The-Visarch.html" class="contentColor">The Visarch</a></div></div><div class="i15 ArmyType_line "><a href="The-Yncarne.html" class="contentColor">The Yncarne</a></div><div class="i15 ArmyType_line "><a href="Yvraine.html" class="contentColor">Yvraine</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Fortifications</b></span></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Codex. Harlequins (8th edition, version Indomitus 1.4)" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" class="contentColor">Webway Gate</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><a href="index.htm#Using-an-Ynnari-Army-in-Warhammer-40-000" class="contentColor">Using an Ynnari Army in Warhammer 40,000</a></div><div class="w1 i15"><a href="index.htm#Stratagems-by-Phase" class="contentColor">Stratagems by Phase</a></div><div class="w1 i15"><a href="index.htm#Stratagems" class="contentColor">Stratagems</a></div><div class="w1 i15"><a href="index.htm#Revenant-Discipline" class="contentColor">Revenant Discipline</a></div><div class="w1 i15"><a href="index.htm#Warlord-Traits" class="contentColor">Warlord Traits</a></div><div class="w1 i15"><a href="index.htm#Relics-of-Ynnead" class="contentColor">Relics of Ynnead</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

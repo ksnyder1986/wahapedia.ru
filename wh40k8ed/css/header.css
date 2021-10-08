@@ -1,0 +1,381 @@
+﻿.NavWrapper {
+	display:inline;
+	float:right;
+}
+.NavWrapper_M {
+	display:inline;
+	position:absolute;
+	top:72px; right:0px;
+}
+.NavWrapper_P {
+	display:inline;
+	position:absolute;
+	top:72px; left:0px;
+}
+
+.NavBtn {
+	background-color: #888;
+   color: #fefefe;
+	width: 100px;
+	text-align:center;
+	margin-top:2px;
+   padding: 4px 16px 2px 16px;
+   font-size: 22px;
+   border: none;
+   cursor: pointer;
+	font-family: 'Minion-Cyrillic-Bold', cursive;
+	background-image: url(../img/TabCorner.png);
+	background-repeat:no-repeat;
+}
+
+.NavBtn_S {
+	background-color: #888;
+	width: 40px;
+	margin-top:2px;
+   padding: 4px 4px 2px 4px;
+   border: none;
+   cursor: pointer;
+   font-size: 22px;
+	font-family: 'Minion-Cyrillic-Bold', cursive;
+	background-image: url(../img/Settings_Icon0.png);
+	background-repeat:no-repeat;
+}
+
+.NavBtn_A {
+	background-color: #888;
+	width: 40px;
+	margin-top:2px;
+   padding: 4px 4px 2px 4px;
+   border: none;
+   cursor: pointer;
+   font-size: 22px;
+	font-family: 'Minion-Cyrillic-Bold', cursive;
+	background-image: url(../img/About_Icon0.png);
+	background-repeat:no-repeat;
+}
+
+.NavBtn_P {
+	background-color: #888;
+   color: #fefefe;
+	width: 120px;
+	text-align:center;
+	margin-top:2px;
+   padding: 4px 16px 2px 16px;
+   font-size: 22px;
+   border: none;
+   cursor: pointer;
+	font-family: 'Minion-Cyrillic-Bold', cursive;
+	background-image: url(../img/TabCorner.png);
+	background-repeat:no-repeat;
+}
+
+.NavDropdown:hover .NavBtn {
+	background-color: #101010;
+   color: white;
+	margin-top: 0px;
+   font-size: 24px;
+}
+.NavDropdown_P:hover .NavBtn_P {
+	background-color: #990000;
+   color: white;
+	margin-top: 0px;
+   font-size: 24px;
+}
+.NavDropdown_S:hover .NavBtn_S {
+	background-color: #101010;
+	margin-top: 0px;
+   font-size: 24px;
+	background-image: url(../img/Settings_Icon1.png);
+	background-repeat:no-repeat;
+}
+.NavDropdown_A:hover .NavBtn_A {
+	background-color: #101010;
+	margin-top: 0px;
+   font-size: 24px;
+	background-image: url(../img/About_Icon1.png);
+	background-repeat:no-repeat;
+}
+
+.NavDropdown {
+   position: relative;
+	display:inline-block;
+}
+.NavDropdown_P {
+   position: relative;
+	display:inline-block;
+}
+.NavDropdown_S {
+   position: relative;
+	display:inline-block;
+}
+.NavDropdown_A {
+   position: relative;
+	display:inline-block;
+}
+.Settings_Icon {
+	padding: 0px 0px 0px 0px;
+}
+.About_Icon {
+	padding: 0px 0px 0px 0px;
+}
+
+.NavDropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #eeeeee;
+   min-width: 200px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+	right: 0;
+	border: 4px ridge #777;
+	padding: 8px;
+}
+.NavDropdown-content_P {
+   display: none;
+   position: absolute;
+   background-color: #eeeeee;
+   min-width: 200px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+	left: 0;
+	border: 4px ridge #777;
+	padding: 8px;
+}
+.NavDropdown-content_S {
+   display: none;
+   position: absolute;
+   background-color: #eeeeee;
+   min-width: 300px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+	right: 0;
+	border: 4px ridge #777;
+	padding: 8px;
+}
+.NavDropdown-content_A {
+   display: none;
+   position: absolute;
+   background-color: #eeeeee;
+   min-width: 80px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+	right: 0;
+	border: 4px ridge #777;
+	padding: 8px;
+}
+
+.NavDropdown-content a {
+   color: #101010;
+   padding: 4px;
+   text-decoration: none;
+	text-align:left;
+	font-weight:800;
+   font-size: 18px;
+   display: block;
+	margin: 4px;
+}
+.NavDropdown-content_A a {
+   color: #101010;
+   padding: 4px;
+   text-decoration: none;
+	text-align:left;
+	font-weight:800;
+   font-size: 18px;
+   display: block;
+	margin: 4px;
+}
+
+.NavDropdown:hover .NavDropdown-content {
+   display: block;
+}
+.NavDropdown_P:hover .NavDropdown-content_P {
+   display: block;
+}
+.NavDropdown_S:hover .NavDropdown-content_S {
+   display: block;
+}
+.NavDropdown_A:hover .NavDropdown-content_A {
+   display: block;
+}
+
+.NavDropdown-content a:hover {
+	background-color: #101010;
+   color: #fefefe;
+	padding: 4px;
+   text-decoration: none;
+   display: block;
+	margin: 4px;
+}
+.NavDropdown-content_A a:hover {
+	background-color: #101010;
+   color: #fefefe;
+	padding: 4px;
+   text-decoration: none;
+   display: block;
+	margin: 4px;
+}
+
+.NavColumns3 {
+	display: inline-block;
+	-moz-column-count: 3; /* Для Firefox */
+	-moz-column-gap: 12px;
+	-webkit-column-count: 3; /* Для Safari и Chrome */
+	-webkit-column-gap: 12px;
+	column-count: 3;
+	column-gap: 12px;
+}
+.NavColumns {
+	display: inline-block;
+	-moz-column-count: 4; /* Для Firefox */
+	-moz-column-gap: 12px;
+	-webkit-column-count: 4; /* Для Safari и Chrome */
+	-webkit-column-gap: 12px;
+	column-count: 4;
+	column-gap: 12px;
+}
+.NavSettings {
+}
+.FactionHeader {
+
+	padding: 0 4px 4px 4px;
+	margin: 0 4px 4px 4px;
+	min-width: 200px;
+	text-align:left;
+	font-size: 18px;
+	font-family:impact,charcoal,arial black;
+   color: #990000;
+}
+
+.SiteHeader {
+	margin: 6px 0px 0px 5px;
+	float:left;
+}
+	
+.NavUnderline {
+	clear:both;
+	width:auto;
+	height:0px;
+	border-bottom: 4px ridge #777;
+	box-shadow: 0px 5px 15px 0px #555;
+}
+.NavUnderline_M {
+	width:100%;
+	height:0px;
+	border-bottom: 4px ridge #777;
+	box-shadow: 0px 5px 15px 0px #555;
+	position:absolute;
+	top:106px; left:0px;
+}
+
+.lang {
+	border:1px solid #fff;
+	border-radius: 2px;
+	padding:1px;
+	float:left;
+	width:25px;
+	height:17px;
+	margin:0 2px 0 2px;
+}
+
+.lang2 {
+	border:1px solid #fff;
+	border-radius: 2px;
+	padding:1px;
+	float:left;
+	width:25px;
+	height:17px;
+	margin:0 2px 0 2px;
+}
+
+.lang:hover {
+	border:1px solid #aaa;
+}
+
+.langSet {
+	float:right;
+	position:absolute;
+	top:-36px; left:-66px;
+}
+
+.lang_line {
+	padding:1px;
+	display:flex;
+	align-items:center;
+	padding: 4px;
+}
+
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 23px;
+    margin: 5px 0 5px 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+	 border: 1px solid #ccc;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #fefefe;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #fefefe;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 5px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid #101010;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.datasheetsCollated {
+	float:right;
+	margin: 1px 5px 0 0;
+}
+.datasheetsCollated a {
+	color: #808080;
+	text-decoration: underline;
+}

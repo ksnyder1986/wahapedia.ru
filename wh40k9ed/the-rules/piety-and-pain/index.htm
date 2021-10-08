@@ -1,0 +1,534 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Piety and Pain">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 9 edition, Soul Hunt, Piety and Pain, Enough is Enough, The Rules, Theatre of War: Urban Arena">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Piety and Pain</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowSpecialistDetachments;
+	if (data == undefined) {data = 'true'; localStorage.ShowSpecialistDetachments = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowSpecialistDetachments').prop('checked', StrData);
+
+	$('.ShowSpecialistDetachments').change(function () {
+      localStorage.ShowSpecialistDetachments = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowCrusadeRules;
+	if (data == undefined) {data = 'true'; localStorage.ShowCrusadeRules = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowCrusadeRules').prop('checked', StrData);
+
+	$('.ShowCrusadeRules').change(function () {
+      localStorage.ShowCrusadeRules = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.PrimarisFilter;
+	if (data == undefined) {data = ''; localStorage.PrimarisFilter = data};
+
+	$('.PrimarisSelect').prop('value', data);
+
+	$('.PrimarisSelect').change(function () {
+      localStorage.PrimarisFilter = $(this).prop('value');
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld, .sSpecialistDetachments, .sPrimaris, .sNotPrimaris, .sCrusadeRules';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+if (localStorage.ShowSpecialistDetachments == 'false') {clFlags = clFlags + comma + '.sSpecialistDetachments'; comma = ', ';};
+if (localStorage.ShowCrusadeRules == 'false') {clFlags = clFlags + comma + '.sCrusadeRules'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sPrimaris') {clFlags = clFlags + comma + '.sNotPrimaris'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sNotPrimaris') {clFlags = clFlags + comma + '.sPrimaris'; comma = ', ';};
+ $('.abVisChk').css('display', ''); $('.abVisChk2').css('display', '');
+	$(clAllFlags).show();
+	$(clFlags).hide();
+
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+ if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+ if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowSpecialistDetachments">
+	<span class="checkmark"></span>Show Specialist Detachments
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowCrusadeRules">
+	<span class="checkmark"></span>Show Crusade Rules
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../playing-this-game/index.htm">Playing This Game</a><a href="../core-rules/index.htm">Core Rules</a><a href="../open-play/index.htm">Open Play</a><a href="../matched-play/index.htm">Matched Play</a><a href="../narrative-play/index.htm">Narrative Play</a><a href="../advanced-rules/index.htm">Advanced Rules</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Mission Packs</div><a href="../beyond-the-veil/index.htm">Beyond the Veil</a><a href="../grand-tournament-2021/index.htm">Grand Tournament 2021</a><a href="../tactical-deployment/index.htm">Tactical Deployment</a><a href="../psychic-awakening/index.htm">Psychic Awakening</a><a href="index.htm">Piety and Pain</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">War Zones</div><a href="../war-zone-charadon/index.htm">War Zone Charadon</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a href="../../factions/adepta-sororitas/index.htm">Adepta Sororitas</a><a href="../../factions/adeptus-custodes/index.htm">Adeptus Custodes</a><a href="../../factions/adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a href="../../factions/astra-militarum/index.htm">Astra Militarum</a><a href="../../factions/grey-knights/index.htm">Grey Knights</a><a href="../../factions/imperial-knights/index.htm">Imperial Knights</a><a href="../../factions/inquisition/index.htm">Inquisition</a><a href="../../factions/officio-assassinorum/index.htm">Officio Assassinorum</a><a href="../../factions/rogue-traders/index.htm">Rogue Traders</a><a href="../../factions/sisters-of-silence/index.htm">Sisters of Silence</a><a href="../../factions/space-marines/index.htm">Space Marines</a><a href="../../factions/titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a href="../../factions/chaos-daemons/index.htm">Chaos Daemons</a><a href="../../factions/chaos-knights/index.htm">Chaos Knights</a><a href="../../factions/chaos-space-marines/index.htm">Chaos Space Marines</a><a href="../../factions/death-guard/index.htm">Death Guard</a><a href="../../factions/heretic-titan-legions/index.htm">Heretic Titan Legions</a><a href="../../factions/renegades-and-heretics/index.htm">Renegades and Heretics</a><a href="../../factions/thousand-sons/index.htm">Thousand Sons</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a href="../../factions/craftworlds/index.htm">Craftworlds</a><a href="../../factions/drukhari/index.htm">Drukhari</a><a href="../../factions/harlequins/index.htm">Harlequins</a><a href="../../factions/ynnari/index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a href="../../factions/genestealer-cults/index.htm">Genestealer Cults</a><a href="../../factions/necrons/index.htm">Necrons</a><a href="../../factions/orks/index.htm">Orks</a><a href="../../factions/t-au-empire/index.htm">T’au Empire</a><a href="../../factions/tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a href="../../factions/unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">Piety and Pain</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">Piety and Pain allows you to recreate the race against time to liberate the mausoleum world of Martyr’s Rest. It is a tale of the Drukhari - led by Lelith Hesperax, the Queen of Knives - enacting cruel blood sports on a gigantic scale, and of the vengeful Battle Sisters of the Adepta Sororitas, who seek to expel the xenos from the holy site in a battle that decides the fate of billions.</p><div class="Columns3"><div class="BreakInsideAvoid frameDark Corner18" style="max-width:390px;"><span><div class="contents_header">Contents</div><div class="mw3 i10"><a href="index.htm#The-Rules" class="contentColorInv"><b>The Rules</b></a></div><div class="mw3 i10"><a href="index.htm#Theatre-of-War:-Urban-Arena" class="contentColorInv"><b>Theatre of War: Urban Arena</b></a></div><div class="mw3 i10"><img class="tooltip logo2" title="Legendary mission" src="../../img/EchoesOfWar.png"><a href="index.htm#Soul-Hunt" class="contentColorInv"><b>Soul Hunt</b></a></div><div class="mw3 i10"><img class="tooltip logo2" title="Legendary mission" src="../../img/EchoesOfWar.png"><a href="index.htm#Enough-is-Enough" class="contentColorInv"><b>Enough is Enough</b></a></div></span></div><br>There is no respite from the corruption that pours out of the Great Rift. The faithful Adepta Sororitas are as besieged as any of the Imperium’s warriors, fighting against heretics, mutants and xenos in system after system.<br><br><div class="BreakInsideAvoid">While defending the cardinal world of Alexistor against the forces of Chaos, Battle Sisters of the Order of Our Martyred Lady took heart as a vile psychic contagion was witnessed to be held back by a miraculous aura. Holy sites dedicated to the long-dead Saint Jheraldine became focuses of adoration, seemingly immune to the soul infection that spread. But the holy emanations were fading, and visions told of the saints spirit being in peril.<br><br></div>Under the command of Palatine Erika Luminas, a mission of the Order of Our Martyred Lady embarked on a crusade to the world of Martyr’s Rest - the site of Jheraldine’s remains and the location of relics sacred to her memory. Luminas’ holy duty was to retrieve a blessed artefact in the hopes of halting the plague’s progress and, if possible, to ruthlessly stamp out any corruption on the world.<br><br>What they found, they saw as a sacrilegious invasion of despicable xenos. The Drukhari had turned the capital shrine-city of Martyr’s Rest, Purity, into a deadly gladiatorial arena several miles wide. Its terrified citizens trapped inside were now the quarry for an acrobatic and gruesome hunt, coordinated by the undisputed champion of the Drukhari’s grisly spectacles, Lelith Hesperax. Once contemplative avenues of sombre statuary were now lethal stalking grounds, strewn with diabolical traps. Lelith had promised her sadistic followers a mesmerising display of unsurpassed, gory delights as she sought to expand her influence among her torturous kind. As the outraged and impassioned Luminas led her Sisters in the attack, she vowed to avenge this defilement of such a holy place. Lelith and her warriors gladly swooped on the Battle Sisters, seeing in the Adepta Sororitas’ faith and strength an opportunity to gratify themselves in the breaking of devout convictions.<br><br><i>Warhammer 40,000: Piety and Pain</i> contains two Citadel miniatures collections, each of which forms a complete army. Within this book, you will find rules for using all these models on the battlefield, alongside a showcase of painted examples of them. You will also discover the story of the Battle of Martyr’s Rest, and a series of missions that allow you to recreate it with a friend on the tabletop. Finally, there is a Theatre of War giving additional rules for playing games in a trap-laden urban arena, as well as Battle Traits and Crusade Relics with which you can reward your experienced Drukhari and Adepta Sororitas armies.</div>
+
+<hr>
+<a name="The-Rules"></a><h3 class="  outline_header " style="display:flex;">The Rules</h3><div class="Columns2">Welcome to the rules section of <i>Warhammer 40,000: Piety and Pain</i>. On the following pages you will find all the content you need to bring the attempted liberation of Martyrs Rest to life on your tabletop battlefields. Maybe you are inspired to dive straight into re-enactments of key missions from the clash between the Drukhari and the Adepta Sororitas, or perhaps you want to incorporate rules to represent veterans of this conflict in <a href="../narrative-play/index.htm">narrative play</a>. Alternatively, you might want to battle in the kinds of environments presented in the narrative presented earlier in this book. Whichever appeals to you - even if it’s a bit of all three - the following pages provide a modular toolbox that allows you to get the most out of the models contained within <i>Warhammer 40,000: Piety and Pain</i>.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">THEATRE OF WAR: URBAN ARENA</font><br>Theatres of War offer a unique and exciting way to represent a wide array of different battlefield environments on the tabletop, some more extreme than others, and can be incorporated into any games of Warhammer 40,000 that you might play. The Piety and Pain Theatre of War is a unique ruleset that allows one player to turn the battlefield itself into a weapon. It is recommended that you use this Theatre of War with the missions presented below, but it is also a suitable addition to games in which one player’s army is at a greater strength than their opponent’s.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION 1: SOUL HUNT</font><br><a href="index.htm#Soul-Hunt">Soul Hunt</a> is the first of the narrative missions included in this booklet. It allows both players to use the miniatures found in <i>Warhammer 40,000: Piety and Pain</i> to recreate the Adepta Sororitas’ counter-attack against the Drukhari raiders, as the Sisters of Battle seek to liberate the populace from torment at xenos hands.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION 2: ENOUGH IS ENOUGH</font><br><a href="index.htm#Enough-is-Enough">Enough Is Enough</a> is a mission set at a crucial juncture in the campaign. Palatine Erika Luminas bravely steps forward to lure out the Drukhari, a tempting prize Lelith Hesperax is all too eager to seize. As the two forces battle, these mighty champions are left to fight against one another in an epic challenge.</div><div><br></div><a name="Theatre-of-War:-Urban-Arena"></a><h3 class="  outline_header " style="display:flex;">Theatre of War: Urban Arena</h3><p class="ShowFluff legend">The Drukhari turned the shrine-city of Purity into an immense arena for their Wych Cults to perform within. Every district contained different forms of traps, pitfalls and xenos snares waiting to fell the unwary, or at least debilitate them in an exotic manner. Fighting in such an environment ensured that the forces of the enemy were not a warrior’s only concerns, for every seeming sanctury held the potential for a gruesome end.</p><div class="Columns2">Urban Arena is a new Theatre of War for your games of Warhammer 40,000. It adds an exciting new feature where one side has turned the battlefield itself into a weapon with traps and ruses to use on their enemies. It is designed to be used with the missions presented below, but if you and your opponent agree, this Theatre of War can be used in other games of Warhammer 40,000 - even in conjunction with other additional rules and mission packs - in the following manner:<br><br>After mustering their armies, each player adds up the <span class="tooltip" data-tooltip-content="#tooltip_content00482"><span class="tt kwbu">Power</span> <span class="tt kwbu">Rating</span></span> of all the units in their army. If the players are playing a <a href="../matched-play/index.htm">matched play</a> game, or are otherwise using <span class="tooltip" data-tooltip-content="#tooltip_content00485"><span class="tt kwbu">points</span> <span class="tt kwbu">values</span></span>, each player adds up the points values of all the units in their army instead. The table below is then consulted to establish if a player can use Urban Arena Ruses, and how many they can use.<br><br><div class="BreakInsideAvoid frameLight Corner15" style=""><b>Designer’s Note:</b> <i>While it specifies above when Urban Arena Ruses should be used, players should feel free to introduce them into their games even if their forces are more equally matched. For example, players might decide it is narratively appropriate for one player to have some Ruses, therefore they gain one or two to use during the game. Similarly, players may decide they want to pitch both forces against one another on an equal footing in the crucible of an Urban Arena, therefore they both randomly generate (in secret) an equal number of Urban Arena Ruses.</i></div><br><div class="BreakInsideAvoid" style=""><table border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable tablefont" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td style="border-width:1px 0 1px 1px;text-align:left;vertical-align:middle;width:280px;height:0px;"><b>HIGHEST POWER VALUE/ POINTS VALUE BANDING OF OPPONENT’S ARMY</b></td><td style="border-width:1px 0 1px 0;text-align:left;vertical-align:middle;width:280px;height:0px;"><b>MAXIMUM POWER VALUE/ POINTS VALUE OF YOUR ARMY IN ORDER TO USE URBAN ARENA RUSES</b></td><td style="border-width:1px 1px 1px 0;text-align:center;vertical-align:middle;width:120px;height:0px;"><b>NUMBER OF RUSES AVAILABLE</b></td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;width:280px;height:0px;">25/500</td><td style="border-width:0 0 0 0;text-align:left;vertical-align:middle;width:280px;height:0px;">20/400</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">2</td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;width:280px;height:0px;">50/1000</td><td style="border-width:0 0 0 0;text-align:left;vertical-align:middle;width:280px;height:0px;">40/800</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">3</td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;width:280px;height:0px;">100/2000</td><td style="border-width:0 0 0 0;text-align:left;vertical-align:middle;width:280px;height:0px;">85/1200</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">4</td></tr><tr><td style="border-width:0 0 1px 1px;text-align:left;vertical-align:middle;width:280px;height:0px;">150+/3000+</td><td style="border-width:0 0 1px 0;text-align:left;vertical-align:middle;width:280px;height:0px;">130/2500</td><td style="border-width:0 1px 1px 0;text-align:center;vertical-align:middle;width:120px;height:0px;">5</td></tr></tbody></table></td></tr></tbody></table></div><br>If a player is using Urban Arena Ruses, after determining deployment zones they must secretly select the Ruses they have available from the following lists. Alternatively, they can declare they will randomly select their Ruses, then secretly roll one D3 to determine the table, and roll a further D3 to determine a Ruse from that table. Either way, they should make a note of which Ruses they have selected. Each Ruse can only be selected once (if randomly determined, re-roll until a new Ruse has been determined).<br><br>Each Ruse specifies when it can be used, can only be used once and has no effect on <a href="../core-rules/index.htm#Aircraft"><span class="kwb">AIRCRAFT</span></a> units. A player cannot use more than one Ruse in a phase.<br><br><div class="BreakInsideAvoid"><h4 style="display:flex;">RUSE TABLE 1</h4><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;width:30px">D3</td><td class="impact18">RUSE</td></tr><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">1</td><td><p class="impact18">Gas</p><p class="ShowFluff legend2">What at first appears to be drifting incense, or oily smoke pooling in dense terrain, is in fact a biohazardous gas that burns the skin and sears the lungs of those unprotected.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>. Select one <a href="../advanced-rules/index.htm#Area-Terrain">Area Terrain</a> feature. Each player rolls one D6 for each model from their army (excluding <span class="kwb">VEHICLE</span> models and models with a 2+ Save characteristic) within 1" of that terrain feature. For each roll of 1, that player must select one model from their army (excluding <span class="kwb">VEHICLE</span> models and models with a 2+ Save characteristic) within 1" of that terrain feature to be destroyed.</p></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">2</td><td><p class="impact18">Blaring Cacophony</p><p class="ShowFluff legend2">Ear-splitting shrieks and unheard frequencies that trouble the subconscious erupt from hidden emitters, sending those in the vicinity to their knees.</p><p>Use this Ruse in any phase. Select one <a href="../advanced-rules/index.htm#TERRAIN-FEATURES">terrain feature</a>. Until the end of the following turn, while a model is within that terrain feature:<br><ul><li>Each time it makes an attack, subtract 1 from that attack’s <span class="tooltip" data-tooltip-content="#tooltip_content00037"><span class="tt kwbu">hit</span> <span class="tt kwbu">roll</span></span>.</li><li>Its unit cannot fire <span class="tooltip" data-tooltip-content="#tooltip_content00524"><span class="tt kwbu">Overwatch</span></span> or <span class="tooltip" data-tooltip-content="#tooltip_content00575"><span class="tt kwbu">Set</span> <span class="tt kwbu">to</span> <span class="tt kwbu">Defend</span></span>.</li></ul></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">3</td><td><p class="impact18">Collapsing Charges</p><p class="ShowFluff legend2">Weakened by nanoscopic lithovores, well-placed detonations topple part of the dense urban environment, bringing it down upon a nearby unit. Those not crushed by titanic blocks of masonry must pull themselves clear before the enemy pounce.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>. Select one <a href="../advanced-rules/index.htm#Buildings">Building</a> or <a href="../advanced-rules/index.htm#Area-Terrain">Area Terrain</a> feature, then select one enemy unit within 6" of that terrain feature. Roll one D6 for each model in that unit. For each result that is higher than the majority Toughness characteristic of models in that unit, that unit suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00042"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span>. In addition, until the end of the turn, halve the Move characteristic of models in that unit and that unit cannot <span class="tooltip" data-tooltip-content="#tooltip_content00368"><span class="tt kwbu">Advance</span></span>.</p></td></tr></tbody></table></div></div><h4 style="display:flex;">RUSE TABLE 2</h4><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;width:30px">D3</td><td class="impact18">RUSE</td></tr><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">1</td><td><p class="impact18">Proximity Mines</p><p class="ShowFluff legend2">Often placed on key routes, explosives are triggered by gene-trace, engine frequency or other variables.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement</a> or <a href="../core-rules/index.htm#CHARGE-PHASE">Charge phase</a>, when an enemy unit (excluding a <span class="tooltip" data-tooltip-content="#tooltip_content00056"><span class="tt kwbu"><span class="kwb">CHARACTER</span></span></span> unit with a Wounds characteristic of 9 or less) is selected to move. Before that unit moves, unless each model in that unit is within a <a href="../advanced-rules/index.htm#TERRAIN-FEATURES">terrain feature</a>, it suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00042"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span>, or 3 mortal wounds if it is a <span class="kwb">VEHICLE</span> or <span class="kwb">MONSTER</span> unit.</p></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">2</td><td><p class="impact18">Tripwire</p><p class="ShowFluff legend2">Sometimes rigged across building entrances, these taut lines can easily take off a limb or the head of the unwary.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement</a> or <a href="../core-rules/index.htm#CHARGE-PHASE">Charge phase</a>, after an enemy <span class="kwb">INFANTRY</span>, <span class="kwb">BIKER</span> or <span class="kwb">CAVALRY</span> unit (excluding a <span class="tooltip" data-tooltip-content="#tooltip_content00056"><span class="tt kwbu"><span class="kwb">CHARACTER</span></span></span> unit) has moved. If a model from that unit is within an <a href="../advanced-rules/index.htm#Area-Terrain">Area Terrain</a> feature, and no models from its unit were within that Area Terrain feature when it was selected to move or charge, roll one D6: on a 3+, your opponent must select one model from that unit to be destroyed.</p></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">3</td><td><p class="impact18">Decoy Projections</p><p class="ShowFluff legend2">Disturbingly realistic hololight imagery draws the foe's fire, allowing the real threat to creep nearer.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#SHOOTING-PHASE">Shooting phase</a>, after an enemy unit has made all of its attacks. Select one <span class="kwb">INFANTRY</span> unit from your army that had models destroyed by those attacks. Place one marker within 6" of that unit. Set up any models from that unit that were destroyed this phase wholly within 6" of the centre of that marker, more than 6" from any enemy models and within <span class="tooltip" data-tooltip-content="#tooltip_content00627"><span class="tt kwbu">unit</span> <span class="tt kwbu">coherency</span></span> of each other. Then remove the remaining models in that unit and set them up within unit coherency of the models returned to that unit and more than 6" from any enemy models.</p></td></tr></tbody></table></div><br><h4 style="display:flex;">RUSE TABLE 3</h4><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;width:30px">D3</td><td class="impact18">RUSE</td></tr><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">1</td><td><p class="impact18">Smokescreen</p><p class="ShowFluff legend2">A dark shroud of clinging mist suddenly envelops charging warriors, allowing their targets to slip swiftly out of reach.</p><p>Use this Ruse in your opponent’s <a href="../core-rules/index.htm#CHARGE-PHASE">Charge phase</a>, when a unit from your army that is not within <span class="tooltip" data-tooltip-content="#tooltip_content00974"><span class="tt kwbu">Engagement</span> <span class="tt kwbu">Range</span></span> of any enemy units is selected as the target of a charge. Until the end of the phase, that unit cannot fire <span class="tooltip" data-tooltip-content="#tooltip_content00524"><span class="tt kwbu">Overwatch</span></span> or <span class="tooltip" data-tooltip-content="#tooltip_content00575"><span class="tt kwbu">Set</span> <span class="tt kwbu">to</span> <span class="tt kwbu">Defend</span></span>, but before the <span class="tooltip" data-tooltip-content="#tooltip_content00976"><span class="tt kwbu">charge</span> <span class="tt kwbu">roll</span></span> is made, you can make a <span class="tooltip" data-tooltip-content="#tooltip_content00977"><span class="tt kwbu">Normal</span> <span class="tt kwbu">Move</span></span> with that unit up to 2D6".</p></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">2</td><td><p class="impact18">Shielding System</p><p class="ShowFluff legend2">A sophisticated device emits a broadspectrum energy shield, warping the fabric of reality enough that all but the most powerful munitions are swatted away on harmless trajectories.</p><p>Use this Ruse at the start of your opponent’s <a href="../core-rules/index.htm#SHOOTING-PHASE">Shooting phase</a>. Select one <a href="../advanced-rules/index.htm#TERRAIN-FEATURES">terrain feature</a>. Until the end of the phase, all models wholly within that terrain feature have a 3+ <span class="tooltip" data-tooltip-content="#tooltip_content00979"><span class="tt kwbu">invulnerable</span> <span class="tt kwbu">save</span></span> against ranged attacks with a Strength characteristic of 5 or less, or attacks that don’t have a Strength characteristic (e.g. attacks made by a splinter rifle).</p></td></tr></tbody></table></div><div class="BreakInsideAvoid"><table max-width="480px" border="0" cellpadding="3" style="border-width:0px"><tbody><tr><td class="impact18" style="text-align:center;vertical-align:top;width:30px">3</td><td><p class="impact18">Sphere of Night</p><p class="ShowFluff legend2">An orb of cold, ink-black darkness spreads out, merging with battlefield shadows and shielding those within its embrace from detection.</p><p>Use this Ruse at the start of your opponent’s <a href="../core-rules/index.htm#SHOOTING-PHASE">Shooting phase</a>. Select one <span class="kwb">INFANTRY</span> unit from your army. Until the end of the turn, that unit cannot be selected as a target for ranged attacks or charges unless they are within 9" of the shooting or charging unit.</p></td></tr></tbody></table></div></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Soul-Hunt"></a><div class="mission_header2">Mission 1</div><h3 class="  outline_header mission_header">Soul Hunt</h3><p class="ShowFluff legend">Palatine Luminas reached the location of Jheraldine’s remains to find death and butchery, and the relics taken. Yet she also discovered hope that they had been sequestered in desperation elsewhere. Now, a search begins and Adepta Sororitas patrols scour the city for traces of the bearer’s route. Yet at every turn the Drukhari haunt their steps, with <a href="../../factions/drukhari/Lelith-Hesperax.html">Lelith Hesperax</a> determined to extract cruel entertainment from them.</p><div class="Columns2"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">THE ARMIES</font><br>The Drukhari army consists of: <a href="../../factions/drukhari/Lelith-Hesperax.html">Lelith Hesperax</a>; 2 <a href="../../factions/drukhari/Wyches.html">Wyches</a> units each containing 5 models; 5 <a href="../../factions/drukhari/Scourges.html">Scourges</a>; 1 <a href="../../factions/drukhari/Venom.html">Venom</a>.<br><br>The Adepta Sororitas army consists of: 1 <a href="../../factions/adepta-sororitas/Palatine.html">Palatine</a>; I <a href="../../factions/adepta-sororitas/Retributor-Squad.html">Retributor Squad</a> unit containing 5 models; 1 <a href="../../factions/adepta-sororitas/Immolator.html">Immolator</a>.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">THE BATTLEFIELD</font><br>Use the deployment map shown below to create a battlefield that is 44"x30". As shown on the map, divide the battlefield into three equal sections and place two <a href="../advanced-rules/index.htm#Area-Terrain">Area Terrain</a> features within each of these sections more than 6" from each other (if this is not possible, place them as far apart as you can). With the exception of any <a href="../advanced-rules/index.htm#Obstacles">obstacles</a>, ensure that there is open ground devoid of any terrain features between the Area Terrain features.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">DEPLOYMENT</font><br>The Adepta Sororitas player sets up their army first. They must set up the Immolator in the location specified on the deployment map as close as possible to their battlefield edge. They must then set up the Palatine and each model in the Retributor Squad unit within 2" of the Immolator and not within an Area Terrain feature.<br><br>Then the Drukhari player sets up their army. Each unit in the Drukhari players army must be set up wholly within their deployment zone.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">FIRST TURN</font><br>The Drukhari player has the first turn.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">BATTLE LENGTH</font><br>The battle ends if the Adepta Sororitas player successfully completes the Locate Signs <a href="../advanced-rules/index.htm#ACTIONS">action</a> (see below) three times. Otherwise, the battle ends when all of the <span class="kwb">INFANTRY</span> units in the Adepta Sororitas players army have been destroyed.<br><br><div class="BreakInsideAvoid"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">VICTORY CONDITIONS</font><br>The winner is determined depending on how many times the Adepta Sororitas player successfully completes the Locate Signs action:<br><ul><li>Three times - The Adepta Sororitas player achieves a major victory.</li><li>Two times - The Adepta Sororitas player achieves a minor victory.</li><li>One time - The Drukhari player achieves a minor victory.</li><li>Zero times - The Drukhari player achieves a major victory.</li></ul><br></div><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">CAUTIOUS ADVANCE</font><br>Each unit from the Adepta Sororitas players army can move no further than 6" in the <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">SWEEP AND SEARCH</font><br>At the end of each of their Movement phases, if any models from the Adepta Sororitas players army are wholly within a section labelled on the deployment map that has not already been searched, they can search that section. Randomly select one of the Area Terrain features within that section. That Area Terrain feature is the location of hidden Sororitas signs.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">LOCATE SIGNS</font><br>Units in the Adepta Sororitas players army can perform the following action: ‘<b>Locate Signs (Action):</b> One <span class="kwb">INFANTRY</span> unit from your army can start to <a href="../advanced-rules/index.htm#Performing-Actions">perform this action</a> at the start of your <a href="../core-rules/index.htm#COMMAND-PHASE">Command phase</a> if every model in that unit is within an Area Terrain feature that is the location of hidden Sororitas signs. The action is completed at the end of your Command phase. If this action is successfully completed, this action cannot be performed within that section again.’<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">URBAN ARENA</font><br>This mission uses the <a href="index.htm#Theatre-of-War:-Urban-Arena">Urban Arena</a> Theatre of War. The Drukhari player can use 2 Urban Arena Ruses.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">VICTOR BONUS</font><br>The victor of this mission gains 2 <span class="tooltip" data-tooltip-content="#tooltip_content00696"><span class="tt kwbu">Requisition</span> <span class="tt kwbu">points</span></span> after this battle, instead of just 1. If the victor achieves a major victory, they gain 3 Requisition points, instead of just 1.</div><br><div class=" img-opa" style="clear:both;display:flex;justify-content:center;align-items:center;"><img border="0" src="../../img/maps/pap/SoulHunt.png" style="margin:4px"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Enough-is-Enough"></a><div class="mission_header2">Mission 2</div><h3 class="  outline_header mission_header">Enough is Enough</h3><p class="ShowFluff legend">St Jheraldine’s mortal remains are finally discovered, but the Battle Sisters must overcome the Drukhari’s barrier encircling Purity if they are to get them to Alexistor. Unable to engage the xenos in open battle, Palatine Luminas offers a prize too great forthem to resist - herself. While Lelith’s obsession with obtaining the relic grows, she prepares her spectacle’s bloody finale with the Palatine's suffering the star attraction.</p><div class="Columns2"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">THE ARMIES</font><br>The Drukhari army consists of: <a href="../../factions/drukhari/Lelith-Hesperax.html">Lelith Hesperax</a>; 2 <a href="../../factions/drukhari/Wyches.html">Wyches</a> units each containing 5 models; 5 <a href="../../factions/drukhari/Scourges.html">Scourges</a>; 1 <a href="../../factions/drukhari/Venom.html">Venom</a>.<br><br>The Adepta Sororitas army consists of: 1 <a href="../../factions/adepta-sororitas/Palatine.html">Palatine</a>; 1 <a href="../../factions/adepta-sororitas/Retributor-Squad.html">Retributor Squad</a> unit containing 5 models; 1 <a href="../../factions/adepta-sororitas/Immolator.html">Immolator</a>.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">THE BATTLEFIELD</font><br>Use the deployment map shown below to create a battlefield that is 44"x30".<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">DEPLOYMENT</font><br>The Adepta Sororitas player sets up their army first. Each unit in the Adepta Sororitas players army must be set up wholly within their deployment zone.<br><br>Then the Drukhari player sets up their army. Each unit in the Drukhari player’s army must be set up more than 16" from the Adepta Sororitas player’s deployment zone.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">FIRST TURN</font><br>The Drukhari player has the first turn.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">BATTLE LENGTH</font><br>The battle ends when one player’s <span class="kwb">PRIZE</span> model (see below) has been destroyed.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">VICTORY CONDITIONS</font><br>A player wins the battle if the enemy <span class="kwb">PRIZE</span> model (see below) has been destroyed.<br><br><div class="BreakInsideAvoid"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">A PRIZE TOO GREAT TO RESIST</font><br>For this battle, Lelith Hesperax and the Palatine gain the <span class="kwb">PRIZE</span> keyword. While an enemy <span class="kwb">PRIZE</span> model has not been destroyed and there are other enemy units on the battlefield, the following rules apply:<br><ul><li>Only the <span class="kwb">PRIZE</span> model from your army can target the enemy <span class="kwb">PRIZE</span> model with attacks, and the <span class="kwb">PRIZE</span> model from your army can only target the enemy <span class="kwb">PRIZE</span> model with attacks.</li><li>Models cannot move within <span class="tooltip" data-tooltip-content="#tooltip_content00980"><span class="tt kwbu">Engagement</span> <span class="tt kwbu">Range</span></span> of an enemy <span class="kwb">PRIZE</span> model unless they are also a <span class="kwb">PRIZE</span> model, and the <span class="kwb">PRIZE</span> model from your army can only move within Engagement Range of the enemy <span class="kwb">PRIZE</span> model.</li></ul><br></div><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">CHALLENGE</font><br>When a <span class="kwb">PRIZE</span> model within Engagement Range of an enemy <span class="kwb">PRIZE</span> model is selected to fight, the enemy <span class="kwb">PRIZE</span> model is selected to fight at the same time. Players alternate making those attacks, one at a time, starting with the player whose turn is taking place.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">BY THE GRACE OF THE EMPEROR</font><br>Each time the Palatine is selected to fight as a result of the Challenge mission rule (see above), you can re-roll one <span class="tooltip" data-tooltip-content="#tooltip_content00037"><span class="tt kwbu">hit</span> <span class="tt kwbu">roll</span></span>, you can re-roll one <span class="tooltip" data-tooltip-content="#tooltip_content00017"><span class="tt kwbu">wound</span> <span class="tt kwbu">roll</span></span> and you can re-roll one <span class="tooltip" data-tooltip-content="#tooltip_content00981"><span class="tt kwbu">saving</span> <span class="tt kwbu">throw</span></span> made for the Palatine.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">URBAN ARENA</font><br>This mission uses the <a href="index.htm#Theatre-of-War:-Urban-Arena">Urban Arena</a> Theatre of War. The Drukhari player can use 2 Urban Arena Ruses.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">VICTOR BONUS</font><br>Every eligible unit in the victor’s army is <a href="../narrative-play/index.htm#Crusade-Mission-Pack">Marked for Greatness</a> after the battle, instead of just one unit.</div><br><div class=" img-opa" style="clear:both;display:flex;justify-content:center;align-items:center;"><img border="0" src="../../img/maps/pap/EnoughIsEnough.png" style="margin:4px"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00482"><div class="tooltip_header">Power Ratings</div><a href="../advanced-rules/index.htm#Power-Ratings"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Every unit has a Power Rating listed on its <a href="../core-rules/index.htm#DATASHEETS-1">datasheet</a>, and it is a measure of its efficacy on the battlefield. They are designed to give players, at a glance, an idea of how mighty a unit is on the battlefield, irrespective of the weapons its models can be equipped with. They can therefore be used as a quick guide to establish the comparative strength of each army.<br><br>The Power Rating on a datasheet is for a minimum-sized unit. A unit’s Power Rating can be increased if additional models are added to the unit, and occasionally if other options are taken for the unit (such as equipping a unit with jump packs) - in either case the unit's datasheet will make it clear if the Power Rating listed at the top of the datasheet is increased as a result.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Power Ratings:</b> Quick measure of a unit's efficacy.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00485"><div class="tooltip_header">Points Values</div><a href="../advanced-rules/index.htm#Points-Values"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Every model and weapon has a points value, which is found in a number of Warhammer 40,000 publications. Points values are similar to <a href="../advanced-rules/index.htm#Power-Ratings">Power Ratings</a>, in that they give you a guide as to how powerful certain warriors and weapons are, but they offer a greater degree of granularity. A unit’s points value is calculated by adding together the points value of every individual model in that unit and the points value of every individual weapon equipped by a model in that unit. Certain items of wargear also have a points value, and must be included in a unit's points value if equipped by a model in that unit. While it takes a little longer to work out each unit's points value, doing so enables you to differentiate between two similar squads equipped with different weapon options, as the points values listed in our publications reflect the fact that some weapons are more powerful than others.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Points values:</b> Detailed measure of a unit's efficacy.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00037"><div class="tooltip_header">Hit Roll</div><a href="../core-rules/index.htm#1.-Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes an attack, make one hit roll for that attack by rolling one D6. If the result of the hit roll is equal to or greater than the attacking model’s Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon) or its Weapon Skill (WS) characteristic (if the attack is being made with a melee weapon), then that attack scores one hit against the target unit. If not, the attack fails and the attack sequence ends.<br><br>If an attack is made with a weapon that has an ability that says it ‘automatically hits the target’, no hit roll is made – that attack simply scores one hit on the target unit. An unmodified hit roll of 6 always scores a hit, and an unmodified hit roll of 1 always fails. A hit roll can never be modified by more than -1 or +1. This means that if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be -2 or worse, it is changed to be -1. Similarly, if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be +2 or better, it is changed to be +1.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00524"><div class="tooltip_header">Overwatch</div><a href="../core-rules/index.htm#Overwatch"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Certain rules enable units to fire Overwatch at an enemy unit before it can charge. If an enemy unit <a href="../core-rules/index.htm#Charging-with-a-Unit">declares a charge</a> that targets one or more units from your army that have such a rule, each of those units can fire Overwatch before the charge roll is made. A unit cannot fire Overwatch if there are any enemy units within <a href="../core-rules/index.htm#Engagement-Range">Engagement Range</a> of it. Overwatch is resolved like a normal <a href="../core-rules/index.htm#SHOOTING-PHASE">shooting attack</a> (albeit one resolved in the <a href="../core-rules/index.htm#CHARGE-PHASE">Charge phase</a>) and uses all the normal rules, except that an unmodified <a href="../core-rules/index.htm#1.-Hit-Roll">hit roll</a> of 6 is always required for a successful hit roll, irrespective of the firing model’s Ballistic Skill or any hit roll modifiers. In addition, when a model fires Overwatch, it does so at the charging unit. Any rule that states the unit cannot be targeted unless it is the closest target (e.g. <a href="../core-rules/index.htm#Look-out-Sir">Look Out, Sir</a>) does not apply when firing Overwatch.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Overwatch</b>: Before charge roll made, all charge targets that can fire Overwatch can do so.</li><li>Can never fire Overwatch while enemy units are in Engagement Range.</li><li>When firing Overwatch, shoot with unit, but attacks only hit on unmodified 6s.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00575"><div class="tooltip_header">Defensible (Set to Defend/Hold Steady)</div><a href="../advanced-rules/index.htm#Defensible"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+If every model in an <span class="kwb">INFANTRY</span> unit is on or in an <a href="../advanced-rules/index.htm#Area-Terrain">Area Terrain</a> feature with this trait, then it can either Hold Steady or it can Set to Defend (see below) when an enemy unit <a href="../core-rules/index.htm#Charging-with-a-Unit">declares a charge</a> against it.<br><br>If every model in an <span class="kwb">INFANTRY</span> unit is within 3" of an <a href="../advanced-rules/index.htm#Obstacles">Obstacle</a> terrain feature with this trait, then it can either Hold Steady or it can Set to Defend (see below) when an enemy unit declares a charge against it if, were you to draw a straight line, 1mm in thickness, between the closest parts of the bases (or hulls) of the two closest models in the two units, that line would pass over or through that terrain feature.<br><br>A unit cannot Hold Steady or Set to Defend while it is within <a href="../core-rules/index.htm#Engagement-Range">Engagement Range</a> of any enemy units.<br><br>If a unit Holds Steady, any <a href="../core-rules/index.htm#Overwatch">Overwatch</a> attacks made by that unit this phase will score hits on rolls of 5+. If a unit Sets to Defend, it cannot fire Overwatch this phase, but you add 1 to <a href="../core-rules/index.htm#1.-Hit-Roll">hit rolls</a> when resolving attacks made with melee weapons by models in that unit until the end of the next <a href="../core-rules/index.htm#FIGHT-PHASE">Fight phase</a>.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><span class="kwb">INFANTRY</span> units can Hold Steady or Set to Defend (if no enemy within Engagement Range}.</li><li><b>Hold Steady</b>: <span class="tooltip" data-tooltip-content="#tooltip_content00524"><span class="tt kwbu">Overwatch</span></span> attacks hit on 5+.</li><li><b>Set to Defend</b>: Cannot fire Overwatch but add 1 to hit rolls in next Fight phase.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00042"><div class="tooltip_header">Mortal Wounds</div><a href="../core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks inflict mortal wounds – these are so powerful that no armour or force field can withstand their fury. Each mortal wound inflicts 1 point of damage on the target unit, and they are always applied one at a time. Do not make a <a href="../core-rules/index.htm#2.-Wound-Roll">wound roll</a> or <a href="../core-rules/index.htm#4.-Saving-Throw">saving throw</a> (including <a href="../core-rules/index.htm#Invulnerable-Saves">invulnerable saves</a>) against a mortal wound – just allocate it as you would any other attack and <a href="../core-rules/index.htm#5.-Inflict-Damage">inflict damage</a> to a model in the target unit. Unlike damage inflicted by normal attacks, excess damage from mortal wounds is not lost. Instead, keep allocating damage to another model in the target unit until either all the damage has been allocated or the target unit is destroyed.<br><br>If an attack inflicts mortal wounds in addition to the normal damage, resolve the normal damage first. If an attack inflicts mortal wounds in addition to the normal damage, but the normal damage is subsequently saved, the target unit still suffers the mortal wounds, as described before. If an ability modifies the damage inflicted by a weapon, and that weapon can inflict mortal wounds in addition to the normal damage, the modifier does not apply to any mortal wounds that are inflicted (unless the rule specifically states otherwise).<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Each mortal wound inflicted on a unit causes one model in the unit to lose one wound.</li><li>No saving throws can be made against mortal wounds.</li><li>Mortal wounds inflicted by attacks in addition to normal damage always apply, even if normal damage saved.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00368"><div class="tooltip_header">Advance</div><a href="../core-rules/index.htm#Advance"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a unit makes an Advance, make an Advance roll for the unit by rolling one D6. Add the result in inches to the Move (M) characteristic of each model in that unit until the end of the current phase. Each model in that unit can then move a distance in inches equal to or less than this total, but no model can be moved within <a href="../core-rules/index.htm#Engagement-Range">Engagement Range</a> of enemy models. A unit cannot <a href="../core-rules/index.htm#SHOOTING-PHASE">shoot</a> or declare a <a href="../core-rules/index.htm#CHARGE-PHASE">charge</a> in the same turn that it made an Advance.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Advance</b>: Models move up to M+D6".</li><li>Cannot move within Engagement Range of enemy models.</li><li>Units that Advance cannot shoot or charge this turn.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00056"><div class="tooltip_header">Characters</div><a href="../core-rules/index.htm#Characters"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have the <span class="kwb">CHARACTER</span> keyword. These models can make <a href="../core-rules/index.htm#2.-Heroic-Interventions">Heroic Interventions</a> in <a href="../core-rules/index.htm#CHARGE-PHASE">Charge Phase</a> and are not easy targets in the <a href="../core-rules/index.htm#SHOOTING-PHASE">Shooting Phase</a> (see <a href="../core-rules/index.htm#Look-out-Sir">Look out, Sir</a>, rule). If your <a href="../core-rules/index.htm#The-Warlord">Warlord</a> has the <span class="kwb">CHARACTER</span> keyword he may be able to have a <a href="../core-rules/index.htm#Warlord-Traits">Warlord Trait</a> (see Warlord Trait section on model’s faction page).<br><br>Note that <span class="kwb">CHARACTERS</span> cannot use their <a href="../core-rules/index.htm#Aura-Abilities">Aura Abilities</a> while <a href="../advanced-rules/index.htm#Performing-Actions">performing actions</a>.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00627"><div class="tooltip_header">Unit Coherency</div><a href="../core-rules/index.htm#Unit-Coherency"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+A unit that has more than one model must be set up and finish any sort of move as a single group, with all models within 2" horizontally and 5" vertically of at least one other model from their unit. While a unit has six or more models, all models must instead be within 2" horizontally and 5" vertically of at least two other models from their unit. This is called unit coherency. If a unit cannot end any kind of move in unit coherency, that move cannot be made. Units are primarily moved in the <a href="../core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>, but they can also be moved in the <a href="../core-rules/index.htm#CHARGE-PHASE">Charge phase</a> and the <a href="../core-rules/index.htm#FIGHT-PHASE">Fight phase</a>.<br><br>Some rules allow you to add models to a unit during the battle; such models must always be set up in unit coherency with the unit they are being added to. Sometimes there will be insufficient room to set up all the models from a unit, or it will not be possible to set up all the models so that they are in unit coherency. When this is the case, any models that cannot be set up are considered to have been destroyed.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Unit coherency:</b> 2" horizontally + 5" vertically.</li><li>Each model must be in unit coherency with one other model from own unit.</li><li>While unit has 6+ models, each model must be in unit coherency with 2 other models from own unit.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00974"><div class="tooltip_header">Engagement Range</div><a href="../core-rules/index.htm#Engagement-Range"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Engagement Range represents the zone of threat that models present to their enemies. While a model is within 1" horizontally and 5" vertically of an enemy model, those models are within Engagement Range of each other. While two enemy models are within Engagement Range of each other, those models’ units are also within Engagement Range of each other. Models cannot be set up within Engagement Range of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Engagement Range:</b> 1" horizontally + 5" vertically.</li><li>Models cannot be set up within Engagement Range of enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00975"><div class="tooltip_header">Engagement Range</div><a href="../core-rules/index.htm#Engagement-Range"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Engagement Range represents the zone of threat that models present to their enemies. While a model is within 1" horizontally and 5" vertically of an enemy model, those models are within Engagement Range of each other. While two enemy models are within Engagement Range of each other, those models’ units are also within Engagement Range of each other. Models cannot be set up within Engagement Range of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Engagement Range:</b> 1" horizontally + 5" vertically.</li><li>Models cannot be set up within Engagement Range of enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00976"><div class="tooltip_header">Charging with a Unit</div><a href="../core-rules/index.htm#Charging-with-a-Unit"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Once you have chosen an eligible unit to declare a charge with, you must select one or more enemy units within 12" of it as the targets of its charge. The target(s) of this charge do not need to be visible to the charging unit. You then make a charge roll for your unit by rolling 2D6. This is the maximum number of inches each model in the charging unit can now be moved if they can make the charge move. To make a charge move, the unit’s charge roll must be sufficient that it is able to end that move in <a href="../core-rules/index.htm#Unit-Coherency">unit coherency</a> and within <a href="../core-rules/index.htm#Engagement-Range">Engagement Range</a> of every unit that was a target of its charge, without moving within Engagement Range of any enemy units that were not a target of its charge. If this is possible, then the charge is successful and the models in the unit make a charge move so as to fulfil the above conditions. If this is impossible, the charge fails and no models in the charging unit move this phase.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Declare targets of the charge (must be within 12").</li><li>Charge roll = 2D6".</li><li>If insufficient to move charging unit into <span class="tooltip" data-tooltip-content="#tooltip_content00975"><span class="tt kwbu">Engagement</span> <span class="tt kwbu">Range</span></span> of all targets, charge fails.</li><li>If charge successful, models make their charge move.</li><li>Cannot make a charge move within Engagement Range of any unit that was not the target of the charge.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00977"><div class="tooltip_header">Normal Move</div><a href="../core-rules/index.htm#Normal-Move"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a unit makes a Normal Move, each model in that unit can move a distance in inches equal to or less than the Move (M) characteristic shown on its datasheet, but no model can be moved within <a href="../core-rules/index.htm#Engagement-Range">Engagement Range</a> of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Normal Move:</b> Models move up to M".</li><li>Cannot move within Engagement Range of any enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00978"><div class="tooltip_header">Saving Throw</div><a href="../core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00979"><div class="tooltip_header">Invulnerable Saves</div><a href="../core-rules/index.htm#Invulnerable-Saves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have an invulnerable save. Each time an attack is allocated to a model with an invulnerable save, you can choose to use either its normal Save (Sv) characteristic or its invulnerable save, but not both. If a model has more than one invulnerable save, it can only use one of them – choose which it will use. If you use a model’s invulnerable save, it is never modified by a weapon’s Armour Penetration value.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Invulnerable save</b>: <span class="tooltip" data-tooltip-content="#tooltip_content00978"><span class="tt kwbu">Saving</span> <span class="tt kwbu">throw</span></span> that is never modified by attacking weapon’s AP.</li><li>A model with an invulnerable save can use it instead of its normal Sv.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00696"><div class="tooltip_header">Requisition Points</div><a href="../narrative-play/index.htm#Requisition-Points"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Requisition points can be used to purchase <a href="../narrative-play/index.htm#Requisitions">Requisitions</a>: these can upgrade your Crusade force, or units within them. Each time you spend a Requisition point, reduce your total by 1. Any Requisition points you do not spend are saved and can be used later. As you play more battles, you can accrue additional Requisition points, but a Crusade force can never have more than 5 (any additional Requisition points acquired beyond this are lost). Each time you play a battle, you will gain 1 Requisition point after that battle has been completed, regardless of the result of the battle itself. You should keep track of how many Requisition points you have on your <a href="../narrative-play/index.htm#Order-of-Battle">Order of Battle</a>.<br><br>The Requisitions you can purchase can be found <a href="../narrative-play/index.htm#Requisitions">here</a>. Each Requisition will tell you when it can be purchased; they can never be purchased during a battle. Unless stated otherwise, there is no limit on the number of Requisitions you can purchase, the number of times you can purchase each Requisition, nor on the combination of Requisitions you can purchase, so long as you have enough Requisition points. If you do not have enough Requisition points to purchase a Requisition, you cannot purchase it.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Requisitions cost Requisition points to purchase.</li><li>You can never have more than 5 Requisition points.</li><li>Each battle you play earns you 1 Requisition point (win, lose or draw).</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00980"><div class="tooltip_header">Engagement Range</div><a href="../core-rules/index.htm#Engagement-Range"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Engagement Range represents the zone of threat that models present to their enemies. While a model is within 1" horizontally and 5" vertically of an enemy model, those models are within Engagement Range of each other. While two enemy models are within Engagement Range of each other, those models’ units are also within Engagement Range of each other. Models cannot be set up within Engagement Range of enemy models.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Engagement Range:</b> 1" horizontally + 5" vertically.</li><li>Models cannot be set up within Engagement Range of enemy models.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00017"><div class="tooltip_header">Wound Roll</div><a href="../core-rules/index.htm#2.-Wound-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Each time an attack scores a hit against a target unit, make a wound roll for that attack by rolling one D6 to see if that attack successfully wounds the target. The result required is determined by comparing the attacking weapon’s Strength (S) characteristic with the target’s Toughness (T) characteristic, as shown on the following table:<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td colspan="2" style="border-width:1px 1px 1px 1px;background-color:rgb(16,16,16);color:rgb(254,254,254);vertical-align:bottom;font-size:26px;width:0px;height:0px;"><b>WOUND ROLL</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:22px;width:360px;height:0px;"><b>ATTACK’S STRENGTH vs TARGET’S TOUGHNESS</b></td><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>D6 ROLL REQUIRED</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:left;vertical-align:middle;font-size:18px;width:360px;height:0px;">Is the Strength <b><span class="redfont">TWICE (or more)<span class="redfont"></span></span></b> than the Toughness?</td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>2+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:360px;height:0px;">Is the Strength <b><span class="redfont">GREATER<span class="redfont"></span></span></b> than the Toughness?</td><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>3+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:left;vertical-align:middle;font-size:18px;width:360px;height:0px;">Is the Strength <b><span class="redfont">EQUAL<span class="redfont"></span></span></b> to the Toughness?</td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>4+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:360px;height:0px;">Is the Strength <b><span class="redfont">LOWER<span class="redfont"></span></span></b> than the Toughness?</td><td style="border-width:1px 1px 1px 1px;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>5+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:left;vertical-align:middle;font-size:18px;width:360px;height:0px;">Is the Strength <b><span class="redfont">HALF (or less)<span class="redfont"></span></span></b> than the Toughness?</td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;font-size:22px;width:88px;height:0px;"><b>6+</b></td></tr></tbody></table></td></tr></tbody></table></div></font><br>If the result of the wound roll is less than the required number, the attack fails and the attack sequence ends. An unmodified wound roll of 6 always successfully wounds the target, and an unmodified wound roll of 1 always fails. A wound roll can never be modified by more than -1 or +1. This means that if, after all the cumulative modifiers to a wound roll have been calculated, the total modifier would be -2 or worse, it is changed to be -1. Similarly, if, after all the cumulative modifiers to a wound roll have been calculated, the total modifier would be +2 or better, it is changed to be +1.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00981"><div class="tooltip_header">Saving Throw</div><a href="../core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

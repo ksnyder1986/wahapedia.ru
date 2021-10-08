@@ -1,0 +1,10 @@
+﻿
+@font-face {
+font-family: 'Impact';
+src: url(../fonts/Impact.ttf);
+}
+
+@font-face {
+font-family: 'Minion-Cyrillic-Bold'; /* Гарнитура шрифта */
+src: url(../fonts/Minion-Cyrillic-Bold.ttf);
+}

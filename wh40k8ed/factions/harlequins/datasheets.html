@@ -1,0 +1,1050 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Harlequins battle-forged army rules, abilities, and wargear.">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 8 edition, Harlequins, Aeldari, <Masque>, Aeldari, Character, Solitaire, Fly, Biker, Psyker, Vehicle, Shadowseer, Troupe, Infantry, Skyweavers, Webway Gate, Building, Transport, Troupe Master, Death Jester, Starweaver, Voidweaver, Holo-suit, Flip Belt, Open-topped, Deadly Hunter, Mirage Launchers, The Path of Damnation, Blitz, Rising Crescendo, Death Is Not Enough, Holo-fields, Webway Gate, Blur of Colour, Webway Strike, Immobile, Eldritch Aura, Impossible Form, Explodes, Shimmering Arrival, Choreographer of War, Shield from Harm">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts.css">
+<link rel="stylesheet" href="../../css/main.css">
+<link rel="stylesheet" href="../../css/header.css">
+<link rel="stylesheet" href="../../css/profile.css">
+<link rel="stylesheet" href="../../css/noprint.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir.css">
+<title>Datasheets</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	var data = localStorage.ShowIndexWargearOptions;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexWargearOptions = data};
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexWargearOptions').prop('checked', StrData);
+	ChangeShowIndexWargearOptions(true);
+	$('.ShowIndexWargearOptions').change(function () {
+      localStorage.ShowIndexWargearOptions = $(this).prop('checked');
+	   ChangeShowIndexWargearOptions(false);
+   });
+	function ChangeShowIndexWargearOptions(IsInit) {
+	if (localStorage.ShowIndexWargearOptions == 'true')
+		{$('.Index1').css('display', ''); $('.Index2').css('display', '');}
+	else
+		{$('.Index1').css('display', 'none'); $('.Index2').css('display', 'none');};
+
+	if (!IsInit) 
+		{$('.tooltip').tooltipster('destroy');
+		 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+		}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowIndexDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexDatasheets').prop('checked', StrData);
+
+	$('.ShowIndexDatasheets').change(function () {
+      localStorage.ShowIndexDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sIndex, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowIndexDatasheets == 'false') {clFlags = clFlags + comma + '.sIndex'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{$('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+});
+$.tooltipster.setDefaults({
+side: ['top', 'bottom', 'left', 'right'],
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+
+</head>
+<body>
+<!--noindex-->
+<div style="margin: 0 auto;width:1000px;">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><img src="../../img/Wahapedia8 site header.png" alt="Wahapedia site header" class="SiteHeader"></a>
+
+	<div class="NavWrapper_M">
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a style="height:21px" href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexDatasheets">
+	<span class="checkmark"></span>Show index datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexWargearOptions">
+	<span class="checkmark"></span>Show index wargear options
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">The Rules</div>
+	<div class="NavDropdown-content">
+		<a style="height:21px" href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a style="height:21px" href="../../the-rules/core-rules/index.htm">Core Rules</a><a style="height:21px" href="../../the-rules/open-play/index.htm">Open Play</a><a style="height:21px" href="../../the-rules/narrative-play/index.htm">Narrative Play</a><a style="height:21px" href="../../the-rules/matched-play/index.htm">Matched Play</a><a style="height:21px" href="../../the-rules/advanced-rules/index.htm">Advanced Rules</a><a style="height:21px" href="../../the-rules/faqs/index.htm">FAQs</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a style="height:21px" href="../adepta-sororitas/index.htm">Adepta Sororitas</a><a style="height:21px" href="../adeptus-custodes/index.htm">Adeptus Custodes</a><a style="height:21px" href="../adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a style="height:21px" href="../astra-militarum/index.htm">Astra Militarum</a><a style="height:21px" href="../blood-angels/index.htm">Blood Angels</a><a style="height:21px" href="../dark-angels/index.htm">Dark Angels</a><a style="height:21px" href="../death-korps-of-krieg/index.htm">Death Korps of Krieg</a><a style="height:21px" href="../deathwatch/index.htm">Deathwatch</a><a style="height:21px" href="../elysian-drop-troops/index.htm">Elysian Drop Troops</a><a style="height:21px" href="../grey-knights/index.htm">Grey Knights</a><a style="height:21px" href="../imperial-knights/index.htm">Imperial Knights</a><a style="height:21px" href="../inquisition/index.htm">Inquisition</a><a style="height:21px" href="../officio-assassinorum/index.htm">Officio Assassinorum</a><a style="height:21px" href="../rogue-traders/index.htm">Rogue Traders</a><a style="height:21px" href="../sisters-of-silence/index.htm">Sisters of Silence</a><a style="height:21px" href="../space-marines/index.htm">Space Marines</a><a style="height:21px" href="../space-wolves/index.htm">Space Wolves</a><a style="height:21px" href="../titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a style="height:21px" href="../chaos-bastions/index.htm">Chaos Bastions</a><a style="height:21px" href="../chaos-daemons/index.htm">Chaos Daemons</a><a style="height:21px" href="../chaos-knights/index.htm">Chaos Knights</a><a style="height:21px" href="../chaos-space-marines/index.htm">Chaos Space Marines</a><a style="height:21px" href="../death-guard/index.htm">Death Guard</a><a style="height:21px" href="../emperor-s-children/index.htm">Emperor’s Children</a><a style="height:21px" href="../heretic-titan-legions/index.htm">Heretic Titan Legions</a><a style="height:21px" href="../renegades-and-heretics/index.htm">Renegades and Heretics</a><a style="height:21px" href="../thousand-sons/index.htm">Thousand Sons</a><a style="height:21px" href="../world-eaters/index.htm">World Eaters</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a style="height:21px" href="../craftworlds/index.htm">Craftworlds</a><a style="height:21px" href="../drukhari/index.htm">Drukhari</a><a style="height:21px" href="index.htm">Harlequins</a><a style="height:21px" href="../ynnari/index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a style="height:21px" href="../genestealer-cults/index.htm">Genestealer Cults</a><a style="height:21px" href="../necrons/index.htm">Necrons</a><a style="height:21px" href="../orks/index.htm">Orks</a><a style="height:21px" href="../tau-empire/index.htm">T’au Empire</a><a style="height:21px" href="../tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a style="height:21px" href="../unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div></div>
+
+<div style="float:left">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+
+<div style="width:380px;padding:0px 0px 26px;float:right">
+<div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://wahapedia.ru/wh40k8ed/search.html','arrow':false,'bg':'transparent','fontsize':16,'fg':'#000000','language':'en','logo':'rb','publicname':'Yandex Site Search #2303560','suggest':true,'target':'_blank','tld':'com','type':2,'usebigdictionary':true,'searchid':2303560,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Search this site...','input_placeholderColor':'#999999','input_borderColor':'#7f9db9'}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2303560"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="tooltip" data-tooltip-content="#tooltip_contentFactionRules">Harlequins</span><span> – </span><span>Datasheets</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="BreakInsideAvoid Corner3" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><font face="georgia,serif" style="font-size:15px"><div class="contents_header">Contents</div><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">H</b>Q</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Shadowseer" style="color:#fefefe">Shadowseer</a></div><div style="clear:both"></div></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Troupe-Master" style="color:#fefefe">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">T</b>roops</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Troupe" style="color:#fefefe">Troupe</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">D</b>edicated Transport</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Starweaver" style="color:#fefefe">Starweaver</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">E</b>lites</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Death-Jester" style="color:#fefefe">Death Jester</a></div><div style="clear:both"></div></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Solitaire" style="color:#fefefe">Solitaire</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">F</b>ast Attack</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Skyweavers" style="color:#fefefe">Skyweavers</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">H</b>eavy Support</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Voidweaver" style="color:#fefefe">Voidweaver</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="max-width:265px;padding: 1px 10px 1px 10px"><span style="color:#fefefe"><b style="color:#f61f09">F</b>ortifications</span></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Webway-Gate" style="color:#fefefe">Webway Gate</a></div><div style="clear:both"></div></div></div></div></font></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><br>
+<a name="HQ"></a><h2>HQ</h2>
+<div><br></div>
+<a name="Shadowseer"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="HQ" src="../../img/Role_HQ.png" style="float:left;margin-left:4px"><div class="PowerPrice">7</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Shadowseer</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>110</a></div>Shadowseer</td>
+<td class="pTable2 pad4">8"</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">9</td>
+<td class="pTable2 pad4">7+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Shadowseer is a single model armed with a shuriken pistol, hallucinogen grenade launcher and miststave.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div>Hallucinogen grenade launcher</div></td><td><div class="ct pad2626">18"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 1</div></td><td><div class="ct pad2626">*</div></td><td><div class="ct pad2626">*</div></td><td><div class="ct pad2626">*</div></td><td><div class="pad2626">If a unit is hit by this weapon, roll 2D6 – if the roll is equal to or greater than the target unit’s Leadership, it suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wounds</span>.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">5</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRNeurodisruptor" data-tooltip-anchor="#tooltip_contentWRGRNeurodisruptor">Neuro disruptor</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">If the target is a VEHICLE, this weapon has a Damage of 1.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikenpistol" data-tooltip-anchor="#tooltip_contentWRGRShurikenpistol">Shuriken pistol</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRMiststave" data-tooltip-anchor="#tooltip_contentWRGRMiststave">Miststave</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+2</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">WARGEAR OPTIONS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div>&nbsp;&#8226; This model may replace its shuriken pistol with a neuro disruptor.</div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>This model can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, it can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Flip Belt</span><b>: </b>During the <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>, models in this unit can move across models as if they were not there, and when moving across <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a>, vertical distance is not counted against the total these models can move (i.e. moving vertically is free for these models in the Movement phase). During the <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">Charge phase</a>, models in this unit can move across models (other than BUILDINGS) as if they were not there.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-suit</span><b>: </b>This model has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Shield from Harm</span><b>: </b>Your opponent must subtract 1 from <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound rolls</span> for any attacks made against friendly <span class="tooltip" data-tooltip-content="#tooltip_content00120" data-tooltip-anchor="#tooltip_content00120">&lt;MASQUE&gt; INFANTRY</span> units that are within 6" of any models with this ability.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">PSYKER</div>
+</td>
+<td style="border-top: 2px ridge #888;background-color:#dee2e1;">
+This model can attempt to <span class="tooltip" data-tooltip-content="#tooltip_content00006">manifest</span> two psychic powers in each friendly <a href="../../the-rules/core-rules/index.htm#2.-PSYCHIC-PHASE">Psychic phase</a>, and attempt to <span class="tooltip" data-tooltip-content="#tooltip_content00083">deny</span> one psychic power in each enemy Psychic phase. It knows the <span class="tooltip" data-tooltip-content="#tooltip_content00113">Smite</span> power and two psychic powers from the <b><a href="index.htm#Phantasmancy-Discipline">Phantasmancy discipline</a></b>.
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentCharacter" data-tooltip-anchor="#tooltip_contentCharacter">CHARACTER</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry">INFANTRY</span>, PSYKER, SHADOWSEER</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Troupe-Master"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="HQ" src="../../img/Role_HQ.png" style="float:left;margin-left:4px"><div class="PowerPrice">4</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Troupe Master</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>60</a></div>Troupe Master</td>
+<td class="pTable2 pad4">8"</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">9</td>
+<td class="pTable2 pad4">6+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Troupe Master is a single model armed with a shuriken pistol, Harlequin’s blade and plasma grenades.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRFusionpistol" data-tooltip-anchor="#tooltip_contentWRGRFusionpistol">Fusion pistol</span></div></td><td><div class="ct pad2626">6"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">8</div></td><td><div class="ct pad2626">-4</div></td><td><div class="ct pad2626">D6</div></td><td><div class="pad2626">If the target is within half range of this weapon, roll two dice when inflicting damage with it and discard the lowest result.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">5</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRNeurodisruptor" data-tooltip-anchor="#tooltip_contentWRGRNeurodisruptor">Neuro disruptor</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">If the target is a VEHICLE, this weapon has a Damage of 1.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikenpistol" data-tooltip-anchor="#tooltip_contentWRGRShurikenpistol">Shuriken pistol</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinsblade" data-tooltip-anchor="#tooltip_contentWRGRHarlequinsblade">Harlequin’s blade</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">User</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinscaress" data-tooltip-anchor="#tooltip_contentWRGRHarlequinscaress">Harlequin’s caress</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+2</div></td><td><div class="ct pad2626">-2</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">6</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinsembrace" data-tooltip-anchor="#tooltip_contentWRGRHarlequinsembrace">Harlequin’s embrace</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinskiss" data-tooltip-anchor="#tooltip_contentWRGRHarlequinskiss">Harlequin’s kiss</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">4</div>Power sword</div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">User</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRPlasmagrenade" data-tooltip-anchor="#tooltip_contentWRGRPlasmagrenade">Plasma grenade</span></div></td><td><div class="ct pad2626">6"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00089">Grenade</span> D6</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">WARGEAR OPTIONS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div>&nbsp;&#8226; This model may replace its shuriken pistol with a neuro disruptor or fusion pistol.</div><div>&nbsp;&#8226; This model may replace its Harlequin’s blade with a power sword, Harlequin’s embrace, Harlequin’s kiss or Harlequin’s caress.</div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>This model can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, it can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Flip Belt</span><b>: </b>During the <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>, models in this unit can move across models as if they were not there, and when moving across <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a>, vertical distance is not counted against the total these models can move (i.e. moving vertically is free for these models in the Movement phase). During the <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">Charge phase</a>, models in this unit can move across models (other than BUILDINGS) as if they were not there.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-suit</span><b>: </b>This model has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Choreographer of War</span><b>: </b>In the <a href="../../the-rules/core-rules/index.htm#5.-FIGHT-PHASE">Fight phase</a>, re-roll failed <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound rolls</span> for friendly <a href="index.htm#MASQUE-">&lt;MASQUE&gt;</a> units that are within 6" of this model.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentCharacter" data-tooltip-anchor="#tooltip_contentCharacter">CHARACTER</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry">INFANTRY</span>, TROUPE MASTER</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Troops"></a><h2>Troops</h2>
+<div><br></div>
+<a name="Troupe"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Troops" src="../../img/Role_Troops.png" style="float:left;margin-left:4px"><div class="PowerPrice">5</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Troupe</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>11</a></div>Player</td>
+<td class="pTable2 pad4">8"</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">1</td>
+<td class="pTable2 pad4">4</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">6+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">This unit contains 5 Players. It can include up to 7 additional Players (<b>Power Rating +1 per model</b>). Each model is armed with a shuriken pistol, Harlequin’s blade and plasma grenades.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRFusionpistol" data-tooltip-anchor="#tooltip_contentWRGRFusionpistol">Fusion pistol</span></div></td><td><div class="ct pad2626">6"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">8</div></td><td><div class="ct pad2626">-4</div></td><td><div class="ct pad2626">D6</div></td><td><div class="pad2626">If the target is within half range of this weapon, roll two dice when inflicting damage with it and discard the lowest result.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">5</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRNeurodisruptor" data-tooltip-anchor="#tooltip_contentWRGRNeurodisruptor">Neuro disruptor</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">If the target is a VEHICLE, this weapon has a Damage of 1.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikenpistol" data-tooltip-anchor="#tooltip_contentWRGRShurikenpistol">Shuriken pistol</span></div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistol</span> 1</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinsblade" data-tooltip-anchor="#tooltip_contentWRGRHarlequinsblade">Harlequin’s blade</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">User</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinscaress" data-tooltip-anchor="#tooltip_contentWRGRHarlequinscaress">Harlequin’s caress</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+2</div></td><td><div class="ct pad2626">-2</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">6</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinsembrace" data-tooltip-anchor="#tooltip_contentWRGRHarlequinsembrace">Harlequin’s embrace</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinskiss" data-tooltip-anchor="#tooltip_contentWRGRHarlequinskiss">Harlequin’s kiss</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRPlasmagrenade" data-tooltip-anchor="#tooltip_contentWRGRPlasmagrenade">Plasma grenade</span></div></td><td><div class="ct pad2626">6"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00089">Grenade</span> D6</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">WARGEAR OPTIONS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div>&nbsp;&#8226; Any model may replace its shuriken pistol with a neuro disruptor or fusion pistol.</div><div>&nbsp;&#8226; Any model may replace its Harlequin’s blade with a Harlequin’s embrace, Harlequin’s kiss or Harlequin’s caress.</div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Flip Belt</span><b>: </b>During the <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>, models in this unit can move across models as if they were not there, and when moving across <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a>, vertical distance is not counted against the total these models can move (i.e. moving vertically is free for these models in the Movement phase). During the <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">Charge phase</a>, models in this unit can move across models (other than BUILDINGS) as if they were not there.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-suit</span><b>: </b>Models in this unit have a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>Models in this unit can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, they can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry">INFANTRY</span>, TROUPE</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Dedicated-Transport"></a><h2>Dedicated Transport</h2>
+<div><br></div>
+<a name="Starweaver"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Dedicated Transport" src="../../img/Role_DedicatedTransport.png" style="float:left;margin-left:4px"><div class="PowerPrice">5</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Starweaver</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>60</a></div>Starweaver</td>
+<td class="pTable2 pad4">16"</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">6</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">4+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Starweaver is a single model armed with two shuriken cannons.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">10</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikencannon" data-tooltip-anchor="#tooltip_contentWRGRShurikencannon">Shuriken cannon</span></div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Open-topped</span><b>: </b>Models embarked on this model can attack in their <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">Shooting phase</a>. Measure the range and draw line of sight from any point on this model. When they do so, any restrictions or modifiers that apply to this model also apply to its passengers; for example, the passengers cannot shoot (except with <span class="tooltip" data-tooltip-content="#tooltip_content00018">Pistols</span>) if this model is within 1" of an enemy unit. Note that, due to their <span class="redfont">Rising Crescendo</span> ability, the passengers can shoot if this model <span class="tooltip" data-tooltip-content="#tooltip_content00002">Falls Back</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Blur of Colour</span><b>: </b>When this model <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advances</span>, add 6" to its Move characteristic for that <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a> instead of rolling a dice.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-fields</span><b>: </b>This model has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Mirage Launchers</span><b>: </b>Your opponent must subtract 1 from any <span class="tooltip" data-tooltip-content="#tooltip_content00001">hit rolls</span> made against this unit in the <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">Shooting phase</a>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Explodes</span><b>: </b>If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield and before any models <a href="../../the-rules/core-rules/index.htm#Transports">disembark</a>. On a 6 it explodes, and each unit within 6" suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wound</span>.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">TRANSPORT</div>
+</td>
+<td style="border-top: 2px ridge #888;background-color:#dee2e1;">
+A Starweaver can <a href="../../the-rules/core-rules/index.htm#Transports">transport</a> 6 <span class="tooltip" data-tooltip-content="#tooltip_content00120" data-tooltip-anchor="#tooltip_content00120">&lt;MASQUE&gt; INFANTRY</span> models.
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentVehicle" data-tooltip-anchor="#tooltip_contentVehicle">VEHICLE</span>, TRANSPORT, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentFly" data-tooltip-anchor="#tooltip_contentFly">FLY</span>, STARWEAVER</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Elites"></a><h2>Elites</h2>
+<div><br></div>
+<a name="Death-Jester"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Elites" src="../../img/Role_Elites.png" style="float:left;margin-left:4px"><div class="PowerPrice">3</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Death Jester</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>45</a></div>Death Jester</td>
+<td class="pTable2 pad4">8"</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">4</td>
+<td class="pTable2 pad4">9</td>
+<td class="pTable2 pad4">6+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Death Jester is a single model armed with a shrieker cannon.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td><div class="pad2626"><div class="PriceTag">0</div>Shrieker cannon</div></td><td colspan="6" style="vertical-align:middle;"><div class="pad2626">When attacking with this weapon, choose one of the profiles below. Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;">&nbsp;- Shrieker</div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 1</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time an INFANTRY model is slain by an attack made with this weapon, its unit suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wounds</span>. If any models in a unit are slain by this weapon, subtract 2 from that unit's Leadership characteristic until the end of the turn.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;">&nbsp;- Shuriken</div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>This model can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, it can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Deadly Hunter</span><b>: </b>This model may target a <span class="tooltip" data-tooltip-content="#tooltip_content00060">CHARACTER</span> even if it is not the closest enemy unit.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-suit</span><b>: </b>This model has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Flip Belt</span><b>: </b>During the <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>, models in this unit can move across models as if they were not there, and when moving across <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a>, vertical distance is not counted against the total these models can move (i.e. moving vertically is free for these models in the Movement phase). During the <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">Charge phase</a>, models in this unit can move across models (other than BUILDINGS) as if they were not there.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Death Is Not Enough</span><b>: </b>If any models <span class="tooltip" data-tooltip-content="#tooltip_content00017">flee</span> from a unit in the same turn that it has been attacked by this model, then you can choose the first model that flees instead of your opponent choosing.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentCharacter" data-tooltip-anchor="#tooltip_contentCharacter">CHARACTER</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry">INFANTRY</span>, DEATH JESTER</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Solitaire"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Elites" src="../../img/Role_Elites.png" style="float:left;margin-left:4px"><div class="PowerPrice">5</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Solitaire</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>84</a></div>Solitaire</td>
+<td class="pTable2 pad4">12"</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">2+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">9</td>
+<td class="pTable2 pad4">6+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Solitaire is a single model armed with a Harlequin’s caress and Harlequin’s kiss. Only one of this model may be included in your army.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinscaress" data-tooltip-anchor="#tooltip_contentWRGRHarlequinscaress">Harlequin’s caress</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+2</div></td><td><div class="ct pad2626">-2</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">7</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHarlequinskiss" data-tooltip-anchor="#tooltip_contentWRGRHarlequinskiss">Harlequin’s kiss</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">The Path of Damnation</span><b>: </b>The Solitaire can never have a <a href="../../the-rules/core-rules/index.htm#The-Warlord">Warlord Trait</a>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Blitz</span><b>: </b>Once per battle, instead of making a normal move with the Solitaire, you can make a Blitz move with it. If you do so, add 2D6" to its Move characteristic until the end of this turn. In addition, its Attacks characteristic is increased to 10 until the end of this turn. This ability may not be used if the model has been selected as the target of the <span class="tooltip" data-tooltip-content="#tooltip_content00008">Twilight Pathways</span> psychic power in your previous <a href="../../the-rules/core-rules/index.htm#2.-PSYCHIC-PHASE">Psychic phase</a>. A model cannot <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and use this ability in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>The Solitaire can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, it can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Impossible Form</span><b>: </b>The Solitaire has a 3+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Flip Belt</span><b>: </b>During the <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>, models in this unit can move across models as if they were not there, and when moving across <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a>, vertical distance is not counted against the total these models can move (i.e. moving vertically is free for these models in the Movement phase). During the <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">Charge phase</a>, models in this unit can move across models (other than BUILDINGS) as if they were not there.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentCharacter" data-tooltip-anchor="#tooltip_contentCharacter">CHARACTER</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry">INFANTRY</span>, SOLITAIRE</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Fast-Attack"></a><h2>Fast Attack</h2>
+<div><br></div>
+<a name="Skyweavers"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Fast Attack" src="../../img/Role_FastAttack.png" style="float:left;margin-left:4px"><div class="PowerPrice">4</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Skyweavers</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>25</a></div>Skyweaver</td>
+<td class="pTable2 pad4">16"</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">4</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">4+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">This unit contains 2 Skyweavers. It can include up to 2 additional Skyweavers (<b>Power Rating +5</b>) or up to 4 additional Skyweavers (<b>Power Rating +9</b>). Each model is equipped with a shuriken cannon and star bolas.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">15</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHaywirecannon" data-tooltip-anchor="#tooltip_contentWRGRHaywirecannon">Haywire cannon</span></div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> D6</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">If the target is a VEHICLE and you roll a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 4+ for this weapon, the target suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wound</span> in addition to any other damage. If the wound roll is 6+, the target suffers D3 mortal wounds instead.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">10</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikencannon" data-tooltip-anchor="#tooltip_contentWRGRShurikencannon">Shuriken cannon</span></div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">6</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRZephyrglaive" data-tooltip-anchor="#tooltip_contentWRGRZephyrglaive">Zephyrglaive</span></div></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00080">Melee</span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-2</div></td><td><div class="ct pad2626">2</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">0</div>Star bolas</div></td><td><div class="ct pad2626">12"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00089">Grenade</span> D3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">2</div></td><td><div class="pad2626">-</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">WARGEAR OPTIONS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div>&nbsp;&#8226; Any model may replace its star bolas with a zephyrglaive.</div><div>&nbsp;&#8226; Any model may replace its shuriken cannon with a haywire cannon.</div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Rising Crescendo</span><b>: </b>Models in this unit can <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advance</span> and charge in the same turn. In addition, they can <span class="tooltip" data-tooltip-content="#tooltip_content00002">Fall Back</span> and still shoot and/or charge in the same turn.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Blur of Colour</span><b>: </b>When this unit <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advances</span>, add 6" to its Move characteristic for that <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a> instead of rolling a dice.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-suit</span><b>: </b>Models in this unit have a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Mirage Launchers</span><b>: </b>Your opponent must subtract 1 from any <span class="tooltip" data-tooltip-content="#tooltip_content00001">hit rolls</span> made against this unit in the <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">Shooting phase</a>.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;">BIKER, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentFly" data-tooltip-anchor="#tooltip_contentFly">FLY</span>, SKYWEAVERS</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Heavy-Support"></a><h2>Heavy Support</h2>
+<div><br></div>
+<a name="Voidweaver"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Heavy Support" src="../../img/Role_HeavySupport.png" style="float:left;margin-left:4px"><div class="PowerPrice">6</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Voidweaver</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>55</a></div>Voidweaver</td>
+<td class="pTable2 pad4">16"</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">3+</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">5</td>
+<td class="pTable2 pad4">6</td>
+<td class="pTable2 pad4">3</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">4+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Voidweaver is a single model equipped with two shuriken cannons and a haywire cannon.</div>
+</div>
+<div style="clear:both"></div>
+<div style="font:16px times new roman, serif"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1">ABILITIES</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">15</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRHaywirecannon" data-tooltip-anchor="#tooltip_contentWRGRHaywirecannon">Haywire cannon</span></div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> D6</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-1</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">If the target is a VEHICLE and you roll a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 4+ for this weapon, the target suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wound</span> in addition to any other damage. If the wound roll is 6+, the target suffers D3 mortal wounds instead.</div></td></tr><tr bgcolor="#dee2e1"><td><div class="pad2626"><div class="PriceTag">15</div>Prismatic cannon</div></td><td colspan="6" style="vertical-align:middle;"><div class="pad2626">When attacking with this weapon, choose one of the profiles below.</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;">&nbsp;- Dispersed</div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> D6</div></td><td><div class="ct pad2626">4</div></td><td><div class="ct pad2626">-2</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;">&nbsp;- Focused</div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> D3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">D3</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#dee2e1"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;">&nbsp;- Lance</div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 1</div></td><td><div class="ct pad2626">8</div></td><td><div class="ct pad2626">-4</div></td><td><div class="ct pad2626">D6</div></td><td><div class="pad2626">-</div></td></tr><tr bgcolor="#fefefe"><td style="vertical-align:middle;"><div style="padding:2px 6px 2px 6px;"><div class="PriceTag">10</div><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentWRGRShurikencannon" data-tooltip-anchor="#tooltip_contentWRGRShurikencannon">Shuriken cannon</span></div></td><td><div class="ct pad2626">24"</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00019">Assault</span> 3</div></td><td><div class="ct pad2626">6</div></td><td><div class="ct pad2626">0</div></td><td><div class="ct pad2626">1</div></td><td><div class="pad2626">Each time you make a <span class="tooltip" data-tooltip-content="#tooltip_content00016">wound roll</span> of 6+ for this weapon, that hit is resolved with an AP of -3.</div></td></tr></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">WARGEAR OPTIONS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div>&nbsp;&#8226; This model may replace its haywire cannon with a prismatic cannon.</div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Blur of Colour</span><b>: </b>When this model <span class="tooltip" data-tooltip-content="#tooltip_content00009">Advances</span>, add 6" to its Move characteristic for that <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a> instead of rolling a dice.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Holo-fields</span><b>: </b>This model has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Mirage Launchers</span><b>: </b>Your opponent must subtract 1 from any <span class="tooltip" data-tooltip-content="#tooltip_content00001">hit rolls</span> made against this model in the <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">Shooting phase</a>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Explodes</span><b>: </b>If this model is reduced to 0 wounds, roll a D6 before removing it from the battlefield. On a 6 it explodes, and each unit within 6" suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00020">mortal wound</span>.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentHarlequins" data-tooltip-anchor="#tooltip_contentHarlequins">HARLEQUINS</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentMasque" data-tooltip-anchor="#tooltip_contentMasque">&lt;MASQUE&gt;</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentVehicle" data-tooltip-anchor="#tooltip_contentVehicle">VEHICLE</span>, <span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentFly" data-tooltip-anchor="#tooltip_contentFly">FLY</span>, VOIDWEAVER</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<div><br><br></div><a name="Fortifications"></a><h2>Fortifications</h2>
+<div><br></div>
+<a name="Webway-Gate"></a>
+<div class="pagebreak " style="position:relative">
+<div style="font:16px times new roman, serif;border:4px solid #101010; border-width:0px 4px 4px 4px">
+<div style="float:left;width:100%">
+<div><img border="0" class="tooltip" title="Fortifications" src="../../img/Role_Fortifications.png" style="float:left;margin-left:4px"><div class="PowerPrice">6</div><img class="tooltip logo3" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo3.png"><h3 style="margin:0px 0px 12px 0px; padding: 10px 0px 10px 0px; margin:0;text-align:center;color:#fefefe;width:100%;background:#101010;"><div style="font-weight: bold; font-size: 24px;">Webway Gate</div></h3></div>
+<table width:100%="" cellpadding="0" cellspacing="0" style="border:4px solid #101010;border-width:0px 0px 4px 0px">
+<tr style="background: #b4bbb4;font-family:impact,charcoal,arial black;padding:3px 154px 3px 3px"><td class="pTable1_">NAME</td>
+<td class="pTable1 pad4044">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable1 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+<tr style="vertical-align:middle;font-weight:bold; padding:0px 154px 0px 3px"><td class="pTable2_"><div class="tooltip PriceTag" data-tooltip-content="#tooltip_content00104"><a>90</a></div>Webway Gate</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">8</td>
+<td class="pTable2 pad4">14</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">-</td>
+<td class="pTable2 pad4">3+</td>
+<td style="border-width:0px;width:342px;"> </td></tr>
+</table>
+<div style="padding:2px;">A Webway Gate is a single model formed from two separate pieces. When setting up these pieces, place them so that an arch is formed, with the bases 5" apart.</div>
+</div>
+<div style="clear:both"></div>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">ABILITIES</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div class="Col2"><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Shimmering Arrival</span><b>: </b>When you set up this model during deployment, it can be set up anywhere on the battlefield that is more than 12" from the enemy deployment zone and any enemy models, and more than 3" from any other <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Terrain">terrain features</a> or the centre of any <a href="../../the-rules/matched-play/index.htm#Objective-Markers">objective markers</a>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Eldritch Aura</span><b>: </b>This model has a 5+ <span class="tooltip" data-tooltip-content="#tooltip_content00039">invulnerable save</span>.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Immobile</span><b>: </b>This model cannot move for any reason, nor can it fight in the <a href="../../the-rules/core-rules/index.htm#5.-FIGHT-PHASE">Fight phase</a>. Enemy models automatically hit this model in the Fight phase – do not make <span class="tooltip" data-tooltip-content="#tooltip_content00001">hit rolls</span>. However, friendly units can still target enemy units that are within 1" of this model.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Webway Strike</span><b>: </b>After you set up this model, any <span class="tooltip" data-tooltip-content="#tooltip_content00121" data-tooltip-anchor="#tooltip_content00121">AELDARI</span> units you have not yet set up during deployment, other than Fortifications, can be set up in a webway spar rather than being set up on the battlefield. One unit in a webway spar can emerge from each friendly Webway Gate at the end of each of your <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phases</a> – set them up wholly within 3" of the Webway Gate and more than 9" away from any enemy models. If all friendly Webway Gates have been destroyed, any units that have not yet arrived from a webway spar are considered to be slain.<div><br></div></div><div class="BreakInsideAvoid" style="padding:2px 2px 2px"><span class="redfont">Webway Gate</span><b>: </b>When measuring distances to and from a Webway Gate, measure from the closest point of the model. If a Webway Gate is destroyed, remove both arch pieces from the battlefield.</div>
+</div></td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">FACTION KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentAeldari" data-tooltip-anchor="#tooltip_contentAeldari">AELDARI</span></div>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:top;border-top: 2px ridge #888;background-color:#dee2e1;width: 220px;">
+<div style="padding:2px 6px 2px 6px;font-family:impact,charcoal,arial black;">KEYWORDS</div>
+</td>
+<td style="vertical-align:middle;border-top: 2px ridge #888;background-color:#dee2e1;">
+<div style="font-weight: bold; font-size:16px;"><span style="border-bottom: 1px dashed" class="tooltip" data-tooltip-content="#tooltip_contentVehicle" data-tooltip-anchor="#tooltip_contentVehicle">VEHICLE</span>, BUILDING, WEBWAY GATE</div>
+</td>
+</tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00104">Does not include wargear</span></div><div class="tooltip_templates"><span id="tooltip_content00020"><div class="tooltip_header">Mortal Wounds</div><a href="../../the-rules/core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks inflict mortal wounds – these are so powerful that no armour or force field can withstand their fury. Each mortal wound inflicts one point of damage on the target unit. Do not make a <a href="../../the-rules/core-rules/index.htm#2-Wound-Roll">wound roll</a> or <a href="../../the-rules/core-rules/index.htm#4-Saving-Throw">saving throw</a> (including <a href="../../the-rules/core-rules/index.htm#Invulnerable-Saves">invulnerable saves</a>) against a mortal wound – just allocate it as you would any other wound and <a href="../../the-rules/core-rules/index.htm#5-Inflict-Damage">inflict damage</a> to a model in the target unit as described above. Unlike normal attacks, excess damage from attacks that inflict mortal wounds is not lost. Instead keep allocating damage to another model in the target unit until either all the damage has been allocated or the target unit is destroyed.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00019"><div class="tooltip_header">ASSAULT</div><a href="../../the-rules/core-rules/index.htm#ASSAULT"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<p class="ShowFluff legend">Assault weapons fire so rapidly or indiscriminately that they can be shot from the hip as warriors dash forwards into combat.</p>A model with an Assault weapon can fire it even if it <a href="../../the-rules/core-rules/index.htm#Advancing">Advanced</a> earlier that turn. If it does so, you must subtract 1 from any <a href="../../the-rules/core-rules/index.htm#1-Hit-Roll">hit rolls</a> made when firing that weapon this turn.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRNeurodisruptor"><b><p>Neuro disruptor used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00018"><div class="tooltip_header">PISTOL</div><a href="../../the-rules/core-rules/index.htm#PISTOL"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<p class="ShowFluff legend">Pistols are carried one-handed and can even be used in a melee to shoot at point-blank range. Many warriors carry one as a sidearm, alongside their primary weapon.</p>A model can fire a Pistol even if there are enemy units within 1" of its own unit, but it must target the closest enemy unit. In such circumstances, the model can shoot its Pistol even if other friendly units are within 1" of the same enemy unit.<br><br>Each time a model equipped with both a Pistol and another type of ranged weapon (e.g. a Pistol and a <a href="../../the-rules/core-rules/index.htm#RAPID-FIRE">Rapid Fire</a> weapon) shoots, it can either shoot with its Pistol(s) or with all of its other weapons. Choose which it will fire (Pistols or non-Pistols) before making <a href="../../the-rules/core-rules/index.htm#1-Hit-Roll">hit rolls</a>.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRShurikenpistol"><b><p>Shuriken pistol used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00016"><div class="tooltip_header">Wound Roll</div><a href="../../the-rules/core-rules/index.htm#2-Wound-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<div class="BreakInsideAvoid" style="padding:4px;float:right;"><font face="georgia,serif"><table width="0" border="0" bordercolor="#888" cellpadding="6" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class="customTable" border="1" bordercolor="#888" cellpadding="4" style="font-size:15px;border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td colspan="2" style="border-width:0 0 0 0;background-color:rgb(16,16,16);color:rgb(254,254,254);vertical-align:bottom;font-family:impact,charcoal,arial black;font-size:24px;width:0px;height:0px;">WOUND ROLL</td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:18px;width:160px;height:0px;">ATTACK’S STRENGTH VS TARGET’S TOUGHNESS</td><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:18px;width:80px;height:0px;">D6 ROLL REQUIRED</td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:160px;height:0px;"><b>Is the Strength<br><span class="redfont">TWICE (or more)</span><br>than the Toughness?</b></td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:80px;height:0px;"><b>2+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;width:160px;height:0px;"><b>Is the Strength<br><span class="redfont">GREATER</span><br>than the Toughness?</b></td><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;width:80px;height:0px;"><b>3+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:160px;height:0px;"><b>Is the Strength<br><span class="redfont">EQUAL</span><br>to the Toughness?</b></td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:80px;height:0px;"><b>4+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;width:160px;height:0px;"><b>Is the Strength<br><span class="redfont">LOWER</span><br>than the Toughness?</b></td><td style="border-width:1px 1px 1px 1px;background-color:#dee2e1;text-align:center;vertical-align:middle;width:80px;height:0px;"><b>5+</b></td></tr><tr><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:160px;height:0px;"><b>Is the Strength<br><span class="redfont">HALF (or less)</span><br>than the Toughness?</b></td><td style="border-width:1px 1px 1px 1px;text-align:center;vertical-align:middle;width:80px;height:0px;"><b>6+</b></td></tr></tbody></table></td></tr></tbody></table></font></div>If an attack scores a hit, you will then need to roll another dice to see if the attack successfully wounds the target. The roll required is determined by comparing the attacking weapon’s Strength characteristic with the target’s Toughness characteristic, as shown on the table to the right:<br><br>If the roll is less than the required number, the attack fails and the attack sequence ends. A roll of 1 always fails, irrespective of any modifiers that may apply.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRMiststave"><b><p>Miststave used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00080"><div class="tooltip_header">Melee Weapon</div><a href="../../the-rules/core-rules/index.htm#4.-Choose-Melee-Weapon"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Each time a model makes a close combat attack, it uses a melee weapon – the weapons a model is equipped with are described on its <a href="../../the-rules/core-rules/index.htm#Datasheets">datasheet</a>. In addition to their other weapons, all models are assumed to be equipped with a close combat weapon, which has the following profile:<br><br><div class="BreakInsideAvoid" style="padding:4px;"><font face="georgia,serif"><table width="0" border="0" bordercolor="#888" cellpadding="6" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class="customTable" border="1" bordercolor="#888" cellpadding="4" style="font-size:15px;border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td style="border-width:1px 0 1px 0;background-color:#dee2e1;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:102,5px;height:0px;">WEAPON</td><td style="border-width:1px 0 1px 0;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:40px;height:0px;">RANGE</td><td style="border-width:1px 0 1px 0;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:40px;height:0px;">TYPE</td><td style="border-width:1px 0 1px 0;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:36px;height:0px;">S</td><td style="border-width:1px 0 1px 0;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:36px;height:0px;">AP</td><td style="border-width:1px 0 1px 0;background-color:#dee2e1;text-align:center;vertical-align:middle;font-family:impact,charcoal,arial black;font-size:16px;width:36px;height:0px;">D</td></tr><tr><td style="border-width:1px 0 1px 0;vertical-align:middle;width:102,5px;height:0px;">Close combat weapon</td><td style="border-width:1px 0 1px 0;text-align:center;vertical-align:middle;width:40px;height:0px;">Melee</td><td style="border-width:1px 0 1px 0;text-align:center;vertical-align:middle;width:40px;height:0px;">Melee</td><td style="border-width:1px 0 1px 0;text-align:center;vertical-align:middle;width:36px;height:0px;">User</td><td style="border-width:1px 0 1px 0;text-align:center;vertical-align:middle;width:36px;height:0px;">0</td><td style="border-width:1px 0 1px 0;text-align:center;vertical-align:middle;width:36px;height:0px;">1</td></tr></tbody></table></td></tr></tbody></table></font></div><br>If a model has more than one melee weapon, choose which it will use before rolling the dice. If a model has more than one melee weapon and can make several close combat attacks, it can split its attacks between these weapons however you wish – declare how you will divide the attacks before any dice are rolled.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00009"><div class="tooltip_header">Advancing</div><a href="../../the-rules/core-rules/index.htm#Advancing"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to move in the Movement phase, you can declare that it will Advance. Roll a dice and add the result to the Move characteristics of all models in the unit for that Movement phase. A unit that Advances can’t <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">shoot</a> or <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">charge</a> later that turn.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00002"><div class="tooltip_header">Falling Back</div><a href="../../the-rules/core-rules/index.htm#Falling-Back"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Units starting the Movement phase within 1" of an enemy unit can either remain stationary or Fall Back. If you choose to Fall Back, the unit must end its move more than 1" away from all enemy units. If a unit Falls Back, it cannot <a href="../../the-rules/core-rules/index.htm#Advancing">Advance</a> (see below), or <a href="../../the-rules/core-rules/index.htm#4.-CHARGE-PHASE">charge</a> later that turn. A unit that Falls Back also cannot shoot later that turn unless it can <a href="../../the-rules/core-rules/index.htm#Moving">Fly</a>.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00039"><div class="tooltip_header">Invulnerable Saves</div><a href="../../the-rules/core-rules/index.htm#Invulnerable-Saves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models possess supernatural reflexes or are protected by force fields that grant them an invulnerable save. Each time a wound is allocated to a model with an invulnerable save, you can choose to use either its normal Save characteristic or its invulnerable save, but not both. If a model has more than one invulnerable save, it can only use one of them – choose which it will use. If you use a model’s invulnerable save, it is never modified by a weapon’s Armour Penetration value.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00120"><b><p>The <a href="index.htm#MASQUE-">&lt;MASQUE&gt;</a> and INFANTRY keywords are used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Shadowseer" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Troupe-Master" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Troupe" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Death-Jester" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Solitaire" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00006"><div class="tooltip_header">Psychic Test</div><a href="../../the-rules/core-rules/index.htm#2.-Make-Psychic-Test"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+A psyker can attempt to manifest a psychic power they know by taking a Psychic test. To do so, roll 2D6. If the total is equal to or greater than that power’s warp charge value, the power is successfully manifested. A psyker cannot attempt to manifest the same psychic power more than once in a turn.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00083"><div class="tooltip_header">Deny the Witch Test</div><a href="../../the-rules/core-rules/index.htm#3.-Deny-the-Witch-Tests"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+A psyker can attempt to resist a psychic power that has been manifested by an enemy model within 24" by taking a Deny the Witch test – this takes place immediately, even though it is not your turn. To do so, roll 2D6. If the total is greater than the result of the <a href="../../the-rules/core-rules/index.htm#2.-Make-Psychic-Test">Psychic test</a> that manifested the power, it has been resisted and its effects are negated. Only one attempt to deny each successfully manifested psychic power can be made each turn, regardless of the number of psykers you have within 24" of the enemy model manifesting the psychic power.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00113"><div class="tooltip_header">Smite</div><a href="../../the-rules/core-rules/index.htm#Smite"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<i>Smite</i> has a warp charge value of 5. If manifested, the closest visible enemy unit within 18" of the psyker suffers D3 <a href="../../the-rules/core-rules/index.htm#Mortal-Wounds">mortal wounds</a>. If the result of the <a href="../../the-rules/core-rules/index.htm#2.-Make-Psychic-Test">Psychic test</a> was more than 10, the target suffers D6 mortal wounds instead.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentAeldari"><b><p>The AELDARI keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fortifications</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" style="color:#101010">Webway Gate</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentHarlequins"><b><p>The <a href="index.htm">HARLEQUINS</a> keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentMasque"><b><p>The <a href="index.htm#MASQUE-">&lt;MASQUE&gt;</a> keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentCharacter"><b><p>The <a href="../../the-rules/core-rules/index.htm#Characters">CHARACTER</a> keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentInfantry"><b><p>The INFANTRY keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRFusionpistol"><b><p>Fusion pistol used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRHarlequinsblade"><b><p>Harlequin’s blade used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRHarlequinscaress"><b><p>Harlequin’s caress used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRHarlequinsembrace"><b><p>Harlequin’s embrace used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRHarlequinskiss"><b><p>Harlequin’s kiss used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRPlasmagrenade"><b><p>Plasma grenade used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00089"><div class="tooltip_header">GRENADE</div><a href="../../the-rules/core-rules/index.htm#GRENADE"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<p class="ShowFluff legend">Grenades are handheld explosive devices that a warrior throws at the enemy while their squad mates provide covering fire.</p>Each time a unit shoots, a single model in the unit that is equipped with Grenades may throw one instead of firing any other weapon.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRShurikencannon"><b><p>Shuriken cannon used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00001"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/core-rules/index.htm#1-Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Each time a model makes an attack, roll a dice. If the roll is equal to or greater than the attacking model’s Ballistic Skill characteristic, then it scores a hit with the weapon it is using. If not, the attack fails and the attack sequence ends. A roll of 1 always fails, irrespective of any modifiers that may apply.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentVehicle"><b><p>The VEHICLE keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fortifications</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" style="color:#101010">Webway Gate</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentFly"><b><p>The <a href="../../the-rules/core-rules/index.htm#Moving">FLY</a> keyword is used in following Harlequins datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">Dedicated Transport</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00060"><div class="tooltip_header">Characters</div><a href="../../the-rules/core-rules/index.htm#Characters"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models are noted as being a Character on their <a href="../../the-rules/core-rules/index.htm#Datasheets">datasheet</a>. These heroes, officers, prophets and warlords are powerful individuals that can have a great impact on the course of a battle. The swirling maelstrom of the battlefield can make it difficult to pick out such individuals as targets, however. <br><br>An enemy CHARACTER with a Wounds characteristic of less than 10 can only be chosen as a target in the <a href="../../the-rules/core-rules/index.htm#3.-SHOOTING-PHASE">Shooting phase</a> if it is both visible to the firing model and it is the closest enemy unit to the firing model. Ignore other enemy CHARACTERS with a Wounds characteristics of less than 10 when determining if the target is the closest enemy unit to the firing model.<br><br>This means that if any other enemy units (other than other CHARACTERS with a Wounds characteristics of less than 10) are closer, whether they are visible or not, then the enemy CHARACTER cannot be targeted.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00017"><div class="tooltip_header">Morale Test</div><a href="../../the-rules/core-rules/index.htm#6.-MORALE-PHASE"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+<p class="ShowFluff legend">Even the bravest heart may quail when the horrors of battle take their toll.</p>In the Morale phase, starting with the player whose turn it is, players must take Morale tests for units from their army that have had models slain during the turn.<br><br>To take a Morale test, roll a dice and add the number of models from the unit that have been slain this turn. If the result of the Morale test exceeds the highest Leadership characteristic in the unit, the test is failed. For each point that the test is failed by, one model in that unit must flee and is removed from play. You choose which models flee from the units you command.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00007"><div class="tooltip_header">Psyker</div><a href="../../the-rules/core-rules/index.htm#1.-Choose-Psyker-and-Power"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models are noted as being a Psyker on their <a href="../../the-rules/core-rules/index.htm#Datasheets">datasheet</a>. Psykers can manifest their otherworldly abilities and attempt to deny enemy sorceries. The powers a psyker knows, and the number of powers they can attempt to manifest or deny each Psychic phase, are detailed on their datasheet.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00008"><div class="BreakInsideAvoid"><p class="impact18">TWILIGHT PATHWAYS</p><p><i>Eerie half-lit tunnels blink into existence, opening new paths of manoeuvre and attack.</i></p><p><i>Twilight Pathways</i> has a warp charge value of 6. If <span class="tooltip" data-tooltip-content="#tooltip_content00006">manifested</span>, select a friendly HARLEQUINS unit within 3" of the <span class="tooltip" data-tooltip-content="#tooltip_content00007">psyker</span> and visible to it. That unit can immediately move as if it were its <a href="../../the-rules/core-rules/index.htm#1.-MOVEMENT-PHASE">Movement phase</a>. You cannot use Twilight Pathways on a unit more than once in each <a href="../../the-rules/core-rules/index.htm#2.-PSYCHIC-PHASE">Psychic phase</a>.</p></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRHaywirecannon"><b><p>Haywire cannon used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="redfont">Heavy Support</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentWRGRZephyrglaive"><b><p>Zephyrglaive used in following  datasheets:</p></b><div style="clear:both; margin-bottom:8px;"><div class="redfont">Fast Attack</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_content00121"><b><p>The profiles using AELDARI keyword can be found in following Factions:</p></b><span class="redfont">Imperium</span>: <a href="../adepta-sororitas/index.htm">Adepta Sororitas</a>, <a href="../rogue-traders/index.htm">Rogue Traders</a>.<br><span class="redfont">Aeldari</span>: <a href="../craftworlds/index.htm">Craftworlds</a>, <a href="../drukhari/index.htm">Drukhari</a>, <a href="index.htm">Harlequins</a>, <a href="../ynnari/index.htm">Ynnari</a>.<br><br><b><p>The AELDARI keyword is used in following  datasheets:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="redfont">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/datasheets.html#Archon" style="color:#101010">Archon</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Asurmen" style="color:#101010">Asurmen</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Autarch" style="color:#101010">Autarch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Autarch-Skyrunner" style="color:#101010">Autarch Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Autarch-with-Swooping-Hawk-Wings" style="color:#101010">Autarch with Swooping Hawk Wings</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Avatar-of-Khaine" style="color:#101010">Avatar of Khaine</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Baharroth" style="color:#101010">Baharroth</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Eldrad-Ulthran" style="color:#101010">Eldrad Ulthran</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Farseer" style="color:#101010">Farseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Farseer-Skyrunner" style="color:#101010">Farseer Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Fuegan" style="color:#101010">Fuegan</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/datasheets.html#Haemonculus" style="color:#101010">Haemonculus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Illic-Nightspear" style="color:#101010">Illic Nightspear</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Karandras" style="color:#101010">Karandras</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/datasheets.html#Lelith-Hesperax" style="color:#101010">Lelith Hesperax</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Maugan-Ra" style="color:#101010">Maugan Ra</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Prince-Yriel" style="color:#101010">Prince Yriel</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Shadowseer" style="color:#101010">Shadowseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Spiritseer" style="color:#101010">Spiritseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/datasheets.html#Succubus" style="color:#101010">Succubus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="datasheets.html#Troupe-Master" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Drukhari_logo2.png"><a href="../drukhari/datasheets.html#Urien-Rakarth" style="color:#101010">Urien Rakarth</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Warlock" style="color:#101010">Warlock</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Warlock-Conclave" style="color:#101010">Warlock Conclave</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Warlock-Skyrunner" style="color:#101010">Warlock Skyrunner</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Craftworlds (8th edition)" align="center" border="0" src="../../img/expansions/Craftworlds_logo2.png"><a href="../craftworlds/datasheets.html#Warlock-Skyrunner-Conclave" style="color:#101010">Warlock Skyrunner Conclave</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../drukhari/datasheets.html#Drazhar" style="color:#101010">Drazhar</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Pariah (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../adepta-sororitas/datasheets.html#Ephrael-Stern-and-Kyganil" style="color:#101010">Ephrael Stern and Kyganil</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../craftworlds/datasheets.html#Jain-Zar" style="color:#101010">Jain Zar</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../ynnari/datasheets.html#The-Visarch" style="color:#101010">The Visarch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../ynnari/datasheets.html#The-Yncarne" style="color:#101010">The Yncarne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Psychic Awakening: Phoenix Rising (8th edition)" align="center" border="0" src="../../img/expansions/PsychicAwakening_logo2.png"><a href="../ynnari/datasheets.html#Yvraine" style="color:#101010">Yvraine</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Index. Imperial Armour: Xenos (8th edition)" align="center" border="0" src="../../img/expansions/FW_logo2.png"><a href="../craftworlds/datasheets.html#Irillyth" style="color:#101010">Irillyth</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Index. Imperial Armour: Xenos (8th edition)" align="center" border="0" src="../../img/expansions/FW_logo2.png"><a href="../craftworlds/datasheets.html#Wraithseer" style="color:#101010">Wraithseer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Drukhari (8th edition)" align="center" border="0" src="../../img/expansions/Legends_logo2.png"><a href="../drukhari/datasheets.html#Archon-Legendary-" style="color:#101010">Archon (Legendary)</a></div><div style="clear:both"></div><br>and others...</div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><font face="georgia,serif" style="font-size:15px" style="font-size:15px"><div class="armylist_header">Army List</div><div style="float:left; padding:2px 0 0 20px;"></div><div class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></div><div style="clear:both"></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">HQ</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Shadowseer.html" style="color:#101010">Shadowseer</a></div><div style="clear:both"></div></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe-Master.html" style="color:#101010">Troupe Master</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Troops</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Troupe.html" style="color:#101010">Troupe</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Dedicated Transport</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Starweaver.html" style="color:#101010">Starweaver</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Elites</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Death-Jester.html" style="color:#101010">Death Jester</a></div><div style="clear:both"></div></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Solitaire.html" style="color:#101010">Solitaire</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Fast Attack</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Skyweavers.html" style="color:#101010">Skyweavers</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Heavy Support</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Voidweaver.html" style="color:#101010">Voidweaver</a></div><div style="clear:both"></div></div></div><div style="clear:both; margin-bottom:8px;"><div class="BreakInsideAvoid"><div style="width:295px;padding: 1px 10px 1px 5px"><span style="color:#101010"><b class="redfont">Fortifications</b></span></div><div style="clear:both"></div><div style="width:295px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="Codex. Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/Harlequins_logo2.png"><a href="Webway-Gate.html" style="color:#101010">Webway Gate</a></div><div style="clear:both"></div></div></div></font></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><font face="georgia,serif" style="font-size:15px"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Keywords" style="color:#101010">Keywords</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Detachment-Rules" style="color:#101010">Detachment Rules</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Masque-Forms" style="color:#101010">Masque Forms</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Stratagems-by-Phase" style="color:#101010">Stratagems by Phase</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Stratagems" style="color:#101010">Stratagems</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Phantasmancy-Discipline" style="color:#101010">Phantasmancy Discipline</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Warlord-Traits" style="color:#101010">Warlord Traits</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><a href="index.htm#Tactical-Objectives" style="color:#101010">Tactical Objectives</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’06/20 Additional Rules: Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="index.htm#Pivotal-Roles" style="color:#101010">Pivotal Roles</a></div><div style="clear:both"></div><div style="width:300px;padding: 1px 10px 1px 15px"><span style="color:#101010">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’06/20 Additional Rules: Harlequins (8th edition)" align="center" border="0" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="index.htm#Stratagems-Additional-Rules-" style="color:#101010">Stratagems (Additional Rules)</a></div><div style="clear:both"></div></font></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop_Hover.png)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop.png)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList_Hover.png)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList.png)');
+	return true;
+});
+
+</script>
+</div>
+<div class="noprint">
+<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+<div class="social_buttons">
+	<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+	<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+	<a target="_blank" href="../../../groups/wahapedia/index.htm"><div class="social_fb no_tooltip" title="Follow on Facebook"></div></a>
+	<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+</div>		
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

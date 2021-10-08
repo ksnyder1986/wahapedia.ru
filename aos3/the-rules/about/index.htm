@@ -1,0 +1,461 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: About">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, Wahapedian Detachment, History, Legal, Introduction, About, Support">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2.css">
+<link rel="stylesheet" href="../../css/main2.css">
+<link rel="stylesheet" href="../../css/header2.css">
+<link rel="stylesheet" href="../../css/profile2.css">
+<link rel="stylesheet" href="../../css/noprint2.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2.css">
+<title>About</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../playing-this-game/index.htm">Playing This Game</a><a href="../the-core-rules/index.htm">The Core Rules</a><a href="../conquest-unbound/index.htm">Conquest Unbound</a><a href="../open-play-games/index.htm">Open Play Games</a><a href="../matched-play-games/index.htm">Matched Play Games</a><a href="../narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../broken-realms/index.htm">Broken Realms</a><a href="../soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../../factions/cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../../factions/daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../../factions/fyreslayers/index.htm">Fyreslayers</a><a href="../../factions/idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../../factions/kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../../factions/lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../../factions/seraphon/index.htm">Seraphon</a><a href="../../factions/stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../../factions/sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../../factions/beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="../../factions/blades-of-khorne/index.htm">Blades of Khorne</a><a href="../../factions/disciples-of-tzeentch/index.htm">Disciples of Tzeentch</a><a href="../../factions/hedonites-of-slaanesh/index.htm">Hedonites of Slaanesh</a><a href="../../factions/legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../../factions/legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../../factions/maggotkin-of-nurgle/index.htm">Maggotkin of Nurgle</a><a href="../../factions/skaven/index.htm">Skaven</a><a href="../../factions/slaves-to-darkness/index.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../../factions/flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../../factions/nighthaunt/index.htm">Nighthaunt</a><a href="../../factions/ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../../factions/soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../../factions/gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../../factions/ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="../../factions/orruk-warclans/index.htm">Orruk Warclans</a><a href="../../factions/sons-of-behemat/index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../../factions/endless-spells/index.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">About</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+
+<div class="Columns3"><div class="BreakInsideAvoid Corner3" style="padding:0px;max-width:390px;"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/aos3/img/corners/Corner3_1.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_2.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_3.png" style="width:20px;height:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_8.png" style="width:20px"></td><td bgcolor="#1d190d"><span style="font-family:georgia,serif; font-size:1em"><div class="contents_header">Contents</div><div class="mw3 i10"><a href="index.htm#History" class="contentColorInv"><b style="color:#f61f09">H</b>istory</a></div><div class="mw3 i10"><a href="index.htm#Legal" class="contentColorInv"><b style="color:#f61f09">L</b>egal</a></div><div class="mw3 i10"><a href="index.htm#Support" class="contentColorInv"><b style="color:#f61f09">S</b>upport</a></div><div class="mw3 i10"><a href="index.htm#Wahapedian-Detachment" class="contentColorInv"><b style="color:#f61f09">W</b>ahapedian Detachment</a></div></span></td><td background="/aos3/img/corners/Corner3_4.png" style="width:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_7.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_6.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_5.png" style="width:20px;height:20px"></td></tr></tbody></table></div><br><div style="float:left;"><img border="0" src="../../../img/VMaltsev.png" style="margin:4px"></div> Hi! My name is Vyacheslav Maltsev and I am the developer of Wahapedia website. I've designed the Wahapedia as a handy tool for the beginners to get into the complex Warhammer tabletop universe. And it is a Universe indeed! For example Warhammer 40,000 comprises 38 factions, more than 100 codexes/supplements, over 2000 unit profiles and about 4000 special rules.<div><br></div><a name="History"></a><h2 class="h2_pge   ">History</h2>I started to work on the site in 2013. I chose Google Sites as a platform for its ability to edit pages via browser and for free hosting without any ads. At the beginning I just typed text into pages using Google Sites tools. I asked for help on Warforge forum and lots of people lent me a helping hand. But still I had to spend a lot of time on the pages adjustment.<br><br>After two years of development I have come to the idea of a data-driven website. Frankly, I am not a web-designer. I am a database programmer and have chosen an instrument which I know better: 1C:Enterprise. In short, this means:<br><ol><li>Input codex data into appropriate database tables.</li><li>Generate HTML-code based on database data.</li><li>Upload HTML-code into the appropriate page on website.</li></ol>This approach allowed me to unify the style for all pages and significantly reduce the time of creating a web page. Previously building a complete codex took 2 months, now it takes 1 week. The work with the database requires specific knowledge, so I refused help of Warforge comrades. However, I am extremely grateful to them for their support during the initial stage of the site’s life.<br><br>Eighth edition released in june 2017. All codexes had to be re-input once again. Simultaneously I worked on modifying 1C:Wahapedia database code. The bulk of the indexes have been implemented by the end of 2017. Now, when the Games Workshop announced 9th edition of the Warhammer 40,000 rules I have to start over. Its not the first time for me since I have supported Wahapedia since 6th edition.<div><br></div><a name="Legal"></a><h2 class="h2_pge   ">Legal</h2>Many may ask, "Is it legal?" I do not think so. If the Games Workshop finds this site and considers it to be dangerous for their business the company will require site’s closure. However, I would like to say a few words in defense of my offspring:<br><ol><li>The site does not store any codexes’ scans. Pictures from rulebooks are used only to illustrate the rules of the game.</li><li>The site does not contain a literary component (background) of codexes. The exception is the text of no more than 1-2 paragraphs to describe special rules, wargear and missions.</li><li>I do not plan to include any advertising on the site or enable a paid subscription. Using of the site is completely free (donations doesn’t count).</li><li>In the end GW will receive benefit from this site, as beginners will learn the game easily. Also you still have to pay for paints and miniatures – you can’t download it from the Internet.</li></ol>– But still. What if GW will send you a "love letter"? – you may ask. For this question, I have some answers:<br><ol><li>Site moved out of British Themis’ reach, in the .ru segment. Hosting also situated in Russia. I’m not using this site for selling weapons to terrorists and store porn - I’m absolutely fine.</li><li>I am citizen of another country and I’m not going to travel in GB.</li><li>I can lock site on a password that will be changed from time to time. New password would be sent to trusted users only or published on some source with limited access (such as Patreon).</li><li>In worst case it is possible to go offline - put site on some torrent or other file storage. You will have to download it every time site recieves an update</li></ol><div><br></div><a name="Support"></a><h2 class="h2_pge   ">Support</h2>Like the site? Think it’s useful? Support it!<br>There are several ways in which you can support the Wahapedia development:<br><ol><li><b>Report mistakes.</b> I love to receive error messages from users, since each bugfix makes Wahapedia even better! Fixing an error usually takes up to 24 hours.</li><li><b>Share your ideas.</b> Found forgotten datasheet? Have an idea to make site more handy? You are welcome to drop me a letter or contact me in social media.</li><li><b>Give some of your money.</b> Donation is the most powerful motivator for my daily struggle for data relevance and integrity of the site.</li></ol><br><div style="padding: 5px 0 5px 0; display:flex; justify-content:center; align-items:center;"><i>E-mail:&nbsp;</i> <a target="_blank" href="mailto:info@wahapedia.ru">info@wahapedia.ru</a></div><div style="padding: 5px 0 5px 0; display:flex; justify-content:center; align-items:center;"><a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div><img border="0" src="../../../img/PayPal_button.png" style="margin:4px"></div></a></div><div style="display:flex;justify-content:center;align-items:center;"><a href="../../../bePatron.html?u=6092318" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async="" src="../../../becomePatronButton.bundle.js"></script></div></div><div><br></div><div style="clear:both"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Wahapedian-Detachment"></a><h2 class="h2_pge   ">Wahapedian Detachment</h2><p class="ShowFluff legend">The soldiers of the Wahapedian Detachment make up the vast bulk of the Imperial war machine. It is they who lay down their lives on every battlefront to hold the line against tides of mutants, monsters and heretics. Yet even amongst the tragically expendable masses of the Imperial Guard, there are elite warriors that stand ready to deploy.</p><div class="Columns2">Those Wahapedia users who have pledged themselves (donated) to build a better future for the Warhammer gaming community, and  those who gave their blood (money) to uphold data servitors are worthy of a special honour as part of the Regiment of the site.<br><br>Patreon members receive a place in the Wahapedian Detachment according to tiers they have chosen:<br><br><div class="BreakInsideAvoid" style=""><table border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#908249;border-width:0px"><tbody><tr><td style="border-width:0 0 1px 0;vertical-align:bottom;width:180px;height:0px;"><b>Tier</b></td><td style="border-width:0 0 1px 0;vertical-align:bottom;width:180px;height:0px;"><b>Pledge per month</b></td></tr><tr><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">Officer</td><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">$8</td></tr><tr><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">Tanker</td><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">$6</td></tr><tr><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">Veteran</td><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">$4</td></tr><tr><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">Guardsman</td><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">$2</td></tr><tr><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">Conscript</td><td style="border-width:0 0 0 0;vertical-align:bottom;width:180px;height:0px;">$1</td></tr></tbody></table></td></tr></tbody></table></div></div><br><!--WD_begin--><div class="WD_LastUpdated">Last updated: 06.10.2021</div><div class="WD_wrapper"><div class="WD_center"><div class="WD_Platoon"><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00001"><div class="WD_SquadName">Company Command Squad</div><div class="WD_center"><div style="float:left" class="WD_CompanyCommander"></div><div style="float:left" class="WD_ServoSkull"></div><div style="float:left" class="WD_OfficerFleet"></div><div style="float:left" class="WD_Ensign"></div><div style="float:left" class="WD_StaffOfficer"></div><div style="float:left" class="WD_MasterOrdnance"></div></div></div></div></div><div style="clear:both"></div><div class="WD_center"><div style="clear:both"></div><div class="WD_Platoon"><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00002"><div class="WD_SquadName">Adeptus Mechanicus</div><div class="WD_center"><div style="float:left" class="WD_TechPriestEnginseer"></div><div style="float:left" class="WD_ServoSkullAdM"></div><div style="float:left" class="WD_Servitor"></div><div style="float:left" class="WD_Servitor2"></div><div style="float:left" class="WD_Servitor2"></div><div style="float:left" class="WD_Servitor2"></div></div></div></div><div class="WD_Platoon"><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00003"><div class="WD_SquadName">Officio Prefectus</div><div class="WD_center"><div style="float:left" class="WD_LordCommissar"></div><div style="float:left" class="WD_ServoSkullOP"></div><div style="float:left" class="WD_Commissar"></div><div style="float:left" class="WD_Commissar"></div><div style="float:left" class="WD_Commissar"></div><div style="float:left" class="WD_Commissar"></div><div style="float:left" class="WD_Commissar"></div><div style="float:left" class="WD_Commissar"></div></div></div></div><div class="WD_Platoon"><div class="WD_Squad"><div class="WD_SquadName">Armoured Company</div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00004"><div style="float:left" class="WD_LemanRussBattleTankP"></div><div class="WD_SquadName2">Leman Russ Battle Tank 1</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00005"><div style="float:left" class="WD_LemanRussBattleTank"></div><div class="WD_SquadName2">Leman Russ Battle Tank 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00006"><div style="float:left" class="WD_ScoutSentinel"></div><div class="WD_SquadName2">Scout Sentinel</div></div></div></div></div><div style="clear:both"></div><div class="WD_center"><div style="clear:both"></div><div class="WD_Platoon"><div style="clear:both"></div><div class="WD_Squad"><div class="WD_SquadName">Platoon 1</div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00007"><div style="float:left" class="WD_PlatoonCommander"></div><div style="float:left" class="WD_ServoSkullP"></div><div style="float:left" class="WD_EnsignP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div class="WD_SquadName2">Platoon Command Squad</div></div><div class="WD_Squad"><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00008"><div style="float:left" class="WD_Chimera"></div><div class="WD_SquadName2">Chimera</div></div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00009"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman_melta"></div><div style="float:left" class="WD_Guardsman_plasma"></div><div style="float:left" class="WD_Guardsman_flamer"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00010"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00011"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00012"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 4</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00013"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 5</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00014"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00015"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00016"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00017"><div style="float:left" class="WD_HWT_MissileLauncher"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with missile launcher 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00018"><div style="float:left" class="WD_HWT_MissileLauncher"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with missile launcher 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00019"><div style="float:left" class="WD_HWT_Lascannon"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with lascannon</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00020"><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div class="WD_SquadName2">Conscripts</div></div></div></div></div><div style="clear:both"></div><div class="WD_center"><div style="clear:both"></div><div class="WD_Platoon"><div style="clear:both"></div><div class="WD_Squad"><div class="WD_SquadName">Platoon 2</div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00021"><div style="float:left" class="WD_PlatoonCommander"></div><div style="float:left" class="WD_ServoSkullP"></div><div style="float:left" class="WD_EnsignP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div class="WD_SquadName2">Platoon Command Squad</div></div><div class="WD_Squad"><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00022"><div style="float:left" class="WD_Chimera"></div><div class="WD_SquadName2">Chimera</div></div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00023"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman_melta"></div><div style="float:left" class="WD_Guardsman_plasma"></div><div style="float:left" class="WD_Guardsman_flamer"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00024"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00025"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00026"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 4</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00027"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 5</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00028"><div style="float:left" class="WD_HWT_Autocannon"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with autocannon 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00029"><div style="float:left" class="WD_HWT_Autocannon"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with autocannon 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00030"><div style="float:left" class="WD_HWT_Mortar"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with mortar 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00031"><div style="float:left" class="WD_HWT_Mortar"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with mortar 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00032"><div style="float:left" class="WD_HWT_Mortar"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with mortar 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00033"><div style="float:left" class="WD_HWT_Mortar"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with mortar 4</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00034"><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div class="WD_SquadName2">Conscripts</div></div></div></div></div><div style="clear:both"></div><div class="WD_center"><div style="clear:both"></div><div class="WD_Platoon"><div style="clear:both"></div><div class="WD_Squad"><div class="WD_SquadName">Platoon 3</div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00035"><div style="float:left" class="WD_PlatoonCommander"></div><div style="float:left" class="WD_ServoSkullP"></div><div style="float:left" class="WD_EnsignP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div style="float:left" class="WD_StaffOfficerP"></div><div class="WD_SquadName2">Platoon Command Squad</div></div><div class="WD_Squad"><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00036"><div style="float:left" class="WD_Chimera"></div><div class="WD_SquadName2">Chimera</div></div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00037"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman_melta"></div><div style="float:left" class="WD_Guardsman_plasma"></div><div style="float:left" class="WD_Guardsman_flamer"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00038"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00039"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00040"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 4</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00041"><div style="float:left" class="WD_Sergeant"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div style="float:left" class="WD_Guardsman"></div><div class="WD_SquadName2">Infantry Squad 5</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00042"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 1</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00043"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 2</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00044"><div style="float:left" class="WD_HWT_HeavyBolter"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with heavy bolter 3</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00045"><div style="float:left" class="WD_HWT_MissileLauncher"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with missile launcher</div></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00046"><div style="float:left" class="WD_HWT_Autocannon"></div><div class="WD_SquadName2">Heavy Weapons Team<br>with autocannon</div></div><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00047"><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div style="float:left" class="WD_Conscript"></div><div class="WD_SquadName2">Conscripts</div></div></div></div></div><div style="clear:both"></div><div class="WD_center"><div style="clear:both"></div><div class="WD_Platoon"><div style="clear:both"></div><div class="WD_Squad tooltip" data-tooltip-content="#tooltip_content00048"><div class="WD_SquadName">Casualties</div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div><div style="float:left" class="WD_KIA"></div></div></div></div><div style="clear:both"></div></div><div class="WD_GraySkull">Artwork by <a href="../../../gray-skull.html"><b>Gray Skull</b></a></div><!--noindex--><div class="tooltip_templates"><span id="tooltip_content00001"><div class="WD_tooltipheader">Company Command Squad</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Company Commander</b></td><td valign="top">Lewys Caiach-Taylor <i>(Officer)</i></td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Demurr  <i>(KIA)</i></td></tr><tr><td valign="top"><b>Officer of the Fleet</b></td><td valign="top">Charles C. Li&#44; M.D. <i>(Officer)</i></td></tr><tr><td valign="top"><b>Ensign</b></td><td valign="top">ScroogeMcFox  <i>(Officer)</i></td></tr><tr><td valign="top"><b>Staff Officer</b></td><td valign="top">michael Bedford <i>(Officer)</i></td></tr><tr><td valign="top"><b>Master of Ordnance</b></td><td valign="top">Schark <i>(Officer)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00002"><div class="WD_tooltipheader">Adeptus Mechanicus</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Tech-Priest Enginseer</b></td><td valign="top">Laufer</td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Christopher Dear <i>(KIA)</i></td></tr><tr><td valign="top"><b>Servitor Mk I</b></td><td valign="top">BattleBear <i>(KIA)</i></td></tr><tr><td valign="top"><b>Servitor Mk II</b></td><td valign="top">Evan MacPhatter <i>(KIA)</i><br>Marcin Jakubowski <i>(KIA)</i><br>Will Frey <i>(KIA)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00003"><div class="WD_tooltipheader">Officio Prefectus</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Lord Commissar</b></td><td valign="top">Simon Gojkovic <i>(Officer)</i></td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Paul Huebner <i>(KIA)</i></td></tr><tr><td valign="top"><b>Commissar</b></td><td valign="top">Austin Phillips <i>(Officer)</i><br>Joshua Martin <i>(Officer)</i><br>Michael Maxwell <i>(Officer)</i><br>Rudyard S Olmstead <i>(Officer)</i><br>Sebastian J <i>(Officer)</i><br>Thomas Snider <i>(Officer)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00004"><div class="WD_tooltipheader">Leman Russ Battle Tank 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Commander</b></td><td valign="top">Xylander  <i>(Officer)</i></td></tr><tr><td valign="top"><b>Gunner</b></td><td valign="top">Vance7  <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Driver</b></td><td valign="top">Andrey Mischenko <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Loader</b></td><td valign="top">Martin Pasko <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Sponson Gunner</b></td><td valign="top">Alex Button <i>(Guardsman)</i><br>Piotr Gutaker <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00005"><div class="WD_tooltipheader">Leman Russ Battle Tank 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Commander</b></td><td valign="top">Stefan Marmion <i>(Officer)</i></td></tr><tr><td valign="top"><b>Gunner</b></td><td valign="top">unangel  <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Driver</b></td><td valign="top">theJoeCode <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Loader</b></td><td valign="top">Kevin Rutherford <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Sponson Gunner</b></td><td valign="top">Gilbert Görsdorf <i>(Guardsman)</i><br>Joris Falip <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00006"><div class="WD_tooltipheader">Scout Sentinel</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Driver</b></td><td valign="top">Brinn Bates <i>(Tanker)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00007"><div class="WD_tooltipheader">Platoon Command Squad</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Platoon Commander</b></td><td valign="top">James Cumming <i>(Officer)</i></td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Nguyễn Thanh Đức <i>(KIA)</i></td></tr><tr><td valign="top"><b>Ensign</b></td><td valign="top">Sam Gray <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Staff Officer</b></td><td valign="top">Dmitry Kletochkin <i>(Officer)</i><br>HappyPea <i>(Officer)</i><br>Rickmisterjoe <i>(Officer)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00008"><div class="WD_tooltipheader">Chimera</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Commander</b></td><td valign="top">Aaron Nessim <i>(Officer)</i></td></tr><tr><td valign="top"><b>Driver</b></td><td valign="top">Grant Tabor <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Gunner</b></td><td valign="top">J B <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00009"><div class="WD_tooltipheader">Infantry Squad 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Joseph Blow <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with meltagun</b></td><td valign="top">Eric Pettersson <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with plasmagun</b></td><td valign="top">Bernard Anderson <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with flamer</b></td><td valign="top">Michał Szałański <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Dillon <i>(Veteran)</i><br>John H Watson <i>(Veteran)</i><br>Komandarm888 <i>(Veteran)</i><br>TacticalTortoise  <i>(Veteran)</i><br>Theodor Kivistö <i>(Veteran)</i><br>Илья Гоголев <i>(Veteran)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00010"><div class="WD_tooltipheader">Infantry Squad 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Bart Wasteels <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Amir Johari <i>(Guardsman)</i><br>Andrea Ascione <i>(Guardsman)</i><br>Charles Roller <i>(Guardsman)</i><br>Harry McDougall <i>(Guardsman)</i><br>Quinn Durlston-Powell <i>(Guardsman)</i><br>Raphael D <i>(Guardsman)</i><br>rick abrams <i>(Guardsman)</i><br>Данил Иксанов <i>(Guardsman)</i><br>Дмитрий Фисенко <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00011"><div class="WD_tooltipheader">Infantry Squad 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Sean Temple <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Christian Nicander <i>(Guardsman)</i><br>Edward Harman <i>(Guardsman)</i><br>M.Pfeifer <i>(Guardsman)</i><br>Marcin M Michalek <i>(Guardsman)</i><br>Mason Rinehart <i>(Guardsman)</i><br>Moritz Witt <i>(Guardsman)</i><br>Nordwulf  <i>(Guardsman)</i><br>Tobias D <i>(Guardsman)</i><br>秋彦 佐藤 <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00012"><div class="WD_tooltipheader">Infantry Squad 4</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Sam Shazam <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">CHERON <i>(Guardsman)</i><br>CoronelPanic <i>(Guardsman)</i><br>Gary Milburn <i>(Guardsman)</i><br>hongyong park <i>(Guardsman)</i><br>KillTeamDave <i>(Guardsman)</i><br>Peter Henderson <i>(Guardsman)</i><br>Renicane <i>(Guardsman)</i><br>Rob Baer <i>(Guardsman)</i><br>Sir Andersen <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00013"><div class="WD_tooltipheader">Infantry Squad 5</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Filq <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Botond Juhász <i>(Guardsman)</i><br>Christian Marks <i>(Guardsman)</i><br>Dorkfang  <i>(Guardsman)</i><br>Hunter Glad <i>(Guardsman)</i><br>Marco Canepa <i>(Guardsman)</i><br>Miika Varis <i>(Guardsman)</i><br>Ryan Tracey <i>(Guardsman)</i><br>Stephen Warren <i>(Guardsman)</i><br>Urazel  <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00014"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Peter Panagakos <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Shade  <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00015"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Miles Bartnik <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Barney Iley <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00016"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Marcus Windus <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Philipp Gronotte <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00017"><div class="WD_tooltipheader">Heavy Weapons Team<br>with missile launcher 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Alex Fung <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Vincent Fung <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00018"><div class="WD_tooltipheader">Heavy Weapons Team<br>with missile launcher 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Jiri Sofka <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Mark Eberle <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00019"><div class="WD_tooltipheader">Heavy Weapons Team<br>with lascannon</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Terrain4Print  <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Mirek Woźniak <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00020"><div class="WD_tooltipheader">Conscripts</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Conscript</b></td><td valign="top">Andrew Vaughan <i>(Conscript)</i><br>Arek Mucha <i>(Conscript)</i><br>Charper <i>(Conscript)</i><br>Chris  <i>(Conscript)</i><br>Crymic <i>(Conscript)</i><br>Dan Oughta <i>(Conscript)</i><br>Dmitry Loac <i>(Conscript)</i><br>flapp  <i>(Conscript)</i><br>Francois Laubscher <i>(Conscript)</i><br>Frédérick Marcotte <i>(Conscript)</i><br>Grant Kirkland <i>(Conscript)</i><br>J S <i>(Conscript)</i><br>James Bonnell <i>(Conscript)</i><br>Jo Bob <i>(Conscript)</i><br>Michael Rogers <i>(Conscript)</i><br>Mikkel Schultz <i>(Conscript)</i><br>Mr P <i>(Conscript)</i><br>Nathaniel Duncan <i>(Conscript)</i><br>stinky nurgle <i>(Conscript)</i><br>Takao  <i>(Conscript)</i><br>Txomin Zaratiegui <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00021"><div class="WD_tooltipheader">Platoon Command Squad</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Platoon Commander</b></td><td valign="top">QubitCrook <i>(Officer)</i></td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Сергей Белоконь <i>(KIA)</i></td></tr><tr><td valign="top"><b>Ensign</b></td><td valign="top">Oliver Williams <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Staff Officer</b></td><td valign="top">JAy <i>(Officer)</i><br>Saurok963 <i>(Officer)</i><br>Stephen Baron <i>(Officer)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00022"><div class="WD_tooltipheader">Chimera</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Commander</b></td><td valign="top">Ian Orsinger <i>(Officer)</i></td></tr><tr><td valign="top"><b>Driver</b></td><td valign="top">Tim Lawlor <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Gunner</b></td><td valign="top">Alexander KoT <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00023"><div class="WD_tooltipheader">Infantry Squad 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Chris Paterson <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with meltagun</b></td><td valign="top">Валерий Михолапов <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with plasmagun</b></td><td valign="top">Aspartam <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with flamer</b></td><td valign="top">Chris Vo <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Denny Wright <i>(Veteran)</i><br>Ian Robbins <i>(Veteran)</i><br>Isaac Berry <i>(Veteran)</i><br>Luke Perdue <i>(Veteran)</i><br>Richard Millington <i>(Veteran)</i><br>Shawn Gately <i>(Veteran)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00024"><div class="WD_tooltipheader">Infantry Squad 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Andreas Steckmeier <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Attila <i>(Guardsman)</i><br>danma <i>(Guardsman)</i><br>David Smisek <i>(Guardsman)</i><br>Hadar Milner <i>(Guardsman)</i><br>Jay <i>(Guardsman)</i><br>Jonathan Ho <i>(Guardsman)</i><br>Julien Segura <i>(Guardsman)</i><br>Stepan Gelasimov <i>(Guardsman)</i><br>TehBenju  <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00025"><div class="WD_tooltipheader">Infantry Squad 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">ANDREW SHARTENBERG <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">AenarIT <i>(Guardsman)</i><br>Bandit_G1 #DBL <i>(Guardsman)</i><br>Cameron Barrows <i>(Guardsman)</i><br>Dan Evans <i>(Guardsman)</i><br>Era Sonata <i>(Guardsman)</i><br>Hannes <i>(Guardsman)</i><br>Jonathan Phousirith <i>(Guardsman)</i><br>The Rightful Tyrant&#44; Rurik <i>(Guardsman)</i><br>Дмитрий Родди <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00026"><div class="WD_tooltipheader">Infantry Squad 4</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Mr Ektor <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Adept_rus <i>(Guardsman)</i><br>Doc the AngryVeteran <i>(Guardsman)</i><br>Gene Higgins <i>(Guardsman)</i><br>Metazealot <i>(Guardsman)</i><br>mike. <i>(Guardsman)</i><br>Paul Street <i>(Guardsman)</i><br>Rodelle <i>(Guardsman)</i><br>Ruben Arranz <i>(Guardsman)</i><br>Serhii  <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00027"><div class="WD_tooltipheader">Infantry Squad 5</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Michael M <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">423211 <i>(Guardsman)</i><br>Bagool <i>(Guardsman)</i><br>Brett Nicholls <i>(Guardsman)</i><br>Douglas Lee Pocock <i>(Guardsman)</i><br>Immanuel &quot;Beardsmite&quot; <i>(Guardsman)</i><br>Kristoffer Madsen <i>(Guardsman)</i><br>Michael Wells <i>(Guardsman)</i><br>Mike Carr <i>(Guardsman)</i><br>tyranidwarrior <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00028"><div class="WD_tooltipheader">Heavy Weapons Team<br>with autocannon 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Andrey Barsky <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Nekeyby  <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00029"><div class="WD_tooltipheader">Heavy Weapons Team<br>with autocannon 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Robert Carpenter <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">lifegrip <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00030"><div class="WD_tooltipheader">Heavy Weapons Team<br>with mortar 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Fallkot  <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Allornone <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00031"><div class="WD_tooltipheader">Heavy Weapons Team<br>with mortar 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Sam Burnett <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Andre Tcherepnin <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00032"><div class="WD_tooltipheader">Heavy Weapons Team<br>with mortar 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Raphaël Beyrouthy <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Asrienda  <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00033"><div class="WD_tooltipheader">Heavy Weapons Team<br>with mortar 4</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Ben Clark <i>(Guardsman)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Nico Kurmann <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00034"><div class="WD_tooltipheader">Conscripts</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Conscript</b></td><td valign="top">Ayda Trisfina <i>(Conscript)</i><br>Bob McHenry <i>(Conscript)</i><br>Chris Covert <i>(Conscript)</i><br>Daniel Hanson <i>(Conscript)</i><br>David Jordan <i>(Conscript)</i><br>DhonKokko Burnaby <i>(Conscript)</i><br>Dustin Frandle <i>(Conscript)</i><br>Espen Pettersen <i>(Conscript)</i><br>gorkson morkson <i>(Conscript)</i><br>Hansack Sebastian <i>(Conscript)</i><br>Koziołek <i>(Conscript)</i><br>Leon  <i>(Conscript)</i><br>Marco Brugnerotto <i>(Conscript)</i><br>matthew brooks <i>(Conscript)</i><br>Raidon Ta <i>(Conscript)</i><br>Randy Brasher <i>(Conscript)</i><br>Ryan Barainyak <i>(Conscript)</i><br>Tanner Wilde <i>(Conscript)</i><br>Vasily M. <i>(Conscript)</i><br>Yatagan <i>(Conscript)</i><br>yoruma <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00035"><div class="WD_tooltipheader">Platoon Command Squad</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Platoon Commander</b></td><td valign="top">liquidsnake  <i>(Officer)</i></td></tr><tr><td valign="top"><b>Servo-skull</b></td><td valign="top">Xiphodon <i>(KIA)</i></td></tr><tr><td valign="top"><b>Ensign</b></td><td valign="top">Stanislav Krajčovič <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Staff Officer</b></td><td valign="top">Alastair Campbell <i>(Officer)</i><br>anonbanon <i>(Officer)</i><br>Brett Hundley <i>(Officer)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00036"><div class="WD_tooltipheader">Chimera</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Commander</b></td><td valign="top">Placeholder name <i>(Officer)</i></td></tr><tr><td valign="top"><b>Driver</b></td><td valign="top">Alexey Zakharov <i>(Tanker)</i></td></tr><tr><td valign="top"><b>Gunner</b></td><td valign="top">Nick Mastrofilippo <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00037"><div class="WD_tooltipheader">Infantry Squad 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Иван Жуванов <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with meltagun</b></td><td valign="top">Carlos Sandoval <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with plasmagun</b></td><td valign="top">Øyvind Olsen <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman with flamer</b></td><td valign="top">Nick Barber <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Eric Fowler <i>(Veteran)</i><br>Jon Chu <i>(Veteran)</i><br>Josep C. <i>(Veteran)</i><br>Marcin Cybulak <i>(Veteran)</i><br>Sharo Moini <i>(Veteran)</i><br>Tsipis K <i>(Veteran)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00038"><div class="WD_tooltipheader">Infantry Squad 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Matt Goldsmith <i>(Veteran)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Derbardin  <i>(Conscript)</i><br>Johan Joensen <i>(Guardsman)</i><br>Kim Pearson <i>(Conscript)</i><br>Kyle Leadbeatter <i>(Guardsman)</i><br>Mark Shalavin <i>(Guardsman)</i><br>Martin Krajcovic <i>(Conscript)</i><br>Phil <i>(Guardsman)</i><br>Phillip Pierce-Savoie <i>(Guardsman)</i><br>Sejason <i>(Guardsman)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00039"><div class="WD_tooltipheader">Infantry Squad 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Jiří Hauser <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Calvin Sands <i>(Conscript)</i><br>EllTee  <i>(Conscript)</i><br>Isaac Eisenbrey <i>(Conscript)</i><br>James B <i>(Conscript)</i><br>Magdi Dahroug <i>(Conscript)</i><br>Tlactar <i>(Conscript)</i><br>Tomáš Ivan <i>(Conscript)</i><br>Tyrat  <i>(Conscript)</i><br>Zachary Gidding <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00040"><div class="WD_tooltipheader">Infantry Squad 4</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">Mike Porter <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Alexandr Titov <i>(Conscript)</i><br>David Wilson <i>(Conscript)</i><br>GrafZahl <i>(Conscript)</i><br>Jake A Dale <i>(Conscript)</i><br>Jake Rowsell <i>(Conscript)</i><br>Marcus Cross <i>(Conscript)</i><br>Matthias Flierl <i>(Conscript)</i><br>Qili Guo <i>(Conscript)</i><br>Travis McDermott <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00041"><div class="WD_tooltipheader">Infantry Squad 5</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Sergeant</b></td><td valign="top">gundam <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Guardsman</b></td><td valign="top">Anders Åkesson <i>(Conscript)</i><br>Chris <i>(Conscript)</i><br>Jan Gaute Frydendahl <i>(Conscript)</i><br>JayWins  <i>(Conscript)</i><br>Jonas Kloster Jacobsen <i>(Conscript)</i><br>Marco Francischello <i>(Conscript)</i><br>sgbrfgs svsgsr <i>(Conscript)</i><br>The_Duri7 <i>(Conscript)</i><br>Theodor Papachristodoulou <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00042"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 1</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Anthony Aziz <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Joshua Krutt <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00043"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 2</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Stanislav Shimuk <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Jeremy Lee <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00044"><div class="WD_tooltipheader">Heavy Weapons Team<br>with heavy bolter 3</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Christian Weinert <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Matt Buxton <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00045"><div class="WD_tooltipheader">Heavy Weapons Team<br>with missile launcher</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Love  <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Ditchwalker  <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00046"><div class="WD_tooltipheader">Heavy Weapons Team<br>with autocannon</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Crew #1</b></td><td valign="top">Nick Sischka <i>(Conscript)</i></td></tr><tr><td valign="top"><b>Crew #2</b></td><td valign="top">Quinton Potovszky <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00047"><div class="WD_tooltipheader">Conscripts</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>Conscript</b></td><td valign="top">angel ALONSO <i>(Conscript)</i><br>Antonín Wingender <i>(Conscript)</i><br>Bob Saget <i>(Conscript)</i><br>Dan Cohen <i>(Conscript)</i><br>Dmitriy  <i>(Conscript)</i><br>Dragon2  <i>(Conscript)</i><br>Esher <i>(Conscript)</i><br>Gareth Turner <i>(Conscript)</i><br>hrabnaz  <i>(Conscript)</i><br>Jakob  <i>(Conscript)</i><br>Liv Lowe <i>(Conscript)</i><br>Nicholas Lown <i>(Conscript)</i><br>Ohfishyfishyfish <i>(Conscript)</i><br>Pooty  <i>(Conscript)</i><br>Rafał Anusiak <i>(Conscript)</i><br>Spencer  <i>(Conscript)</i><br>Steven Woinoski <i>(Conscript)</i><br>StormFalcon1233 <i>(Conscript)</i><br>Tashi Gibson <i>(Conscript)</i><br>Zethy  <i>(Conscript)</i></td></tr></tbody></table></span></div><div class="tooltip_templates"><span id="tooltip_content00048"><div class="WD_tooltipheader">Casualties</div><table border="0" cellspacing="0" cellpadding="2"><tbody><tr><td valign="top"><b>KIA</b></td><td valign="top">Aducan <i>(KIA)</i><br>Alexey Platkovsky <i>(KIA)</i><br>Alexey Sidorenko <i>(KIA)</i><br>AnonymousJoe <i>(KIA)</i><br>Ben A Ramos <i>(KIA)</i><br>Benjamin Lee <i>(KIA)</i><br>camzi11a <i>(KIA)</i><br>Conor Sheehy <i>(KIA)</i><br>Daniel Edwards <i>(KIA)</i><br>David Kraytsberg <i>(KIA)</i><br>David Paton <i>(KIA)</i><br>Derek Gurban <i>(KIA)</i><br>dix_huit <i>(KIA)</i><br>Doug Stalker <i>(KIA)</i><br>EC779  <i>(KIA)</i><br>Eros Bonazzi <i>(KIA)</i><br>Francis O'Brien <i>(KIA)</i><br>Genytor <i>(KIA)</i><br>Glinnergasm <i>(KIA)</i><br>Griffin Brodman <i>(KIA)</i><br>Harold Hayward <i>(KIA)</i><br>Isaac Lichtenstein <i>(KIA)</i><br>Ivan Rudik <i>(KIA)</i><br>james collum <i>(KIA)</i><br>Joshua Van Camp <i>(KIA)</i><br>lordcenzin <i>(KIA)</i><br>Mark Fairbrother <i>(KIA)</i><br>Mike Earley <i>(KIA)</i><br>Milo Self <i>(KIA)</i><br>Nate  <i>(KIA)</i><br>Nikolas Rockney-Finger <i>(KIA)</i><br>rick kuhnert <i>(KIA)</i><br>Ryan Renna <i>(KIA)</i><br>Samuel Green <i>(KIA)</i><br>Serge  <i>(KIA)</i><br>Serge Krylov <i>(KIA)</i><br>SlimothyJames <i>(KIA)</i><br>Smileynazgul <i>(KIA)</i><br>Sp <i>(KIA)</i><br>Spaff <i>(KIA)</i><br>Stephen Godwin <i>(KIA)</i><br>Stewart Robertson <i>(KIA)</i><br>THE CHAD BRAD <i>(KIA)</i><br>Thomas Monti <i>(KIA)</i><br>Tiki The Troll <i>(KIA)</i><br>Trollballz  <i>(KIA)</i><br>Troy Gregson <i>(KIA)</i><br>Trusty_Thor <i>(KIA)</i><br>Tseung Tsu <i>(KIA)</i><br>Tyler LaRiviere <i>(KIA)</i><br>Victor Westeraa <i>(KIA)</i><br>William W. <i>(KIA)</i><br>Zane  <i>(KIA)</i></td></tr></tbody></table></span></div><!--/noindex--><!--WD_end-->
+<!--noindex--><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

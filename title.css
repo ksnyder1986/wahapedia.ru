@@ -1,0 +1,261 @@
+:root {
+	--font-color: #000;
+	--bg-color: #fff;
+	--bg-hover: #fff7d7;
+	--logo: url("Wahapedia-logo.png");
+	--contents: #311d00;
+	--author-color: #494949;
+}
+[data-theme="dark"] {
+	--font-color: #dadada;
+	--bg-color: #2a2a2a;
+	--bg-hover: #121212;
+	--logo: url("Wahapedia-logo-dark.png");
+	--contents: #9e7d4d;
+	--author-color: #adadad;
+}
+
+body {
+	color: #121212; color:var(--font-color);
+	width: 95%;
+	height: 100%;
+	font-family: times new roman,  sans-serif;
+	font-size: 22px;
+	background: #fff; background: var(--bg-color);
+}
+
+#wrapper {
+	background: #fff; background: var(--bg-color);
+	width: auto;
+	max-width:1000px;
+	min-width: 320px;
+	margin: 0 auto;
+	padding: 10px;
+	height: auto !important;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto\9; /* ie8 */
+	align: center;
+}
+
+.logo {
+	background-image: url("Wahapedia-logo-dark.png"); background-image: var(--logo);
+	width: 300px;
+	height: 395px;
+	max-width:440px;
+}
+
+.selectionWarning {
+    background-color: #d0d4ce;
+    padding: 14px;
+    background: linear-gradient(-135deg, transparent 14px, #d0d4ce 0);
+    margin: 14px;
+    max-width: 400px;
+}
+
+.WahapediaWarningSign {
+    background-image: url(img/Wahapedia_logo3.png);
+    padding: 0 10px 10px 0;
+    background-repeat: no-repeat;
+    height: 40px;
+    width: 40px;
+    float: left;
+	font-size: 0.9em;
+}
+
+.author {
+	color: #494949; color: var(--author-color);
+	font-size: 14px;
+}
+
+a {text-decoration: none; color: inherit}
+a:visited {text-decoration: none; color: inherit}
+a:hover {text-decoration: none; color: inherit}
+
+@font-face {
+	font-family: 'Impact';
+	src: url('Impact.ttf');
+}
+
+.Contents {
+	max-width: 440px;
+	color: #311d00; color: var(--contents);
+	font: 20px impact, charcoal, sans-serif;
+	padding: 20px 0 20px 0;
+}
+
+.GameButton1 {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid transparent;
+	display: block;
+}
+
+.GameButton1:hover {
+	background: #fff7d7; background: var(--bg-hover);
+	border-top: 3px ridge #855100;
+	border-bottom: 3px ridge #855100;
+	background-image: url(logo_wh40k.png);
+	background-repeat:no-repeat;
+}
+
+.GameButton2 {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid #fff;
+	display: block;
+}
+
+.GameButton2:hover {
+	background: #fff7d7; background: var(--bg-hover);
+	border-top: 3px ridge #855100;
+	border-bottom: 3px ridge #855100;
+	background-image: url(logo_heresy.png);
+	background-repeat:no-repeat;
+}
+
+.GameButton3 {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid transparent;
+	display: block;
+}
+
+.GameButton3:hover {
+	background: #fff7d7; background: var(--bg-hover);
+	border-top: 3px ridge #855100;
+	border-bottom: 3px ridge #855100;
+	background-image: url(logo_aos.png);
+	background-repeat:no-repeat;
+}
+
+.GameButton4 {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid transparent;
+	display: block;
+}
+
+.GameButton4:hover {
+	background: #fff7d7; background: var(--bg-hover);
+	border-top: 3px ridge #855100;
+	border-bottom: 3px ridge #855100;
+	background-image: url(logo_kill_team.png);
+	background-repeat:no-repeat;
+}
+
+.GameButton_a {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid transparent;
+	display: block;
+}
+
+.GameButton_a:hover {
+	background: #dfdfdf; background: var(--bg-hover);
+	border-top: 3px ridge #756c5f;
+	border-bottom: 3px ridge #756c5f;
+}
+
+.GameButtonEmpty {
+	max-width: 440px;
+	padding: 12px 0px 12px 0px;
+	font-size: 28px;
+	color: #888;
+	text-align: center;
+	vertical-align: middle;
+	border: 3px solid transparent;
+}
+
+.social_buttons {
+	width:136px;
+	height: 56px;
+	position:relative;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	margin-top: 24px;
+}
+
+.patreon_logo {
+	height: 32px;
+	width: 32px;
+	background-image: url(PatreonMark32.png);
+	transition: top 160ms ease-out;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.patreon_logo:hover {
+	top: -4px;
+}
+
+.social_vk {
+	height: 32px;
+	width: 32px;
+	background-image: url(social_vk.png);
+	transition: top 160ms ease-out;
+	position: absolute;
+	left: 36px;
+	top: 0px;
+}
+.social_vk:hover {
+	top: -4px;
+}
+
+.social_fb {
+	height: 32px;
+	width: 32px;
+	background-image: url(social_fb.png);
+	transition: top 160ms ease-out;
+	position: absolute;
+	left: 72px;
+	top: 0px;
+}
+.social_fb:hover {
+	top: -4px;
+}
+
+.social_email {
+	height: 32px;
+	width: 32px;
+	background-image: url(social_email.png);
+	transition: top 160ms ease-out;
+	position: absolute;
+	left: 108px;
+	top: 0px;
+}
+.social_email:hover {
+	top: -4px;
+}
+
+.social_dd {
+	height: 32px;
+	width: 32px;
+	background-image: url(social_dd.png);
+	transition: top 160ms ease-out;
+	position: absolute;
+	left: 72px;
+	top: 0px;
+}
+.social_dd:hover {
+	top: -4px;
+}

@@ -1,0 +1,512 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Open Play">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 9 edition, Annihilation, Death or Glory, Open Hostility Mission Pack, Hold at all Costs, Open Play, Introduction, Suggestions for Open Play Missions">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Open Play</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowSpecialistDetachments;
+	if (data == undefined) {data = 'true'; localStorage.ShowSpecialistDetachments = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowSpecialistDetachments').prop('checked', StrData);
+
+	$('.ShowSpecialistDetachments').change(function () {
+      localStorage.ShowSpecialistDetachments = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowCrusadeRules;
+	if (data == undefined) {data = 'true'; localStorage.ShowCrusadeRules = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowCrusadeRules').prop('checked', StrData);
+
+	$('.ShowCrusadeRules').change(function () {
+      localStorage.ShowCrusadeRules = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.PrimarisFilter;
+	if (data == undefined) {data = ''; localStorage.PrimarisFilter = data};
+
+	$('.PrimarisSelect').prop('value', data);
+
+	$('.PrimarisSelect').change(function () {
+      localStorage.PrimarisFilter = $(this).prop('value');
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld, .sSpecialistDetachments, .sPrimaris, .sNotPrimaris, .sCrusadeRules';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+if (localStorage.ShowSpecialistDetachments == 'false') {clFlags = clFlags + comma + '.sSpecialistDetachments'; comma = ', ';};
+if (localStorage.ShowCrusadeRules == 'false') {clFlags = clFlags + comma + '.sCrusadeRules'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sPrimaris') {clFlags = clFlags + comma + '.sNotPrimaris'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sNotPrimaris') {clFlags = clFlags + comma + '.sPrimaris'; comma = ', ';};
+ $('.abVisChk').css('display', ''); $('.abVisChk2').css('display', '');
+	$(clAllFlags).show();
+	$(clFlags).hide();
+
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+ if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+ if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowSpecialistDetachments">
+	<span class="checkmark"></span>Show Specialist Detachments
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowCrusadeRules">
+	<span class="checkmark"></span>Show Crusade Rules
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../playing-this-game/index.htm">Playing This Game</a><a href="../core-rules/index.htm">Core Rules</a><a href="index.htm">Open Play</a><a href="../matched-play/index.htm">Matched Play</a><a href="../narrative-play/index.htm">Narrative Play</a><a href="../advanced-rules/index.htm">Advanced Rules</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Mission Packs</div><a href="../beyond-the-veil/index.htm">Beyond the Veil</a><a href="../grand-tournament-2021/index.htm">Grand Tournament 2021</a><a href="../tactical-deployment/index.htm">Tactical Deployment</a><a href="../psychic-awakening/index.htm">Psychic Awakening</a><a href="../piety-and-pain/index.htm">Piety and Pain</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">War Zones</div><a href="../war-zone-charadon/index.htm">War Zone Charadon</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a href="../../factions/adepta-sororitas/index.htm">Adepta Sororitas</a><a href="../../factions/adeptus-custodes/index.htm">Adeptus Custodes</a><a href="../../factions/adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a href="../../factions/astra-militarum/index.htm">Astra Militarum</a><a href="../../factions/grey-knights/index.htm">Grey Knights</a><a href="../../factions/imperial-knights/index.htm">Imperial Knights</a><a href="../../factions/inquisition/index.htm">Inquisition</a><a href="../../factions/officio-assassinorum/index.htm">Officio Assassinorum</a><a href="../../factions/rogue-traders/index.htm">Rogue Traders</a><a href="../../factions/sisters-of-silence/index.htm">Sisters of Silence</a><a href="../../factions/space-marines/index.htm">Space Marines</a><a href="../../factions/titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a href="../../factions/chaos-daemons/index.htm">Chaos Daemons</a><a href="../../factions/chaos-knights/index.htm">Chaos Knights</a><a href="../../factions/chaos-space-marines/index.htm">Chaos Space Marines</a><a href="../../factions/death-guard/index.htm">Death Guard</a><a href="../../factions/heretic-titan-legions/index.htm">Heretic Titan Legions</a><a href="../../factions/renegades-and-heretics/index.htm">Renegades and Heretics</a><a href="../../factions/thousand-sons/index.htm">Thousand Sons</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a href="../../factions/craftworlds/index.htm">Craftworlds</a><a href="../../factions/drukhari/index.htm">Drukhari</a><a href="../../factions/harlequins/index.htm">Harlequins</a><a href="../../factions/ynnari/index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a href="../../factions/genestealer-cults/index.htm">Genestealer Cults</a><a href="../../factions/necrons/index.htm">Necrons</a><a href="../../factions/orks/index.htm">Orks</a><a href="../../factions/t-au-empire/index.htm">T’au Empire</a><a href="../../factions/tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a href="../../factions/unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">Open Play</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">Over the following pages you will find different examples of how to create missions for open play. If you want to start waging war right away, pick one of the three missions from the <a href="index.htm#Open-Hostility-Mission-Pack">Open Hostility mission pack</a>, detailed below. Alternatively, if you want the freedom and flexibility to create your own open play missions, we have provided a few ideas to spark your imagination (see <a href="index.htm#Suggestions-for-Open-Play-Missions">Suggestions for Open Play Missions</a>).</p>
+
+<hr>
+<div class="Columns2"><div class="BreakInsideAvoid frameDark Corner18" style="max-width:390px;"><span><div class="contents_header">Contents</div><div class="mw3 i10"><a href="index.htm#Open-Hostility-Mission-Pack" class="contentColorInv"><b>Open Hostility Mission Pack</b></a></div><div class="mw3 i30"><img style="padding-bottom:2px; vertical-align:middle" src="../../img/dice17.png">&nbsp;<b>1-2</b> <a href="index.htm#Annihilation" class="contentColorInv">Annihilation</a></div><div class="mw3 i30"><img style="padding-bottom:2px; vertical-align:middle" src="../../img/dice17.png">&nbsp;<b>3-4</b> <a href="index.htm#Hold-at-all-Costs" class="contentColorInv">Hold at all Costs</a></div><div class="mw3 i30"><img style="padding-bottom:2px; vertical-align:middle" src="../../img/dice17.png">&nbsp;<b>5-6</b> <a href="index.htm#Death-or-Glory" class="contentColorInv">Death or Glory</a></div><div class="mw3 i10"><a href="index.htm#Suggestions-for-Open-Play-Missions" class="contentColorInv"><b>Suggestions for Open Play Missions</b></a></div></span></div>The open play rules provide a style of play that is as free-form and permissive as Warhammer 40,000 gets. In open play anything goes, whether it be deploying your armies without worrying about points of power, inventing your own missions, playing highly themed and entirely unbalanced games, or anything else that you think will prove enjoyable.<br><br>Perhaps you are looking to play your first few games of Warhammer 40,000 with whatever models you have to hand. Maybe you simply want to play with every tank you have in your collection, while your opponent has a swarm of huge monsters to send into battle against them. You and your opponent might have much larger or smaller collections than one another, and elect to play a battle where the smaller force must simply hold out for as long as it can from behind heavily fortified positions before it is finally overrun. Alternatively, maybe both of you have a handful of powerful heroes each and want to pit them against one another, or to send such a band of champions in against a horde of lesser foes and see how many they can slay. The limits of open play are few, and dictated only by your own imagination.<br><br>Open play mission packs provide a guide on how to dive into this sort of free-form wargaming. For example, Open War cards provide randomised cues for how to set up and fight different missions, giving near endless possibilities for different battle. But the quickest way to start playing is to use the Open Hostility mission pack on the following pages. It provides guidelines for approximate game sizes, several fun and straightforward missions that you can play, and explains how big of a battlefield you're going to want in order to enjoy a satisfying game depending on how big your armies are. Within the content of these few pages, there are dozens of potential games to be played and long hours of wargaming enjoyment to be had.<br><br>Once you have gotten a feel for open play gaming, you may well find that you want to start devising your own missions that fit the armies you want to use and the stories you want to tell. On the last page of this section you will find a raft of exciting suggestions to help you on your way and inspire exciting games that you and your opponents will remember for years to come. Whether it be stopping your enemy’s evil ritual (or completing your evil ritual before your foes can interfere), ambushing a convoy as it races through hostile territory, hunting down the enemy’s spies or any of a host of other exciting ideas, you will be sure to find inspiration for your own fun and engaging open play missions.</div><div><br></div><div style="clear:both"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Open-Hostility-Mission-Pack"></a><h3 class="  outline_header " style="display:flex;">Open Hostility Mission Pack</h3><div class="Columns2">An Open Hostility battle is waged by following the sequence below:<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">1. MUSTER ARMIES</font><br>You and your opponent must first each muster an army from the miniatures in your collection. Your armies can be as big as you like, and you can use as many models from your collection as you wish.<br><br>It is up to the players to agree how big their armies will be — there is no reason why the two armies need to be the same size, though if that is what the players want they should agree to this now. The table below gives a rough guide of how long the battle should take based on the size of the armies used (note that this is the combined <span class="tooltip" data-tooltip-content="#tooltip_content01191"><span class="tt kwbu">Power</span> <span class="tt kwbu">Level</span></span> of both your and your opponent's army).<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td colspan="3" style="border-width:1px 1px 0 1px;background-color:rgb(16,16,16);color:rgb(254,254,254);vertical-align:bottom;font-size:26px;width:0px;height:0px;"><b>BATTLES</b></td></tr><tr><td style="border-width:0 0 1px 1px;background-color:var(--header-bg);text-align:left;vertical-align:middle;font-size:22px;width:174px;height:0px;"><b>BATTLE SIZE</b></td><td style="border-width:0 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;font-size:22px;width:233px;height:0px;"><b>SIZE OF ARMIES<br>(Combined Power Levels)</b></td><td style="border-width:0 1px 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;font-size:22px;width:120px;height:0px;"><b>BATTLE DURATION</b></td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;font-size:18px;width:174px;height:0px;">Combat Patrol</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:233px;height:0px;">50</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;font-size:18px;width:120px;height:0px;">Up to 1 hour</td></tr><tr><td style="border-width:0 0 0 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:174px;height:0px;">Incursion</td><td style="border-width:0 0 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:233px;height:0px;">100</td><td style="border-width:0 1px 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:120px;height:0px;">Up to 2 hour</td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;font-size:18px;width:174px;height:0px;">Strike Force</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:233px;height:0px;">200</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;font-size:18px;width:120px;height:0px;">Up to 3 hour</td></tr><tr><td style="border-width:0 0 1px 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:174px;height:0px;">Onslaught</td><td style="border-width:0 0 1px 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:233px;height:0px;">300</td><td style="border-width:0 1px 1px 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:120px;height:0px;">Up to 4 hour</td></tr></tbody></table></td></tr></tbody></table></div></font><br>The missions in this mission pack have been designed to be used for armies that have certain relative Power Levels. As a result, you may wish to read on further before deciding what size armies to muster.<br><br>Once you have mustered your army, select one of your models to be your Warlord. This model gains the <span class="kwb">WARLORD</span> keyword. If your Warlord has the <span class="kwb">CHARACTER</span> keyword, they will have a Warlord Trait, which you choose now. Any <span class="kwb">WARLORD</span> can have the Inspiring Leader Warlord Trait:<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">Inspiring Leader (Warlord Trait, Aura)</font><br>Add 1 to the Leadership characteristic of friendly units while they are within 6" of this <span class="kwb">WARLORD</span>.<br><br>Alternative Warlord Traits can be found in other publications.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">2. DETERMINE MISSION</font><br>The players determine which of the three Open Hostility missions will be used for the battle. This will determine the deployment map that the players use, as well as the specific mission briefing.<br><br>You can simply agree with your opponent which mission you will use. Alternatively, you can roll to randomly select a mission using the appropriate table below. Note, however, that the missions have been designed to be used with battles of certain relative Power Levels, as described in the table below:<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td colspan="2" style="border-width:1px 1px 0 1px;background-color:rgb(16,16,16);color:rgb(254,254,254);vertical-align:bottom;font-size:26px;width:0px;height:0px;"><b>MISSION</b></td></tr><tr><td style="border-width:0 0 1px 1px;background-color:var(--header-bg);text-align:center;vertical-align:middle;font-size:22px;width:84px;height:0px;"><b>D6</b></td><td style="border-width:0 1px 1px 0;background-color:var(--header-bg);text-align:left;vertical-align:middle;font-size:22px;width:465px;height:0px;"><b>OPEN HOSTILITY MISSIONS</b></td></tr><tr><td style="border-width:0 0 0 1px;text-align:center;vertical-align:middle;font-size:18px;width:84px;height:0px;">1-2</td><td style="border-width:0 1px 0 0;text-align:left;vertical-align:middle;font-size:18px;width:465px;height:0px;"><a href="index.htm#Annihilation"><b>Annihilation</b></a><br>This mission is designed for battles with two armies of roughly similar Power Level.</td></tr><tr><td style="border-width:0 0 0 1px;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:84px;height:0px;">3-4</td><td style="border-width:0 1px 0 0;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:465px;height:0px;"><a href="index.htm#Hold-at-all-Costs"><b>Hold at All Costs</b></a><br>This mission is designed for battles where the Power Level of one player's army is at least one third more than, but less than twice that of, the other.</td></tr><tr><td style="border-width:0 0 1px 1px;text-align:center;vertical-align:middle;font-size:18px;width:84px;height:0px;">5-6</td><td style="border-width:0 1px 1px 0;text-align:left;vertical-align:middle;font-size:18px;width:465px;height:0px;"><a href="index.htm#Death-or-Glory"><b>Death or Glory</b></a><br>This mission is designed for battles where the Power Level of one player's army is at least twice that of the other.</td></tr></tbody></table></td></tr></tbody></table></div></font><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">3. READ MISSION BRIEFING</font><br>Each mission has a mission briefing that will detail the mission objectives that award victory points to the players. Some mission briefings also list one or more mission rules that will apply for the duration of the battle. The players should read and familiarise themselves with these before proceeding.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">4. CREATE THE BATTLEFIELD</font><br>The players now create the battlefield and set up <a href="../advanced-rules/index.htm#TERRAIN-FEATURES">terrain features</a>. Missions are played on rectangular battlefields. The size of your battlefield depends on the battle size you have selected, as shown in the table below:<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td colspan="2" style="border-width:1px 1px 0 1px;background-color:rgb(16,16,16);color:rgb(254,254,254);vertical-align:bottom;font-size:26px;width:0px;height:0px;"><b>BATTLEFIELDS</b></td></tr><tr><td style="border-width:0 0 1px 1px;background-color:var(--header-bg);text-align:left;vertical-align:middle;font-size:22px;width:247px;height:0px;"><b>BATTLE SIZE</b></td><td style="border-width:0 1px 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;font-size:22px;width:304px;height:0px;"><b>BATTLEFIELD SIZE (Minimum)</b></td></tr><tr><td style="border-width:0 0 0 1px;text-align:left;vertical-align:middle;font-size:18px;width:247px;height:0px;">Combat Patrol/Incursion</td><td style="border-width:0 1px 0 0;text-align:center;vertical-align:middle;font-size:18px;width:304px;height:0px;">44" x 30"</td></tr><tr><td style="border-width:0 0 0 1px;background-color:var(--row-bg);text-align:left;vertical-align:middle;font-size:18px;width:247px;height:0px;">Strike Force</td><td style="border-width:0 1px 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;font-size:18px;width:304px;height:0px;">44" x 60"</td></tr><tr><td style="border-width:0 0 1px 1px;text-align:left;vertical-align:middle;font-size:18px;width:247px;height:0px;">Onslaught</td><td style="border-width:0 1px 1px 0;text-align:center;vertical-align:middle;font-size:18px;width:304px;height:0px;">44" x 90"</td></tr></tbody></table></td></tr></tbody></table></div></font><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">5. DETERMINE ATTACKER AND DEFENDER</font><br>If the <span class="tooltip" data-tooltip-content="#tooltip_content00482"><span class="tt kwbu">Power</span> <span class="tt kwbu">Rating</span></span> of one player's army is greater than that of their opponent’, then that player is the Attacker and their opponent is the Defender. Otherwise, the players <span class="tooltip" data-tooltip-content="#tooltip_content01192"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> and the winner decides who will be the Attacker and who will be the Defender.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">6. DECLARE RESERVES AND TRANSPORTS</font><br>Both players now secretly note down which of their units will start the battle in a location other than the battlefield, and which of their units will start the battle embarked within <a href="../core-rules/index.htm#Transports"><span class="kwb">TRANSPORT</span></a> models (they must declare what units are embarked on what models). When both players have done so, they declare their selections to their opponent.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">7. DEPLOY ARMIES</font><br>The deployment maps for each mission will tell you which deployment zone is the Attacker’s and which is the Defender’s.<br><br>The players alternate setting up their remaining units, one at a time, starting with the Attacker. These models must be set up wholly within their player’s deployment zone. If one player has finished deploying all their units, their opponent then deploys the remainder of their units.<br><br>If both players have units that have abilities that allow them to be set up ‘after both armies have deployed’, the players must <span class="tooltip" data-tooltip-content="#tooltip_content01193"><span class="tt kwbu">roll-off</span></span> after all other units have been set-up and alternate setting up these units, starting with the winner.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">8. DETERMINE FIRST TURN</font><br>Unless the mission briefing says otherwise, the players roll-off and the winner declares whether they will take the first or second turn.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">9. RESOLVE PRE-BATTLE ABILITIES</font><br>Players alternate resolving any pre-battle abilities units in their army may have, starting with the player who will take the first turn.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">10. BEGIN THE BATTLE</font><br>The first battle round begins. Players continue to resolve <a href="../core-rules/index.htm#THE-BATTLE-ROUND">battle rounds</a> until the battle ends.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">11. ENDING THE BATTLE</font><br>The battle ends when all of the models in one player's army have been destroyed, or once the fifth battle round has ended (whichever comes first).<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">12. DETERMINE VICTOR</font><br>At the end of the battle, both players check their mission objectives to determine who is the victor.</div><div><br></div><div style="clear:both"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Annihilation"></a><div class="mission_header2">Open Hostility</div><h3 class="  outline_header_dice mission_header"><div class="empty_logo4_l"></div>Annihilation<div style="float:right"><img class="dice27" src="../../img/dice27.png">&nbsp;1-2</div></h3><div class="Columns2"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION BRIEFING</font><br><i>Two warlords face each other, intent on destroying all who stand before them. Each must attempt to annihilate their opponent while minimising their own losses.</i><br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION OBJECTIVES</font><br><b>No Mercy</b>: If, at the end of the battle, one army has been destroyed, the player commanding the opposing army is the victor. Otherwise, the player with the most victory points is the victor (in the case of a tie, the battle is a draw). Victory points are awarded as follows:<br><br><div class="BreakInsideAvoid"><b>Slay the Warlord</b>: A player scores 1 victory point if the enemy <span class="kwb">WARLORD</span> is destroyed at the end of the battle.</div><br><b>Purge the Enemy</b>: At the end of the battle, each player adds up the <span class="tooltip" data-tooltip-content="#tooltip_content00482"><span class="tt kwbu">Power</span> <span class="tt kwbu">Rating</span></span> of all enemy units that were destroyed during the battle and divides the total by 10 (rounding up) - this is the number of victory points that player scores. If a unit splits to form two or more individual units during the battle, then divide that unit’s Power Rating equally between the individual ‘split’ units (rounding up) when calculating this. Any units that are not on the battlefield at the end of the battle (other than units that are currently embarked within <a href="../core-rules/index.htm#Transports"><span class="kwb">TRANSPORT</span></a> models that are on the battlefield) count as destroyed for this mission objective.</div><div style="clear:both"></div><div class=" img-opa" style="clear:both;display:flex;justify-content:center;align-items:center;"><img border="0" src="../../img/maps/Annihilation.png" style="margin:4px"></div><div><br></div><div style="clear:both"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Hold-at-all-Costs"></a><div class="mission_header2">Open Hostility</div><h3 class="  outline_header_dice mission_header"><div class="empty_logo4_l"></div>Hold at all Costs<div style="float:right"><img class="dice27" src="../../img/dice27.png">&nbsp;3-4</div></h3><div class="Columns2"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION BRIEFING</font><br><i>The battlefield lies at a crossing of key strategic importance. A defending army that has dug in stands ready to hold it at all costs in the face of a superior foe that surrounds them.</i><br><br><div class="BreakInsideAvoid"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">Mission Rules</font><br><b>Dug-in Positions</b>: In the first battle round, the Defender adds 1 to all <span class="tooltip" data-tooltip-content="#tooltip_content01194"><span class="tt kwbu">saving</span> <span class="tt kwbu">throws</span></span> taken for their models that are wholly within their own deployment zone (<span class="tooltip" data-tooltip-content="#tooltip_content01196"><span class="tt kwbu">invulnerable</span> <span class="tt kwbu">saves</span></span> are unaffected).<br><br></div><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION OBJECTIVES</font><br><b>No Matter the Cost</b>: If, at the end of the battle, one army has been destroyed, the player commanding the opposing army is the victor. Otherwise, the player who has the closest model to the centre of the battlefield is the victor (if both players have models that are the closest to the centre of the battlefield, the battle is a draw).</div><div style="clear:both"></div><div class=" img-opa" style="clear:both;display:flex;justify-content:center;align-items:center;"><img border="0" src="../../img/maps/HoldAtAllCosts.png" style="margin:4px"></div><div><br></div><div style="clear:both"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Death-or-Glory"></a><div class="mission_header2">Open Hostility</div><h3 class="  outline_header_dice mission_header"><div class="empty_logo4_l"></div>Death or Glory<div style="float:right"><img class="dice27" src="../../img/dice27.png">&nbsp;5-6</div></h3><div class="Columns2"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION BRIEFING</font><br><i>An outnumbered army faces inevitable defeat, but if they sell their lives dearly to allow even a single warrior to survive them, they will have earned a heroic death.</i><br><br><div class="BreakInsideAvoid"><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">Mission Rules</font><br><b>No Retreat</b>: In this mission, the Defender automatically passes all <span class="tooltip" data-tooltip-content="#tooltip_content00527"><span class="tt kwbu">Morale</span> <span class="tt kwbu">tests</span></span> taken for their units (no dice are rolled).<br><br></div><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">FIRST TURN</font><br>The Defender decides which player has the first turn.<br><br><font face="ConduitITC, arial" style="font-weight: 400; font-size:1.67em;">MISSION OBJECTIVES</font><br><b>Death or Glory</b>: If, at the end of the battle, the Defender’s army has been destroyed, the Attacker is the victor. Otherwise, the Defender is the victor.</div><div style="clear:both"></div><div class=" img-opa" style="clear:both;display:flex;justify-content:center;align-items:center;"><img border="0" src="../../img/maps/DeathOrGlory.png" style="margin:4px"></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="Suggestions-for-Open-Play-Missions"></a><h3 class="  outline_header " style="display:flex;">Suggestions for Open Play Missions</h3><p class="ShowFluff legend">No form of war is unknown in the galaxy. Below you will find a few ideas below to spark your imagination for other open play missions; you should feel free to use these hooks as the basis of your battles, or simply create ones of your own.</p><div class="Columns2"><ul style="margin-block-start:0em"><li>An elite force strikes behind enemy lines to assassinate the foe’s commanders.</li><li>An evil ritual is nearing completion - fight to prevent its culmination, or bring about its fruition.</li><li>A group of sappers attempts to sabotage a mighty war machine or fortress before it, and its fearsome weapons, become fully operational.</li><li>A convoy is ambushed - how many of its vital supplies can it escape with?</li><li>You and your opponent(s) are trying to reach a powerful relic; use your fastest units to race across the long battlefield and claim the prize!</li><li>The battlefield houses a holy shrine that must not fall into enemy hands. Protect it at any cost.</li><li>As you signal the attack, your own allies suddenly reveal their traitorous intent and open fire upon your fines. Can you rally to wage a war on two fronts and prevail?</li><li>An escape pod has crash landed nearby. Locate and recover the survivors before the enemy can capture them.</li><li>Your enemy believes their position unassailable. Lead the forlorn attempt to create a breach and bring victory!</li><li>The underground tunnels beneath the battlefield are infested with mutants, aliens or cultists. They boil to the surface, threatening to overwhelm the defenders.</li><li>A band of operatives must silence enemy sentries to enable their army’s approach to go undetected.</li><li>A priceless piece of archeotech is lost within these war-torn ruins; your forces must be the ones to discover its location and take it back to your headquarters.</li><li>A beleaguered army must hold out long enough for reinforcements to relieve them.</li><li>You have been entrusted with the life of a dignitary - you must escort them safely across the war zone.</li><li>Snipers and close-quarters fighters come into their own in a claustrophobic battle through the ruins of a fallen hive city.</li><li>A spy is sheltering within ruins deep inside hostile territory. Their allies must attempt to extract them before they are discovered by patrols.</li><li>After months of fighting, the enemy army is on the verge of routing. Break their morale and victory will be assured.</li></ul></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content01191"><div class="tooltip_header">Power Level</div><a href="../advanced-rules/index.htm#Power-Level"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+An army's Power Level is a guide to how large and powerful an army is, so an army with a high Power Level is more powerful than one with a low Power Level. You can calculate the Power Level of an army by adding up the individual Power Ratings of every unit contained within it.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Power Level:</b> Sum of all Power Ratings in army.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00482"><div class="tooltip_header">Power Ratings</div><a href="../advanced-rules/index.htm#Power-Ratings"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Every unit has a Power Rating listed on its <a href="../core-rules/index.htm#DATASHEETS-1">datasheet</a>, and it is a measure of its efficacy on the battlefield. They are designed to give players, at a glance, an idea of how mighty a unit is on the battlefield, irrespective of the weapons its models can be equipped with. They can therefore be used as a quick guide to establish the comparative strength of each army.<br><br>The Power Rating on a datasheet is for a minimum-sized unit. A unit’s Power Rating can be increased if additional models are added to the unit, and occasionally if other options are taken for the unit (such as equipping a unit with jump packs) - in either case the unit's datasheet will make it clear if the Power Rating listed at the top of the datasheet is increased as a result.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Power Ratings:</b> Quick measure of a unit's efficacy.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content01192"><div class="tooltip_header">Roll-offs</div><a href="../core-rules/index.htm#Roll-offs"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some rules instruct players to roll off. To do so, both players roll one D6, and whoever scores highest wins the roll-off. If there is a tie for the highest roll, make the roll-off again. Neither player is allowed to re-roll or modify any of the D6 when making a roll-off.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Roll-off:</b> Both players roll a D6 – highest wins.</li><li>Roll again if a tie.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content01193"><div class="tooltip_header">Roll-offs</div><a href="../core-rules/index.htm#Roll-offs"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some rules instruct players to roll off. To do so, both players roll one D6, and whoever scores highest wins the roll-off. If there is a tie for the highest roll, make the roll-off again. Neither player is allowed to re-roll or modify any of the D6 when making a roll-off.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Roll-off:</b> Both players roll a D6 – highest wins.</li><li>Roll again if a tie.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content01194"><div class="tooltip_header">Saving Throw</div><a href="../core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content01195"><div class="tooltip_header">Saving Throw</div><a href="../core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content01196"><div class="tooltip_header">Invulnerable Saves</div><a href="../core-rules/index.htm#Invulnerable-Saves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have an invulnerable save. Each time an attack is allocated to a model with an invulnerable save, you can choose to use either its normal Save (Sv) characteristic or its invulnerable save, but not both. If a model has more than one invulnerable save, it can only use one of them – choose which it will use. If you use a model’s invulnerable save, it is never modified by a weapon’s Armour Penetration value.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Invulnerable save</b>: <span class="tooltip" data-tooltip-content="#tooltip_content01195"><span class="tt kwbu">Saving</span> <span class="tt kwbu">throw</span></span> that is never modified by attacking weapon’s AP.</li><li>A model with an invulnerable save can use it instead of its normal Sv.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00527"><div class="tooltip_header">Morale Tests</div><a href="../core-rules/index.htm#Morale-Tests"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+To take a Morale test, roll one D6 and add the number of models from the unit that have been destroyed this turn. If the result is equal to or less than the highest Leadership (Ld) characteristic in the unit, the Morale test is passed and nothing else happens. An unmodified roll of 1 also always results in a passed Morale test, irrespective of the total result. In any other case, the Morale test is failed, one model flees that unit, and you must then take <a href="../core-rules/index.htm#Combat-Attrition-Tests">Combat Attrition tests</a> for the remaining models in the unit. You decide which model from your unit flees – that model is removed from play and counts as having been destroyed, but it never triggers any rules that are used when a model is destroyed.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Morale test</b> = D6 + number of models destroyed this turn.</li><li>Unmodified roll of 1 always a success (no models flee).</li><li>If Morale test exceeds unit’s Ld, one model flees and other models must take Combat Attrition tests.</li></ul></div>
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

@@ -1,0 +1,486 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Slaanesh — Blissbarb Seekers (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 2 edition, SLAANESH, BLISSBARB SEEKERS, SEEKERS, HEDONITE, CHAOS, MORTAL">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Blissbarb Seekers</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sForgeWorld';
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Chariot.html" class="contentColor">Exalted Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fiends.html" class="contentColor">Fiends</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellflayer.html" class="contentColor">Hellflayer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seeker-Chariots.html" class="contentColor">Seeker Chariots</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Daemonettes.html" class="contentColor">Daemonettes</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Exalted-Chariot.html" class="contentColor">Bladebringer, Herald on Exalted Chariot</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Hellflayer.html" class="contentColor">Bladebringer, Herald on Hellflayer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Seeker-Chariot.html" class="contentColor">Bladebringer, Herald on Seeker Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Infernal-Enrapturess-Herald-of-Slaanesh.html" class="contentColor">Infernal Enrapturess, Herald of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Syll-Esske-the-Vengeful-Allegiance.html" class="contentColor">Syll’Esske, the Vengeful Allegiance</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Contorted-Epitome.html" class="contentColor">The Contorted Epitome</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Masque.html" class="contentColor">The Masque</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Viceleader-Herald-of-Slaanesh.html" class="contentColor">Viceleader, Herald of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Dexcessa-the-Talon-of-Slaanesh.html" class="contentColor">Dexcessa, the Talon of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Synessa-the-Voice-of-Slaanesh.html" class="contentColor">Synessa, the Voice of Slaanesh</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Keeper-of-Secrets.html" class="contentColor">Keeper of Secrets</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Shalaxi-Helbane.html" class="contentColor">Shalaxi Helbane</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Soulfeaster-Keeper-of-Secrets.html" class="contentColor">Soulfeaster Keeper of Secrets</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Depraved-Carnival.html" class="contentColor">Depraved Carnival</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Epicurean-Revellers.html" class="contentColor">Epicurean Revellers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Speed-Knights.html" class="contentColor">Exalted Speed-Knights</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hedonite-Host.html" class="contentColor">Hedonite Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Nobles-of-Excess.html" class="contentColor">Nobles of Excess</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seeker-Cavalcade.html" class="contentColor">Seeker Cavalcade</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Supreme-Sybarites.html" class="contentColor">Supreme Sybarites</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Daemonsteel-Contingent.html" class="contentColor">Daemonsteel Contingent</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Devout-Supplicants.html" class="contentColor">Devout Supplicants</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="The-Vengeful-Alliance.html" class="contentColor">The Vengeful Alliance</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Vengeful-Throng.html" class="contentColor">Vengeful Throng</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="The-Exquisite-Pursuit.html" class="contentColor">The Exquisite Pursuit</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Endless Spell</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Dreadful-Visage.html" class="contentColor">Dreadful Visage</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mesmerising-Mirror.html" class="contentColor">Mesmerising Mirror</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wheels-of-Excruciation.html" class="contentColor">Wheels of Excruciation</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Scenery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fane-of-Slaanesh.html" class="contentColor">Fane of Slaanesh</a></div></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2351545&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2351545,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2351545"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent2"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../fyreslayers/index.htm">Fyreslayers</a><a href="../idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../seraphon/index.htm">Seraphon</a><a href="../stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="../khorne/index.htm">Khorne</a><a href="../legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../nurgle/index.htm">Nurgle</a><a href="../skaventide/index.htm">Skaventide</a><a href="index.htm">Slaanesh</a><a href="../slaves-to-darkness/index.htm">Slaves to Darkness</a><a href="../tzeentch/index.htm">Tzeentch</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../nighthaunt/index.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index.htm">Orruk Warclans</a><a href="../sons-of-behemat/index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2351545&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2351545,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2351545"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Slaanesh</span><span class="page_header_span2"> – Blissbarb Seekers</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  " style="position:relative"><div class="AoS_profile"><div class="wsMove">14"</div><div class="wsWounds">4</div><div class="wsSave">5+</div><div class="wsBravery">6</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Blissbarb Seekers<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Slaanesh%20Blissbarb%20Seekers%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">Blissbarb warriors who acquire for themselves an Exalted Steed of Slaanesh conduct war at a breakneck pace. Charging across the battlefield with astonishing speed, these Sybarites launch flights of cruel arrows with an incredible accuracy.</div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_RangedWeapons"><span class="wsHeaderCellName_short">MISSILE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Blissbarb Bow</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Blissbarb Bow</td><td class="wsDataCell">18"</td><td class="wsDataCell">3</td><td class="wsDataCell">4+</td><td class="wsDataCell">4+</td><td class="wsDataCell">-1</td><td class="wsDataCell">1</td></tr><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Sybarite Blade</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Sybarite Blade</td><td class="wsDataCell">1"</td><td class="wsDataCell">1</td><td class="wsDataCell">4+</td><td class="wsDataCell">4+</td><td class="wsDataCell">-</td><td class="wsDataCell">1</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Poisoned Tongue</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Poisoned Tongue</td><td class="wsLastDataCell">1"</td><td class="wsLastDataCell">2</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">-</td><td class="wsLastDataCell">1</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/matched-play-games/index.htm#Pitched-Battles-2020-"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>5 - 15&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>180<br><span class="redfont">Battlefield Role</span><b>: </b>None<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>75 x 42mm</span><br class="ShowBaseSize"></div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">BATTALIONS</div><br><div class="BreakInsideAvoid">This warscroll can be used in following warscroll battalions:<br>&nbsp;•&nbsp;<a href="Exalted-Speed-Knights.html">Exalted Speed-Knights</a><br>&nbsp;•&nbsp;<a href="Seeker-Cavalcade.html">Seeker Cavalcade</a><div><br></div></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">A unit of Blissbarb Seekers has any number of models, each armed with a Blissbarb Bow and Sybarite Blade.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">MOUNT</span><b>: </b>This unit’s Exalted Steeds of Slaanesh attack with their Poisoned Tongues.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">HIGH TEMPTER</span><b>: </b>1 model in this unit can be a High Tempter. Add 1 to the Attacks characteristic of that model’s Blissbarb Bow.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Flawless Accuracy</span><b>: </b><span class="ShowFluff legend4">Blissbarb Seekers revel in delivering highly accurate arrow fire even at high speeds.<br><div class="spc"></div></span>This unit can <span class="tooltip" data-tooltip-content="#tooltip_content00125"><span class="tt kwbu">run</span></span> and still <a href="../../the-rules/the-core-rules/index.htm#SHOOTING-PHASE">shoot</a> later in the same turn.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Vectors of Agony</span><b>: </b><span class="ShowFluff legend4">The arrowheads of Blissbarb Seekers are liberally coated in their steeds’ poisonous saliva, and the torments they deliver can overwhelm even the mightiest of prey.<br><div class="spc"></div></span>If the unmodified <span class="tooltip" data-tooltip-content="#tooltip_content00128"><span class="tt kwbu">wound</span> <span class="tt kwbu">roll</span></span> for an attack made with a <span class="tooltip" data-tooltip-content="#tooltip_content00129"><span class="tt kwbu">missile</span> <span class="tt kwbu">weapon</span></span> by this unit is 6, that attack inflicts 1 <span class="tooltip" data-tooltip-content="#tooltip_content00130"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span> on the target and the attack sequence ends (do not make a <span class="tooltip" data-tooltip-content="#tooltip_content00133"><span class="tt kwbu">save</span> <span class="tt kwbu">roll</span></span>).</div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentCHAOS" data-tooltip-anchor="#tooltip_contentCHAOS"><span class="tt kwbu">CHAOS</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentMORTAL" data-tooltip-anchor="#tooltip_contentMORTAL"><span class="tt kwbu">MORTAL</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentSLAANESH" data-tooltip-anchor="#tooltip_contentSLAANESH"><span class="tt kwbu">SLAANESH</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentHEDONITE" data-tooltip-anchor="#tooltip_contentHEDONITE"><span class="tt kwbu">HEDONITE</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentSEEKERS" data-tooltip-anchor="#tooltip_contentSEEKERS"><span class="tt kwbu">SEEKERS</span></span>, <span class="tt">BLISSBARB</span> <span class="tt">SEEKERS</span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00125"><div class="tooltip_header">Running</div><a href="../../the-rules/the-core-rules/index.htm#Running"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to make a normal move, you can declare that it will run. Make a run roll for the unit by rolling a dice. Add the result of the run roll to the Move characteristic of all models in the unit for that <a href="../../the-rules/the-core-rules/index.htm#MOVEMENT-PHASE">movement phase</a>. The unit can then move up to that distance in inches. Models in a unit that runs can’t <a href="../../the-rules/the-core-rules/index.htm#SHOOTING-PHASE">shoot</a> or <a href="../../the-rules/the-core-rules/index.htm#CHARGE-PHASE">charge</a> later in the same turn.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00126"><div class="tooltip_header">Modifiers</div><a href="../../the-rules/the-core-rules/index.htm#Modifiers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes modifiers apply to characteristics or abilities. For example, a rule might add 1 to a <a href="../../the-rules/the-core-rules/index.htm#Making-Attacks">hit roll</a> or the Move characteristic of a model. Modifiers are cumulative. Modifiers can never reduce a dice roll to less than 1.<br><br>If a modifier applies to a random value, work out the random value first and then apply the modifier(s) to it. For example, if an ability adds 1 to a Damage characteristic of D3, the result would be worked out by rolling the D3 and adding 1 to the roll.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00127"><div class="tooltip_header">Modifiers</div><a href="../../the-rules/the-core-rules/index.htm#Modifiers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes modifiers apply to characteristics or abilities. For example, a rule might add 1 to a <a href="../../the-rules/the-core-rules/index.htm#Making-Attacks">hit roll</a> or the Move characteristic of a model. Modifiers are cumulative. Modifiers can never reduce a dice roll to less than 1.<br><br>If a modifier applies to a random value, work out the random value first and then apply the modifier(s) to it. For example, if an ability adds 1 to a Damage characteristic of D3, the result would be worked out by rolling the D3 and adding 1 to the roll.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00128"><div class="tooltip_header">Making Attacks</div><a href="../../the-rules/the-core-rules/index.htm#Making-Attacks"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Attacks are resolved one at a time using the following attack sequence. In some cases, you can resolve all of the attacks made by the same type of weapon at the same time (see <a href="../../the-rules/the-core-rules/index.htm#Multiple-Attacks">Multiple Attacks</a>).<br><br><div class="BreakInsideAvoid Corner1" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner1_1"></td><td class="Corner1_2"></td><td class="Corner1_3"></td></tr><tr><td class="Corner1_8"></td><td class="Corner1_9"><div class="BreakInsideAvoid"><table border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#908249;border-width:0px"><tbody><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>1.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Hit Roll:</b> Roll a dice. If the roll equals or beats the attacking weapon’s To Hit characteristic, then it scores a hit and you must make a wound roll. If not, the attack fails and the attack sequence ends. A hit roll of 1 before modification always fails to hit the target, and a hit roll of 6 before modification always hits the target.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>2.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Wound Roll:</b> Roll a dice. If the roll equals or beats the attacking weapon’s To Wound characteristic, then it is successful and the opposing player must make a save roll. If not, then the attack fails and the attack sequence ends. A wound roll of 1 before <span class="tooltip" data-tooltip-content="#tooltip_content00126"><span class="tt kwbu">modification</span></span> always fails, and a wound roll of 6 before modification is always successful.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>3.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Save Roll:</b> The opposing player rolls a dice, modifying the roll by the attacking weapon’s Rend characteristic. For example, if a weapon has a -1 Rend characteristic, then 1 is subtracted from the save roll. If the result equals or beats the Save characteristic of the models in the target unit, the save succeeds and the attack sequence ends without causing any damage. If not, the save fails and the attack is successful, and you must determine damage on the target unit. A save roll of 1 before <span class="tooltip" data-tooltip-content="#tooltip_content00127"><span class="tt kwbu">modification</span></span> always fails.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>4.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Determine Damage:</b> Each successful attack inflicts damage on the target unit equal to the Damage characteristic of the weapon making the attack. Most weapons have a Damage characteristic of 1, but some have a Damage characteristic of 2 or more.</td></tr></tbody></table></td></tr></tbody></table></div></td><td class="Corner1_4"></td></tr><tr><td class="Corner1_7"></td><td class="Corner1_6"></td><td class="Corner1_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00129"><div class="tooltip_header">Missile Weapons</div><a href="../../the-rules/the-core-rules/index.htm#Missile-Weapons"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+In order to attack with a missile weapon, the model using the weapon must be in range of the target unit (i.e. within the maximum distance, in inches, of the Range listed for the weapon making the attack), and the target unit must be visible to the model with the weapon (if unsure, stoop down and look from behind the shooting model to see if a model from the target unit is visible). For the purposes of determining visibility, a model can see through other models in its unit.<br><br>Some missile weapons have a Range characteristic with a minimum range, for example 6"-48". Such weapons cannot attack units that are wholly within the shorter range.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00130"><div class="tooltip_header">Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities inflict mortal wounds. Do not make <a href="../../the-rules/the-core-rules/index.htm#Making-Attacks">hit, wound or save rolls</a> for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were suffered. <a href="../../the-rules/the-core-rules/index.htm#Allocating-Wounds">Allocate</a> any mortal wounds that are caused while a unit is attacking at the same time as any other wounds caused by the unit’s attacks, after all of the unit’s attacks have been completed. Mortal wounds caused at other times are allocated to models in the target unit as soon as they occur, in the same manner as wounds caused by damage from an attack.<br><br>After they have been allocated, a mortal wound is treated in the same manner as any other wound for all rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00131"><div class="tooltip_header">Modifiers</div><a href="../../the-rules/the-core-rules/index.htm#Modifiers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes modifiers apply to characteristics or abilities. For example, a rule might add 1 to a <a href="../../the-rules/the-core-rules/index.htm#Making-Attacks">hit roll</a> or the Move characteristic of a model. Modifiers are cumulative. Modifiers can never reduce a dice roll to less than 1.<br><br>If a modifier applies to a random value, work out the random value first and then apply the modifier(s) to it. For example, if an ability adds 1 to a Damage characteristic of D3, the result would be worked out by rolling the D3 and adding 1 to the roll.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00132"><div class="tooltip_header">Modifiers</div><a href="../../the-rules/the-core-rules/index.htm#Modifiers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes modifiers apply to characteristics or abilities. For example, a rule might add 1 to a <a href="../../the-rules/the-core-rules/index.htm#Making-Attacks">hit roll</a> or the Move characteristic of a model. Modifiers are cumulative. Modifiers can never reduce a dice roll to less than 1.<br><br>If a modifier applies to a random value, work out the random value first and then apply the modifier(s) to it. For example, if an ability adds 1 to a Damage characteristic of D3, the result would be worked out by rolling the D3 and adding 1 to the roll.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00133"><div class="tooltip_header">Making Attacks</div><a href="../../the-rules/the-core-rules/index.htm#Making-Attacks"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Attacks are resolved one at a time using the following attack sequence. In some cases, you can resolve all of the attacks made by the same type of weapon at the same time (see <a href="../../the-rules/the-core-rules/index.htm#Multiple-Attacks">Multiple Attacks</a>).<br><br><div class="BreakInsideAvoid Corner1" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner1_1"></td><td class="Corner1_2"></td><td class="Corner1_3"></td></tr><tr><td class="Corner1_8"></td><td class="Corner1_9"><div class="BreakInsideAvoid"><table border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#908249;border-width:0px"><tbody><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>1.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Hit Roll:</b> Roll a dice. If the roll equals or beats the attacking weapon’s To Hit characteristic, then it scores a hit and you must make a wound roll. If not, the attack fails and the attack sequence ends. A hit roll of 1 before modification always fails to hit the target, and a hit roll of 6 before modification always hits the target.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>2.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Wound Roll:</b> Roll a dice. If the roll equals or beats the attacking weapon’s To Wound characteristic, then it is successful and the opposing player must make a save roll. If not, then the attack fails and the attack sequence ends. A wound roll of 1 before <span class="tooltip" data-tooltip-content="#tooltip_content00131"><span class="tt kwbu">modification</span></span> always fails, and a wound roll of 6 before modification is always successful.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>3.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Save Roll:</b> The opposing player rolls a dice, modifying the roll by the attacking weapon’s Rend characteristic. For example, if a weapon has a -1 Rend characteristic, then 1 is subtracted from the save roll. If the result equals or beats the Save characteristic of the models in the target unit, the save succeeds and the attack sequence ends without causing any damage. If not, the save fails and the attack is successful, and you must determine damage on the target unit. A save roll of 1 before <span class="tooltip" data-tooltip-content="#tooltip_content00132"><span class="tt kwbu">modification</span></span> always fails.</td></tr><tr><td style="border-width:0 0 0 0;text-align:right;vertical-align:top;width:15px;height:0px;"><b>4.</b></td><td style="border-width:0 0 0 0;vertical-align:bottom;width:424px;height:0px;"><b>Determine Damage:</b> Each successful attack inflicts damage on the target unit equal to the Damage characteristic of the weapon making the attack. Most weapons have a Damage characteristic of 1, but some have a Damage characteristic of 2 or more.</td></tr></tbody></table></td></tr></tbody></table></div></td><td class="Corner1_4"></td></tr><tr><td class="Corner1_7"></td><td class="Corner1_6"></td><td class="Corner1_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_contentCHAOS"><b><p>The CHAOS keyword is used in following Slaanesh warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Chariot.html" class="contentColor">Exalted Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fiends.html" class="contentColor">Fiends</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellflayer.html" class="contentColor">Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seeker-Chariots.html" class="contentColor">Seeker Chariots</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Daemonettes.html" class="contentColor">Daemonettes</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Exalted-Chariot.html" class="contentColor">Bladebringer, Herald on Exalted Chariot</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Hellflayer.html" class="contentColor">Bladebringer, Herald on Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Seeker-Chariot.html" class="contentColor">Bladebringer, Herald on Seeker Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Infernal-Enrapturess-Herald-of-Slaanesh.html" class="contentColor">Infernal Enrapturess, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Syll-Esske-the-Vengeful-Allegiance.html" class="contentColor">Syll’Esske, the Vengeful Allegiance</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Contorted-Epitome.html" class="contentColor">The Contorted Epitome</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Masque.html" class="contentColor">The Masque</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Viceleader-Herald-of-Slaanesh.html" class="contentColor">Viceleader, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Dexcessa-the-Talon-of-Slaanesh.html" class="contentColor">Dexcessa, the Talon of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Synessa-the-Voice-of-Slaanesh.html" class="contentColor">Synessa, the Voice of Slaanesh</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Keeper-of-Secrets.html" class="contentColor">Keeper of Secrets</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shalaxi-Helbane.html" class="contentColor">Shalaxi Helbane</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Soulfeaster-Keeper-of-Secrets.html" class="contentColor">Soulfeaster Keeper of Secrets</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentMORTAL"><b><p>The MORTAL keyword is used in following Slaanesh warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentSLAANESH"><b><p>The SLAANESH keyword is used in following Slaanesh warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Chariot.html" class="contentColor">Exalted Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fiends.html" class="contentColor">Fiends</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellflayer.html" class="contentColor">Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seeker-Chariots.html" class="contentColor">Seeker Chariots</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Daemonettes.html" class="contentColor">Daemonettes</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Exalted-Chariot.html" class="contentColor">Bladebringer, Herald on Exalted Chariot</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Hellflayer.html" class="contentColor">Bladebringer, Herald on Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Seeker-Chariot.html" class="contentColor">Bladebringer, Herald on Seeker Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Infernal-Enrapturess-Herald-of-Slaanesh.html" class="contentColor">Infernal Enrapturess, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Syll-Esske-the-Vengeful-Allegiance.html" class="contentColor">Syll’Esske, the Vengeful Allegiance</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Contorted-Epitome.html" class="contentColor">The Contorted Epitome</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Masque.html" class="contentColor">The Masque</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Viceleader-Herald-of-Slaanesh.html" class="contentColor">Viceleader, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Dexcessa-the-Talon-of-Slaanesh.html" class="contentColor">Dexcessa, the Talon of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Synessa-the-Voice-of-Slaanesh.html" class="contentColor">Synessa, the Voice of Slaanesh</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Keeper-of-Secrets.html" class="contentColor">Keeper of Secrets</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shalaxi-Helbane.html" class="contentColor">Shalaxi Helbane</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Soulfeaster-Keeper-of-Secrets.html" class="contentColor">Soulfeaster Keeper of Secrets</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Scenery</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fane-of-Slaanesh.html" class="contentColor">Fane of Slaanesh</a></div></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentHEDONITE"><b><p>The HEDONITE keyword is used in following Slaanesh warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Chariot.html" class="contentColor">Exalted Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fiends.html" class="contentColor">Fiends</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellflayer.html" class="contentColor">Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seeker-Chariots.html" class="contentColor">Seeker Chariots</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Daemonettes.html" class="contentColor">Daemonettes</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Exalted-Chariot.html" class="contentColor">Bladebringer, Herald on Exalted Chariot</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Hellflayer.html" class="contentColor">Bladebringer, Herald on Hellflayer</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Seeker-Chariot.html" class="contentColor">Bladebringer, Herald on Seeker Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Infernal-Enrapturess-Herald-of-Slaanesh.html" class="contentColor">Infernal Enrapturess, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Syll-Esske-the-Vengeful-Allegiance.html" class="contentColor">Syll’Esske, the Vengeful Allegiance</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Contorted-Epitome.html" class="contentColor">The Contorted Epitome</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Masque.html" class="contentColor">The Masque</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Viceleader-Herald-of-Slaanesh.html" class="contentColor">Viceleader, Herald of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Dexcessa-the-Talon-of-Slaanesh.html" class="contentColor">Dexcessa, the Talon of Slaanesh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Synessa-the-Voice-of-Slaanesh.html" class="contentColor">Synessa, the Voice of Slaanesh</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Keeper-of-Secrets.html" class="contentColor">Keeper of Secrets</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Shalaxi-Helbane.html" class="contentColor">Shalaxi Helbane</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Soulfeaster-Keeper-of-Secrets.html" class="contentColor">Soulfeaster Keeper of Secrets</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentSEEKERS"><b><p>The SEEKERS keyword is used in following Slaanesh warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blissbarb-Archers.html" class="contentColor">Blissbarb Archers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Blissbarb-Seekers.html" class="contentColor">Blissbarb Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Chariot.html" class="contentColor">Exalted Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fiends.html" class="contentColor">Fiends</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellflayer.html" class="contentColor">Hellflayer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Claw-spears.html" class="contentColor">Hellstriders with Claw-spears</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hellstriders-with-Hellscourges.html" class="contentColor">Hellstriders with Hellscourges</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Myrmidesh-Painbringers.html" class="contentColor">Myrmidesh Painbringers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seeker-Chariots.html" class="contentColor">Seeker Chariots</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seekers.html" class="contentColor">Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaangor-Fiendbloods.html" class="contentColor">Slaangor Fiendbloods</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slickblade-Seekers.html" class="contentColor">Slickblade Seekers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Symbaresh-Twinsouls.html" class="contentColor">Symbaresh Twinsouls</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Dread-Pageant.html" class="contentColor">The Dread Pageant</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Daemonettes.html" class="contentColor">Daemonettes</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Exalted-Chariot.html" class="contentColor">Bladebringer, Herald on Exalted Chariot</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Hellflayer.html" class="contentColor">Bladebringer, Herald on Hellflayer</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bladebringer-Herald-on-Seeker-Chariot.html" class="contentColor">Bladebringer, Herald on Seeker Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Glutos-Orscollion-Lord-of-Gluttony.html" class="contentColor">Glutos Orscollion, Lord of Gluttony</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Infernal-Enrapturess-Herald-of-Slaanesh.html" class="contentColor">Infernal Enrapturess, Herald of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Pain.html" class="contentColor">Lord of Pain</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Shardspeaker-of-Slaanesh.html" class="contentColor">Shardspeaker of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Sigvald-Prince-of-Slaanesh.html" class="contentColor">Sigvald, Prince of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Syll-Esske-the-Vengeful-Allegiance.html" class="contentColor">Syll’Esske, the Vengeful Allegiance</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Contorted-Epitome.html" class="contentColor">The Contorted Epitome</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Masque.html" class="contentColor">The Masque</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Viceleader-Herald-of-Slaanesh.html" class="contentColor">Viceleader, Herald of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Dexcessa-the-Talon-of-Slaanesh.html" class="contentColor">Dexcessa, the Talon of Slaanesh</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="Synessa-the-Voice-of-Slaanesh.html" class="contentColor">Synessa, the Voice of Slaanesh</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Keeper-of-Secrets.html" class="contentColor">Keeper of Secrets</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Shalaxi-Helbane.html" class="contentColor">Shalaxi Helbane</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Soulfeaster-Keeper-of-Secrets.html" class="contentColor">Soulfeaster Keeper of Secrets</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Depraved-Carnival.html" class="contentColor">Depraved Carnival</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Epicurean-Revellers.html" class="contentColor">Epicurean Revellers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Speed-Knights.html" class="contentColor">Exalted Speed-Knights</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Hedonite-Host.html" class="contentColor">Hedonite Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Nobles-of-Excess.html" class="contentColor">Nobles of Excess</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Seeker-Cavalcade.html" class="contentColor">Seeker Cavalcade</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Supreme-Sybarites.html" class="contentColor">Supreme Sybarites</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Daemonsteel-Contingent.html" class="contentColor">Daemonsteel Contingent</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Devout-Supplicants.html" class="contentColor">Devout Supplicants</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="The-Vengeful-Alliance.html" class="contentColor">The Vengeful Alliance</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Vengeful-Throng.html" class="contentColor">Vengeful Throng</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition)" src="../../img/expansions/BR_logo2.png"><a href="The-Exquisite-Pursuit.html" class="contentColor">The Exquisite Pursuit</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Endless Spell</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Dreadful-Visage.html" class="contentColor">Dreadful Visage</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mesmerising-Mirror.html" class="contentColor">Mesmerising Mirror</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Wheels-of-Excruciation.html" class="contentColor">Wheels of Excruciation</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Scenery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fane-of-Slaanesh.html" class="contentColor">Fane of Slaanesh</a></div></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Invaders-Battle-Traits" class="contentColor">Invaders Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Invaders-Command-Traits" class="contentColor">Invaders Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Invaders-Artefacts-of-Power" class="contentColor">Invaders Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Pretenders-Battle-Traits" class="contentColor">Pretenders Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Pretenders-Command-Traits" class="contentColor">Pretenders Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Pretenders-Artefacts-of-Power" class="contentColor">Pretenders Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Godseekers-Battle-Traits" class="contentColor">Godseekers Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Godseekers-Command-Traits" class="contentColor">Godseekers Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Godseekers-Artefacts-of-Power" class="contentColor">Godseekers Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Spell-Lores" class="contentColor">Spell Lores</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’10/19 The Host of Syll’Esske (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="index.htm#The-Host-of-Syll-Esske-Battle-Traits" class="contentColor">The Host of Syll’Esske Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Soul Wars: Wrath of the Everchosen (2nd edition, version 1.1)" src="../../img/expansions/WoE_logo2.png"><a href="index.htm#Hosts-of-Chaos" class="contentColor">Hosts of Chaos</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

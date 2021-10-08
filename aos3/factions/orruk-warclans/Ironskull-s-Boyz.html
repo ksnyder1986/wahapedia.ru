@@ -1,0 +1,504 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Orruk Warclans — Ironskull’s Boyz (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, IRONSKULL’S BOYZ, IRONSUNZ, IRONJAWZ, DESTRUCTION, ORRUK, ARDBOYS">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2.css">
+<link rel="stylesheet" href="../../css/main2.css">
+<link rel="stylesheet" href="../../css/header2.css">
+<link rel="stylesheet" href="../../css/profile2.css">
+<link rel="stylesheet" href="../../css/noprint2.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2.css">
+<title>Ironskull’s Boyz</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+var data = localStorage.OW_storage;
+if (data === undefined) {data = ''; localStorage.OW_storage = data;}
+$('.FilterSelect').prop('value', data);
+FilterSelect(true);
+
+$('.FilterSelect').change(function () {
+	localStorage.OW_storage = $(this).prop('value');
+	$('.FilterSelect').prop('value', $(this).prop('value'));
+   FilterSelect(false);
+	FilterApply(false)
+});
+
+function FilterSelect(IsInit) {
+var x = localStorage.OW_storage;
+$('.clFl').show();
+var arrFl = [{eCode:"IJ"}, {eCode:"BS"}, {eCode:"BW"}];
+arrFl.forEach(function(item, i, arr) {
+if (item.eCode == x)
+	{$('.clFl').not('.'+item.eCode).hide();
+	}
+});
+};
+function FilterApply(IsInit) {
+	$('#cog').show();
+	$('.ctrlSelect').prop('disabled', true);
+setTimeout(function(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$('.clFl').filter(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+	UpdateTooltipster(IsInit);
+	$('.ctrlSelect').prop('disabled', false);
+	$('#cog').hide();
+})
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Stabbas.html" class="contentColor">Savage Big Stabbas</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboy-Maniaks.html" class="contentColor">Savage Boarboy Maniaks</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboys.html" class="contentColor">Savage Boarboys</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Arrowboys.html" class="contentColor">Savage Orruk Arrowboys</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Morboys.html" class="contentColor">Savage Orruk Morboys</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Hobgrot-Slittaz.html" class="contentColor">Hobgrot Slittaz</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Man-skewer-Boltboyz.html" class="contentColor">Man-skewer Boltboyz</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-s-Madmob.html" class="contentColor">Hedkrakka’s Madmob</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boar-Chariots.html" class="contentColor">Orruk Boar Chariots</a></div><div class="i15 ArmyType_line clFl sLegendary"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boarboys.html" class="contentColor">Orruk Boarboys</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruks.html" class="contentColor">Savage Orruks</a></div></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Gutrippaz.html" class="contentColor">Gutrippaz</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Mob.html" class="contentColor">Orruk Mob</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Maniak-Weirdnob.html" class="contentColor">Maniak Weirdnob</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Boss.html" class="contentColor">Savage Big Boss</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Wardokk.html" class="contentColor">Wardokk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Wurrgog-Prophet.html" class="contentColor">Wurrgog Prophet</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-on-Great-Gnashtoof.html" class="contentColor">Killaboss on Great Gnashtoof</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-with-Stab-grot.html" class="contentColor">Killaboss with Stab-grot</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Murknob-with-Belcha-banna.html" class="contentColor">Murknob with Belcha-banna</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Swampcalla-Shaman-and-Pot-grot.html" class="contentColor">Swampcalla Shaman and Pot-grot</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-Gob-of-Gork.html" class="contentColor">Hedkrakka, Gob of Gork</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Great-Shaman.html" class="contentColor">Orruk Great Shaman</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss.html" class="contentColor">Orruk Warboss</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss-on-Wyvern.html" class="contentColor">Orruk Warboss on Wyvern</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld IJ BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Rogue-Idol.html" class="contentColor">Rogue Idol</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Dread-Maw.html" class="contentColor">Dread Maw</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Beasts.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Fire.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Magma-Dragon.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Merwyrm.html" class="contentColor">Merwyrm</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ardfist.html" class="contentColor">Ardfist</a></div></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Big-Rukk.html" class="contentColor">Big Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Brawl.html" class="contentColor">Brawl</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Brutal-Rukk.html" class="contentColor">Brutal Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Brutefist.html" class="contentColor">Brutefist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Gorefist.html" class="contentColor">Gorefist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ironfist.html" class="contentColor">Ironfist</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Kop-Rukk.html" class="contentColor">Kop Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Kunnin-Rukk.html" class="contentColor">Kunnin’ Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Snaga-Rukk.html" class="contentColor">Snaga Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Teef-Rukk.html" class="contentColor">Teef Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Weirdfist.html" class="contentColor">Weirdfist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Da-Bossfist.html" class="contentColor">Da Bossfist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Dakkbad-s-Brawl.html" class="contentColor">Dakkbad’s Brawl</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Moggorz-s-Rekrootin-Krew.html" class="contentColor">Moggorz’s Rekrootin’ Krew</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../fyreslayers/index.htm">Fyreslayers</a><a href="../idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../seraphon/index.htm">Seraphon</a><a href="../stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="../blades-of-khorne/index.htm">Blades of Khorne</a><a href="../disciples-of-tzeentch/index.htm">Disciples of Tzeentch</a><a href="../hedonites-of-slaanesh/index.htm">Hedonites of Slaanesh</a><a href="../legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../maggotkin-of-nurgle/index.htm">Maggotkin of Nurgle</a><a href="../skaven/index.htm">Skaven</a><a href="../slaves-to-darkness/index.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../nighthaunt/index.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="index.htm">Orruk Warclans</a><a href="../sons-of-behemat/index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../endless-spells/index.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Orruk Warclans</span><span class="page_header_span2"> – Ironskull’s Boyz</span>  <span class="noprint"><span style="font-size:1.1em; display:inline-block">
+<div style="display:flex;justify-content:center;align-items:center;">
+	<div>[&nbsp;<label><span style="white-space:nowrap"><select disabled="" class="ctrlSelect FilterSelect" size="1"><option class="ctrlOption" value="">No filter</option><option class="ctrlOption" value="IJ">Ironjawz army (IRONJAWZ)</option><option class="ctrlOption" value="BS">Bonesplitterz army (BONESPLITTERZ)</option><option class="ctrlOption" value="BW">Big Waaagh! army (ORRUK)</option></select></span></label>&nbsp;]</div>
+	<div class="cog-pic" id="cog"></div>
+</div></span></span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Filter</b> combo-box or <b>Settings</b> tab).</div></div>
+<div class="datasheet  clFl BW IJ" style="position:relative"><div class="AoS_profile"><div class="wsMove">4"</div><div class="wsWounds">2</div><div class="wsSave">4+</div><div class="wsBravery">6</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Ironskull’s Boyz<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Orruk%20Warclans%20Ironskull’s%20Boyz%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">Everyone agrees that Gurzag Ironskull’s Ardboys are the toughest orruks around. Anyone foolish enough to challenge this notion is likely to receive a bone-crushing headbutt from Gurzag, or otherwise be bashed and hacked to pieces by his warriors.</div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">’Eadbutt</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">’Eadbutt</td><td class="wsDataCell">1"</td><td class="wsDataCell">1</td><td class="wsDataCell">4+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-</td><td class="wsDataCell">D3</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Pair of Ardboy Choppas</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Pair of Ardboy Choppas</td><td class="wsDataCell">1"</td><td class="wsDataCell">2</td><td class="wsDataCell">3+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-1</td><td class="wsDataCell">1</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Ardboy Big Choppa</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Ardboy Big Choppa</td><td class="wsLastDataCell">1"</td><td class="wsLastDataCell">2</td><td class="wsLastDataCell">4+</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">-1</td><td class="wsLastDataCell">2</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/the-core-rules/index.htm#Pitched-Battle-Profiles"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>85<br><span class="redfont">Battlefield Role</span><b>: </b>None<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>32mm</span><br class="ShowBaseSize"><span class="redfont">Notes</span><b>: </b>Single, Unique</div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">Ironskull’s Boyz has 4 models. 3 models are each armed with a Pair of Ardboy Choppas, and 1 model is armed with an Ardboy Big Choppa.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">GURZAG IRONSKULL</span><b>: </b>One of the 3 models armed with a Pair of Ardboy Choppas is Gurzag Ironskull. He is also armed with an ’Eadbutt. In addition, add 1 to the Attacks characteristic of his Pair of Ardboy Choppas.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Dead ’Ard</span><b>: </b><span class="ShowFluff legend4">Whether through natural hardiness or sheer belligerence, Ironskull and his boys fight on through the most grievous wounds, hollering and cheering as they batter their foes into the ground.<br><div class="spc"></div></span>Roll a dice each time you <span class="tooltip" data-tooltip-content="#tooltip_content00320"><span class="tt kwbu">allocate</span> <span class="tt kwbu">a</span> <span class="tt kwbu">wound</span></span> or <span class="tooltip" data-tooltip-content="#tooltip_content00321"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span> to this unit. On a 6, the wound or mortal wound is negated. Wounds or mortal wounds allocated to Gurzag Ironskull are negated on a 5+ instead of a 6.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Paired Choppas</span><b>: </b><span class="ShowFluff legend4">A pair of choppas can be used to creating a swirling arc of destruction that is almost impossible to avoid.<br><div class="spc"></div></span>Add 1 to <span class="tooltip" data-tooltip-content="#tooltip_content00322"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span> for attacks made with a Pair of Ardboy Choppas.</div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentDESTRUCTION" data-tooltip-anchor="#tooltip_contentDESTRUCTION"><span class="kwb kwbu">DESTRUCTION</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentORRUK" data-tooltip-anchor="#tooltip_contentORRUK"><span class="kwb kwbu">ORRUK</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentIRONJAWZ" data-tooltip-anchor="#tooltip_contentIRONJAWZ"><span class="kwb kwbu">IRONJAWZ</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentIRONSUNZ" data-tooltip-anchor="#tooltip_contentIRONSUNZ"><span class="kwb kwbu">IRONSUNZ</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentARDBOYS" data-tooltip-anchor="#tooltip_contentARDBOYS"><span class="kwb kwbu">ARDBOYS</span></span>, <span class="kwb">IRONSKULL’S</span> <span class="kwb">BOYZ</span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00320"><div class="tooltip_header">14.1 Allocating Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Allocating-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Wounds are <span class="term">allocated</span> to the models in a unit 1 wound at a time. You can allocate the wounds caused to your units as you see fit. However, once you have allocated a wound to a model, you cannot allocate wounds to other models in the unit until that model is slain (<a href="../../the-rules/the-core-rules/index.htm#Slain-Models">see 14.2</a>). If a unit is destroyed, all wounds that remain to be allocated to the unit are negated and have no effect.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00321"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00322"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/the-core-rules/index.htm#Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Hit</span> characteristic, the attack scores a <span class="term">hit</span> and you must make a <span class="term">wound roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified hit roll of 1 always fails and an unmodified hit roll of 6 always hits. A hit roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).<br><br>Sometimes an ability will allow a single hit roll to score two or more hits. If this is the case, make all of the wound and save rolls for those hits at the same time.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentDESTRUCTION"><b><p>The <span class="kwb">DESTRUCTION</span> keyword is used in the following Orruk Warclans warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Stabbas.html" class="contentColor">Savage Big Stabbas</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboy-Maniaks.html" class="contentColor">Savage Boarboy Maniaks</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboys.html" class="contentColor">Savage Boarboys</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Arrowboys.html" class="contentColor">Savage Orruk Arrowboys</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Morboys.html" class="contentColor">Savage Orruk Morboys</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Hobgrot-Slittaz.html" class="contentColor">Hobgrot Slittaz</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Man-skewer-Boltboyz.html" class="contentColor">Man-skewer Boltboyz</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-s-Madmob.html" class="contentColor">Hedkrakka’s Madmob</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boar-Chariots.html" class="contentColor">Orruk Boar Chariots</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boarboys.html" class="contentColor">Orruk Boarboys</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruks.html" class="contentColor">Savage Orruks</a></div></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Gutrippaz.html" class="contentColor">Gutrippaz</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Mob.html" class="contentColor">Orruk Mob</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Maniak-Weirdnob.html" class="contentColor">Maniak Weirdnob</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Boss.html" class="contentColor">Savage Big Boss</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Wardokk.html" class="contentColor">Wardokk</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Wurrgog-Prophet.html" class="contentColor">Wurrgog Prophet</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-on-Great-Gnashtoof.html" class="contentColor">Killaboss on Great Gnashtoof</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-with-Stab-grot.html" class="contentColor">Killaboss with Stab-grot</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Murknob-with-Belcha-banna.html" class="contentColor">Murknob with Belcha-banna</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Swampcalla-Shaman-and-Pot-grot.html" class="contentColor">Swampcalla Shaman and Pot-grot</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-Gob-of-Gork.html" class="contentColor">Hedkrakka, Gob of Gork</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Great-Shaman.html" class="contentColor">Orruk Great Shaman</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss.html" class="contentColor">Orruk Warboss</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss-on-Wyvern.html" class="contentColor">Orruk Warboss on Wyvern</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld IJ BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Rogue-Idol.html" class="contentColor">Rogue Idol</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentORRUK"><b><p>The <span class="kwb">ORRUK</span> keyword is used in the following Orruk Warclans warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Stabbas.html" class="contentColor">Savage Big Stabbas</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboy-Maniaks.html" class="contentColor">Savage Boarboy Maniaks</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboys.html" class="contentColor">Savage Boarboys</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Arrowboys.html" class="contentColor">Savage Orruk Arrowboys</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Morboys.html" class="contentColor">Savage Orruk Morboys</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Man-skewer-Boltboyz.html" class="contentColor">Man-skewer Boltboyz</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-s-Madmob.html" class="contentColor">Hedkrakka’s Madmob</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boar-Chariots.html" class="contentColor">Orruk Boar Chariots</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Orruks.html" class="contentColor">Savage Orruks</a></div></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Gutrippaz.html" class="contentColor">Gutrippaz</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Mob.html" class="contentColor">Orruk Mob</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Maniak-Weirdnob.html" class="contentColor">Maniak Weirdnob</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Boss.html" class="contentColor">Savage Big Boss</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Wardokk.html" class="contentColor">Wardokk</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Wurrgog-Prophet.html" class="contentColor">Wurrgog Prophet</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-on-Great-Gnashtoof.html" class="contentColor">Killaboss on Great Gnashtoof</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-with-Stab-grot.html" class="contentColor">Killaboss with Stab-grot</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Murknob-with-Belcha-banna.html" class="contentColor">Murknob with Belcha-banna</a></div><div style="clear:both"></div><div class="clFl BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Swampcalla-Shaman-and-Pot-grot.html" class="contentColor">Swampcalla Shaman and Pot-grot</a></div><div style="clear:both"></div><div class="clFl BW BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-Gob-of-Gork.html" class="contentColor">Hedkrakka, Gob of Gork</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Great-Shaman.html" class="contentColor">Orruk Great Shaman</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss.html" class="contentColor">Orruk Warboss</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div style="clear:both"></div><div class="clFl sLegendary BW" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss-on-Wyvern.html" class="contentColor">Orruk Warboss on Wyvern</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentIRONJAWZ"><b><p>The <span class="kwb">IRONJAWZ</span> keyword is used in the following Orruk Warclans warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld IJ BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Rogue-Idol.html" class="contentColor">Rogue Idol</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentIRONSUNZ"><b><p>The <a href="index.htm#Ironsunz"><span class="kwb">IRONSUNZ</span></a> keyword is used in the following Orruk Warclans warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sForgeWorld IJ BS" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Rogue-Idol.html" class="contentColor">Rogue Idol</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentARDBOYS"><b><p>The <span class="kwb">ARDBOYS</span> keyword is used in the following Orruk Warclans warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div style="clear:both"></div><div class="clFl BW IJ" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ironskull-s-Boyz.html" class="contentColor">Ironskull’s Boyz</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Ardboys.html" class="contentColor">Orruk Ardboys</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Brutes.html" class="contentColor">Orruk Brutes</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Gore-gruntas.html" class="contentColor">Orruk Gore-gruntas</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Stabbas.html" class="contentColor">Savage Big Stabbas</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboy-Maniaks.html" class="contentColor">Savage Boarboy Maniaks</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Boarboys.html" class="contentColor">Savage Boarboys</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Arrowboys.html" class="contentColor">Savage Orruk Arrowboys</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruk-Morboys.html" class="contentColor">Savage Orruk Morboys</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Hobgrot-Slittaz.html" class="contentColor">Hobgrot Slittaz</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Man-skewer-Boltboyz.html" class="contentColor">Man-skewer Boltboyz</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-s-Madmob.html" class="contentColor">Hedkrakka’s Madmob</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Morgok-s-Krushas.html" class="contentColor">Morgok’s Krushas</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimir-Warriors.html" class="contentColor">Fimir Warriors</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boar-Chariots.html" class="contentColor">Orruk Boar Chariots</a></div><div class="i15 ArmyType_line clFl sLegendary"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Boarboys.html" class="contentColor">Orruk Boarboys</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Orruks.html" class="contentColor">Savage Orruks</a></div></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Gutrippaz.html" class="contentColor">Gutrippaz</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Mob.html" class="contentColor">Orruk Mob</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Maniak-Weirdnob.html" class="contentColor">Maniak Weirdnob</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Megaboss.html" class="contentColor">Orruk Megaboss</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Warchanter.html" class="contentColor">Orruk Warchanter</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Orruk-Weirdnob-Shaman.html" class="contentColor">Orruk Weirdnob Shaman</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Savage-Big-Boss.html" class="contentColor">Savage Big Boss</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Wardokk.html" class="contentColor">Wardokk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Wurrgog-Prophet.html" class="contentColor">Wurrgog Prophet</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-on-Great-Gnashtoof.html" class="contentColor">Killaboss on Great Gnashtoof</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Killaboss-with-Stab-grot.html" class="contentColor">Killaboss with Stab-grot</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Murknob-with-Belcha-banna.html" class="contentColor">Murknob with Belcha-banna</a></div><div class="i15 ArmyType_line clFl BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="Swampcalla-Shaman-and-Pot-grot.html" class="contentColor">Swampcalla Shaman and Pot-grot</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Direchasm (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2.png"><a href="Hedkrakka-Gob-of-Gork.html" class="contentColor">Hedkrakka, Gob of Gork</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Fimirach-Noble.html" class="contentColor">Fimirach Noble</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Great-Shaman.html" class="contentColor">Orruk Great Shaman</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss.html" class="contentColor">Orruk Warboss</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Gordrakk-the-Fist-of-Gork.html" class="contentColor">Gordrakk, the Fist of Gork</a></div></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Megaboss-on-Maw-krusha.html" class="contentColor">Megaboss on Maw-krusha</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2.png"><a href="Kragnos-the-End-of-Empires.html" class="contentColor">Kragnos, the End of Empires</a></div><div class="i15 ArmyType_line clFl sLegendary BW"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Index. Warhammer Legends: Grand Alliance Destruction (3rd edition, version 1.0)" src="../../img/expansions/Legends_logo2.png"><a href="Orruk-Warboss-on-Wyvern.html" class="contentColor">Orruk Warboss on Wyvern</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sForgeWorld IJ BS"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2.png"><a href="Rogue-Idol.html" class="contentColor">Rogue Idol</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Basilisk.html" class="contentColor">Basilisk</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Dread-Maw.html" class="contentColor">Dread Maw</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Beasts.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Incarnate-Elemental-of-Fire.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Magma-Dragon.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2.png"><a href="Merwyrm.html" class="contentColor">Merwyrm</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ardfist.html" class="contentColor">Ardfist</a></div></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Big-Rukk.html" class="contentColor">Big Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Brawl.html" class="contentColor">Brawl</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Brutal-Rukk.html" class="contentColor">Brutal Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Brutefist.html" class="contentColor">Brutefist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Gorefist.html" class="contentColor">Gorefist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Ironfist.html" class="contentColor">Ironfist</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Kop-Rukk.html" class="contentColor">Kop Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Kunnin-Rukk.html" class="contentColor">Kunnin’ Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Snaga-Rukk.html" class="contentColor">Snaga Rukk</a></div><div class="i15 ArmyType_line clFl BW BS"><span class="bl0">•&nbsp;</span><a href="Teef-Rukk.html" class="contentColor">Teef Rukk</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><a href="Weirdfist.html" class="contentColor">Weirdfist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Da-Bossfist.html" class="contentColor">Da Bossfist</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Dakkbad-s-Brawl.html" class="contentColor">Dakkbad’s Brawl</a></div><div class="i15 ArmyType_line clFl BW IJ"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="White Dwarf’02/20 Ironsunz (2nd edition)" src="../../img/expansions/WhiteDwarf_logo2.png"><a href="Moggorz-s-Rekrootin-Krew.html" class="contentColor">Moggorz’s Rekrootin’ Krew</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Allies" class="contentColor">Allies</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Battle-Traits" class="contentColor">Ironjawz Battle Traits</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Command-Traits" class="contentColor">Ironjawz Command Traits</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Artefacts-of-Power" class="contentColor">Ironjawz Artefacts of Power</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Mount-Traits" class="contentColor">Ironjawz Mount Traits</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Warchanter-Warbeats" class="contentColor">Warchanter Warbeats</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Spell-Lores" class="contentColor">Ironjawz Spell Lores</a></div><div class="clFl BW IJ w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Ironjawz-Warclans" class="contentColor">Ironjawz Warclans</a></div><div class="clFl BW BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Bonesplitterz-Battle-Traits" class="contentColor">Bonesplitterz Battle Traits</a></div><div class="clFl BW BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Bonesplitterz-Command-Traits" class="contentColor">Bonesplitterz Command Traits</a></div><div class="clFl BW BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Bonesplitterz-Artefacts-of-Power" class="contentColor">Bonesplitterz Artefacts of Power</a></div><div class="clFl BW BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Bonesplitterz-Spell-Lores" class="contentColor">Bonesplitterz Spell Lores</a></div><div class="clFl BW BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Bonesplitterz-Warclans" class="contentColor">Bonesplitterz Warclans</a></div><div class="clFl BW w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Big-Waaagh-Battle-Traits" class="contentColor">Big Waaagh! Battle Traits</a></div><div class="clFl BW w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Other-Big-Waaagh-Allegiance-Abilities" class="contentColor">Other Big Waaagh! Allegiance Abilities</a></div><div class="clFl IJ BS w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Boxset. Warhammer Age of Sigmar: Dominion (3rd edition)" src="../../img/expansions/WARHAMMER_logo2.png"><a href="index.htm#Kruleboyz-Allegiance-Abilities" class="contentColor">Kruleboyz Allegiance Abilities</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

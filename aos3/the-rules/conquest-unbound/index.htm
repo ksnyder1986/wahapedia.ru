@@ -1,0 +1,505 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Conquest Unbound">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, Heroic Actions, Tunnel, , Siege Rolls, Turn Sequence, Balewind Vortex, Impenetrable Gloom, Realm of Battle: Ulgu the Realm of Shadow, Convergence of Fate, Monstrous Denizen, Realm of Battle: Ghur the Realm of Beasts, Removing Endless Spells, Allegiance Abilities: Chaos, SIEGE WARFARE, Rolling Off, Command Abilities, Endless Spell Models, TRIUMPH TREACHERY, Predatory Endless Spells, Allegiance Abilities: Order, ENDLESS SPELLS, Realm of Battle: Shyish the Realm of Death, The Relief Force, The Siege Phase, Allegiance Abilities: Death, Neutral Models, Realm of Battle: Aqshy the Realm of Fire, Rules Index and Rosters, Starve, Unbinding and Dispelling, Turn Order, Unstable Surroundings, Low Ceilings, Conquest Unbound, Realm of Battle: Ghyran the Realm of Life, Siege Table, Realm of Battle: Hysh the Realm of Light, The Fortress, Tunnel Wars, Realm of Battle: Chamon the Realm of Metal, TUNNEL FIGHTING, ALLEGIANCE ABILITIES, Allegiance Abilities: Destruction, Batter, REALMS OF BATTLE">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2.css">
+<link rel="stylesheet" href="../../css/main2.css">
+<link rel="stylesheet" href="../../css/header2.css">
+<link rel="stylesheet" href="../../css/profile2.css">
+<link rel="stylesheet" href="../../css/noprint2.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2.css">
+<title>Conquest Unbound</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../playing-this-game/index.htm">Playing This Game</a><a href="../the-core-rules/index.htm">The Core Rules</a><a href="index.htm">Conquest Unbound</a><a href="../open-play-games/index.htm">Open Play Games</a><a href="../matched-play-games/index.htm">Matched Play Games</a><a href="../narrative-play-games/index.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../broken-realms/index.htm">Broken Realms</a><a href="../soul-wars/index.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../../factions/cities-of-sigmar/index.htm">Cities of Sigmar</a><a href="../../factions/daughters-of-khaine/index.htm">Daughters of Khaine</a><a href="../../factions/fyreslayers/index.htm">Fyreslayers</a><a href="../../factions/idoneth-deepkin/index.htm">Idoneth Deepkin</a><a href="../../factions/kharadron-overlords/index.htm">Kharadron Overlords</a><a href="../../factions/lumineth-realm-lords/index.htm">Lumineth Realm-lords</a><a href="../../factions/seraphon/index.htm">Seraphon</a><a href="../../factions/stormcast-eternals/index.htm">Stormcast Eternals</a><a href="../../factions/sylvaneth/index.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../../factions/beasts-of-chaos/index.htm">Beasts of Chaos</a><a href="../../factions/blades-of-khorne/index.htm">Blades of Khorne</a><a href="../../factions/disciples-of-tzeentch/index.htm">Disciples of Tzeentch</a><a href="../../factions/hedonites-of-slaanesh/index.htm">Hedonites of Slaanesh</a><a href="../../factions/legion-of-azgorh/index.htm">Legion of Azgorh</a><a href="../../factions/legion-of-the-first-prince/index.htm">Legion of the First Prince</a><a href="../../factions/maggotkin-of-nurgle/index.htm">Maggotkin of Nurgle</a><a href="../../factions/skaven/index.htm">Skaven</a><a href="../../factions/slaves-to-darkness/index.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../../factions/flesh-eater-courts/index.htm">Flesh-eater Courts</a><a href="../../factions/nighthaunt/index.htm">Nighthaunt</a><a href="../../factions/ossiarch-bonereapers/index.htm">Ossiarch Bonereapers</a><a href="../../factions/soulblight-gravelords/index.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../../factions/gloomspite-gitz/index.htm">Gloomspite Gitz</a><a href="../../factions/ogor-mawtribes/index.htm">Ogor Mawtribes</a><a href="../../factions/orruk-warclans/index.htm">Orruk Warclans</a><a href="../../factions/sons-of-behemat/index.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../../factions/endless-spells/index.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">Conquest Unbound</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">All across the Mortal Realms, mighty armies and ambitious generals fight endless wars of conquest and destruction. In this section, you will find an array of additional rules that will allow you to fight special types of battle using the Warhammer Age of Sigmar rules.</p>
+<div style="display:flex;justify-content:center;align-items:center;"><div class="BreakInsideAvoid Corner3" style="padding:0px;max-width:988px;"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/aos3/img/corners/Corner3_1.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_2.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_3.png" style="width:20px;height:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_8.png" style="width:20px"></td><td bgcolor="#1d190d"><span style="font-family:georgia,serif; font-size:1em"><div class="contents_header">Contents</div><div class="NavColumns2"><div class="mw2 i10"><a href="index.htm#SIEGE-WARFARE" class="contentColorInv"><b style="color:#f61f09">S</b>IEGE WARFARE</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#The-Fortress" class="contentColorInv">The Fortress</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#The-Siege-Phase" class="contentColorInv">The Siege Phase</a></div><div class="mw2 i50"><span class="bl1">◦&nbsp;</span><a href="index.htm#Siege-Rolls" class="contentColorInv">Siege Rolls</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Siege-Table" class="contentColorInv">Siege Table</a></div><div class="mw2 i30"><img class="tooltip logo2" title="Siege Warfare battleplan" src="../../img/SiegeWarfare.png"><a href="index.htm#The-Relief-Force" class="contentColorInv">The Relief Force</a></div><div class="mw2 i10"><a href="index.htm#TRIUMPH-TREACHERY" class="contentColorInv"><b style="color:#f61f09">T</b>RIUMPH & TREACHERY</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Rolling-Off" class="contentColorInv">Rolling Off</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Turn-Order" class="contentColorInv">Turn Order</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Neutral-Models" class="contentColorInv">Neutral Models</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Turn-Sequence" class="contentColorInv">Turn Sequence</a></div><div class="mw2 i30"><img class="tooltip logo2" title="Triumph and Treachery battleplan" src="../../img/CrucibleOfWar.png"><a href="index.htm#Convergence-of-Fate" class="contentColorInv">Convergence of Fate</a></div><div class="mw2 i10"><a href="index.htm#TUNNEL-FIGHTING" class="contentColorInv"><b style="color:#f61f09">T</b>UNNEL FIGHTING</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Impenetrable-Gloom" class="contentColorInv">Impenetrable Gloom</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Low-Ceilings" class="contentColorInv">Low Ceilings</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Monstrous-Denizen" class="contentColorInv">Monstrous Denizen</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Unstable-Surroundings" class="contentColorInv">Unstable Surroundings</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Command-Abilities" class="contentColorInv">Command Abilities</a></div><div class="mw2 i30"><span class="bl1">•&nbsp;</span><a href="index.htm#Heroic-Actions" class="contentColorInv">Heroic Actions</a></div><div class="mw2 i30"><img class="tooltip logo2" title="Darkest Depths battleplan" src="../../img/DarkestDepths.png"><a href="index.htm#Tunnel-Wars" class="contentColorInv">Tunnel Wars</a></div></div></span></td><td background="/aos3/img/corners/Corner3_4.png" style="width:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_7.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_6.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_5.png" style="width:20px;height:20px"></td></tr></tbody></table></div></div>
+<hr>
+<div class="Columns3">Across the Mortal Realms, battles are fought in all manner of unusual environments or circumstances. Entire campaigns have been fought underground in tunnels and caverns inhabited by dangerous subterranean creatures, and some of the largest battles ever fought have been for control of the cities that stud the realms. Furthermore, while most battles pit two armies against each other, it is not uncommon for three or more sides to be involved in a single conflict.<br><br>Conquest Unbound includes rules that are designed to be used with battleplans that recreate the types of battle described above. For example, a battleplan might say that you must use the <a href="index.htm#SIEGE-WARFARE">Siege Warfare rules</a> from Conquest Unbound, in which case all of the rules on this page would apply to that battle. We have included a battleplan with each set of rules so that you can try out the rules in your own games straight away.<br><br>While the Conquest Unbound rules in this book cover the most common types of ‘non-standard’ battle - <a href="index.htm#SIEGE-WARFARE">sieges</a>, <a href="index.htm#TUNNEL-FIGHTING">tunnel fighting</a> and <a href="index.htm#TRIUMPH-TREACHERY">multiplayer battles</a> - the Mortal Realms are vast, and the circumstances in which warring factions find themselves are hugely varied. To represent this, some battlepacks may include additional Conquest Unbound rules for use with the battleplans found in that battlepack.<div><br></div><a name="Rules-Index-and-Rosters"></a><h2 class="h2_pge   ">Rules Index and Rosters</h2>After the Conquest Unbound rules you will find a handy index and set of roster sheets. The index lists all of the important rules terms used in Age of Sigmar, with references pointing you to the rule that explains the term. You can use the rosters to record the units in your army and any other important information for your battle, such as your army’s enhancements.</div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="SIEGE-WARFARE"></a><h3 class="h3_pge  outline_header ">SIEGE WARFARE</h3><b>Fortresses of all different shapes and sizes can be found throughout the Mortal Realms. Only a sizeable and highly motivated force has any chance of capturing such an objective and the spoils that lie beyond its walls, and then only at a terrible cost in blood and lives.</b><div><br></div><div class="Columns2"><a name="The-Fortress"></a><h2 class="h2_pge   ">The Fortress</h2>All Warhammer Age of Sigmar sieges require a fortress for the defender to occupy. If the battleplan instructs the defender to set up their fortress, they must set up at least 5 <a href="../the-core-rules/index.htm#Terrain-1">terrain features</a> (but otherwise as many terrain features as they wish) wholly within their territory.<div><br></div><a name="The-Siege-Phase"></a><h2 class="h2_pge   ">The Siege Phase</h2>The siege phase takes place after the armies are set up but before the first battle round begins. Both the attacker and the defender must secretly pick a siege tactic. The attacker does this by hiding a dice showing 1, 2 or 3 behind their hand, while the defender does this by hiding a dice showing 4, 5 or 6 behind their hand. Each number corresponds to a different siege tactic, as shown in the table below. Once both players have chosen their numbers, the dice are revealed and the numbers are cross-referenced on the table below to determine the <span class="tooltip" data-tooltip-content="#tooltip_content00913"><span class="tt kwbu">modifiers</span></span> that will apply to the <a href="index.htm#Siege-Rolls">siege rolls</a> (see below).<div><br></div><a name="Siege-Rolls"></a><h3 class="h3_pge   ">Siege Rolls</h3>The attacker now makes a series of rolls to determine the effects that their siege methods have had on the defenders. Make the <a href="index.htm#Batter">batter rolls</a> first, then the <a href="index.htm#Starve">starve rolls</a>, and finally the <a href="index.htm#Tunnel">tunnel rolls</a>. After all of the rolls have been made, the first battle round starts.<div><br></div><a name="Batter"></a><h4 class="h4_pgeNoCaps   ">Batter</h4>The attacker rolls a dice for each <a href="../the-core-rules/index.htm#Terrain-1">terrain feature</a> wholly within the defender’s territory, applying the modifier from the <a href="index.htm#Siege-Table">Siege table</a> (if there is one). On a 5+, the terrain feature is <a href="../the-core-rules/index.htm#Demolish">demolished</a> if it was defensible, and it no longer provides <span class="tooltip" data-tooltip-content="#tooltip_content00914"><span class="tt kwbu">cover</span></span> if it was not defensible.<div><br></div><div class="BreakInsideAvoid"><a name="Starve"></a><h4 class="h4_pgeNoCaps   ">Starve</h4>The attacker rolls a dice for each unit in the defender’s army, subtracting 1 from the roll if the unit is a <span class="kwb">HERO</span> and applying the modifier from the <a href="index.htm#Siege-Table">Siege table</a> (if there is one). On a 5+, that unit suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00915"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span>.</div><div><br></div><a name="Tunnel"></a><h4 class="h4_pgeNoCaps   ">Tunnel</h4>The attacker and the defender each roll a dice. The attacker applies the modifier from the <a href="index.htm#Siege-Table">Siege table</a> to their roll (if there is one). If the attacker’s roll is higher, they have completed a tunnel. They can pick 1 <span class="kwb">HERO</span> that does not have a <span class="tooltip" data-tooltip-content="#tooltip_content00916"><span class="tt kwbu">mount</span></span> and is not a <a href="../the-core-rules/index.htm#Monsters"><span class="kwb">MONSTER</span></a>, and 2 other units that do not have mounts and are not <span class="kwb">MONSTERS</span>, to send into the tunnel.<br><br>Units sent into the tunnel are removed from the battlefield. At the start of any of the attacker’s <a href="../the-core-rules/index.htm#Movement-Phase">movement phases</a>, all of the units sent into the tunnel can be set up on the battlefield. They must be set up more than 3" from all enemy units and within 3" of each other. This counts as their move for that movement phase.<div><br></div><a name="Siege-Table"></a><h2 class="h2_pge   ">Siege Table</h2><div class="BreakInsideAvoid" style=""><table border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#908249;border-width:0px"><tbody><tr><td colspan="4" style="border-width:1px 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:0px;height:0px;"><b>Attacker’s Siege Tactic</b></td></tr><tr><td style="border-width:1px 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:223px;height:0px;"><b>Defender’s Siege Tactic</b></td><td style="border-width:1px 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:120px;height:0px;"><b>1 – Cut Off Supplies</b></td><td style="border-width:1px 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:120px;height:0px;"><b>2 – Demolish</b></td><td style="border-width:1px 0 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:120px;height:0px;"><b>3 – Mine</b></td></tr><tr><td style="border-width:1px 1px 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:223px;height:0px;"><b>4 – Gather Supplies</b></td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">-1 Starve</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">+1 Batter<br>-1 Starve</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;width:120px;height:0px;">+2 Tunnel<br>-1 Starve</td></tr><tr><td style="border-width:1px 1px 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:223px;height:0px;"><b>5 – Rebuild</b></td><td style="border-width:0 0 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;width:120px;height:0px;">+1 Starve<br>-1 Batter</td><td style="border-width:0 0 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;width:120px;height:0px;">-1 Batter</td><td style="border-width:0 0 0 0;background-color:var(--row-bg);text-align:center;vertical-align:middle;width:120px;height:0px;">+2 Tunnel<br>-1 Batter</td></tr><tr><td style="border-width:1px 1px 1px 0;background-color:var(--header-bg);text-align:center;vertical-align:middle;width:223px;height:0px;"><b>6 – Counter-mine</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;width:120px;height:0px;">+1 Starve<br>-2 Tunnel</td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;width:120px;height:0px;">+1 Batter<br>-2 Tunnel</td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;width:120px;height:0px;">-2 Tunnel</td></tr></tbody></table></td></tr></tbody></table></div></div><div><br></div><div class="BreakInsideAvoid Corner4" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner4_1"></td><td class="Corner4_2"></td><td class="Corner4_3"></td></tr><tr><td class="Corner4_8"></td><td class="Corner4_9"><a name="The-Relief-Force"></a><div class="nails-header"><span class="nails"></span>Battleplan<span class="nails"></span></div><h3 class=" ct_AoS  mission_header">The Relief Force</h3><div class="Columns3"><b>A defending army has been under siege for a considerable time. Can it hold out until reinforcements arrive?</b><br><br><span class="hi_custom">SIEGE WARFARE</span><br>This battle uses the <a href="index.htm#SIEGE-WARFARE">Siege Warfare rules</a>. If you are using the <a href="../open-play-games/index.htm#OPEN-WAR-BATTLEPACK">Open War</a>, <a href="../narrative-play-games/index.htm#Path-to-Glory-Battlepack">Path to Glory</a> or <a href="../matched-play-games/index.htm#CONTEST-OF-GENERALS-BATTLEPACK">Contest of Generals battlepack</a>, you can use this battleplan instead of using the rules in the battlepack that determine which battleplan is used for the battle.<br><br><span class="hi_custom">THE ARMIES</span><br>Each player picks an army and then they <span class="tooltip" data-tooltip-content="#tooltip_content00917"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span>. The winner picks which player is the attacker. The other player is the defender. The defender must split their army into a <b>garrison contingent</b> and a <b>relief force contingent</b>. There must be at least one unit in the relief force contingent for each unit in the garrison contingent. The army’s general can be in either contingent.<br><br><span class="hi_custom">THE BATTLEFIELD</span><br>First, the defender sets up a maximum of 6 <a href="../the-core-rules/index.htm#Terrain-1">terrain features</a>. Each terrain feature must be wholly within the attacker’s territory or neutral territory, more than 3" from the battlefield edge, more than 6" from the defender’s territory and more than 9" from all other terrain features. Then the defender <a href="index.htm#The-Fortress">sets up their fortress</a>.<br><br>Then, starting with the attacker, the players alternate placing 1 <a href="../the-core-rules/index.htm#Objectives">objective</a> on a terrain feature in the defender’s territory until 3 objectives have been set up. Each objective must be placed on a different terrain feature.<br><br><span class="hi_custom">DEPLOYMENT</span><br>The defender sets up their garrison contingent first, wholly within their territory. The attacker sets up their army second, wholly within their territory and more than 6" from the defender’s territory.<br><br><span class="hi_custom">FIRST TURN</span><br>The attacker chooses which player takes the first turn in the first battle round.<br><br><span class="hi_custom">THE RELIEF FORCE</span><br>At the end of each of their <a href="../the-core-rules/index.htm#Movement-Phase">movement phases</a>, the defender rolls 2D6 and adds the battle round number to the score. On an 11 or more, their relief force contingent arrives. The defender then rolls a dice to see from which direction it arrives. On a 1-2, it arrives from the eastern battlefield edge. On a 3-4, it arrives from the southern battlefield edge. On a 5-6, it arrives from the western battlefield edge.<br><br>All of the units in the relief force contingent must be set up wholly within 6" of the battlefield edge it arrived from and more than 9" away from all enemy units.<br><br><span class="hi_custom">CONTROLLING OBJECTIVES</span><br>The attacker cannot gain control of an objective that is controlled by the defender if a unit from the defender’s army is within 3" of it (the objective remains under the defender’s control).<br><br><span class="hi_custom">BATTLE LENGTH</span><br>The battle lasts for 5 <a href="../the-core-rules/index.htm#Battle-Rounds">battle rounds</a>.<br><br><span class="hi_custom">GLORIOUS VICTORY</span><br>When the battle ends:<br><br>- If the attacker controls all 3 objectives, they win a <b>major victory</b>.<br><br>- If the attacker controls just 2 objectives, they win a <b>minor victory</b>.<br><br>- If the attacker controls no objectives, the defender wins a <b>major victory</b>.<br><br>- If the attacker controls just 1 objective, the defender wins a <b>minor victory</b>.</div><div style="height:8px"></div><div style="clear:both;"></div></td></tr></tbody></table></div><br><div style="display:flex;justify-content:center;align-items:center;"><div style="float:right;"><img border="0" src="../../img/battleplans/TheReliefForce3.png" style="margin:0px"></div></div><td class="Corner4_4"></td><tr><td class="Corner4_7"></td><td class="Corner4_6"></td><td class="Corner4_5"></td></tr></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="TRIUMPH-TREACHERY"></a><h3 class="h3_pge  outline_header ">TRIUMPH & TREACHERY</h3><b>The Triumph and Treachery rules allow three or more armies to take part in a multi-sided battle. Each player commands their own force and takes on all the other players involved to prove themselves the ultimate champion.</b><div><br></div><div class="Columns3">If a battleplan says to use the Triumph and Treachery rules, then the following rules apply to that battle.<div><br></div><a name="Rolling-Off"></a><h2 class="h2_pge   ">Rolling Off</h2>To <span class="tooltip" data-tooltip-content="#tooltip_content00918"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> in a Triumph and Treachery battle, all of the players involved in the roll-off roll a dice, and the player that rolls highest wins the roll-off. If several players are tied for the highest roll, the tied players roll off again until only one player remains with the highest dice roll.<div><br></div><a name="Turn-Order"></a><h2 class="h2_pge   ">Turn Order</h2>All the players <span class="tooltip" data-tooltip-content="#tooltip_content00919"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> at the start of each battle round and the winner decides which player will take the first turn. The player that has been chosen takes their turn, and then all of the remaining players roll off again, and the winner decides who will have the second turn. This carries on until there is only one player that has not yet taken a turn - that player takes their turn and then the battle round ends.<div><br></div><a name="Neutral-Models"></a><h2 class="h2_pge   ">Neutral Models</h2>At the start of each phase, the player whose turn it is picks one opponent to be their ‘enemy’ for that phase. A different player may be picked to be the enemy in each phase. Only the models in the army of the opponent picked to be the enemy are considered to be enemy models that phase. The models in the armies of all other opponents’ armies are instead considered to be neutral models and cannot be affected by abilities or spells, or attacked in any way for that phase. Neutral models cannot use abilities.<br><br><b>Designer’s Note:</b> <i>When it is time for a player to pick who is their enemy for a phase, you can expect for the other players to plead their case or to offer to form temporary alliances. This is allowed and is all part of the fun. Don’t be surprised if your so-called ‘ally’ turns around to stab you in the back later on!</i><div><br></div><a name="Turn-Sequence"></a><h2 class="h2_pge   ">Turn Sequence</h2>The following rules apply in the different phases of a Triumph and Treachery battle:<br><br><b>Hero Phase:</b> In your <a href="../the-core-rules/index.htm#Hero-Phase">hero phase</a>, <a href="index.htm#Neutral-Models">neutral models</a> cannot <span class="tooltip" data-tooltip-content="#tooltip_content00920"><span class="tt kwbu">unbind</span> <span class="tt kwbu">spells</span></span> or perform <a href="../the-core-rules/index.htm#Heroes-and-Heroic-Actions">heroic actions</a>. Neutral models are never affected by <a href="../the-core-rules/index.htm#Spells">spells</a>, even if they are within the area of effect of a spell. <a href="../the-core-rules/index.htm#Predatory-Endless-Spells">Predatory endless spells</a> controlled by neutral <a href="../the-core-rules/index.htm#Wizards"><span class="kwb">WIZARDS</span></a> are not moved. <a href="../the-core-rules/index.htm#Predatory-Endless-Spell-Control">Wild endless spells</a> are moved alternately by the player whose turn is taking place and the enemy player.<br><br><b>Movement Phase:</b> Neutral models are treated as enemy models in your <a href="../the-core-rules/index.htm#Movement-Phase">movement phase</a>. This means that you cannot move friendly models within 3" of neutral models, you must <span class="tooltip" data-tooltip-content="#tooltip_content00921"><span class="tt kwbu">retreat</span></span> if you want to move away from them, and so on.<br><br><b>Shooting Phase:</b> In your <a href="../the-core-rules/index.htm#Shooting-Phase">shooting phase</a>, only enemy units may be picked as the target of a shooting attack. Attacks that affect models within a certain distance of a point do not affect neutral models.<br><br><b>Charge Phase:</b> In your <a href="../the-core-rules/index.htm#Charge-Phase">charge phase</a>, the first model moved from a charging unit must finish the <span class="tooltip" data-tooltip-content="#tooltip_content00009"><span class="tt kwbu">charge</span> <span class="tt kwbu">move</span></span> within 1/2" of an enemy model. Neutral models cannot carry out a <a href="../the-core-rules/index.htm#Monstrous-Rampage">monstrous rampage</a>.<br><br><b>Combat Phase:</b> Only friendly units and enemy units can be picked to fight.<br><br><b>Battleshock Phase:</b> All units, including <a href="index.htm#Neutral-Models">neutral units</a>, have to take <span class="tooltip" data-tooltip-content="#tooltip_content00005"><span class="tt kwbu">battleshock</span> <span class="tt kwbu">tests</span></span> if they suffered casualties during the turn. You must still choose an enemy at the start of your <a href="../the-core-rules/index.htm#Battleshock-Phase">battleshock phase</a>, however, in case any of your models have abilities that affect enemy models in this phase. Neutral players can use abilities that only affect units from their own army in this phase.</div><div><br></div><div class="BreakInsideAvoid Corner4" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner4_1"></td><td class="Corner4_2"></td><td class="Corner4_3"></td></tr><tr><td class="Corner4_8"></td><td class="Corner4_9"><a name="Convergence-of-Fate"></a><div class="nails-header"><span class="nails"></span>Battleplan<span class="nails"></span></div><h3 class=" ct_AoS  mission_header">Convergence of Fate</h3><div class="Columns3">Multiple armies march upon a strange monolith, but only one can be the victor this day.<br><br><span class="hi_custom">TRIUMPH AND TREACHERY</span><br>This battle uses the <a href="index.htm#TRIUMPH-TREACHERY">Triumph and Treachery rules</a>. If you are using the <a href="../open-play-games/index.htm#OPEN-WAR-BATTLEPACK">Open War</a>, <a href="../narrative-play-games/index.htm#Path-to-Glory-Battlepack">Path to Glory</a> or <a href="../matched-play-games/index.htm#CONTEST-OF-GENERALS-BATTLEPACK">Contest of Generals battlepack</a>, you can use this battleplan instead of using the rules in the battlepack that determine which battleplan is used for the battle.<br><br>The battlefield for this battle should be at least 44" x 60" to accommodate all the armies.<br><br><span class="hi_custom">THE ARMIES</span><br>Each player picks an army. The players cannot include <a href="../the-core-rules/index.htm#Faction-Terrain">faction terrain features</a> in their armies. Each player must split their army into a <b>vanguard contingent</b> and a <b>reinforcements contingent</b>. There must be at least one unit in the vanguard contingent for each unit in the reinforcements contingent. The army’s general can be in either contingent.<br><br><span class="hi_custom">THE BATTLEFIELD</span><br>The players <span class="tooltip" data-tooltip-content="#tooltip_content00922"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> and the winner sets up the battlefield’s terrain features. One terrain feature must be set up in the centre of the battlefield. This terrain feature is the <b>monolith</b> and can be <a href="../the-core-rules/index.htm#Terrain-Control">controlled by the players</a>.<br><br><span class="hi_custom">DEPLOYMENT</span><br>All of the players apart from the player that set up battlefield’s terrain features roll off. The winner chooses which long edge of the battlefield is the northern edge and assigns a different territory to each player.<br><br>The players then alternate setting up units from their vanguard contingents, one at a time, starting with the player that assigned the territories. Each player must set up their units wholly within their territory and more than 9" from all other players’ territories.<br><br>The players continue to set up units until all of the vanguard contingents have been set up. If a player finishes setting up their vanguard contingent first, the remaining players continue to alternate setting up units until all of the units in the vanguard contingents have been set up.<br><br><span class="hi_custom">REINFORCEMENTS</span><br>Each player sets up their reinforcements contingent at the end of their second <a href="../the-core-rules/index.htm#Movement-Phase">movement phase</a>, wholly within their territory, wholly within 6" of the battlefield edge and more than 9" away from all enemy units.<br><br><span class="hi_custom">BATTLE LENGTH</span><br>The battle lasts for 4 <a href="../the-core-rules/index.htm#Battle-Rounds">battle rounds</a>.<br><br><span class="hi_custom">GLORIOUS VICTORY</span><br>When the battle ends:<br><br>- If one player controls the monolith, they win a <b>major victory</b>.<br><br>- If no player controls the monolith, the player commanding the model closest to the monolith wins a <b>minor victory</b>.<br><br>- If no player controls the monolith and 2 or more models in different armies are tied to be the closest to the monolith, the battle is a <b>draw</b>.</div><div style="height:8px"></div><div style="clear:both;"></div></td></tr></tbody></table></div><br><div style="display:flex;justify-content:center;align-items:center;"><div style="float:right;"><img border="0" src="../../img/battleplans/ConvergenceOfFate.png" style="margin:0px"></div></div><td class="Corner4_4"></td><tr><td class="Corner4_7"></td><td class="Corner4_6"></td><td class="Corner4_5"></td></tr></div><div class="noprint page_breaker"><div class="page_br1"></div><div class="page_br2"></div><div class="page_br3"></div></div><a name="TUNNEL-FIGHTING"></a><h3 class="h3_pge  outline_header ">TUNNEL FIGHTING</h3><b>Many of the Mortal Realms’ landscapes are riddled with subterranean tunnels and caverns. Frantic battles are often fought to control these dark passageways, turning the underground world into a battlefield that is just as bloody as any found on the surface.</b><div><br></div><div class="Columns3">If a battleplan says to use the Tunnel Fighting rules, then the following rules apply to that battle.<div><br></div><a name="Impenetrable-Gloom"></a><h2 class="h2_pge   ">Impenetrable Gloom</h2>The range of missile weapons and spells is limited to a maximum of 12".<div><br></div><a name="Low-Ceilings"></a><h2 class="h2_pge   ">Low Ceilings</h2>Models cannot <span class="tooltip" data-tooltip-content="#tooltip_content00923"><span class="tt kwbu">fly</span></span>. In addition, the path of a model’s move cannot be traced more than 4" above the battlefield.<div><br></div><a name="Monstrous-Denizen"></a><h2 class="h2_pge   ">Monstrous Denizen</h2>After the battlefield has been set up but before territories have been assigned, the players <span class="tooltip" data-tooltip-content="#tooltip_content00924"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span>. The winner can set up 1 <span class="kwb">MONSTER</span> anywhere on the battlefield (if a suitable model that is not part of either army is available). This model is referred to as a monstrous denizen.<br><br>At the start of each battle round, before determining <a href="../the-core-rules/index.htm#The-Priority-Roll">priority</a>, the players roll off. In that battle round, the winner of the <span class="tooltip" data-tooltip-content="#tooltip_content00925"><span class="tt kwbu">roll-off</span></span> treats the monstrous denizen as a unit in their army and their opponent treats it as an enemy unit.<br><br>The monstrous denizen’s commanding player can choose to attack it, but if they do, until the end of the battle round, they treat it as an enemy unit and their opponent treats it as a unit in their own army. The monstrous denizen cannot attack itself.<div><br></div><a name="Unstable-Surroundings"></a><h2 class="h2_pge   ">Unstable Surroundings</h2>Roll a dice at the start of each of your <a href="../the-core-rules/index.htm#Hero-Phase">hero phases</a>. On a 6, you can choose for a cave-in to take place, or for falling stalactites to crash down from the ceiling.<br><br><b>Cave-in:</b> Pick a point anywhere on the battlefield that is more than 3" from all models and <a href="../the-core-rules/index.htm#Terrain-1">terrain features</a>. For the rest of the battle, no models can move or be set up within 3" of that point.<br><br><b>Falling Stalactites:</b> Pick up to D3 different enemy units. Roll a dice for each unit you pick. On a 2+, that unit suffers 1 <span class="tooltip" data-tooltip-content="#tooltip_content00926"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span>.<div><br></div><a name="Command-Abilities"></a><h2 class="h2_pge   ">Command Abilities</h2>You can use the following <span class="tooltip" data-tooltip-content="#tooltip_content00064"><span class="tt kwbu">command</span> <span class="tt kwbu">ability</span></span> in battles that use the Tunnel Fighting rules:<br><br><span class="redfont">Cunning Traps</span><b>:</b> <span class="ShowFluff legend4">Sabotage is a common tactic used by those wishing to eradicate unwary opponents.<br><div class="spc"></div></span>You can use this command ability at the end of the enemy <a href="../the-core-rules/index.htm#Movement-Phase">movement phase</a>. Pick an enemy unit within 12" of the unit that receives this command that is visible to them and roll 2D6. If the roll is equal to or greater than the distance between the unit that receives this command and that enemy unit, that enemy unit suffers D3 <span class="tooltip" data-tooltip-content="#tooltip_content00927"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span>.<div><br></div><a name="Heroic-Actions"></a><h2 class="h2_pge   ">Heroic Actions</h2><span class="kwb">HEROES</span> can perform the following <a href="../the-core-rules/index.htm#Heroes-and-Heroic-Actions">heroic action</a> in battles that use the Tunnel Fighting rules:<br><br><span class="redfont">Tame the Raging Beast</span><b>:</b> <span class="ShowFluff legend4">Those who frequently brave the realms’ depths often earn the loyalty of the creatures that dwell there.<br><div class="spc"></div></span>Pick 1 <a href="index.htm#Monstrous-Denizen">monstrous denizen</a> within 3" of a friendly <span class="kwb">HERO</span>. That monstrous denizen is treated as unit in your army for the rest of the battle round.</div><div><br></div><div class="BreakInsideAvoid Corner4" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner4_1"></td><td class="Corner4_2"></td><td class="Corner4_3"></td></tr><tr><td class="Corner4_8"></td><td class="Corner4_9"><a name="Tunnel-Wars"></a><div class="nails-header"><span class="nails"></span>Battleplan<span class="nails"></span></div><h3 class=" ct_AoS  mission_header">Tunnel Wars</h3><div class="Columns3"><b>Countless battles have been fought to control the tunnel networks that twist and turn below the surfaces of the Mortal Realms. Such conflicts are usually fought as a series of bitter encounters in near-total darkness, with no quarter asked or given.</b><br><br><span class="hi_custom">TUNNEL FIGHTING</span><br>This battle uses the <a href="index.htm#TUNNEL-FIGHTING">Tunnel Fighting rules</a>. If you are using the <a href="../open-play-games/index.htm#OPEN-WAR-BATTLEPACK">Open War</a>, <a href="../narrative-play-games/index.htm#Path-to-Glory-Battlepack">Path to Glory</a> or <a href="../matched-play-games/index.htm#CONTEST-OF-GENERALS-BATTLEPACK">Contest of Generals battlepack</a>, you can use this battleplan instead of using the rules in the battlepack that determine which battleplan is used for the battle.<br><br><span class="hi_custom">THE ARMIES</span><br>Each player picks an army. The players cannot include <a href="../the-core-rules/index.htm#Faction-Terrain">faction terrain features</a> in their armies. Each player must split their army into three contingents. No contingent can have fewer than a quarter of the units in the army or more than half of the units in the army.<br><br>After the players have divided their armies into contingents, they must fight three battles using this battleplan, one after the other. Before setting up their armies for each battle, the players must secretly write down which of their three contingents they will use and then reveal their choices to each other. Each contingent can only be used in one of the three battles. Pick a general for each contingent at the start of each battle.<br><br><span class="hi_custom">THE BATTLEFIELD</span><br>The players <span class="tooltip" data-tooltip-content="#tooltip_content00928"><span class="tt kwbu">roll</span> <span class="tt kwbu">off</span></span> and the winner sets up the battlefield’s terrain features. The player that lost the roll-off then chooses which player uses Territory A and which player uses Territory B, and which long edge of the battlefield is the northern edge.<br><br><b>Designer’s Note:</b> <i>Do not be put off playing this scenario if you lack terrain features that have a suitably subterranean appearance. An easy way to represent the tunnel complex is to cut out black or grey card into irregular shapes. These pieces can be used to represent solid rock walls, and placed on the battlefield to create a maze-like set of tunnels and caverns.</i><br><br><span class="hi_custom">DEPLOYMENT</span><br>The players alternate setting up units one at a time, starting with the player that picked their territory. Each player must set up their units wholly within their territory.<br><br>The players continue to set up units until both contingents have been set up. If one player finishes setting up their contingent first, their opponent must set up the rest of the units in their contingent, one after another.<br><br><span class="hi_custom">BATTLE LENGTH</span><br>Each battle lasts until all of the units in one contingent have been destroyed.<br><br><span class="hi_custom">GLORIOUS VICTORY</span><br>For each battle, a player wins the battle if all of the units in their opponent’s contingent have been destroyed. If one player wins all three battles, they win a <b>major victory</b>. If one player wins just two of the battles, they win a <b>minor victory</b>.</div><div style="height:8px"></div><div style="clear:both;"></div></td></tr></tbody></table></div><br><div style="display:flex;justify-content:center;align-items:center;"><div style="float:right;"><img border="0" src="../../img/battleplans/TunnelWars3.png" style="margin:0px"></div></div><td class="Corner4_4"></td><tr><td class="Corner4_7"></td><td class="Corner4_6"></td><td class="Corner4_5"></td></tr>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00911"><div class="tooltip_header">Hit Roll</div><a href="../the-core-rules/index.htm#Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Hit</span> characteristic, the attack scores a <span class="term">hit</span> and you must make a <span class="term">wound roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified hit roll of 1 always fails and an unmodified hit roll of 6 always hits. A hit roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).<br><br>Sometimes an ability will allow a single hit roll to score two or more hits. If this is the case, make all of the wound and save rolls for those hits at the same time.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00912"><div class="tooltip_header">Wound Roll</div><a href="../the-core-rules/index.htm#Wound-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Wound</span> characteristic, the attack <span class="term">wounds</span> the target and your opponent must make a <span class="term">save roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified wound roll of 1 always fails and an unmodified wound roll of 6 always wounds. A wound roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).
+</span></div><div class="tooltip_templates"><span id="tooltip_content00913"><div class="tooltip_header">1.5.5 Dice Roll Modifiers</div><a href="../the-core-rules/index.htm#Dice-Roll-Modifiers"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a <span class="term">modifier</span> will apply to a dice roll. Modifiers are applied after <a href="../the-core-rules/index.htm#Re-rolls">re-rolls</a>. Rules that refer to an <span class="term">unmodified</span> roll are referring to the dice roll after re-rolls have been made but before modifiers are applied. If a rule instructs you to pick or change a roll, do so after re-rolls are made but before modifiers are applied.<br><br><div class="BreakInsideAvoid Corner22" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner22_1"></td><td class="Corner22_2"></td><td class="Corner22_3"></td></tr><tr><td class="Corner22_8"></td><td class="Corner22_9"><i>In most cases, modifiers are cumulative. However, some dice rolls, such as <span class="tooltip" data-tooltip-content="#tooltip_content00911"><span class="tt kwbu">hit</span></span> and <span class="tooltip" data-tooltip-content="#tooltip_content00912"><span class="tt kwbu">wound</span> <span class="tt kwbu">rolls</span></span>, will specify that the roll cannot be modified by more than +1 or -1. When this is the case, add up all the modifiers that apply, and if the total is more than +1 or -1, treat it as being either +1 or -1 as appropriate.</i></td><td class="Corner22_4"></td></tr><tr><td class="Corner22_7"></td><td class="Corner22_6"></td><td class="Corner22_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00914"><div class="tooltip_header">17.1.1 Cover</div><a href="../the-core-rules/index.htm#Cover"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+A target unit is in <span class="term">cover</span> if all of the models in the unit are wholly on a terrain feature or behind a terrain feature. Add 1 to <a href="../the-core-rules/index.htm#Save-Roll">save rolls</a> for attacks that target a unit that is in cover. A unit that has a Wounds characteristic of 10 or more or that has made a <a href="../the-core-rules/index.htm#Charge-Moves">charge move</a> in the same turn does not receive the benefit of being in cover.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00915"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00916"><div class="tooltip_header">22.3.1 Mounts, Companions and Crew</div><a href="../the-core-rules/index.htm#Mounts-Companions-and-Crew"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes the description on a warscroll will say whether the models in the unit have <span class="term">mounts</span>, <span class="term">companions</span> or a <span class="term">crew</span>. When a model attacks, its mount, companions and crew attack too, and when the model is removed from play, its mount, companions and crew are removed too. For rules purposes, companions and crew are treated in the same manner as mounts.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00917"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00918"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00919"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00920"><div class="tooltip_header">19.1.2 Unbinding Spells</div><a href="../the-core-rules/index.htm#Unbinding-Spells"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+If a spell is successfully cast, your opponent can pick 1 of their <span class="kwb">WIZARDS</span> that is within 30" of the caster to attempt to unbind the spell before its effects are applied. In order to attempt to unbind a spell, first say which <span class="kwb">WIZARD</span> will attempt to unbind it. Then make an <span class="term">unbinding roll</span> by rolling 2D6. If the unbinding roll is greater than the roll used to cast the spell, then the spell is <span class="term">unbound</span> and its effects are not applied. The number of spells a <span class="kwb">WIZARD</span> can attempt to unbind is noted on their warscroll. Only 1 unbinding attempt can be made for each spell.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00921"><div class="tooltip_header">8.2 Retreat</div><a href="../the-core-rules/index.htm#Retreat"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you pick a unit to <span class="term">retreat</span>, you can move each model in that unit a distance in inches equal to or less than the Move characteristic shown on the unit’s warscroll. The unit must end the move more than 3" from all enemy units. You cannot shoot or attempt a charge later in the turn with a unit that has retreated.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00009"><div class="tooltip_header">11.1 Charge Moves</div><a href="../the-core-rules/index.htm#Charge-Moves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you attempt a charge with a unit, make a <span class="term">charge roll</span> for the unit by rolling 2D6. You can then make a <span class="term">charge move</span> with each model in that unit by moving the model a distance in inches that is equal to or less than the charge roll. The first model you move in a unit attempting a charge must finish the move within 1/2" of an enemy unit. If this is impossible, no models in the unit can make a charge move.<br><br><div class="BreakInsideAvoid Corner22" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner22_1"></td><td class="Corner22_2"></td><td class="Corner22_3"></td></tr><tr><td class="Corner22_8"></td><td class="Corner22_9"><i>You do not have to pick a target for a charge attempt before making the charge roll.</i></td><td class="Corner22_4"></td></tr><tr><td class="Corner22_7"></td><td class="Corner22_6"></td><td class="Corner22_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00005"><div class="tooltip_header">15.1 Battleshock Tests</div><a href="../the-core-rules/index.htm#Battleshock-Tests"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+You must make a <span class="term">battleshock roll</span> for each friendly unit that has to take a battleshock test. To make a battleshock roll, roll a dice and add the number of models in the unit that were slain in that turn to the roll. If the battleshock roll is greater than the unit’s <span class="term">Bravery</span> characteristic, the battleshock test has been <span class="term">failed</span>. If the test is failed, for each point by which the battleshock roll exceeds the unit’s Bravery characteristic, 1 model in that unit must <span class="term">flee</span>. You decide which models flee. A model that flees is <a href="../the-core-rules/index.htm#Removed-from-Play">removed from play</a>.<br><br><div class="BreakInsideAvoid Corner22" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner22_1"></td><td class="Corner22_2"></td><td class="Corner22_3"></td></tr><tr><td class="Corner22_8"></td><td class="Corner22_9"><i>If a slain model is returned to its unit in the same turn that it is slain, it still counts as having been slain in that battle round for the purposes of battleshock tests.</i></td><td class="Corner22_4"></td></tr><tr><td class="Corner22_7"></td><td class="Corner22_6"></td><td class="Corner22_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00922"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00923"><div class="tooltip_header">9.4 Flying</div><a href="../the-core-rules/index.htm#Flying"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+If the warscroll used by a model says that it can <span class="term">fly</span>, you can ignore other models and terrain features when you trace the path of its move across the battlefield (it flies over them). In addition, when a model that can fly starts or finishes a move on a terrain feature, instead of tracing its move across the battlefield, you can trace it ‘through the air’, as shown in the diagram below.<br><br>A flying model cannot finish a move on top of another model or finish a <a href="../the-core-rules/index.htm#Normal-Move">normal move</a>, <a href="../the-core-rules/index.htm#Run">run</a> or <a href="../the-core-rules/index.htm#Retreat">retreat</a> within 3" of an enemy unit.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00924"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00925"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00926"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00064"><div class="tooltip_header">6.1 Using Command Abilities</div><a href="../the-core-rules/index.htm#Using-Command-Abilities"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+To use a command ability, you must spend 1 command point, pick 1 friendly model to <span class="term">issue</span> the command, and pick 1 friendly unit to <span class="term">receive</span> the command. Unless noted otherwise, the models that can issue commands and the units they can issue them to are as follows:<br><ul><li>Unit champions can issue commands to their own unit (<a href="../the-core-rules/index.htm#Command-Models">see 22.3.2</a>).</li><li><span class="kwb">HEROES</span> can issue commands to units that are wholly within 12" of them.</li><li>Generals can issue commands to units that are wholly within 18" of them.</li><li><span class="kwb">TOTEMS</span> can issue commands to units that are wholly within 18" of them.</li></ul>Each command ability will say when it can be used and what effect it has on the unit that receives it. A model cannot issue more than 1 command in the same phase and a unit cannot receive more than 1 command in the same phase. In addition, you cannot use the same command ability more than once in the same phase (even for different units).
+</span></div><div class="tooltip_templates"><span id="tooltip_content00927"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../the-core-rules/index.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00928"><div class="tooltip_header">1.5.3 Rolling Off</div><a href="../the-core-rules/index.htm#Rolling-Off"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Sometimes a rule may require the players to <span class="term">roll off</span>. To roll off, each player rolls a dice, and whoever rolls highest wins. If a roll-off is tied, roll off again. You cannot re-roll or modify the dice when you roll off.
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

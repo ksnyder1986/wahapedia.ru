@@ -1,0 +1,579 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Rogue Traders — Gotfret de Montbard (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 9 edition, Imperium, Astra Militarum, Adeptus Ministorum, Character, Crusader, Infantry, Gotfret de Montbard, Ecclesiarchy Battle Conclave, Servant of the Imperium, Acts of Faith, Zealot, Storm Shield, Hacking Advance, Shield of Faith, Ecclesiarchy Battle Conclave">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1.css">
+<link rel="stylesheet" href="../../css/main1.css">
+<link rel="stylesheet" href="../../css/header1.css">
+<link rel="stylesheet" href="../../css/profile1.css">
+<link rel="stylesheet" href="../../css/noprint1.css">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1.css">
+<title>Gotfret de Montbard</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowSpecialistDetachments;
+	if (data == undefined) {data = 'true'; localStorage.ShowSpecialistDetachments = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowSpecialistDetachments').prop('checked', StrData);
+
+	$('.ShowSpecialistDetachments').change(function () {
+      localStorage.ShowSpecialistDetachments = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowCrusadeRules;
+	if (data == undefined) {data = 'true'; localStorage.ShowCrusadeRules = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowCrusadeRules').prop('checked', StrData);
+
+	$('.ShowCrusadeRules').change(function () {
+      localStorage.ShowCrusadeRules = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.PrimarisFilter;
+	if (data == undefined) {data = ''; localStorage.PrimarisFilter = data};
+
+	$('.PrimarisSelect').prop('value', data);
+
+	$('.PrimarisSelect').change(function () {
+      localStorage.PrimarisFilter = $(this).prop('value');
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld, .sSpecialistDetachments, .sPrimaris, .sNotPrimaris, .sCrusadeRules';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+if (localStorage.ShowSpecialistDetachments == 'false') {clFlags = clFlags + comma + '.sSpecialistDetachments'; comma = ', ';};
+if (localStorage.ShowCrusadeRules == 'false') {clFlags = clFlags + comma + '.sCrusadeRules'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sPrimaris') {clFlags = clFlags + comma + '.sNotPrimaris'; comma = ', ';};
+if (localStorage.PrimarisFilter == 'sNotPrimaris') {clFlags = clFlags + comma + '.sPrimaris'; comma = ', ';};
+$('.abVisChk').css('display', ''); $('.abVisChk2').css('display', '');
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Datasheets</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Codex. Adeptus Mechanicus (9th edition, version Indomitus 1.1)" src="../../img/expansions/AdeptusMechanicus_logo2.png"><a href="Technoarcheologist.html" class="contentColor">Technoarcheologist</a></div></div><div class="i15 ArmyType_line "><a href="Elucia-Vhane.html" class="contentColor">Elucia Vhane</a></div><div class="i15 ArmyType_line "><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div><div class="i15 ArmyType_line "><a href="Janus-Draik.html" class="contentColor">Janus Draik</a></div><div class="i15 ArmyType_line "><a href="Neyam-Shai-Murad.html" class="contentColor">Neyam Shai Murad</a></div><div class="i15 ArmyType_line "><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Troops</b></span></div><div class="i15 ArmyType_line "><a href="Nitsch-s-Squad.html" class="contentColor">Nitsch’s Squad</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Elites</b></span></div><div class="i15 ArmyType_line "><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div class="i15 ArmyType_line "><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div class="i15 ArmyType_line "><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div class="i15 ArmyType_line "><a href="Amallyn-Shadowguide.html" class="contentColor">Amallyn Shadowguide</a></div><div class="i15 ArmyType_line "><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div class="i15 ArmyType_line "><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div class="i15 ArmyType_line "><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div class="i15 ArmyType_line "><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div class="i15 ArmyType_line "><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div class="i15 ArmyType_line "><a href="UR-025.html" class="contentColor">UR-025</a></div><div class="i15 ArmyType_line "><a href="X-101.html" class="contentColor">X-101</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowSpecialistDetachments">
+	<span class="checkmark"></span>Show Specialist Detachments
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowCrusadeRules">
+	<span class="checkmark"></span>Show Crusade Rules
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index.htm">Playing This Game</a><a href="../../the-rules/core-rules/index.htm">Core Rules</a><a href="../../the-rules/open-play/index.htm">Open Play</a><a href="../../the-rules/matched-play/index.htm">Matched Play</a><a href="../../the-rules/narrative-play/index.htm">Narrative Play</a><a href="../../the-rules/advanced-rules/index.htm">Advanced Rules</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Mission Packs</div><a href="../../the-rules/beyond-the-veil/index.htm">Beyond the Veil</a><a href="../../the-rules/grand-tournament-2021/index.htm">Grand Tournament 2021</a><a href="../../the-rules/tactical-deployment/index.htm">Tactical Deployment</a><a href="../../the-rules/psychic-awakening/index.htm">Psychic Awakening</a><a href="../../the-rules/piety-and-pain/index.htm">Piety and Pain</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">War Zones</div><a href="../../the-rules/war-zone-charadon/index.htm">War Zone Charadon</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a href="../adepta-sororitas/index.htm">Adepta Sororitas</a><a href="../adeptus-custodes/index.htm">Adeptus Custodes</a><a href="../adeptus-mechanicus/index.htm">Adeptus Mechanicus</a><a href="../astra-militarum/index.htm">Astra Militarum</a><a href="../grey-knights/index.htm">Grey Knights</a><a href="../imperial-knights/index.htm">Imperial Knights</a><a href="../inquisition/index.htm">Inquisition</a><a href="../officio-assassinorum/index.htm">Officio Assassinorum</a><a href="index.htm">Rogue Traders</a><a href="../sisters-of-silence/index.htm">Sisters of Silence</a><a href="../space-marines/index.htm">Space Marines</a><a href="../titan-legions/index.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a href="../chaos-daemons/index.htm">Chaos Daemons</a><a href="../chaos-knights/index.htm">Chaos Knights</a><a href="../chaos-space-marines/index.htm">Chaos Space Marines</a><a href="../death-guard/index.htm">Death Guard</a><a href="../heretic-titan-legions/index.htm">Heretic Titan Legions</a><a href="../renegades-and-heretics/index.htm">Renegades and Heretics</a><a href="../thousand-sons/index.htm">Thousand Sons</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a href="../craftworlds/index.htm">Craftworlds</a><a href="../drukhari/index.htm">Drukhari</a><a href="../harlequins/index.htm">Harlequins</a><a href="../ynnari/index.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a href="../genestealer-cults/index.htm">Genestealer Cults</a><a href="../necrons/index.htm">Necrons</a><a href="../orks/index.htm">Orks</a><a href="../t-au-empire/index.htm">T’au Empire</a><a href="../tyranids/index.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a href="../unaligned/index.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/wh40k9ed/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2422253&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_self&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2422253,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_self" accept-charset="utf-8"><input type="hidden" name="searchid" value="2422253"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Rogue Traders</span><span class="page_header_span2"> – Gotfret de Montbard</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This datasheet does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+
+<div class="datasheet  " style="position:relative">
+<div class="dsOuterFrame">
+<div style="float:left" class="pTable_no_dam">
+<div><img border="0" class="img-opa tooltip" data-tooltip-content="#tooltip_contentElites" src="../../img/Role_Elites.png" style="float:left;margin-left:4px"><div class="img-opa PowerPrice">2</div><img class="tooltip img-opa logo3" title="Boxset. Warhammer Quest: Blackstone Fortress – Escalation (8th edition)" src="../../img/expansions/BlackStoneFortress_logo3.png"><h3 class="pTable_h3 pTable_no_dam"><div>Gotfret de Montbard<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Warhammer%2040000%20Rogue%20Traders%20Gotfret%20de%20Montbard%20miniature"><div class="picSearch"></div></a></div></h3></div>
+<table class="pTable_no_dam pTable_border" cellpadding="0" cellspacing="0">
+<tr class="wTable3">
+<td class="pTable1 pad4">No</td><td class="pTable1_"><span class="pTable_left">NAME</span><span class="pTable_left">&nbsp;</span></td>
+<td class="pTable2 pad4">M</td>
+<td class="pTable1 pad4">WS</td>
+<td class="pTable1 pad4">BS</td>
+<td class="pTable1 pad4">S</td>
+<td class="pTable1 pad4">T</td>
+<td class="pTable2 pad4">W</td>
+<td class="pTable1 pad4">A</td>
+<td class="pTable1 pad4">Ld</td>
+<td class="pTable1 pad4">Sv</td>
+<td class="pTable1b pad4 ShowBaseSize">Base</td>
+
+</tr>
+<tr class="pTable2_short"><td class="pTable2_pad" colspan="12"><div class="PriceTag">40</div>Gotfret de Montbard<span class="ShowBaseSize"> (base: 32mm)</span></td>
+</tr>
+<tr>
+<td class="pTable2">1</td><td class="pTable2_"><span class="pTable2_long"><div class="PriceTag">40</div>Gotfret de Montbard</span></td>
+<td class="pTable1">6"</td>
+<td class="pTable2">3+</td>
+<td class="pTable2">4+</td>
+<td class="pTable2">3</td>
+<td class="pTable2">3</td>
+<td class="pTable1">4</td>
+<td class="pTable2">4</td>
+<td class="pTable2">7</td>
+<td class="pTable2">4+</td>
+<td class="pTable2b ShowBaseSize">32mm</td>
+
+</tr>
+</table>
+<div style="padding:4px;">Gotfret de Montbard is a single model armed with a power sword and storm shield. Only one of this model can be included in your army.</div>
+</div>
+<div style="clear:both"></div>
+<div class="dsline"></div>
+<div class="wtOuterFrame"><table class="wTable" width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td class="wTable_WEAPON" style="width: 220px;"><div class="wTable1">WEAPON</div></td><td style="width: 60px;"><div class="ct wTable1">RANGE</div></td><td style="width: 100px;"><div class="wTable1">TYPE</div></td><td style="width: 38px;"><div class="ct wTable1">S</div></td><td style="width: 38px;"><div class="ct wTable1">AP</div></td><td style="width: 38px;"><div class="ct wTable1">D</div></td><td><div class="wTable1"><span class="wTable1_short">ABILITIES</span><span class="wTable1_short_space">&nbsp;</span></div></td></tr><tbody class=" bkg"><tr class="wTable2_long"><td colspan="7" class="pad2626"><span>Power sword</span></td></tr><tr class=""><td class="wTable2_short pad2626"><span>Power sword</span></td><td><div class="ct pad2626">Melee</div></td><td><div class="pad2626"><span class="tooltip" data-tooltip-content="#tooltip_content00076"><span class="tt kwbu">Melee</span></span></div></td><td><div class="ct pad2626">+1</div></td><td><div class="ct pad2626">-3</div></td><td><div class="ct pad2626">1</div></td><td><span class="wTable1_short pad2626">-</span></td></tr></tbody></tbody></table></div>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr class="abVisChk dsAbilityHeader_long"><td><div class="dsHeader">ABILITIES</div></td></tr>
+<tr class="abVisChk">
+<td class="dsAbilityHeader"><div class="dsHeader">ABILITIES</div></td>
+<td class="dsAbilityData">
+<div class="Col2"><div class="BreakInsideAvoid abVisChk2" style="padding:2px 2px 2px"><b><span class="abVis2"><span class="tooltip" data-tooltip-content="#tooltip_content00119"><span class="tt kwbu">Acts</span> <span class="tt kwbu">of</span> <span class="tt kwbu">Faith</span></span></span></b></div><div class="abVisChk2 a_indent"></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Hacking Advance</span><b>: </b>Each unmodified <span class="tooltip" data-tooltip-content="#tooltip_content00007"><span class="tt kwbu">hit</span> <span class="tt kwbu">roll</span></span> of 6 made for Gotfret de Montbard’s attacks in the <a href="../../the-rules/core-rules/index.htm#FIGHT-PHASE">Fight phase</a> scores 2 hits instead of 1.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Shield of Faith</span><b>: </b>Gotfret de Montbard can attempt to <span class="tooltip" data-tooltip-content="#tooltip_content00120"><span class="tt kwbu">deny</span></span> one psychic power in each enemy <a href="../../the-rules/core-rules/index.htm#PSYCHIC-PHASE">Psychic phase</a> in the same manner as a <a href="../../the-rules/core-rules/index.htm#PSYCHIC-PHASE">PSYKER</a>. However, if he does so, instead of rolling 2D6, only roll a single D6; the psychic power is resisted if the roll is greater than the result of the <span class="tooltip" data-tooltip-content="#tooltip_content00121"><span class="tt kwbu">Psychic</span> <span class="tt kwbu">test</span></span> that manifested the power.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Zealot</span><b>: </b>You can re-roll failed <span class="tooltip" data-tooltip-content="#tooltip_content00007"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span> for Gotfret de Montbard in a turn in which he charged, made a <span class="tooltip" data-tooltip-content="#tooltip_content00122"><span class="tt kwbu">Heroic</span> <span class="tt kwbu">Intervention</span></span>, or was charged by an enemy unit.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Storm Shield</span><b>: </b>The bearer has a 4+ <span class="tooltip" data-tooltip-content="#tooltip_content00124"><span class="tt kwbu">invulnerable</span> <span class="tt kwbu">save</span></span>. In addition, add 1 to armour <span class="tooltip" data-tooltip-content="#tooltip_content00125"><span class="tt kwbu">saving</span> <span class="tt kwbu">throws</span></span> made for the bearer.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Ecclesiarchy Battle Conclave</span><b>: </b>If your army is <a href="../../the-rules/advanced-rules/index.htm#BATTLE-FORGED-ARMIES">Battle-forged</a>, this unit does not take up slots in a <a href="../../the-rules/advanced-rules/index.htm#Detachments">Detachment</a> that includes any <span class="tooltip" data-tooltip-content="#tooltip_content00126" data-tooltip-anchor="#tooltip_content00126"><span class="kwb kwbu">MINISTORUM</span> <span class="kwb kwbu">PRIESTS</span></span>.<div class="a_indent"></div></div><div class="BreakInsideAvoid abVis" style="padding:2px 2px 2px"><span class="redfont">Servant of the Imperium</span><b>: </b>Gotfret de Montbard can be included in an <a href="../astra-militarum/index.htm#Detachment-Rules">ASTRA MILITARUM Detachment</a> without preventing other units in that Detachment from gaining a <a href="../astra-militarum/index.htm#Regimental-Doctrines">Regimental Doctrine</a>. Note, however, that Gotfret de Montbard can never benefit from a Regimental Doctrine.<div class="a_indent"></div></div></div>
+</td>
+</tr>
+<tr><td colspan="2" style="vertical-align:middle;border-top: 2px ridge #888;padding:4px;">
+<span class="dsKeywordHeader">FACTION KEYWORDS: </span><span class="dsKeywordData"><span class="tooltip" data-tooltip-content="#tooltip_contentImperium" data-tooltip-anchor="#tooltip_contentImperium"><span class="kwb kwbu">IMPERIUM</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentAdeptusMinistorum" data-tooltip-anchor="#tooltip_contentAdeptusMinistorum"><span class="kwb kwbu">ADEPTUS</span> <span class="kwb kwbu">MINISTORUM</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentAstraMilitarum" data-tooltip-anchor="#tooltip_contentAstraMilitarum"><span class="kwb kwbu">ASTRA</span> <span class="kwb kwbu">MILITARUM</span></span></span>
+</td></tr>
+<tr><td colspan="2" style="padding:4px;">
+<span class="dsKeywordHeader">KEYWORDS: </span><span class="dsKeywordData"><span class="tooltip" data-tooltip-content="#tooltip_contentCharacter" data-tooltip-anchor="#tooltip_contentCharacter"><span class="kwb kwbu">CHARACTER</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentInfantry" data-tooltip-anchor="#tooltip_contentInfantry"><span class="kwb kwbu">INFANTRY</span></span>, <span class="kwb">ECCLESIARCHY</span> <span class="kwb">BATTLE</span> <span class="kwb">CONCLAVE</span>, <span class="kwb">CRUSADER</span>, <span class="kwb">GOTFRET</span> <span class="kwb">DE</span> <span class="kwb">MONTBARD</span></span>
+</td></tr>
+</table>
+</div>
+<div style="position:relative">
+</div>
+</div>
+<div style="clear:both"></div>
+
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_contentElites"><p><b>This datasheet has <span class="redfont">Elites</span> <a href="../../the-rules/advanced-rules/index.htm#Battlefield-Role">Battlefield Role</a>. Full list of Rogue Traders units sharing same Battlefield Role follows:</b></p><span class="contents"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Elites</b></span></div><div class="i15 ArmyType_line "><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div class="i15 ArmyType_line "><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div class="i15 ArmyType_line "><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div class="i15 ArmyType_line "><a href="Amallyn-Shadowguide.html" class="contentColor">Amallyn Shadowguide</a></div><div class="i15 ArmyType_line "><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div class="i15 ArmyType_line "><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div class="i15 ArmyType_line "><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div class="i15 ArmyType_line "><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div class="i15 ArmyType_line "><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div class="i15 ArmyType_line "><a href="UR-025.html" class="contentColor">UR-025</a></div><div class="i15 ArmyType_line "><a href="X-101.html" class="contentColor">X-101</a></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_content00076"><div class="tooltip_header">Select Weapon</div><a href="../../the-rules/core-rules/index.htm#Select-Weapon"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes a close combat attack, it must do so using a melee weapon (i.e. a weapon that has the ‘Melee’ type). The weapons a model is equipped with are described on its datasheet. If a model is not equipped with any melee weapons, or if it cannot make an attack with any of the melee weapons it is equipped with, then that model makes its attacks using a close combat weapon, which has the following profile:<br><br><font style="font-family:ConduitITC;"><div class="BreakInsideAvoid" style=""><table width="0" border="0" bordercolor="#888" cellpadding="4" cellspacing="0" style="border-collapse:collapse;border-width:0px"><tbody><tr><td><table class=" customTable" border="1" bordercolor="#888" cellpadding="4" style="border-collapse:collapse;border-color:#888888;border-width:0px"><tbody><tr><td style="border-width:0 0 1px 0;text-align:left;vertical-align:middle;font-size:22px;width:179px;height:0px;"><b>WEAPON</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:93px;height:0px;"><b>RANGE</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:91px;height:0px;"><b>TYPE</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>S</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>AP</b></td><td style="border-width:0 0 1px 0;text-align:center;vertical-align:middle;font-size:22px;width:44px;height:0px;"><b>D</b></td></tr><tr><td style="border-width:0 0 0 0;vertical-align:middle;font-size:18px;width:179px;height:0px;">Close combat weapon</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:93px;height:0px;">Melee</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:91px;height:0px;">Melee</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">User</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">0</td><td style="border-width:0 0 0 0;text-align:center;vertical-align:middle;font-size:18px;width:44px;height:0px;">1</td></tr></tbody></table></td></tr></tbody></table></div></font><br>If a model has more than one melee weapon, select which it will use before resolving any attacks. If a model has more than one melee weapon and can make several attacks, it can split them between these weapons however you wish – declare which attacks are being made with which weapons before any attacks are resolved. If the selected weapon has more than one profile that you must choose between, you must declare which profile is being used at the same time. Different attacks made with such a weapon can be made using different profiles if you wish.<br><br>If your unit is <a href="../../the-rules/core-rules/index.htm#Making-Attacks">making attacks</a> with more than one melee weapon against a unit, and those weapons have different characteristics profiles, then after you have resolved an attack with one of those weapons you must, if any other weapons with the same characteristics profile are also being used to make attacks against that unit, resolve those attacks before resolving any attacks against the target with a weapon that has a different characteristics profile. Note that all the attacks you have declared are always resolved against the target unit even if, when you come to resolve an individual attack, no models in the target unit remain in range (this can happen because of models being destroyed and removed from the battlefield as the result of resolving other attacks made by the attacking model’s unit first).<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li>Each close combat attack is made with a melee weapon.</li><li>A model makes attacks using the close combat weapon profile if it has no other melee weapons.</li><li>If a unit attacks with multiple weapons, all attacks made with weapons that have the same profile must be resolved before resolving attacks with the next.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00119"><div class="tooltip_header">Acts of Faith</div><a href="index.htm#Acts-of-Faith"><div class="tooltip_link"></div></a><div style="clear:both"></div>If your army includes any models with this ability, you will start the battle with 3 Faith Points, plus 1 additional Faith Point for every 10 models with this ability in your army (rounding down). These can be spent to attempt the Acts of Faith listed below. Each can only be attempted once per battle round, and you must spend one Faith Point each time you do so (if you have no Faith Points remaining, you cannot attempt an Act of Faith). To attempt an Act of Faith, select a unit in your army that has the Acts of Faith ability and then choose the Act of Faith you wish to attempt. Then make a Test of Faith for the unit by rolling a D6; if the result is less than that Act of Faith’s devotion value, or is an unmodified roll of 1, the test fails and nothing happens. Otherwise the test is successful and the Act of Faith takes effect.<br><br><b>Hand of the Emperor</b><br><i>Devotion value 4</i><br>Use this Act of Faith at the start of your <a href="../../the-rules/core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>. If successful, add 3" to the selected unit’s Move characteristic until the end of that phase.<br><br><b>Spirit of the Martyr</b><br><i>Devotion value 3</i><br>Use this Act of Faith at the start of your <a href="../../the-rules/core-rules/index.htm#MOVEMENT-PHASE">Movement phase</a>. If successful, one model in the selected unit regains D3 lost wounds, or, if there are no wounded models and any models in the unit have been slain, you can return one slain model to the unit with 1 wound remaining (this model is set up in <a href="../../the-rules/core-rules/index.htm#Unit-Coherency">unit coherency</a> and cannot be set up within 1" of any enemy models – if it is not possible to place this model, it is not returned to the unit).<br><br><b>Aegis of the Emperor</b><br><i>Devotion value 3</i><br>Use this Act of Faith at the start of your opponent’s <a href="../../the-rules/core-rules/index.htm#PSYCHIC-PHASE">Psychic phase</a>. If successful, then until the end of that phase, roll a D6 each time the selected unit suffers a <a href="../../the-rules/core-rules/index.htm#Mortal-Wounds">mortal wound</a>. On a 4+ that mortal wound is ignored.<br><br><b>Divine Guidance</b><br><i>Devotion value 4</i><br>Use this Act of Faith at the start of your <a href="../../the-rules/core-rules/index.htm#SHOOTING-PHASE">Shooting phase</a>. If successful, add 1 to <a href="../../the-rules/core-rules/index.htm#1.-Hit-Roll">hit rolls</a> for attacks made with this unit’s ranged weapons until the end of the phase.<br><br><b>The Passion</b><br><i>Devotion value 5</i><br>Use this Act of Faith at the start of your <a href="../../the-rules/core-rules/index.htm#FIGHT-PHASE">Fight phase</a>. If successful, the selected unit can be chosen to Fight with twice in that phase, instead of only once.<br><br><b>Light of the Emperor</b><br><i>Devotion value 3</i><br>Use this Act of Faith at the start of the <a href="../../the-rules/core-rules/index.htm#MORALE-PHASE">Morale phase</a>. If successful, the selected unit automatically passes <a href="../../the-rules/core-rules/index.htm#Morale-Tests">Morale tests</a> that phase.</span></div><div class="tooltip_templates"><span id="tooltip_content00007"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/core-rules/index.htm#1.-Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a model makes an attack, make one hit roll for that attack by rolling one D6. If the result of the hit roll is equal to or greater than the attacking model’s Ballistic Skill (BS) characteristic (if the attack is being made with a ranged weapon) or its Weapon Skill (WS) characteristic (if the attack is being made with a melee weapon), then that attack scores one hit against the target unit. If not, the attack fails and the attack sequence ends.<br><br>If an attack is made with a weapon that has an ability that says it ‘automatically hits the target’, no hit roll is made – that attack simply scores one hit on the target unit. An unmodified hit roll of 6 always scores a hit, and an unmodified hit roll of 1 always fails. A hit roll can never be modified by more than -1 or +1. This means that if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be -2 or worse, it is changed to be -1. Similarly, if, after all the cumulative modifiers to a hit roll have been calculated, the total modifier would be +2 or better, it is changed to be +1.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00120"><div class="tooltip_header">Deny the Witch</div><a href="../../the-rules/core-rules/index.htm#Deny-the-Witch"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a <span class="kwb">PSYKER</span> unit attempts to deny a psychic power, you must take a Deny the Witch test for that unit by rolling 2D6. If the total is greater than the result of the <a href="../../the-rules/core-rules/index.htm#Psychic-Tests">Psychic test</a>, the Deny the Witch test is passed and the psychic power is denied. Only one attempt can be made to deny a psychic power. If a <span class="kwb">PSYKER</span> unit can attempt to deny more than one psychic power in a <a href="../../the-rules/core-rules/index.htm#PSYCHIC-PHASE">psychic phase</a>, this will be listed on its datasheet.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Deny the Witch</b>: Passed if 2D6 exceeds result of the opposing <span class="kwb">PSYKER</span>’s Psychic test.</li><li>Only one attempt can be made to deny each psychic power.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00121"><div class="tooltip_header">Psychic Tests</div><a href="../../the-rules/core-rules/index.htm#Psychic-Tests"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a <span class="kwb">PSYKER</span> unit attempts to <a href="../../the-rules/core-rules/index.htm#Manifesting-Psychic-Powers">manifest a psychic power</a>, you must take a Psychic test for that unit by rolling 2D6. If the total is equal to or greater than that power’s warp charge value, the Psychic test is passed. If you roll a double 1 or a double 6 when taking a Psychic test, that unit immediately suffers <a href="../../the-rules/core-rules/index.htm#Perils-of-the-Warp">Perils of the Warp</a>.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Psychic test</b>: Passed if 2D6 equals or exceeds psychic power’s warp charge.</li><li>If double 1 or double 6 rolled, <span class="kwb">PSYKER</span> suffers Perils of the Warp.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00122"><div class="tooltip_header">Performing a Heroic Intervention</div><a href="../../the-rules/core-rules/index.htm#Performing-a-Heroic-Intervention"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a unit performs a Heroic Intervention, you can move each model in that unit up to 3" – this is a Heroic Intervention move. Each model in the unit must finish its Heroic Intervention move closer to the closest enemy model. Remember that a unit must finish any type of move in <a href="../../the-rules/core-rules/index.htm#Unit-Coherency">unit coherency</a>.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Heroic Intervention</b>: Move up to 3".</li><li>Must end closer to the closest enemy model.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00123"><div class="tooltip_header">Saving Throw</div><a href="../../the-rules/core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00124"><div class="tooltip_header">Invulnerable Saves</div><a href="../../the-rules/core-rules/index.htm#Invulnerable-Saves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models have an invulnerable save. Each time an attack is allocated to a model with an invulnerable save, you can choose to use either its normal Save (Sv) characteristic or its invulnerable save, but not both. If a model has more than one invulnerable save, it can only use one of them – choose which it will use. If you use a model’s invulnerable save, it is never modified by a weapon’s Armour Penetration value.<br><br><div class="BreakInsideAvoid frameLight Corner14" style=""><ul class="redSquare"><li><b>Invulnerable save</b>: <span class="tooltip" data-tooltip-content="#tooltip_content00123"><span class="tt kwbu">Saving</span> <span class="tt kwbu">throw</span></span> that is never modified by attacking weapon’s AP.</li><li>A model with an invulnerable save can use it instead of its normal Sv.</li></ul></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00125"><div class="tooltip_header">Saving Throw</div><a href="../../the-rules/core-rules/index.htm#4.-Saving-Throw"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+The player commanding the target unit then makes one saving throw by rolling one D6 and modifying the roll by the Armour Penetration (AP) characteristic of the weapon that the attack was made with. For example, if the weapon has an AP of -1, then 1 is subtracted from the saving throw roll. If the result is equal to, or greater than, the Save (Sv) characteristic of the model the attack was allocated to, then the saving throw is successful and the attack sequence ends. If the result is less than the model’s Save characteristic, then the saving throw fails and the model suffers damage. An unmodified roll of 1 always fails.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00126"><b><p>The datasheets using <span class="kwb">MINISTORUM</span> <span class="kwb">PRIEST</span> keyword can be found in the following Factions:</p></b><span class="BatRole">Imperium</span>: <a href="../adepta-sororitas/index.htm">Adepta Sororitas</a>, <a href="../astra-militarum/index.htm">Astra Militarum</a>, <a href="index.htm">Rogue Traders</a>.<br><br><b><p>The <span class="kwb">MINISTORUM</span> <span class="kwb">PRIEST</span> keyword is used in the following  datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Boxset. Warhammer Quest: Blackstone Fortress (8th edition)" src="../../img/expansions/BlackStoneFortress_logo2.png"><a href="../adepta-sororitas/Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Adepta Sororitas (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../adepta-sororitas/Arch-Confessor-Kyrinov.html" class="contentColor">Arch-Confessor Kyrinov</a></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Adepta Sororitas (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../adepta-sororitas/Uriah-Jacobus.html" class="contentColor">Uriah Jacobus</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div class="clFl            " style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Astra Militarum (8th edition, version Indomitus 1.1)" src="../../img/expansions/AstraMilitarum_logo2.png"><a href="../astra-militarum/Ministorum-Priest.html" class="contentColor">Ministorum Priest</a></div></div><div style="clear:both"></div><div class="clFl sLegendary" style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Dataslate. Warhammer Legends: Adepta Sororitas (8th edition)" src="../../img/expansions/Legends_logo2.png"><a href="../adepta-sororitas/Preacher-Legendary-.html" class="contentColor">Preacher (Legendary)</a></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentImperium"><b><p>The <span class="kwb">IMPERIUM</span> keyword is used in the following Rogue Traders datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Elucia-Vhane.html" class="contentColor">Elucia Vhane</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Janus-Draik.html" class="contentColor">Janus Draik</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Neyam-Shai-Murad.html" class="contentColor">Neyam Shai Murad</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Nitsch-s-Squad.html" class="contentColor">Nitsch’s Squad</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="UR-025.html" class="contentColor">UR-025</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="X-101.html" class="contentColor">X-101</a></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentAdeptusMinistorum"><b><p>The <a href="../adepta-sororitas/index.htm"><span class="kwb">ADEPTUS</span> <span class="kwb">MINISTORUM</span></a> keyword is used in the following Rogue Traders datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentAstraMilitarum"><b><p>The <span class="kwb">ASTRA</span> <span class="kwb">MILITARUM</span> keyword is used in the following Rogue Traders datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentCharacter"><b><p>The <a href="../../the-rules/core-rules/index.htm#Characters"><span class="kwb">CHARACTER</span></a> keyword is used in the following Rogue Traders datasheets:</p></b><span class="contents"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Adeptus Mechanicus (9th edition, version Indomitus 1.1)" src="../../img/expansions/AdeptusMechanicus_logo2.png"><a href="Technoarcheologist.html" class="contentColor">Technoarcheologist</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Elucia-Vhane.html" class="contentColor">Elucia Vhane</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Janus-Draik.html" class="contentColor">Janus Draik</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Neyam-Shai-Murad.html" class="contentColor">Neyam Shai Murad</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Amallyn-Shadowguide.html" class="contentColor">Amallyn Shadowguide</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="UR-025.html" class="contentColor">UR-025</a></div><div style="clear:both"></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentInfantry"><b><p>The <span class="kwb">INFANTRY</span> keyword is used in the following Rogue Traders datasheets:</p></b><span class="contents"><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">HQ</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><img class="tooltip logo2" title="Codex. Adeptus Mechanicus (9th edition, version Indomitus 1.1)" src="../../img/expansions/AdeptusMechanicus_logo2.png"><a href="Technoarcheologist.html" class="contentColor">Technoarcheologist</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Elucia-Vhane.html" class="contentColor">Elucia Vhane</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Janus-Draik.html" class="contentColor">Janus Draik</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Neyam-Shai-Murad.html" class="contentColor">Neyam Shai Murad</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Troops</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Nitsch-s-Squad.html" class="contentColor">Nitsch’s Squad</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Elites</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Amallyn-Shadowguide.html" class="contentColor">Amallyn Shadowguide</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="UR-025.html" class="contentColor">UR-025</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><a href="X-101.html" class="contentColor">X-101</a></div><div style="clear:both"></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="datasheets.html">Datasheets collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">HQ</b></span></div><div class="i15 ArmyType_line "><img class="tooltip logo2" title="Codex. Adeptus Mechanicus (9th edition, version Indomitus 1.1)" src="../../img/expansions/AdeptusMechanicus_logo2.png"><a href="Technoarcheologist.html" class="contentColor">Technoarcheologist</a></div></div><div class="i15 ArmyType_line "><a href="Elucia-Vhane.html" class="contentColor">Elucia Vhane</a></div><div class="i15 ArmyType_line "><a href="Aradia-Madellan.html" class="contentColor">Aradia Madellan</a></div><div class="i15 ArmyType_line "><a href="Janus-Draik.html" class="contentColor">Janus Draik</a></div><div class="i15 ArmyType_line "><a href="Neyam-Shai-Murad.html" class="contentColor">Neyam Shai Murad</a></div><div class="i15 ArmyType_line "><a href="Taddeus-the-Purifier.html" class="contentColor">Taddeus the Purifier</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Troops</b></span></div><div class="i15 ArmyType_line "><a href="Nitsch-s-Squad.html" class="contentColor">Nitsch’s Squad</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Elites</b></span></div><div class="i15 ArmyType_line "><a href="Knosso-Prond.html" class="contentColor">Knosso Prond</a></div></div><div class="i15 ArmyType_line "><a href="Larsen-van-der-Grauss.html" class="contentColor">Larsen van der Grauss</a></div><div class="i15 ArmyType_line "><a href="Sanistasia-Minst.html" class="contentColor">Sanistasia Minst</a></div><div class="i15 ArmyType_line "><a href="Amallyn-Shadowguide.html" class="contentColor">Amallyn Shadowguide</a></div><div class="i15 ArmyType_line "><a href="Dahyak-Grekh.html" class="contentColor">Dahyak Grekh</a></div><div class="i15 ArmyType_line "><a href="Espern-Locarno.html" class="contentColor">Espern Locarno</a></div><div class="i15 ArmyType_line "><a href="Gotfret-de-Montbard.html" class="contentColor">Gotfret de Montbard</a></div><div class="i15 ArmyType_line "><a href="Pious-Vorne.html" class="contentColor">Pious Vorne</a></div><div class="i15 ArmyType_line "><a href="Rein-and-Raus.html" class="contentColor">Rein and Raus</a></div><div class="i15 ArmyType_line "><a href="UR-025.html" class="contentColor">UR-025</a></div><div class="i15 ArmyType_line "><a href="X-101.html" class="contentColor">X-101</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><a href="index.htm#Abilities" class="contentColor">Abilities</a></div><div class="w1 i15"><a href="index.htm#Stratagems-by-Phase" class="contentColor">Stratagems by Phase</a></div><div class="w1 i15"><a href="index.htm#Elucidian-Starstriders-Stratagems" class="contentColor">Elucidian Starstriders Stratagems</a></div><div class="w1 i15"><a href="index.htm#Warlord-Traits" class="contentColor">Warlord Traits</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k9ed/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>
