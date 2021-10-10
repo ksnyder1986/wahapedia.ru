@@ -1,0 +1,301 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Introduction">
+<meta name="keywords" content="Wahapedia, Kill Team, 1 edition, nbsp;, Kill Team: Commanders Tokens, Kill Team Tokens, Squad Versus Squad, Introduction, Kill Teams">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1-1.css">
+<link rel="stylesheet" href="../../css/main1-1.css">
+<link rel="stylesheet" href="../../css/header1-1.css">
+<link rel="stylesheet" href="../../css/profile1-1.css">
+<link rel="stylesheet" href="../../css/noprint1-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1-1.css">
+<title>Introduction</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/kill-team/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2405438&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2405438,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2405438"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../about/index-1.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="index-1.htm">Introduction</a><a href="../the-rules/index-1.htm">The Rules</a><a href="../kill-teams/index-1.htm">Kill Teams</a><a href="../missions/index-1.htm">Missions</a><a href="../ultra-close-confines/index-1.htm">Ultra-close Confines</a><a href="../campaigns/index-1.htm">Campaigns</a><a href="../faqs/index-1.htm">FAQs</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Imperium</div><a href="../../factions/adepta-sororitas/index-1.htm">Adepta Sororitas</a><a href="../../factions/adeptus-astartes/index-1.htm">Adeptus Astartes</a><a href="../../factions/adeptus-custodes/index-1.htm">Adeptus Custodes</a><a href="../../factions/adeptus-mechanicus/index-1.htm">Adeptus Mechanicus</a><a href="../../factions/astra-militarum/index-1.htm">Astra Militarum</a><a href="../../factions/blackstone-fortress-kill-team/index-1.htm">Blackstone Fortress Kill Team</a><a href="../../factions/deathwatch/index-1.htm">Deathwatch</a><a href="../../factions/elucidian-starstriders/index-1.htm">Elucidian Starstriders</a><a href="../../factions/grey-knights/index-1.htm">Grey Knights</a><a href="../../factions/sisters-of-silence/index-1.htm">Sisters of Silence</a></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../../factions/chaos-daemons/index-1.htm">Chaos Daemons</a><a href="../../factions/death-guard/index-1.htm">Death Guard</a><a href="../../factions/gellerpox-infected/index-1.htm">Gellerpox Infected</a><a href="../../factions/heretic-astartes/index-1.htm">Heretic Astartes</a><a href="../../factions/servants-of-the-abyss/index-1.htm">Servants of the Abyss</a><a href="../../factions/thousand-sons/index-1.htm">Thousand Sons</a></div><div style="height:16px"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Aeldari</div><a href="../../factions/asuryani/index-1.htm">Asuryani</a><a href="../../factions/drukhari/index-1.htm">Drukhari</a><a href="../../factions/harlequins/index-1.htm">Harlequins</a></div><div class="BreakInsideAvoid"><div class="FactionHeader">Xenos</div><a href="../../factions/genestealer-cults/index-1.htm">Genestealer Cults</a><a href="../../factions/kroot-mercenaries/index-1.htm">Kroot Mercenaries</a><a href="../../factions/necrons/index-1.htm">Necrons</a><a href="../../factions/orks/index-1.htm">Orks</a><a href="../../factions/t-au-empire/index-1.htm">T’au Empire</a><a href="../../factions/tyranids/index-1.htm">Tyranids</a></div><div style="height:16px"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Unaligned</div><a href="../../factions/unaligned/index-1.htm">Unaligned</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/kill-team/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2405438&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2405438,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2405438"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">Introduction</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">Warhammer40,000: Kill Team is a fast-paced tabletop miniatures game that pits teams of elite specialists, ragtag zealots and hard-bitten veterans against one another in vicious battles to the death. Draw your blades, check your ammo, mutter a quick prayer to your gods and get ready to join the fight!</p><div class="Columns3"><div class="BreakInsideAvoid frameDark Corner11" style="margin-bottom:8px;padding:2px; background:#c54c21;color:#;max-width:390px;display:grid"><div style="padding:14px; background:linear-gradient(225deg, transparent 13px, #191b1c 0"><span style="font-family:georgia,serif; font-size:1em"><div class="contents_header">Contents</div><div class="mw3 i10"><a href="index-1.htm#Squad-Versus-Squad" class="contentColorInv"><b style="color:#f61f09">S</b>quad Versus Squad</a></div><div class="mw3 i10"><a href="index-1.htm#Kill-Teams" class="contentColorInv"><b style="color:#f61f09">K</b>ill Teams</a></div><div class="mw3 i10"><a href="index-1.htm#Kill-Team-Tokens" class="contentColorInv"><b style="color:#f61f09">K</b>ill Team Tokens</a></div><div class="mw3 i10"><a href="index-1.htm#Kill-Team:-Commanders-Tokens" class="contentColorInv"><b style="color:#f61f09">K</b>ill Team: Commanders Tokens</a><img class="tooltip logo2" title="Expansion. Kill Team: Commanders (1st edition, version 1.0)" src="../../img/expansions/Commanders_logo2-1.png"></div></span></div></div>
+
+<hr>
+<a name="Squad-Versus-Squad"></a><h2>Squad Versus Squad</h2>Games of Kill Team revolve around vital conflicts between small but powerful bands of warriors rather than huge armies. They are an opportunity to tell cinematic tabletop stories in which every single combatant counts, and every model you command develops their own personality and history.<br><br>Can the enemy’s leader be eliminated before he can reach – and activate – the doomsday weapon? Can your scouting force sever the enemy’s lines of communication and get clear before they are caught? Will the freshly deployed squad of elite specialists be taken down by the battle-hardened band of veterans, and will the eagle-eyed sniper take down his tenth kill in a row? These and countless other narratives await to be uncovered!<br><br>In this book, you will find all the background information and tabletop rules required to dive headlong into the world of Kill Team. The following pages are replete with examples of the sorts of kill teams that might be assembled. You will see some of the apocalyptic war zones through which such warbands fight, and how their desperate fire fights and vicious battles can be every bit as impactful upon the fates of worlds as can the onslaught of massed regiments or super-heavy engines of war.<br><br>Reading on, you will find a wealth of narrative information and random tables for many of the major Warhammer 40,000 factions. Intended to provide collectors with a wide range of exciting inspiration, these tables present various types of kill team that each faction might field, the sorts of missions they might be sent upon, as well as the strange personality quirks that their warriors and leaders might possess. These sections are designed to be toolkits from which players can draw as little or much as they like – one collector may roll up every aspect of their kill team and choose to play in character upon the tabletop in order to get a truly narrative experience, while another may simply use these tables as idea-fuel for conversions or kill team designs.<br><br>Finally, this book provides a full suite of rules for playing a wide variety of skirmish-level Kill Team battles.<br><br>Alongside the rules to <a href="../kill-teams/index-1.htm">create your kill teams</a>, you will also find an array of custom <a href="../missions/index-1.htm">scenarios</a> perfectly suited to squad-on-squad battles to the death. There are also sets of Kill Team tactics to evoke everything from a sniper’s killer headshot to an unhinged knifeman’s rampage, and even a full campaign system during which your kill teams can advance their skills, gain new warriors and wargear, and conquer swathes of different territories in the war to take control of a sprawling Imperial hive city. By combining these mechanics with narrative inspiration from the background tables, your gaming group can enjoy a truly unique and personal hobby experience that will generate war stories you’ll talk about for years to come!<div><br></div><a name="Kill-Teams"></a><h2>Kill Teams</h2>Creating a kill team can be as simple as purchasing a single box of Citadel Miniatures, assembling and painting them to a standard you’re happy with, and getting ready to play. On the other hand, some hobbyists derive great satisfaction from melding multiple troop types into a single, cohesive warband. They model, convert and paint up every individual figure to have its own aesthetic, personality and equipment to bring to battle. Many players enjoy the narrative element of this sort of project, drawing inspiration from their favourite codex or Black Library novel, from esoteric aspects of the Warhammer 40,000 universe, or even from Warhammer 40,000 computer games. There is a real thrill in painstakingly recreating a favourite band of warriors from a book or game and seeing them come to life on the tabletop. In either case, the tables of background traits, team missions, pre-generated names and more found later in this book will go a long way towards helping even a first-time hobbyist create a unique character and backstory for their kill team.<br><br>In Kill Team battles, every warrior in your warband is a vital link in the chain. Even the lowliest Grot or Astra Militarum Conscript can fire the shot that makes the difference between glorious victory and ignominious defeat. However, certain figures amongst the ranks of every kill team deserve a special mention. These are the team’s <a href="../kill-teams/index-1.htm#Leader-Specialists">leader</a> and its <a href="../kill-teams/index-1.htm#SPECIALISTS">specialists</a>.<br><br>Kill team Leaders direct their warriors in the field. Whether they are tyrannical monsters or disciplined line officers, hard-bitten survivors or zealous demagogues, these individuals are the exemplars of their respective kill teams, and in many ways form the embodiment of the player upon the battlefield. Many kill team Leaders have access to powerful weapons and specialised wargear that allow them to cut a path of ruin through an enemy warband, and it is their leadership, force of will and authority that keeps the kill team fighting when the odds are against them.<br><br>Specialists, meanwhile, are warriors who excel in a single area, typically armed with the sort of weaponry that allows them to make the most of their skills. Sharpshooting snipers whose powerful firearms can take an enemy’s head off from across the battlefield; masterful bladesmen whose thrumming power swords have tasted the blood of a hundred foes; madcap demolitions experts with belts full of explosives and a crazed gleam in their eye; all of these and many more embody the specialists that can be added to a kill team in order to give it powerful, battle-winning abilities.</div><div><br></div><div style="clear:both"></div>&nbsp;<div><br></div><div style="clear:both"></div><div class="BreakInsideAvoid  Corner10" style="margin:0px 8px 16px 8px; padding:2px; background:#c54c21;color:#;display:grid; background:linear-gradient(225deg, transparent 14px, #c54c21 0);"><div style="padding:14px; background:linear-gradient(225deg, transparent 13px, #e7e5e0 0); background:linear-gradient(225deg, transparent 13px, var(--corner10-bg) 0)"><a name="Kill-Team-Tokens"></a><h2>Kill Team Tokens</h2><div class=" img-opa" style="float:right;"><img border="0" src="../../img/KillTeamTokens-1.png" style="margin:4px"></div>The Kill Team Starter Set box and the Kill Team Faction Starter Set boxes each come with a set of tokens for use in your games of Kill Team.<br><br>You do not need these tokens to play Kill Team, but if you have a set you’ll find the tokens shown on the right to be a very useful way of keeping track of which of your warriors have done what in each battle round. The core rules explain when each token is used, and what significance it has.<br><br>You’ll also find the objective markers included in each set of tokens useful in your games of Kill Team, where they can represent areas or items of vital importance to your mission.</div></div><div><br></div><div style="clear:both"></div><div style="clear:both"></div><div class="BreakInsideAvoid  Corner10" style="margin:0px 8px 16px 8px; padding:2px; background:#c54c21;color:#;display:grid; background:linear-gradient(225deg, transparent 14px, #c54c21 0);"><div style="padding:14px; background:linear-gradient(225deg, transparent 13px, #e7e5e0 0); background:linear-gradient(225deg, transparent 13px, var(--corner10-bg) 0)"><a name="Kill-Team:-Commanders-Tokens"></a><h2><img class="tooltip logo1" title="Expansion. Kill Team: Commanders (1st edition, version 1.0)" src="../../img/expansions/Commanders_logo1-1.png">Kill Team: Commanders Tokens</h2><div class="Columns2">The Kill Team: Commanders box and Kill Team: Commander Set expansion boxes each come with tokens for use in your games of Kill Team. Some of these are similar to the tokens found in the Kill Team Starter Set and the Kill Team Faction Starter Set boxes, but are suitably more impressive versions worthy of the mighty Commander leading your kill team to battle. The new counters are designed to help you keep track of the powerful new skills and abilities your Commander brings to the battlefield.<br><br>You do not need these tokens to play Kill Team, but if you have a set, you’ll find the tokens shown here to be a very useful way of keeping track of what actions your Commander has taken in each battle round. The core rules explain when many of these tokens are used, and what significance they have, whilst the new tokens are introduced here.<br><br><div style="display:inline-block"><div class=" img-opa" style="float:left;"><img border="0" src="../../img/WoundMarkers-1.png" style="margin:4px"></div><b>Wound Markers:</b> Wound markers range from 1-5 wounds. As soon as your <a href="../kill-teams/index-1.htm#COMMANDERS">Commander</a> suffers one or more wounds in battle, place the appropriate wound marker next to their model to show how many wounds they have suffered.</div><div style="clear:both"></div><br><div style="display:inline-block"><div class=" img-opa" style="float:left;"><img border="0" src="../../img/AuraTacticTokens-1.png" style="margin:4px"></div><b>Aura Tactic Tokens:</b> If you spend <a href="../kill-teams/index-1.htm#COMMAND-POINTS-AND-TACTICS">Command Points</a> to use any of your Commander’s <span class="tooltip" data-tooltip-content="#tooltip_content00470"><span class="tt kwbu">Aura</span> <span class="tt kwbu">Tactics</span></span>, place an Aura Tactic token next to their model as a reminder that it is in effect.</div><div style="clear:both"></div><br><div style="display:inline-block"><div class=" img-opa" style="float:left;"><img border="0" src="../../img/PsychicPowerTokens-1.png" style="margin:4px"></div><b>Psychic Power Tokens:</b> If you use any <a href="../kill-teams/index-1.htm#PSYCHIC-POWERS">psychic powers</a> that have an ongoing effect, place a Psychic Power token next to the affected model as a reminder.</div></div></div></div><div><br></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00470"><div class="tooltip_header">Aura Tactics</div><a href="../kill-teams/index-1.htm#Aura-Tactics"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Kill Team: Commanders includes a new type of Tactic, called Aura Tactics. Aura Tactics are ‘passive’ abilities (i.e. they have a constant effect once they are used), that affect certain models within a given distance for a specific duration of time – most commonly until the end of the phase in which the Aura Tactic was used, or the end of the battle round.<br><br>Unless the Aura Tactic in question says otherwise, the model that used the Aura Tactic is always within range of its effects. For example, an Adeptus Astartes or Deathwatch <a href="../../factions/adeptus-astartes/index-1.htm#Primaris-Captain">Primaris Captain</a> can use the <a href="../../factions/adeptus-astartes/index-1.htm#Aura-Tactics-1">Rites of Battle</a> Aura Tactic, which affects all friendly models within 6" of him. As the Primaris Captain is a friendly model, he benefits from the Aura Tactic as well, effectively leading by example.
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/kill-team/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/kill-team/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/kill-team/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/kill-team/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY-1.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

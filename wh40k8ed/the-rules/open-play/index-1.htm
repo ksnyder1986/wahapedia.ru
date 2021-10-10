@@ -1,0 +1,369 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Open Play">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 8 edition, War Without End, Annihilation, Death or Glory, Hold at all Costs, Open Play">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts-1.css">
+<link rel="stylesheet" href="../../css/main-1.css">
+<link rel="stylesheet" href="../../css/header-1.css">
+<link rel="stylesheet" href="../../css/profile-1.css">
+<link rel="stylesheet" href="../../css/noprint-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir-1.css">
+<title>Open Play</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	var data = localStorage.ShowIndexWargearOptions;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexWargearOptions = data};
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexWargearOptions').prop('checked', StrData);
+	ChangeShowIndexWargearOptions(true);
+	$('.ShowIndexWargearOptions').change(function () {
+      localStorage.ShowIndexWargearOptions = $(this).prop('checked');
+	   ChangeShowIndexWargearOptions(false);
+   });
+	function ChangeShowIndexWargearOptions(IsInit) {
+	if (localStorage.ShowIndexWargearOptions == 'true')
+		{$('.Index1').css('display', ''); $('.Index2').css('display', '');}
+	else
+		{$('.Index1').css('display', 'none'); $('.Index2').css('display', 'none');};
+
+	if (!IsInit) 
+		{$('.tooltip').tooltipster('destroy');
+		 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+		}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowIndexDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexDatasheets').prop('checked', StrData);
+
+	$('.ShowIndexDatasheets').change(function () {
+      localStorage.ShowIndexDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sIndex, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowIndexDatasheets == 'false') {clFlags = clFlags + comma + '.sIndex'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{$('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+});
+$.tooltipster.setDefaults({
+side: ['top', 'bottom', 'left', 'right'],
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+
+</head>
+<body>
+<!--noindex-->
+<div style="margin: 0 auto;width:1000px;">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><img src="../../img/Wahapedia8 site header-1.png" alt="Wahapedia site header" class="SiteHeader"></a>
+
+	<div class="NavWrapper_M">
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a style="height:21px" href="../about/index-1.htm">About</a>
+	</div>
+	</div>
+
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexDatasheets">
+	<span class="checkmark"></span>Show index datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexWargearOptions">
+	<span class="checkmark"></span>Show index wargear options
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">The Rules</div>
+	<div class="NavDropdown-content">
+		<a style="height:21px" href="../playing-this-game/index-1.htm">Playing This Game</a><a style="height:21px" href="../core-rules/index-1.htm">Core Rules</a><a style="height:21px" href="index-1.htm">Open Play</a><a style="height:21px" href="../narrative-play/index-1.htm">Narrative Play</a><a style="height:21px" href="../matched-play/index-1.htm">Matched Play</a><a style="height:21px" href="../advanced-rules/index-1.htm">Advanced Rules</a><a style="height:21px" href="../faqs/index-1.htm">FAQs</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a style="height:21px" href="../../factions/adepta-sororitas/index-1.htm">Adepta Sororitas</a><a style="height:21px" href="../../factions/adeptus-custodes/index-1.htm">Adeptus Custodes</a><a style="height:21px" href="../../factions/adeptus-mechanicus/index-1.htm">Adeptus Mechanicus</a><a style="height:21px" href="../../factions/astra-militarum/index-1.htm">Astra Militarum</a><a style="height:21px" href="../../factions/blood-angels/index-1.htm">Blood Angels</a><a style="height:21px" href="../../factions/dark-angels/index-1.htm">Dark Angels</a><a style="height:21px" href="../../factions/death-korps-of-krieg/index-1.htm">Death Korps of Krieg</a><a style="height:21px" href="../../factions/deathwatch/index-1.htm">Deathwatch</a><a style="height:21px" href="../../factions/elysian-drop-troops/index-1.htm">Elysian Drop Troops</a><a style="height:21px" href="../../factions/grey-knights/index-1.htm">Grey Knights</a><a style="height:21px" href="../../factions/imperial-knights/index-1.htm">Imperial Knights</a><a style="height:21px" href="../../factions/inquisition/index-1.htm">Inquisition</a><a style="height:21px" href="../../factions/officio-assassinorum/index-1.htm">Officio Assassinorum</a><a style="height:21px" href="../../factions/rogue-traders/index-1.htm">Rogue Traders</a><a style="height:21px" href="../../factions/sisters-of-silence/index-1.htm">Sisters of Silence</a><a style="height:21px" href="../../factions/space-marines/index-1.htm">Space Marines</a><a style="height:21px" href="../../factions/space-wolves/index-1.htm">Space Wolves</a><a style="height:21px" href="../../factions/titan-legions/index-1.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a style="height:21px" href="../../factions/chaos-bastions/index-1.htm">Chaos Bastions</a><a style="height:21px" href="../../factions/chaos-daemons/index-1.htm">Chaos Daemons</a><a style="height:21px" href="../../factions/chaos-knights/index-1.htm">Chaos Knights</a><a style="height:21px" href="../../factions/chaos-space-marines/index-1.htm">Chaos Space Marines</a><a style="height:21px" href="../../factions/death-guard/index-1.htm">Death Guard</a><a style="height:21px" href="../../factions/emperor-s-children/index-1.htm">Emperor’s Children</a><a style="height:21px" href="../../factions/heretic-titan-legions/index-1.htm">Heretic Titan Legions</a><a style="height:21px" href="../../factions/renegades-and-heretics/index-1.htm">Renegades and Heretics</a><a style="height:21px" href="../../factions/thousand-sons/index-1.htm">Thousand Sons</a><a style="height:21px" href="../../factions/world-eaters/index-1.htm">World Eaters</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a style="height:21px" href="../../factions/craftworlds/index-1.htm">Craftworlds</a><a style="height:21px" href="../../factions/drukhari/index-1.htm">Drukhari</a><a style="height:21px" href="../../factions/harlequins/index-1.htm">Harlequins</a><a style="height:21px" href="../../factions/ynnari/index-1.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a style="height:21px" href="../../factions/genestealer-cults/index-1.htm">Genestealer Cults</a><a style="height:21px" href="../../factions/necrons/index-1.htm">Necrons</a><a style="height:21px" href="../../factions/orks/index-1.htm">Orks</a><a style="height:21px" href="../../factions/tau-empire/index-1.htm">T’au Empire</a><a style="height:21px" href="../../factions/tyranids/index-1.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a style="height:21px" href="../../factions/unaligned/index-1.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div></div>
+
+<div style="float:left">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+
+<div style="width:380px;padding:0px 0px 26px;float:right">
+<div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://wahapedia.ru/wh40k8ed/search.html','arrow':false,'bg':'transparent','fontsize':16,'fg':'#000000','language':'en','logo':'rb','publicname':'Yandex Site Search #2303560','suggest':true,'target':'_blank','tld':'com','type':2,'usebigdictionary':true,'searchid':2303560,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Search this site...','input_placeholderColor':'#999999','input_borderColor':'#7f9db9'}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2303560"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header">Open Play</div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="Columns3">
+<p class="ShowFluff legend">Are you new to tabletop wargaming? Or are you a grizzled veteran looking for a new challenge? Either way, open play games are one of the best ways to get started, providing you with almost limitless options and flexibility.</p><div class="BreakInsideAvoid Corner3" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><font face="georgia,serif" style="font-size:15px"><div class="contents_header">Contents</div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#War-Without-End" style="color:#fefefe"><b style="color:#f61f09">W</b>ar Without End</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><a href="index-1.htm#Annihilation" style="color:#fefefe">Annihilation</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><a href="index-1.htm#Hold-at-all-Costs" style="color:#fefefe">Hold at all Costs</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 30px"><span style="color:#e3f1f2">•&nbsp;</span><a href="index-1.htm#Death-or-Glory" style="color:#fefefe">Death or Glory</a></div><div style="clear:both"></div></font></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><br>Brilliant ideas are sometimes the simplest, and open play games of Warhammer 40,000 epitomise this. Open play is a style of gaming that allows you to take to the battlefield with any army, made up of any Citadel Miniatures from your collection – no restrictions. It’s as straightforward and streamlined as wargaming gets, and it’s a great way to begin.<br><br>Many players love the deep and complex rules that have traditionally defined tabletop wargaming, and if that’s your preferred style, then you’ll find plenty of support and guidance right here in this book. However, there’s also a lot of fun to be found in a more flexible approach. All you need to play an open play game are your painted miniatures, their datasheets, the <a href="../core-rules/index-1.htm">core rules</a>, a set of dice, a tape measure, a surface on which to play and a willing opponent. Then, just set up your models and start having fun! You can add extra dimensions to your open play games by incorporating any of the rules or guidelines that appear in this and other Warhammer 40,000 books, such as rules for <a href="../advanced-rules/index-1.htm#Detachments">Detachments</a>, <a href="../advanced-rules/index-1.htm#Battlezones">battlezones</a> and <a href="../advanced-rules/index-1.htm#Battlefield-Terrain">battlefield terrain</a>. Alternatively, you can devise your own missions, creating entirely new objectives or special rules, or you could adapt any existing mission to better suit your needs.<br><br>The flexible nature of open play means that you can spend as much or as little time as you like reading rules, and it’s a great introduction to the world of tabletop games. This style of gaming is perfect for beginners, who may not yet own a complete collection of miniatures. It’s also ideal for veterans thinking of starting a new collection, and allows battles to be fought with just a few units of the models you plan to collect, so that you can see how they perform and what tactics work best with them.<br><br>Open play games allow the broadest choice of army selection, providing the greatest degree of freedom for collecting miniatures and putting together an army. Rather than structuring your collection around a particular <a href="../advanced-rules/index-1.htm#Factions">Faction</a>, you can be inspired by any facet of the diverse and brutal galaxy, or simply by the models you most admire. If you’re the proud owner of a varied collection of warriors, war machines and monstrous creatures, there’s nothing to stop you fielding all of them in a single game. You can even deploy every last miniature you own in a battle of apocalyptic proportions, or set yourself unusual challenges. For instance, you could discover how many Space Marine Intercessors it takes to bring down your friend’s Khorne Bloodthirster, or see how long a heroic Terminator Captain could fight off a Nurgling horde.<br><br>While there are no restrictions or requirements placed on the models you can use in open play games, it’s best to have a chat with your opponent before the game begins to discuss what models you will each be taking in your armies. You can even make use of elements of <a href="../matched-play/index-1.htm">matched play</a>, like points, if you wish, but it is entirely up to you.<br><br>Besides giving you freedom to do more with your collection, open play games are also perfect for battles between multiple players. For example, there’s a great fight to be had where a third player brings their Drukhari raiders to the battlefield. The piratical xenos strike from the shadows, preying on targets from the other armies, or perhaps even forging fleeting alliances with one side or the other. In open play, the types of battles you fight are limited only by your imagination.<br><br>You should feel free to tinker with any aspect of playing a game of Warhammer 40,000 that appeals to you. You could, for example, devise other methods of deploying your forces. You might place a screen across the centre of the table so that the armies can deploy in secret, or you and your opponent might each draw a map showing where you plan to deploy your units, and so on.<br><br>With so much scope for fun and creativity, open play is one of the most accessible and enjoyable gaming styles, for beginners and veterans alike. So what are you waiting for? Grab your miniatures collection, however large or small, and give open play a try!</div>
+
+<hr>
+<div style="clear:both"></div><div class="Columns3"><a name="War-Without-End"></a><h2>War Without End</h2><p class="ShowFluff legend">No form of war is unknown in the galaxy. On these pages you will find three examples of open play missions – <a href="index-1.htm#Annihilation">Annihilation</a>, <a href="index-1.htm#Hold-at-all-Costs">Hold at all Costs</a> and <a href="index-1.htm#Death-or-Glory">Death or Glory</a> – that you can use to start waging war right away. You will also find a few ideas below to spark your imagination for other open play battles; you should feel free to use these hooks as the basis of your battles, or simply create ones of your own.</p><ul><li>An elite force strikes behind enemy lines to assassinate the foe’s commanders.</li></ul><ul><li>An evil ritual is nearing completion – fight to prevent its culmination, or bring about its fruition.</li></ul><ul><li>A group of sappers attempts to sabotage a mighty war machine or fortress before it, and its terribly powerful weapons, become fully operational.</li></ul><ul><li>A convoy is ambushed – how many of its vital supplies can it escape with?</li></ul><ul><li>You and your opponent(s) are trying to reach a powerful relic; use your fastest units to race across the long battlefield and be first to claim the prize!</li></ul><ul><li>As you signal the attack, your own allies suddenly reveal their traitorous intent and open fire upon your lines. Can you rally to wage a war on two fronts and prevail?</li></ul><ul><li>Your enemy believes their position unassailable. Lead the forlorn attempt to create a breach and bring victory!</li></ul><ul><li>A band of operatives must silence sentries and enable their army’s approach.</li></ul><ul><li>A priceless piece of archeotech is lost within these war-torn ruins – your forces must be the ones to discover its location and take it back to your headquarters.</li></ul><ul><li>A beleaguered army must hold out long enough for reinforcements to relieve them.</li></ul><ul><li>You have been entrusted with the life of a dignitary – you must escort them safely across the war zone.</li></ul><ul><li>Snipers and close-quarters fighters come into their own in a claustrophobic battle through the ruins of a fallen hive city.</li></ul><ul><li>After months of fighting, the enemy army is on the verge of routing. Break their morale and victory will be assured.</li></ul><br><div class="BreakInsideAvoid Corner2" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner2_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_8.png" style="width:24px"></td><td bgcolor="#354947"><b>TEAM GAMES</b><br>Warhammer 40,000 battles are conventionally fought between two players, but battling it out with three or more lends the game a different dynamic and ensures that no one has to sit out. Of course, the real joy of team games is the social aspect, and you’ll discover true camaraderie with your fellow gamers over salvoes of good-natured banter aimed across the battlefield, making it clear that this gaming style is fun for friend and foe alike.<br><br>It couldn’t be easier to play a team game. Once all players have assembled with their armies, simply split into two teams – how you divide the players is entirely up to you. Having done so, select one model on each team to be their <a href="../core-rules/index-1.htm#The-Warlord">Warlord</a> and then play the battle exactly as you normally would, using the same rules but replacing terms like ‘player’ and ‘opponent’ with ‘team’ or ‘opposing team’.</td><td background="/wh40k8ed/img/corners/Corner2_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div></div><hr><div style="clear:both"></div><div class="BreakInsideAvoid Corner3" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><div class="Columns2"><a name="Annihilation"></a><h3>Annihilation</h3><p class="ShowFluff legend">Two warlords face each other, intent on destroying all that stand before them. Each must attempt to annihilate their opponent, whilst minimising their own losses.</p><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE ARMIES</font><br>In order to play this mission, you must first muster an army from the miniatures in your collection. You can include any models in your army, but this mission works especially well when both armies have a roughly equal Power Level.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE BATTLEFIELD</font><br>Create the battlefield and set up terrain.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">DEPLOYMENT</font><br>Once the battlefield has been created, the players <span class="tooltip" data-tooltip-content="#tooltip_content00021">roll off</span>. The player who rolled highest divides the battlefield into two equal-sized halves. Then, the player who rolled lowest chooses a half to be their deployment zone; the opposite half is their opponent’s deployment zone. The players then alternate deploying their units, one at a time, starting with the player who did not pick their deployment zone. Models must be set up in their own deployment zone, more than 12" from the enemy deployment zone. Continue setting up units until both players have set up all the units in their army, or you have run out of room to set up more units.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">FIRST TURN</font><br>The player who finished setting up their army first can choose whether to have the first or second turn.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">BATTLE LENGTH</font><br>The battle lasts for five battle rounds, or until one army has slain all of its foes.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">VICTORY CONDITIONS</font><br>If one army has slain all of its foes, it immediately wins a major victory. Otherwise, at the end of the battle, the player who has the most models remaining wins a minor victory.</div></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div><div style="clear:both"></div><div class="BreakInsideAvoid Corner3" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><div class="Columns2"><a name="Hold-at-all-Costs"></a><h3>Hold at all Costs</h3><p class="ShowFluff legend">The battlefield lies at a crossing of key strategic importance. A defending army stands ready to hold it at all costs in the face of a superior foe that surrounds them.</p><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE ARMIES</font><br>In order to play this mission, you must first muster an army from the miniatures in your collection. You can include any models in your army, but this mission works especially well when the Power Level of one army is between a third higher and double that of the other. In this mission, the player whose army has the higher Power Level is the Attacker; their opponent is the Defender.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE BATTLEFIELD</font><br>Create the battlefield and set up terrain. The centre of the battlefield should contain at least one terrain feature, such as a hill, a building or a large ruin that the Defender’s units can begin the battle holding.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">DEPLOYMENT</font><br>Once the battlefield has been created, the Defender sets up their entire army anywhere that is within 18" of the centre of the battlefield. The Attacker then sets up their entire army anywhere that is more than 12" from any enemy model.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">FIRST TURN</font><br>The players should <span class="tooltip" data-tooltip-content="#tooltip_content00021">roll off</span>, and whoever rolls highest can choose whether to have the first or second turn.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">BATTLE LENGTH</font><br>The battle lasts for five battle rounds, or until one army has slain all of its foes.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">VICTORY CONDITIONS</font><br>If one army has slain all of its foes, it immediately wins a major victory. Otherwise, at the end of the battle, the player whose model is closest to the centre of the battlefield wins a major victory.</div></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div><div style="clear:both"></div><div class="BreakInsideAvoid Corner3" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><div class="Columns2"><a name="Death-or-Glory"></a><h3>Death or Glory</h3><p class="ShowFluff legend">An outnumbered army faces inevitable defeat, but if they sell their lives dearly, and even a single warrior survives, they will have earned a heroic death.</p><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE ARMIES</font><br>In order to play this mission, you must first muster an army from the miniatures in your collection. You can include any models in your army, but this mission works especially well when the Power Level of one army is at least twice that of the other. In this mission, the player whose army has the higher Power Level is the Attacker, and their opponent is the Defender.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">THE BATTLEFIELD</font><br>Create the battlefield and set up terrain.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">DEPLOYMENT</font><br>Once the battlefield has been created, the players should <span class="tooltip" data-tooltip-content="#tooltip_content00021">roll off</span>. The player who rolled lowest chooses a half to be their deployment zone; the opposite half is their opponent’s deployment zone. The Attacker sets up their entire army first, and the Defender sets up their entire army second. Models must be set up in their own deployment zone, more than 12" from the enemy deployment zone.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">FIRST TURN</font><br>The Defender can choose whether to have the first or second turn.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">BATTLE LENGTH</font><br>The battle lasts for five battle rounds, or until one army has slain all of its foes.<br><br><font style="font-family:impact,charcoal,arial black;font-size:18px;">VICTORY CONDITIONS</font><br>If one army has slain all of its foes, it immediately wins a major victory. Otherwise, at the end of the battle, the Defender wins a heroic victory if they have even a single model remaining on the battlefield.</div></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00021"><div class="tooltip_header">Roll-offs</div><a href="../core-rules/index-1.htm#Roll-offs"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some rules instruct players to roll off. To do so, both players roll a D6, and whoever scores highest wins the roll-off. In the case of a tie, both players re-roll their D6; this is the only time players can reroll a re-roll – if the second and subsequent rolls are also tied, keep on rolling until a winner is decided.
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop_Hover.png)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop.png)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList_Hover.png)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList.png)');
+	return true;
+});
+
+</script>
+</div>
+<div class="noprint">
+<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+<div class="social_buttons">
+	<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+	<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+	<a target="_blank" href="../../../groups/wahapedia/index-1.htm"><div class="social_fb no_tooltip" title="Follow on Facebook"></div></a>
+	<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+</div>		
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

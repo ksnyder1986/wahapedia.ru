@@ -1,0 +1,364 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: About">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 8 edition, Wahapedian Detachment, History, Legal, Introduction, About, Support">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts-1.css">
+<link rel="stylesheet" href="../../css/main-1.css">
+<link rel="stylesheet" href="../../css/header-1.css">
+<link rel="stylesheet" href="../../css/profile-1.css">
+<link rel="stylesheet" href="../../css/noprint-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir-1.css">
+<title>About</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	var data = localStorage.ShowIndexWargearOptions;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexWargearOptions = data};
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexWargearOptions').prop('checked', StrData);
+	ChangeShowIndexWargearOptions(true);
+	$('.ShowIndexWargearOptions').change(function () {
+      localStorage.ShowIndexWargearOptions = $(this).prop('checked');
+	   ChangeShowIndexWargearOptions(false);
+   });
+	function ChangeShowIndexWargearOptions(IsInit) {
+	if (localStorage.ShowIndexWargearOptions == 'true')
+		{$('.Index1').css('display', ''); $('.Index2').css('display', '');}
+	else
+		{$('.Index1').css('display', 'none'); $('.Index2').css('display', 'none');};
+
+	if (!IsInit) 
+		{$('.tooltip').tooltipster('destroy');
+		 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+		}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowIndexDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexDatasheets').prop('checked', StrData);
+
+	$('.ShowIndexDatasheets').change(function () {
+      localStorage.ShowIndexDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sIndex, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowIndexDatasheets == 'false') {clFlags = clFlags + comma + '.sIndex'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{$('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+});
+$.tooltipster.setDefaults({
+side: ['top', 'bottom', 'left', 'right'],
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+
+</head>
+<body>
+<!--noindex-->
+<div style="margin: 0 auto;width:1000px;">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><img src="../../img/Wahapedia8 site header-1.png" alt="Wahapedia site header" class="SiteHeader"></a>
+
+	<div class="NavWrapper_M">
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a style="height:21px" href="index-1.htm">About</a>
+	</div>
+	</div>
+
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexDatasheets">
+	<span class="checkmark"></span>Show index datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexWargearOptions">
+	<span class="checkmark"></span>Show index wargear options
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">The Rules</div>
+	<div class="NavDropdown-content">
+		<a style="height:21px" href="../playing-this-game/index-1.htm">Playing This Game</a><a style="height:21px" href="../core-rules/index-1.htm">Core Rules</a><a style="height:21px" href="../open-play/index-1.htm">Open Play</a><a style="height:21px" href="../narrative-play/index-1.htm">Narrative Play</a><a style="height:21px" href="../matched-play/index-1.htm">Matched Play</a><a style="height:21px" href="../advanced-rules/index-1.htm">Advanced Rules</a><a style="height:21px" href="../faqs/index-1.htm">FAQs</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a style="height:21px" href="../../factions/adepta-sororitas/index-1.htm">Adepta Sororitas</a><a style="height:21px" href="../../factions/adeptus-custodes/index-1.htm">Adeptus Custodes</a><a style="height:21px" href="../../factions/adeptus-mechanicus/index-1.htm">Adeptus Mechanicus</a><a style="height:21px" href="../../factions/astra-militarum/index-1.htm">Astra Militarum</a><a style="height:21px" href="../../factions/blood-angels/index-1.htm">Blood Angels</a><a style="height:21px" href="../../factions/dark-angels/index-1.htm">Dark Angels</a><a style="height:21px" href="../../factions/death-korps-of-krieg/index-1.htm">Death Korps of Krieg</a><a style="height:21px" href="../../factions/deathwatch/index-1.htm">Deathwatch</a><a style="height:21px" href="../../factions/elysian-drop-troops/index-1.htm">Elysian Drop Troops</a><a style="height:21px" href="../../factions/grey-knights/index-1.htm">Grey Knights</a><a style="height:21px" href="../../factions/imperial-knights/index-1.htm">Imperial Knights</a><a style="height:21px" href="../../factions/inquisition/index-1.htm">Inquisition</a><a style="height:21px" href="../../factions/officio-assassinorum/index-1.htm">Officio Assassinorum</a><a style="height:21px" href="../../factions/rogue-traders/index-1.htm">Rogue Traders</a><a style="height:21px" href="../../factions/sisters-of-silence/index-1.htm">Sisters of Silence</a><a style="height:21px" href="../../factions/space-marines/index-1.htm">Space Marines</a><a style="height:21px" href="../../factions/space-wolves/index-1.htm">Space Wolves</a><a style="height:21px" href="../../factions/titan-legions/index-1.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a style="height:21px" href="../../factions/chaos-bastions/index-1.htm">Chaos Bastions</a><a style="height:21px" href="../../factions/chaos-daemons/index-1.htm">Chaos Daemons</a><a style="height:21px" href="../../factions/chaos-knights/index-1.htm">Chaos Knights</a><a style="height:21px" href="../../factions/chaos-space-marines/index-1.htm">Chaos Space Marines</a><a style="height:21px" href="../../factions/death-guard/index-1.htm">Death Guard</a><a style="height:21px" href="../../factions/emperor-s-children/index-1.htm">Emperor’s Children</a><a style="height:21px" href="../../factions/heretic-titan-legions/index-1.htm">Heretic Titan Legions</a><a style="height:21px" href="../../factions/renegades-and-heretics/index-1.htm">Renegades and Heretics</a><a style="height:21px" href="../../factions/thousand-sons/index-1.htm">Thousand Sons</a><a style="height:21px" href="../../factions/world-eaters/index-1.htm">World Eaters</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a style="height:21px" href="../../factions/craftworlds/index-1.htm">Craftworlds</a><a style="height:21px" href="../../factions/drukhari/index-1.htm">Drukhari</a><a style="height:21px" href="../../factions/harlequins/index-1.htm">Harlequins</a><a style="height:21px" href="../../factions/ynnari/index-1.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a style="height:21px" href="../../factions/genestealer-cults/index-1.htm">Genestealer Cults</a><a style="height:21px" href="../../factions/necrons/index-1.htm">Necrons</a><a style="height:21px" href="../../factions/orks/index-1.htm">Orks</a><a style="height:21px" href="../../factions/tau-empire/index-1.htm">T’au Empire</a><a style="height:21px" href="../../factions/tyranids/index-1.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a style="height:21px" href="../../factions/unaligned/index-1.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div></div>
+
+<div style="float:left">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+
+<div style="width:380px;padding:0px 0px 26px;float:right">
+<div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://wahapedia.ru/wh40k8ed/search.html','arrow':false,'bg':'transparent','fontsize':16,'fg':'#000000','language':'en','logo':'rb','publicname':'Yandex Site Search #2303560','suggest':true,'target':'_blank','tld':'com','type':2,'usebigdictionary':true,'searchid':2303560,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Search this site...','input_placeholderColor':'#999999','input_borderColor':'#7f9db9'}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2303560"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header">About</div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+
+<div class="Columns3"><div class="BreakInsideAvoid Corner3" style="padding:6px;float:left;max-width:390px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0" width="312"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><font face="georgia,serif" style="font-size:15px"><div class="contents_header">Contents</div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#History" style="color:#fefefe"><b style="color:#f61f09">H</b>istory</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Legal" style="color:#fefefe"><b style="color:#f61f09">L</b>egal</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Support" style="color:#fefefe"><b style="color:#f61f09">S</b>upport</a></div><div style="clear:both"></div></font></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div style="float:left;"><img border="0" src="../../../img/VMaltsev-1.png" style="margin:4px"></div> Hi! My name is Vyacheslav Maltsev and I am the developer of Wahapedia website. I've designed Wahapedia as a handy tool for the beginners to get into complex Warhammer tabletop universe. And it is Universe indeed! For example Warhammer 40,000 comprises 38 factions, more than 100 codexes/supplements, over 2000 unit profiles and about 4000 special rules.<div><br></div><a name="History"></a><h2>History</h2>I started to work on the site in 2013. Google Sites has been chosen as a platform for its ability to edit pages via browser and for free hosting without any ads. At the beginning I just typed text into pages using Google Sites tools. I asked for help on Warforge forum and lots of people lend me a helping hand. But still I had to spend much time on the pages adjustment.<br><br>After two years of development I have come to an idea of data-driven website. Frankly, I am not a web-designer. I am database programmer and have chosen the instrument which I know better: 1C:Enterprise. Shortly, the meaning is:<br><ol><li>Input codex data into appropriate database tables.</li><li>Generate HTML-code based on database data.</li><li>Upload HTML-code into the appropriate page on website.</li></ol>This approach allowed me to unify the style for all pages and significantly reduce the time of creating a web page. Previously building a complete codex took 2 months, now it takes 1 week. The work with the database requires specific knowledge, so I refused help of Warforge comrades. However, I am extremely grateful to them for their support during the initial stage of the site’s life.<br><br>Eith edition released in june 2017. All codexes had to be re-input once again. Simultaneously I worked on modifying 1C:Wahapedia database code. The bulk of indexes have been implemented by the end of 2017. Now, when the Games Workshop announced 9th edition of the Warhammer 40,000 rules. I have to start over. Its not first time for me since I support Wahapedia since 6th edition.<div><br></div><a name="Legal"></a><h2>Legal</h2>Many may ask, "Is it legal?" I do not think so. If the Games Workshop finds this site and considers it to be dangerous for their business the company will require site’s closure. However, I would like to say a few words in defense of my offspring:<br><ol><li>The site does not store any codexes’ scans. Pictures from rulebooks are used only to illustrate the rules of the game.</li><li>The site does not contain a literary component (background) of codexes. The exception is the text of no more than 1-2 paragraphs to describe special rules, wargear and missions.</li><li>I do not plan to include any advertising on the site or enable a paid subscription. Using of the site is completely free (donations doesn’t count).</li><li>In the end GW will receive benefit from this site, as beginners will learn the game easily. Also you still have to pay for paints and miniatures – you can’t download it from the Internet.</li></ol>– But still. What if GW will send you a "love letter"? – you may ask. For this question, I have some answers:<br><ol><li>Site moved out of British Themis’ reach, in the .ru segment. Hosting also situated in Russia. Until I’m not using this site for selling weapons to terrorists and store porn - I’m absolutely fine.</li><li>I am citizen of another country and I’m not going to travel in GB.</li><li>I can lock site on a password that will be changed from time to time. New password would be sent to trusted users only or published on some source with limited access (such as Patreon).</li><li>In worst case it is possible to go offline - put site on some torrent or other file storage. You will have to download it every time site recieves an update</li></ol><div><br></div><a name="Support"></a><h2>Support</h2>Like the site? Think it’s useful? Support it!<br>There are several ways in which you can support the Wahapedia development:<br><ol><li><b>Report mistakes.</b> I love to receive error messages from users, since each bugfix makes Wahapedia even better! Fixing an error usually takes up to 24 hours.</li><li><b>Share your ideas.</b> Found forgotten datasheet? Have an idea to make site more handy? You are welcome to drop me a letter or contact me in social media.</li><li><b>Give some of your money.</b> Donation is the most powerful motivator for my daily struggle for data relevance and integrity of the site.</li></ol><br><div style="padding: 5px 0 5px 0; display:flex; justify-content:center; align-items:center;"><i>E-mail:</i> <a target="_blank" href="mailto:info@wahapedia.ru">info@wahapedia.ru</a></div><div style="padding: 5px 0 5px 0; display:flex; justify-content:center; align-items:center;"><a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div><img border="0" src="../../../img/PayPal_button-1.png" style="margin:4px"></div></a></div><div style="display:flex;justify-content:center;align-items:center;"><a href="../../../bePatron-1.html?u=6092318" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async="" src="../../../becomePatronButton.bundle-1.js"></script></div><div><br></div></div>
+<!--noindex--><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop_Hover.png)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop.png)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList_Hover.png)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList.png)');
+	return true;
+});
+
+</script>
+</div>
+<div class="noprint">
+<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+<div class="social_buttons">
+	<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+	<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+	<a target="_blank" href="../../../groups/wahapedia/index-1.htm"><div class="social_fb no_tooltip" title="Follow on Facebook"></div></a>
+	<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+</div>		
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿.PowerPrice {
+	background-image: url(../img/PowerSign-1.png);
+	background-repeat:no-repeat;
+	color: #fefefe;
+	font-size: 24px;
+	font-family: times new roman, sans-serif;
+	width: 44px;
+	height: 42px;
+	text-align: center;
+	float: left;
+	margin-left: 8px;
+}
+
+.pTable1_ {
+	padding: 4px;
+	width: 210px;
+	border-width: 0px 0px 0px;
+}
+
+.wTable1 {
+	vertical-align: middle;
+	font-family:impact,charcoal,arial black;
+	background-color:#b4bbb4; // e09f77
+	padding:2px 6px 2px 6px;
+	border-bottom: 2px ridge #888;
+}
+.pad4 {padding: 4px;}
+.pad4044 {padding: 4px 0 4px 4px;}
+.pad2626 {padding:2px 6px 2px 6px;}
+
+.pTable1 {
+	text-align: center;
+	width:40px;
+	border-width:0px 0px 0px;
+}
+.pTable2_ {
+	padding: 4px;
+	width: 210px;
+	border-width:0px;
+}
+.pTable2 {
+	text-align: center;
+	vertical-align: middle;
+	width:40px;
+	border-width:0px;
+}
+.wTable2 {
+	font-weight: bold;
+	color:#fefefe;
+	padding:2px 6px 2px 6px;
+}
+
+.Col2 {
+	display: inline-block;
+	-moz-column-count: 2; /* Для Firefox */
+	-moz-column-gap: 12px;
+	-webkit-column-count: 2; /* Для Safari и Chrome */
+	-webkit-column-gap: 12px;
+	column-count: 2;
+	column-gap: 12px;
+}
+
+.PriceTag {
+	font-family: times new roman, sans-serif;
+	float: right;
+	font-size: 14px;
+	padding: 2px 4px 0px 2px;
+	color:#fefefe;
+	background-color: #b32d2d;
+	font-weight: bold;
+	position: relative;
+	height: 16px;
+	margin-left: 14px;
+}
+.PriceTag a {text-decoration: underline}
+.PriceTag:before {
+	content: "";
+	background: url("http://wahapedia.ru/wh40k8ed/img/Price_arrow.png") no-repeat;
+	width: 8px;
+	height: 20px;
+	position: absolute;
+	left: -8px;
+	top: -0px;
+}
+
+.PriceTagW {
+	font-family: times new roman, sans-serif;
+	float: right;
+	font-size: 14px;
+	padding: 1px 4px 0px 2px;
+	color:#fefefe;
+	background-color: #b32d2d;
+	font-weight: bold;
+	position: relative;
+	height: 17px;
+	margin-left: 14px;
+}
+.PriceTagW a {text-decoration: underline}
+.PriceTagW:before {
+	content: "";
+	background: url("http://wahapedia.ru/wh40k8ed/img/Price_arrow.png") no-repeat;
+	width: 8px;
+	height: 20px;
+	position: absolute;
+	left: -8px;
+	top: -0px;
+}
+
+.legendE {
+	display:flex;
+	align-items:center;
+}
+.legendW {
+	display:block;
+	width:315px;
+	cursor: pointer;
+	float:left; 
+	padding:2px 5px 2px 0px;
+}
+.Index1 {
+	color: #465f65 !important;
+}
+
+
+.ya-site-form input {
+	height: 28px;
+	width: 64px;
+	font-size: 18px;
+}
+.ya-site-form__input-text {
+	font-family: Georgia1, Georgia, serif !important;
+}			
+.ya-site-form__submit {
+	font-family: 'Minion-Cyrillic-Bold', Georgia1, serif !important;
+	font-size: 18px !important;
+}
+.tooltip_templates { display: none; }

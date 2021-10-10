@@ -1,0 +1,368 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Playing This Game">
+<meta name="keywords" content="Wahapedia, Warhammer 40000, 8 edition, Advanced Rules, Playing This Game, Battle forged Armies, Core Rules, Open Play, Narrative Play, Matched Play">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts-1.css">
+<link rel="stylesheet" href="../../css/main-1.css">
+<link rel="stylesheet" href="../../css/header-1.css">
+<link rel="stylesheet" href="../../css/profile-1.css">
+<link rel="stylesheet" href="../../css/noprint-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir-1.css">
+<title>Playing This Game</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	var data = localStorage.ShowIndexWargearOptions;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexWargearOptions = data};
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexWargearOptions').prop('checked', StrData);
+	ChangeShowIndexWargearOptions(true);
+	$('.ShowIndexWargearOptions').change(function () {
+      localStorage.ShowIndexWargearOptions = $(this).prop('checked');
+	   ChangeShowIndexWargearOptions(false);
+   });
+	function ChangeShowIndexWargearOptions(IsInit) {
+	if (localStorage.ShowIndexWargearOptions == 'true')
+		{$('.Index1').css('display', ''); $('.Index2').css('display', '');}
+	else
+		{$('.Index1').css('display', 'none'); $('.Index2').css('display', 'none');};
+
+	if (!IsInit) 
+		{$('.tooltip').tooltipster('destroy');
+		 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+		}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowIndexDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowIndexDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowIndexDatasheets').prop('checked', StrData);
+
+	$('.ShowIndexDatasheets').change(function () {
+      localStorage.ShowIndexDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+
+
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sIndex, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowIndexDatasheets == 'false') {clFlags = clFlags + comma + '.sIndex'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{$('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+};
+$('.tooltip').tooltipster({
+contentCloning: true,
+restoration: 'current',
+maxWidth: 600,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+position: 'left',
+restoration: 'previous',
+functionPosition: function(instance, helper, position){
+	position.coord.top -= 20;
+	position.distance -= 5;
+	return position;
+},
+contentCloning: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true
+}
+});
+});
+$.tooltipster.setDefaults({
+side: ['top', 'bottom', 'left', 'right'],
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+
+</head>
+<body>
+<!--noindex-->
+<div style="margin: 0 auto;width:1000px;">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><img src="../../img/Wahapedia8 site header-1.png" alt="Wahapedia site header" class="SiteHeader"></a>
+
+	<div class="NavWrapper_M">
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a style="height:21px" href="../about/index-1.htm">About</a>
+	</div>
+	</div>
+
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexDatasheets">
+	<span class="checkmark"></span>Show index datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World datasheets
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowIndexWargearOptions">
+	<span class="checkmark"></span>Show index wargear options
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">The Rules</div>
+	<div class="NavDropdown-content">
+		<a style="height:21px" href="index-1.htm">Playing This Game</a><a style="height:21px" href="../core-rules/index-1.htm">Core Rules</a><a style="height:21px" href="../open-play/index-1.htm">Open Play</a><a style="height:21px" href="../narrative-play/index-1.htm">Narrative Play</a><a style="height:21px" href="../matched-play/index-1.htm">Matched Play</a><a style="height:21px" href="../advanced-rules/index-1.htm">Advanced Rules</a><a style="height:21px" href="../faqs/index-1.htm">FAQs</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns"><div class="FactionHeader">Imperium</div><a style="height:21px" href="../../factions/adepta-sororitas/index-1.htm">Adepta Sororitas</a><a style="height:21px" href="../../factions/adeptus-custodes/index-1.htm">Adeptus Custodes</a><a style="height:21px" href="../../factions/adeptus-mechanicus/index-1.htm">Adeptus Mechanicus</a><a style="height:21px" href="../../factions/astra-militarum/index-1.htm">Astra Militarum</a><a style="height:21px" href="../../factions/blood-angels/index-1.htm">Blood Angels</a><a style="height:21px" href="../../factions/dark-angels/index-1.htm">Dark Angels</a><a style="height:21px" href="../../factions/death-korps-of-krieg/index-1.htm">Death Korps of Krieg</a><a style="height:21px" href="../../factions/deathwatch/index-1.htm">Deathwatch</a><a style="height:21px" href="../../factions/elysian-drop-troops/index-1.htm">Elysian Drop Troops</a><a style="height:21px" href="../../factions/grey-knights/index-1.htm">Grey Knights</a><a style="height:21px" href="../../factions/imperial-knights/index-1.htm">Imperial Knights</a><a style="height:21px" href="../../factions/inquisition/index-1.htm">Inquisition</a><a style="height:21px" href="../../factions/officio-assassinorum/index-1.htm">Officio Assassinorum</a><a style="height:21px" href="../../factions/rogue-traders/index-1.htm">Rogue Traders</a><a style="height:21px" href="../../factions/sisters-of-silence/index-1.htm">Sisters of Silence</a><a style="height:21px" href="../../factions/space-marines/index-1.htm">Space Marines</a><a style="height:21px" href="../../factions/space-wolves/index-1.htm">Space Wolves</a><a style="height:21px" href="../../factions/titan-legions/index-1.htm">Titan Legions</a><div style="height:37px"></div><div class="FactionHeader">Chaos</div><a style="height:21px" href="../../factions/chaos-bastions/index-1.htm">Chaos Bastions</a><a style="height:21px" href="../../factions/chaos-daemons/index-1.htm">Chaos Daemons</a><a style="height:21px" href="../../factions/chaos-knights/index-1.htm">Chaos Knights</a><a style="height:21px" href="../../factions/chaos-space-marines/index-1.htm">Chaos Space Marines</a><a style="height:21px" href="../../factions/death-guard/index-1.htm">Death Guard</a><a style="height:21px" href="../../factions/emperor-s-children/index-1.htm">Emperor’s Children</a><a style="height:21px" href="../../factions/heretic-titan-legions/index-1.htm">Heretic Titan Legions</a><a style="height:21px" href="../../factions/renegades-and-heretics/index-1.htm">Renegades and Heretics</a><a style="height:21px" href="../../factions/thousand-sons/index-1.htm">Thousand Sons</a><a style="height:21px" href="../../factions/world-eaters/index-1.htm">World Eaters</a><div style="height:37px"></div><div class="FactionHeader">Aeldari</div><a style="height:21px" href="../../factions/craftworlds/index-1.htm">Craftworlds</a><a style="height:21px" href="../../factions/drukhari/index-1.htm">Drukhari</a><a style="height:21px" href="../../factions/harlequins/index-1.htm">Harlequins</a><a style="height:21px" href="../../factions/ynnari/index-1.htm">Ynnari</a><div style="height:37px"></div><div class="FactionHeader">Xenos</div><a style="height:21px" href="../../factions/genestealer-cults/index-1.htm">Genestealer Cults</a><a style="height:21px" href="../../factions/necrons/index-1.htm">Necrons</a><a style="height:21px" href="../../factions/orks/index-1.htm">Orks</a><a style="height:21px" href="../../factions/tau-empire/index-1.htm">T’au Empire</a><a style="height:21px" href="../../factions/tyranids/index-1.htm">Tyranids</a><div style="height:37px"></div><div class="FactionHeader">Unaligned</div><a style="height:21px" href="../../factions/unaligned/index-1.htm">Unaligned</a><div style="height:37px"></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div></div>
+
+<div style="float:left">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+
+<div style="width:380px;padding:0px 0px 26px;float:right">
+<div class="ya-site-form ya-site-form_inited_no" onclick="return {'action':'http://wahapedia.ru/wh40k8ed/search.html','arrow':false,'bg':'transparent','fontsize':16,'fg':'#000000','language':'en','logo':'rb','publicname':'Yandex Site Search #2303560','suggest':true,'target':'_blank','tld':'com','type':2,'usebigdictionary':true,'searchid':2303560,'input_fg':'#000000','input_bg':'#ffffff','input_fontStyle':'normal','input_fontWeight':'normal','input_placeholder':'Search this site...','input_placeholderColor':'#999999','input_borderColor':'#7f9db9'}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2303560"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header">Playing This Game</div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">Welcome to the rules section of Warhammer 40,000 – a guide to playing games in the war-torn galaxy of the Dark Millennium. As well as including the core rules for engaging in tabletop warfare with your miniatures, this section is packed with different ways to enjoy games of Warhammer 40,000, crammed with inspiration and brimming with battles.</p><div class="Columns3"><div class="BreakInsideAvoid Corner3" style="padding:6px;float:left;max-width:390px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0" width="312"><tbody><tr><td background="/wh40k8ed/img/corners/Corner3_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_8.png" style="width:24px"></td><td bgcolor="#3e4644"><font face="georgia,serif" style="font-size:15px"><div class="contents_header">Contents</div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Core-Rules" style="color:#fefefe"><b style="color:#f61f09">C</b>ore Rules</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Advanced-Rules" style="color:#fefefe"><b style="color:#f61f09">A</b>dvanced Rules</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Open-Play" style="color:#fefefe"><b style="color:#f61f09">O</b>pen Play</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Narrative-Play" style="color:#fefefe"><b style="color:#f61f09">N</b>arrative Play</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Matched-Play" style="color:#fefefe"><b style="color:#f61f09">M</b>atched Play</a></div><div style="clear:both"></div><div style="max-width:265px;padding: 1px 10px 1px 10px"><a href="index-1.htm#Battle-forged-Armies" style="color:#fefefe"><b style="color:#f61f09">B</b>attle-forged Armies</a></div><div style="clear:both"></div></font></td><td background="/wh40k8ed/img/corners/Corner3_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner3_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner3_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div>Throughout the following pages you’ll find an array of different rules and guidelines to suit all hobbyists, from casual collectors who play occasional games with their friends, to veteran warriors who’ve spent years honing their forces for competitive tournaments. The core rules are everybody’s starting point, but as everyone enjoys the Games Workshop hobby in different ways, this section of the book also introduces three different ways to approach your games: <a href="../open-play/index-1.htm">open play</a>, <a href="../narrative-play/index-1.htm">narrative play</a>, and <a href="../matched-play/index-1.htm">matched play</a>. Each offers a different experience but it’s important to note that elements of each can be mixed and matched to create whatever kind of gaming experience you want – they are a gaming toolbox, providing inspiration and options to get the dice rolling and allow you to play with your collection of Citadel Miniatures on the tabletop.<br><br>You will also find a guide to building battlefields, the rules for forming a <a href="../advanced-rules/index-1.htm#Battle-forged-Armies">Battle-forged army</a>, and an introduction to <a href="../advanced-rules/index-1.htm">advanced rules</a>, which explore additional ways to fight your battles. So whether you are looking to wage war in one of the myriad deadly environments of the galaxy, play a team game, or fight battles as part of an escalating narrative campaign, there is an expansion to enable you to do so. A universe of war awaits you – read on to see short explanations of what you will find on these pages and how to use them in your games, starting with the essential core rules.</div>
+
+<hr>
+<div class="BreakInsideAvoid Corner2" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner2_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_8.png" style="width:24px"></td><td bgcolor="#354947"><div class="Columns3"><a name="Core-Rules"></a><h2>Core Rules</h2><a href="../core-rules/index-1.htm">Start here!</a> Whatever type of game you want to play, you’ll need the <a href="../core-rules/index-1.htm">core rules</a>, which form the essential foundation for playing games of Warhammer 40,000. These rules show you how to <a href="../core-rules/index-1.htm#1.-MOVEMENT-PHASE">move</a>, <a href="../core-rules/index-1.htm#2.-PSYCHIC-PHASE">use psychic powers</a>, <a href="../core-rules/index-1.htm#3.-SHOOTING-PHASE">shoot</a>, <a href="../core-rules/index-1.htm#4.-CHARGE-PHASE">charge</a> and <a href="../core-rules/index-1.htm#5.-FIGHT-PHASE">fight</a> with your models – basically everything you need to start waging miniature war! They provide the key mechanics for everything from foot-slogging infantry to gigantic monsters and armour-clad war machines, allowing you to quickly build up from your first few simple games to grand spectacles of all-out war.<br><br>The core rules also provide plenty of helpful clarifications, hints and tips, along with a single mission (the suitably titled ‘<a href="../core-rules/index-1.htm#Only-War">Only War</a>’), which serves as a perfect introduction to gaming in the Warhammer 40,000 universe. Wherever you go with your games, the core rules will provide the foundation you need to get started, and be your constant gaming companion. <br><br>Before trying too many of the diverse options offered by the Warhammer 40,000 gaming hobby, it’s recommended that you play a few games using just these rules. This will build a great grounding for what comes after.</div></td><td background="/wh40k8ed/img/corners/Corner2_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div><div style="clear:both"></div><div class="Columns3"><a name="Advanced-Rules"></a><h2>Advanced Rules</h2>At its heart, Warhammer 40,000 is a game that pits one army of warriors against another in tabletop conflict to the death. Beyond that core premise, it is a hobby of vast and thrilling variation that allows you to depict everything from breakneck aerial dogfights and orbital drop-assaults to war across hostile alien environments between multiple different armies at once and close-run battles through the war-torn streets of an Imperial hive – all encompassed by the <a href="../advanced-rules/index-1.htm">advanced rules</a>.<br><br>Whether you choose to introduce any advanced rules to your games, or even combine several different aspects in a single game, all of these optional mechanics build upon the <a href="../core-rules/index-1.htm">core rules</a> – they add to or provide variation on the core rules, rather than requiring you to learn a whole new game system! From huge <a href="../advanced-rules/index-1.htm#Multiplayer-Battles">multiplayer battles</a> and <a href="../advanced-rules/index-1.htm#Stronghold-Assault">sprawling sieges</a>, to <a href="../advanced-rules/index-1.htm#Campaigns">campaigns</a> fought over strange alien worlds, the advanced rules will provide you with exciting new gaming experiences to suit whatever type of game you want to play for years to come.<div><br></div></div><div style="clear:both"></div><div class="Columns3"><a name="Open-Play"></a><h2>Open Play</h2>The first of the three distinct ways to play Warhammer 40,000, <a href="../open-play/index-1.htm">open play</a> is the most free-form and adaptable. It can be as simple or as complex as you like – you can literally just pick any Citadel Miniatures you have and start playing. It’s as easy as that, and playing games this way can lead to extraordinary battles as players are free to put their entire collections on the battlefield to get the dice rolling started! Whether this leads to titanic clashes between huge armies that last entire weekends, or desperate and dramatic battles against the odds, the emphasis in open play is firmly on playing a fun wargame with whatever parts of your collections you wish, in whatever fashion you so choose.<br><br>This section also contains a selection of story hooks, to use as inspiration for your games. With a little prior thought and discussion, your Warhammer 40,000 battles can take on a thrilling, story-driven aspect, transcending the simple rules of the game and becoming something altogether more dramatic and involving. Desperate last stands, vendettas between mighty heroes, courageous rescue missions and endless other characterful conflicts can easily be brought to life on the tabletop in an open play game.<br><br>Open play is also an ideal way of gaming when you have multiple players who want to get involved in a battle all at once. Allowing for all kinds of variation in terms of team gaming, outnumbered players fighting against the odds, or whatever other scenario you can envision, this section provides you with the help you need to get the most out of your multiplayer games.<div><br></div></div><div style="clear:both"></div><div class="Columns3"><a name="Narrative-Play"></a><h2>Narrative Play</h2><a href="../narrative-play/index-1.htm">Narrative play</a> is based around the stories embedded in the background of Warhammer 40,000, either those in our books or those you write yourself. You’ll often find that reading up on the history of a particular Faction, hero or battle is all the inspiration you need to set up a game and play it.<br><br>Perhaps you enjoyed the story of a bitter rivalry between two <span class="tooltip" data-tooltip-content="#tooltip_content00005">characters</span> in the background, whether it be the ongoing feud between <a href="../../factions/astra-militarum/Commissar-Yarrick-1.html">Commissar Yarrick</a> and <a href="../../factions/orks/Ghazghkull-Thraka-1.html">Ghazghkull Thraka</a> or Wolf Lord <a href="../../factions/space-wolves/Logan-Grimnar-1.html">Logan Grimnar’s</a> quest for revenge upon the Daemon Primarch <a href="../../factions/thousand-sons/Magnus-the-Red-1.html">Magnus the Red</a>. Maybe tales of strategy and massed battle bring you inspiration, stories of sudden ambushes, sweeping flank attacks and meat-grinder offensives through the smoke and fire of no man’s land. Whatever the case, narrative play provides guidelines and structured scenarios that allow you to recreate your favourite war stories on the tabletop.<br><br><div class="BreakInsideAvoid Corner2" style="padding:6px;max-width:988px;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner2_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_8.png" style="width:24px"></td><td bgcolor="#354947"><b>An Evolving Experience</b><br>With three different styles of play to explore, dozens of missions to play, and an ever-expanding array of armies and <a href="../advanced-rules/index-1.htm#Detachments">Detachments</a> to collect, Warhammer 40,000 could potentially seem intimidating to a new player. Fortunately, by starting with the <a href="../core-rules/index-1.htm">core rules</a> and building up at an appropriate pace, you can enjoy your hobby in whatever way suits you. By taking your time and trying things out, you’ll soon find the combination that best fits your play style, and if things ever start to feel a little bit routine, just try out some new rules!</td><td background="/wh40k8ed/img/corners/Corner2_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><br>There are many places to find these sorts of exciting tales, from the histories and backgrounds provided in this book and in codexes to the dramatic stories in Black Library’s Warhammer 40,000 novels.<br><br>Unlike <a href="../open-play/index-1.htm">open play</a>, which leaves the impetus on the players to determine their own story and victory conditions, narrative play gives a somewhat tighter framework to operate in. Examples of this can be found in the seven new missions found in this section of rules. Going beyond the straightforward battle fought in the <a href="../core-rules/index-1.htm#Only-War">Only War</a> scenario, games such as <a href="../narrative-play/index-1.htm#Patrol">Patrol</a> and <a href="../narrative-play/index-1.htm#Ambush-">Ambush!</a> alter the parameters of your games and provide players with differing roles and objectives where one plays as the attacker and the other as the defender.<br><br>The additional rules provided in this section are intended to help with your own battlefield storytelling, and with a little experience and imagination, you and your opponents can quickly piece together your own exciting narrative play missions to depict whatever deadly scenario you wish.<div><br></div></div><div style="clear:both"></div><div class="Columns3"><a name="Matched-Play"></a><h2>Matched Play</h2>As the name would suggest, tabletop wargames are just that: games to be enjoyed by all players involved. For some, this enjoyment is derived from assembling <a href="../advanced-rules/index-1.htm#Battle-forged-Armies">Battle-forged armies</a> that they believe provide the optimal combination of units, and then pitting these armies against one another in balanced contests of strategy and skill.<br><br><a href="../matched-play/index-1.htm">Matched play</a> allows for armies of this sort to be tested against each other under conditions that give no particular advantage to either side, in order to see which army is strongest and which general is canniest. It’s a more balanced and controlled way of playing games, often favoured by those collectors who engage in gaming tournaments and similar events. Matched play is also a fantastic way to ensure a relatively balanced gaming experience for those who like playing at local gaming clubs or stores, where they may find themselves having pick-up games against opponents they have never faced before.<br><br>This section of the rules includes a further twelve missions that are designed to compliment the rules for <a href="../advanced-rules/index-1.htm#Battle-forged-Armies">Battle-forged armies</a> and create a gaming experience where both players have as equal a chance of securing victory as possible.<br><br>The six <a href="../matched-play/index-1.htm#Eternal-War-Missions">Eternal War missions</a> are the most stable and straightforward in this rulebook. Typically based around both players attempting to break into the other’s territory, secure control of objectives, or eliminate particular enemy targets, each one is an exciting tactical challenge every time you play.<br><br>By comparison, the six <a href="../matched-play/index-1.htm#Maelstrom-of-War-Missions">Maelstrom of War missions</a> are more unpredictable. These games use dynamic <a href="../matched-play/index-1.htm#Tactical-Objectives">Tactical Objectives</a> to randomise players’ victory conditions and keep games hanging in the balance.<br><br><div class="BreakInsideAvoid Corner2" style="padding:6px;float:right;max-width:300;"><font face="georgia,serif" style="font-size:15px"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td background="/wh40k8ed/img/corners/Corner2_1.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_2.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_3.png" style="width:24px;height:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_8.png" style="width:24px"></td><td bgcolor="#354947"><b>Where to Play</b><br>There are lots of places to play Warhammer 40,000, and opponents are normally easy to find. If you are lucky enough to have a local gaming club or gaming store nearby, these can be great places to play and to meet new opponents and favourite rivals in the making. Alternatively, many collectors enjoy playing games with their friends, often building gaming tables at home to play on. Still others involve themselves in <a href="../advanced-rules/index-1.htm#Campaigns">campaign events</a> and <a href="../matched-play/index-1.htm#Organised-Events">tournaments</a>, spending whole weekends playing game after game against many opponents. </td><td background="/wh40k8ed/img/corners/Corner2_4.png" style="width:24px"></td></tr><tr><td background="/wh40k8ed/img/corners/Corner2_7.png" style="width:24px;height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_6.png" style="height:24px"></td><td background="/wh40k8ed/img/corners/Corner2_5.png" style="width:24px;height:24px"></td></tr></tbody></table></font></div><div><br></div></div><div style="clear:both"></div><div class="Columns3"><a name="Battle-forged-Armies"></a><h2>Battle-forged Armies</h2>While <a href="../open-play/index-1.htm">open play</a> encourages gamers to place whatever models they want to on the tabletop, in whatever quantities they choose, both <a href="../narrative-play/index-1.htm">narrative</a> and <a href="../matched-play/index-1.htm">matched</a> play tend to use <a href="../advanced-rules/index-1.htm#Battle-forged-Armies">Battle-forged armies</a>. These forces bring additional structure and balance to the gaming experience. <br><br>When selecting a <a href="../advanced-rules/index-1.htm#Battle-forged-Armies">Battle-forged army</a>, you will find that there are greater restrictions and considerations of structure placed upon you. Some people will intentionally build their collections using the Battle-forged template to ensure that they can easily assemble a Battle-forged force for any game they play. Others prefer to collect however the mood takes them, and then simply form models from their collection into a Battle-forged army when their games require them to do so. Either method is equally valid, and both allow you to build exciting and impressive miniatures collections.<br><br>Battle-forged armies must be organised into <a href="../advanced-rules/index-1.htm#Detachments">Detachments</a> (groupings of units with specific strategic roles), twelve of which are presented in this book. With your army fully made up of Detachments, you will gain access to <a href="../advanced-rules/index-1.htm#Command-Points">Command Points</a>, which unlock Stratagems that can be used in all Warhammer 40,000 missions.<div><br></div></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00005"><div class="tooltip_header">Characters</div><a href="../core-rules/index-1.htm#Characters"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some models are noted as being a Character on their <a href="../core-rules/index-1.htm#Datasheets">datasheet</a>. These heroes, officers, prophets and warlords are powerful individuals that can have a great impact on the course of a battle. The swirling maelstrom of the battlefield can make it difficult to pick out such individuals as targets, however. <br><br>An enemy CHARACTER with a Wounds characteristic of less than 10 can only be chosen as a target in the <a href="../core-rules/index-1.htm#3.-SHOOTING-PHASE">Shooting phase</a> if it is both visible to the firing model and it is the closest enemy unit to the firing model. Ignore other enemy CHARACTERS with a Wounds characteristics of less than 10 when determining if the target is the closest enemy unit to the firing model.<br><br>This means that if any other enemy units (other than other CHARACTERS with a Wounds characteristics of less than 10) are closer, whether they are visible or not, then the enemy CHARACTER cannot be targeted.
+</span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop_Hover.png)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ToTop.png)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList_Hover.png)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/wh40k8ed/img/Button_ArmyList.png)');
+	return true;
+});
+
+</script>
+</div>
+<div class="noprint">
+<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+<div class="social_buttons">
+	<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+	<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+	<a target="_blank" href="../../../groups/wahapedia/index-1.htm"><div class="social_fb no_tooltip" title="Follow on Facebook"></div></a>
+	<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+</div>		
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

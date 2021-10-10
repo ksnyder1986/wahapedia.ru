@@ -1,0 +1,476 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Ogor Mawtribes — Frostlord on Stonehorn (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, OGOR MAWTRIBES, DESTRUCTION, BEASTCLAW RAIDERS, HERO, MONSTER, STONEHORN, FROSTLORD, OGOR">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2-1.css">
+<link rel="stylesheet" href="../../css/main2-1.css">
+<link rel="stylesheet" href="../../css/header2-1.css">
+<link rel="stylesheet" href="../../css/profile2-1.css">
+<link rel="stylesheet" href="../../css/noprint2-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2-1.css">
+<title>Frostlord on Stonehorn</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gnoblars-1.html" class="contentColor">Gnoblars</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gorgers-1.html" class="contentColor">Gorgers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ironguts-1.html" class="contentColor">Ironguts</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Leadbelchers-1.html" class="contentColor">Leadbelchers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Maneaters-1.html" class="contentColor">Maneaters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimir-Warriors-1.html" class="contentColor">Fimir Warriors</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Artillery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gnoblar-Scraplauncher-1.html" class="contentColor">Gnoblar Scraplauncher</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ironblaster-1.html" class="contentColor">Ironblaster</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ogor-Gluttons-1.html" class="contentColor">Ogor Gluttons</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimirach-Noble-1.html" class="contentColor">Fimirach Noble</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2-1.png"><a href="Kragnos-the-End-of-Empires-1.html" class="contentColor">Kragnos, the End of Empires</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Basilisk-1.html" class="contentColor">Basilisk</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Dread-Maw-1.html" class="contentColor">Dread Maw</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Beasts-1.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Fire-1.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Magma-Dragon-1.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Merwyrm-1.html" class="contentColor">Merwyrm</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Alfrostun-1.html" class="contentColor">Alfrostun</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Butcher-s-Band-1.html" class="contentColor">Butcher’s Band</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Eurlbad-1.html" class="contentColor">Eurlbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Goremand-1.html" class="contentColor">Goremand</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gutbuster-Warglutt-1.html" class="contentColor">Gutbuster Warglutt</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Jorlbad-1.html" class="contentColor">Jorlbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Junkmob-1.html" class="contentColor">Junkmob</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skal-1.html" class="contentColor">Skal</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Torrbad-1.html" class="contentColor">Torrbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrant-s-Gutguard-1.html" class="contentColor">Tyrant’s Gutguard</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Faction Terrain Feature</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Great-Mawpot-1.html" class="contentColor">Great Mawpot</a></div></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index-1.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index-1.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index-1.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index-1.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index-1.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index-1.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index-1.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index-1.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index-1.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index-1.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index-1.htm">Daughters of Khaine</a><a href="../fyreslayers/index-1.htm">Fyreslayers</a><a href="../idoneth-deepkin/index-1.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index-1.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index-1.htm">Lumineth Realm-lords</a><a href="../seraphon/index-1.htm">Seraphon</a><a href="../stormcast-eternals/index-1.htm">Stormcast Eternals</a><a href="../sylvaneth/index-1.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index-1.htm">Beasts of Chaos</a><a href="../blades-of-khorne/index-1.htm">Blades of Khorne</a><a href="../disciples-of-tzeentch/index-1.htm">Disciples of Tzeentch</a><a href="../hedonites-of-slaanesh/index-1.htm">Hedonites of Slaanesh</a><a href="../legion-of-azgorh/index-1.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index-1.htm">Legion of the First Prince</a><a href="../maggotkin-of-nurgle/index-1.htm">Maggotkin of Nurgle</a><a href="../skaven/index-1.htm">Skaven</a><a href="../slaves-to-darkness/index-1.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index-1.htm">Flesh-eater Courts</a><a href="../nighthaunt/index-1.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index-1.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index-1.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index-1.htm">Gloomspite Gitz</a><a href="index-1.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index-1.htm">Orruk Warclans</a><a href="../sons-of-behemat/index-1.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../endless-spells/index-1.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Ogor Mawtribes</span><span class="page_header_span2"> – Frostlord on Stonehorn</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  " style="position:relative"><div class="AoS_profile"><div class="wsMoveCt"><img src="../../img/asterix-1.png"></div><div class="wsWounds">13</div><div class="wsSave">3+</div><div class="wsBravery">9</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Frostlord on Stonehorn<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Ogor%20Mawtribes%20Frostlord%20on%20Stonehorn%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">A Frostlord and their Stonehorn are an unstoppable force. The warlord’s booming voice directs the raiders while the bodies of foes are broken and ground to a bloody paste by the horns and hooves of their granite-boned steed. </div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Frost Spear</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Frost Spear</td><td class="wsDataCell">2"</td><td class="wsDataCell">4</td><td class="wsDataCell">3+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-1</td><td class="wsDataCell">3</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Punches and Kicks</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Punches and Kicks</td><td class="wsDataCell">1"</td><td class="wsDataCell">3</td><td class="wsDataCell">3+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-</td><td class="wsDataCell">1</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Rock-hard Horns</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Rock-hard Horns</td><td class="wsDataCell">2"</td><td class="wsDataCell"><img class="ast" src="../../img/asterix-1.png"></td><td class="wsDataCell">4+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-2</td><td class="wsDataCell">3</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Crushing Hooves</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Crushing Hooves</td><td class="wsLastDataCell">2"</td><td class="wsLastDataCell">D6</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell"><img class="ast" src="../../img/asterix-1.png"></td><td class="wsLastDataCell">-1</td><td class="wsLastDataCell">D3</td></tr></table></div><div class="wsTable"><div class="wsDamageHeader">DAMAGE</div><table border="1" cellspacing="0" cellpadding="2" class="wsDamageTable"><tr class="wsHeaderRow"><td class="wsDamageWidth wsHeaderCell">Wounds Suffered</td><td class="wsDamageWidth wsHeaderCell">Move</td><td class="wsDamageWidth wsHeaderCell">Rock-hard Horns</td><td class="wsDamageWidth wsHeaderCell">Crushing Hooves</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">0-3</td><td class="wsDamageWidth wsDataCell">12"</td><td class="wsDamageWidth wsDataCell">6</td><td class="wsDamageWidth wsDataCell">2+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">4-5</td><td class="wsDamageWidth wsDataCell">10"</td><td class="wsDamageWidth wsDataCell">5</td><td class="wsDamageWidth wsDataCell">3+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">6-8</td><td class="wsDamageWidth wsDataCell">8"</td><td class="wsDamageWidth wsDataCell">4</td><td class="wsDamageWidth wsDataCell">3+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">9-10</td><td class="wsDamageWidth wsDataCell">6"</td><td class="wsDamageWidth wsDataCell">3</td><td class="wsDamageWidth wsDataCell">4+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsLastDataCell">11+</td><td class="wsDamageWidth wsLastDataCell">4"</td><td class="wsDamageWidth wsLastDataCell">2</td><td class="wsDamageWidth wsLastDataCell">4+</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/the-core-rules/index-1.htm#Pitched-Battle-Profiles"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>430<br><span class="redfont">Battlefield Role</span><b>: </b>Leader, Behemoth<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>120 x 92mm</span><br class="ShowBaseSize"><span class="redfont">Notes</span><b>: </b>Single</div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">BATTALIONS</div><br><div class="BreakInsideAvoid">This warscroll can be used in the following warscroll battalions:<br>&nbsp;•&nbsp;<a href="Alfrostun-1.html">Alfrostun</a><div><br></div></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">A Frostlord on Stonehorn is a single model armed with a Frost Spear and Punches and Kicks.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">MOUNT</span><b>: </b>This model’s Stonehorn attacks with its Rock-hard Horns and Crushing Hooves.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Earth-shattering Charge</span><b>: </b><span class="ShowFluff legend4">Enemies are crushed and trampled beneath the unstoppable ferocity of a Stonehorn’s charge.<br><div class="spc"></div></span>Add 1 to the damage inflicted by attacks made with this model’s Rock-hard Horns and Crushing Hooves if this model made a <span class="tooltip" data-tooltip-content="#tooltip_content00004"><span class="tt kwbu">charge</span> <span class="tt kwbu">move</span></span> in the same turn.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Stone Skeleton</span><b>: </b><span class="ShowFluff legend4">The thick, rock-like skeletons of these beasts can take substantial punishment.<br><div class="spc"></div></span>Roll a dice each time you <span class="tooltip" data-tooltip-content="#tooltip_content00274"><span class="tt kwbu">allocate</span> <span class="tt kwbu">a</span> <span class="tt kwbu">wound</span></span> or <span class="tooltip" data-tooltip-content="#tooltip_content00275"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span> to this model. On a 5+, that wound or mortal wound is negated.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">COMMAND ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Bellowing Voice</span><b>: </b><span class="ShowFluff legend4">With his booming voice, the Frostlord signals the hunt.<br><div class="spc"></div></span>You can use this <span class="tooltip" data-tooltip-content="#tooltip_content00027"><span class="tt kwbu">command</span> <span class="tt kwbu">ability</span></span> at the start of your <a href="../../the-rules/the-core-rules/index-1.htm#Charge-Phase">charge phase</a>. If you do so, pick 1 friendly model with this command ability. Until the end of that phase, you can re-roll <span class="tooltip" data-tooltip-content="#tooltip_content00004"><span class="tt kwbu">charge</span> <span class="tt kwbu">rolls</span></span> for friendly <span class="tooltip" data-tooltip-content="#tooltip_content00006" data-tooltip-anchor="#tooltip_content00006"><span class="kwb kwbu">BEASTCLAW</span> <span class="kwb kwbu">RAIDERS</span></span> units that are wholly within 12" of that model when the charge roll is made.</div></div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentDESTRUCTION" data-tooltip-anchor="#tooltip_contentDESTRUCTION"><span class="kwb kwbu">DESTRUCTION</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentOGOR" data-tooltip-anchor="#tooltip_contentOGOR"><span class="kwb kwbu">OGOR</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentSTONEHORN" data-tooltip-anchor="#tooltip_contentSTONEHORN"><span class="kwb kwbu">STONEHORN</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentOGORMAWTRIBES" data-tooltip-anchor="#tooltip_contentOGORMAWTRIBES"><span class="kwb kwbu">OGOR</span> <span class="kwb kwbu">MAWTRIBES</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentBEASTCLAWRAIDERS" data-tooltip-anchor="#tooltip_contentBEASTCLAWRAIDERS"><span class="kwb kwbu">BEASTCLAW</span> <span class="kwb kwbu">RAIDERS</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentMONSTER" data-tooltip-anchor="#tooltip_contentMONSTER"><span class="kwb kwbu">MONSTER</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentHERO" data-tooltip-anchor="#tooltip_contentHERO"><span class="kwb kwbu">HERO</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentFROSTLORD" data-tooltip-anchor="#tooltip_contentFROSTLORD"><span class="kwb kwbu">FROSTLORD</span></span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00004"><div class="tooltip_header">11.1 Charge Moves</div><a href="../../the-rules/the-core-rules/index-1.htm#Charge-Moves"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When you attempt a charge with a unit, make a <span class="term">charge roll</span> for the unit by rolling 2D6. You can then make a <span class="term">charge move</span> with each model in that unit by moving the model a distance in inches that is equal to or less than the charge roll. The first model you move in a unit attempting a charge must finish the move within 1/2" of an enemy unit. If this is impossible, no models in the unit can make a charge move.<br><br><div class="BreakInsideAvoid Corner22" style="padding:0px;"><table collapse"="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="Corner22_1"></td><td class="Corner22_2"></td><td class="Corner22_3"></td></tr><tr><td class="Corner22_8"></td><td class="Corner22_9"><i>You do not have to pick a target for a charge attempt before making the charge roll.</i></td><td class="Corner22_4"></td></tr><tr><td class="Corner22_7"></td><td class="Corner22_6"></td><td class="Corner22_5"></td></tr></tbody></table></div>
+</span></div><div class="tooltip_templates"><span id="tooltip_content00274"><div class="tooltip_header">14.1 Allocating Wounds</div><a href="../../the-rules/the-core-rules/index-1.htm#Allocating-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Wounds are <span class="term">allocated</span> to the models in a unit 1 wound at a time. You can allocate the wounds caused to your units as you see fit. However, once you have allocated a wound to a model, you cannot allocate wounds to other models in the unit until that model is slain (<a href="../../the-rules/the-core-rules/index-1.htm#Slain-Models">see 14.2</a>). If a unit is destroyed, all wounds that remain to be allocated to the unit are negated and have no effect.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00275"><div class="tooltip_header">14.5 Mortal Wounds</div><a href="../../the-rules/the-core-rules/index-1.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities cause <span class="term">mortal wounds</span>. Do not make hit, wound or save rolls for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were caused.<br><br>Mortal wounds caused while a unit is attacking are allocated at the same time as wounds caused by the unit’s attacks: after all of the unit’s attacks have been made. Mortal wounds caused at other times are allocated as soon as they are caused. Mortal wounds are allocated in the same way as wounds and are treated in the same manner as wounds for rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00027"><div class="tooltip_header">6.1 Using Command Abilities</div><a href="../../the-rules/the-core-rules/index-1.htm#Using-Command-Abilities"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+To use a command ability, you must spend 1 command point, pick 1 friendly model to <span class="term">issue</span> the command, and pick 1 friendly unit to <span class="term">receive</span> the command. Unless noted otherwise, the models that can issue commands and the units they can issue them to are as follows:<br><ul><li>Unit champions can issue commands to their own unit (<a href="../../the-rules/the-core-rules/index-1.htm#Command-Models">see 22.3.2</a>).</li><li><span class="kwb">HEROES</span> can issue commands to units that are wholly within 12" of them.</li><li>Generals can issue commands to units that are wholly within 18" of them.</li><li><span class="kwb">TOTEMS</span> can issue commands to units that are wholly within 18" of them.</li></ul>Each command ability will say when it can be used and what effect it has on the unit that receives it. A model cannot issue more than 1 command in the same phase and a unit cannot receive more than 1 command in the same phase. In addition, you cannot use the same command ability more than once in the same phase (even for different units).
+</span></div><div class="tooltip_templates"><span id="tooltip_content00006"><b><p>The <span class="kwb">BEASTCLAW</span> <span class="kwb">RAIDERS</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentDESTRUCTION"><b><p>The <span class="kwb">DESTRUCTION</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gnoblars-1.html" class="contentColor">Gnoblars</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gorgers-1.html" class="contentColor">Gorgers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironguts-1.html" class="contentColor">Ironguts</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Leadbelchers-1.html" class="contentColor">Leadbelchers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Maneaters-1.html" class="contentColor">Maneaters</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimir-Warriors-1.html" class="contentColor">Fimir Warriors</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Artillery</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gnoblar-Scraplauncher-1.html" class="contentColor">Gnoblar Scraplauncher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironblaster-1.html" class="contentColor">Ironblaster</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ogor-Gluttons-1.html" class="contentColor">Ogor Gluttons</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimirach-Noble-1.html" class="contentColor">Fimirach Noble</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2-1.png"><a href="Kragnos-the-End-of-Empires-1.html" class="contentColor">Kragnos, the End of Empires</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Basilisk-1.html" class="contentColor">Basilisk</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentOGOR"><b><p>The <span class="kwb">OGOR</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gorgers-1.html" class="contentColor">Gorgers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironguts-1.html" class="contentColor">Ironguts</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Leadbelchers-1.html" class="contentColor">Leadbelchers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Maneaters-1.html" class="contentColor">Maneaters</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Artillery</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironblaster-1.html" class="contentColor">Ironblaster</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ogor-Gluttons-1.html" class="contentColor">Ogor Gluttons</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentSTONEHORN"><b><p>The <span class="kwb">STONEHORN</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentOGORMAWTRIBES"><b><p>The <span class="kwb">OGOR</span> <span class="kwb">MAWTRIBES</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gnoblars-1.html" class="contentColor">Gnoblars</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironguts-1.html" class="contentColor">Ironguts</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Leadbelchers-1.html" class="contentColor">Leadbelchers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Maneaters-1.html" class="contentColor">Maneaters</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Artillery</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gnoblar-Scraplauncher-1.html" class="contentColor">Gnoblar Scraplauncher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ironblaster-1.html" class="contentColor">Ironblaster</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ogor-Gluttons-1.html" class="contentColor">Ogor Gluttons</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentBEASTCLAWRAIDERS"><b><p>The <span class="kwb">BEASTCLAW</span> <span class="kwb">RAIDERS</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentMONSTER"><b><p>The <a href="../../the-rules/the-core-rules/index-1.htm#Monsters"><span class="kwb">MONSTER</span></a> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2-1.png"><a href="Kragnos-the-End-of-Empires-1.html" class="contentColor">Kragnos, the End of Empires</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Basilisk-1.html" class="contentColor">Basilisk</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Dread-Maw-1.html" class="contentColor">Dread Maw</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Beasts-1.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Fire-1.html" class="contentColor">Incarnate Elemental of Fire</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Magma-Dragon-1.html" class="contentColor">Magma Dragon</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Merwyrm-1.html" class="contentColor">Merwyrm</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentHERO"><b><p>The <span class="kwb">HERO</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimirach-Noble-1.html" class="contentColor">Fimirach Noble</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2-1.png"><a href="Kragnos-the-End-of-Empires-1.html" class="contentColor">Kragnos, the End of Empires</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentFROSTLORD"><b><p>The <span class="kwb">FROSTLORD</span> keyword is used in the following Ogor Mawtribes warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frost-Sabres-1.html" class="contentColor">Frost Sabres</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gnoblars-1.html" class="contentColor">Gnoblars</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gorgers-1.html" class="contentColor">Gorgers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Icefall-Yhetees-1.html" class="contentColor">Icefall Yhetees</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ironguts-1.html" class="contentColor">Ironguts</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Leadbelchers-1.html" class="contentColor">Leadbelchers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Maneaters-1.html" class="contentColor">Maneaters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Mournfang-Pack-1.html" class="contentColor">Mournfang Pack</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-s-Mantrappers-1.html" class="contentColor">Hrothgorn’s Mantrappers</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimir-Warriors-1.html" class="contentColor">Fimir Warriors</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Artillery</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gnoblar-Scraplauncher-1.html" class="contentColor">Gnoblar Scraplauncher</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ironblaster-1.html" class="contentColor">Ironblaster</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ogor-Gluttons-1.html" class="contentColor">Ogor Gluttons</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Butcher-1.html" class="contentColor">Butcher</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Firebelly-1.html" class="contentColor">Firebelly</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Icebrow-Hunter-1.html" class="contentColor">Icebrow Hunter</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Slaughtermaster-1.html" class="contentColor">Slaughtermaster</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrant-1.html" class="contentColor">Tyrant</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Underworlds: Beastgrave (2nd edition)" src="../../img/expansions/UNDERWORLDS_logo2-1.png"><a href="Hrothgorn-1.html" class="contentColor">Hrothgorn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Fimirach-Noble-1.html" class="contentColor">Fimirach Noble</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Stonehorn-1.html" class="contentColor">Frostlord on Stonehorn</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Frostlord-on-Thundertusk-1.html" class="contentColor">Frostlord on Thundertusk</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Huskard-on-Stonehorn-1.html" class="contentColor">Huskard on Stonehorn</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Huskard-on-Thundertusk-1.html" class="contentColor">Huskard on Thundertusk</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Kragnos (2nd edition, version 1.0)" src="../../img/expansions/BR_logo2-1.png"><a href="Kragnos-the-End-of-Empires-1.html" class="contentColor">Kragnos, the End of Empires</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Stonehorn-Beastriders-1.html" class="contentColor">Stonehorn Beastriders</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Thundertusk-Beastriders-1.html" class="contentColor">Thundertusk Beastriders</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Basilisk-1.html" class="contentColor">Basilisk</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Dread-Maw-1.html" class="contentColor">Dread Maw</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Beasts-1.html" class="contentColor">Incarnate Elemental of Beasts</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Incarnate-Elemental-of-Fire-1.html" class="contentColor">Incarnate Elemental of Fire</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Magma-Dragon-1.html" class="contentColor">Magma Dragon</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Merwyrm-1.html" class="contentColor">Merwyrm</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Alfrostun-1.html" class="contentColor">Alfrostun</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Butcher-s-Band-1.html" class="contentColor">Butcher’s Band</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Eurlbad-1.html" class="contentColor">Eurlbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Goremand-1.html" class="contentColor">Goremand</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gutbuster-Warglutt-1.html" class="contentColor">Gutbuster Warglutt</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Jorlbad-1.html" class="contentColor">Jorlbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Junkmob-1.html" class="contentColor">Junkmob</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skal-1.html" class="contentColor">Skal</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Torrbad-1.html" class="contentColor">Torrbad</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tyrant-s-Gutguard-1.html" class="contentColor">Tyrant’s Gutguard</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Faction Terrain Feature</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Great-Mawpot-1.html" class="contentColor">Great Mawpot</a></div></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index-1.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Command-Traits" class="contentColor">Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Artefacts-of-Power" class="contentColor">Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Spell-Lores" class="contentColor">Spell Lores</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Prayer-Scriptures" class="contentColor">Prayer Scriptures</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Mount-Traits" class="contentColor">Mount Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Mawtribes" class="contentColor">Mawtribes</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY-1.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

@@ -1,0 +1,474 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Kharadron Overlords — Carmine Dragon (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 2 edition, ">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts1-1.css">
+<link rel="stylesheet" href="../../css/main1-1.css">
+<link rel="stylesheet" href="../../css/header1-1.css">
+<link rel="stylesheet" href="../../css/profile1-1.css">
+<link rel="stylesheet" href="../../css/noprint1-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir1-1.css">
+<title>Carmine Dragon</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sForgeWorld';
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'};
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+if (($('.abVis:visible').length == 0) && ($('.abVis2:visible').length == 0)) {
+	$('.abVisChk').hide()}
+else {
+	$('.abVisChk').css('display', '')}
+if ($('.abVis2:visible').length == 0) {
+	$('.abVisChk2').hide()}
+else {
+	$('.abVisChk2').css('display', '')}
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinriggers-1.html" class="contentColor">Endrinriggers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Gunhauler-1.html" class="contentColor">Grundstok Gunhauler</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Thunderers-1.html" class="contentColor">Grundstok Thunderers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skywardens-1.html" class="contentColor">Skywardens</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Company-1.html" class="contentColor">Arkanaut Company</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aether-Khemist-1.html" class="contentColor">Aether-Khemist</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aetheric-Navigator-1.html" class="contentColor">Aetheric Navigator</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Admiral-1.html" class="contentColor">Arkanaut Admiral</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bjorgen-Thundrik-1.html" class="contentColor">Bjorgen Thundrik</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Brokk-Grungsson-Lord-Magnate-of-Barak-Nar-1.html" class="contentColor">Brokk Grungsson, Lord-Magnate of Barak-Nar</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Dirigible-Suit-1.html" class="contentColor">Endrinmaster with Dirigible Suit</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Endrinharness-1.html" class="contentColor">Endrinmaster with Endrinharness</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Thundrik-s-Profiteers-1.html" class="contentColor">Thundrik’s Profiteers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Quest: Cursed City (2nd edition)" src="../../img/expansions/CC_logo2-1.png"><a href="Dagnai-Holdenstock-1.html" class="contentColor">Dagnai Holdenstock</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Frigate-1.html" class="contentColor">Arkanaut Frigate</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Ironclad-1.html" class="contentColor">Arkanaut Ironclad</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Carmine-Dragon-1.html" class="contentColor">Carmine Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grand-Armada-1.html" class="contentColor">Grand Armada</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Escort-Wing-1.html" class="contentColor">Grundstok Escort Wing</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Iron-Sky-Attack-Squadron-1.html" class="contentColor">Iron Sky Attack Squadron</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Iron-Sky-Command-1.html" class="contentColor">Iron Sky Command</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Be’lakor (2nd edition)" src="../../img/expansions/BR_logo2-1.png"><a href="Drongon-s-Aether-runners-1.html" class="contentColor">Drongon’s Aether-runners</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2351545&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2351545,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2351545"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index-1.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index-1.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index-1.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index-1.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index-1.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index-1.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index-1.htm">Narrative Play Games</a><div class="NavColumns_indent2"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index-1.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index-1.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index-1.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index-1.htm">Daughters of Khaine</a><a href="../fyreslayers/index-1.htm">Fyreslayers</a><a href="../idoneth-deepkin/index-1.htm">Idoneth Deepkin</a><a href="index-1.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index-1.htm">Lumineth Realm-lords</a><a href="../seraphon/index-1.htm">Seraphon</a><a href="../stormcast-eternals/index-1.htm">Stormcast Eternals</a><a href="../sylvaneth/index-1.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index-1.htm">Beasts of Chaos</a><a href="../khorne/index-1.htm">Khorne</a><a href="../legion-of-azgorh/index-1.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index-1.htm">Legion of the First Prince</a><a href="../nurgle/index-1.htm">Nurgle</a><a href="../skaventide/index-1.htm">Skaventide</a><a href="../slaanesh/index-1.htm">Slaanesh</a><a href="../slaves-to-darkness/index-1.htm">Slaves to Darkness</a><a href="../tzeentch/index-1.htm">Tzeentch</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index-1.htm">Flesh-eater Courts</a><a href="../nighthaunt/index-1.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index-1.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index-1.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index-1.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index-1.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index-1.htm">Orruk Warclans</a><a href="../sons-of-behemat/index-1.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2351545&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2351545,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2351545"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Kharadron Overlords</span><span class="page_header_span2"> – Carmine Dragon</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  clFl sForgeWorld" style="position:relative"><div class="AoS_profile"><div class="wsMoveCt"><img src="../../img/asterix-1.png"></div><div class="wsWounds">14</div><div class="wsSave">3+</div><div class="wsBravery">10</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><img class="tooltip img-opa logo3" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo3-1.png"><h3 class="wsHeader"><div>Carmine Dragon<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Cities%20of%20Sigmar%20Carmine%20Dragon%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">The Carmine Dragon is a creature saturated with the arcane power of Shyish, its claws and fangs rippling with amethyst magic. With every roar, it unleashes deadly blasts of dark energy that strip its terrified victims of their souls.</div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_RangedWeapons"><span class="wsHeaderCellName_short">MISSILE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Soul-sheering Blast</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Soul-sheering Blast</td><td class="wsDataCell">12"</td><td colspan="5" class="wsDataCell"><table border="0" cellspacing="0" cellpadding="0" style="width:50%; margin:auto"><tr><td style="width:6px"></td><td><div class="colspan_edge"></div></td><td><div style="width:127px" class="colspan_line colspan_max5"></div></td><td><div class="colspan_see_below">See below</div></td><td><div style="width:127px" class="colspan_line colspan_max5"></div></td><td><div class="colspan_edge"></div></td><td style="width:6px"></td></tr></table></td></tr><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Raking Claws</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Raking Claws</td><td class="wsDataCell">2"</td><td class="wsDataCell"><img class="ast" src="../../img/asterix-1.png"></td><td class="wsDataCell">4+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-2</td><td class="wsDataCell">2</td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Amethyst Fangs</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Amethyst Fangs</td><td class="wsLastDataCell">3"</td><td class="wsLastDataCell">3</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell"><img class="ast" src="../../img/asterix-1.png"></td><td class="wsLastDataCell">-2</td><td class="wsLastDataCell">D6</td></tr></table></div><div class="wsTable"><div class="wsDamageHeader">DAMAGE</div><table border="1" cellspacing="0" cellpadding="2" class="wsDamageTable"><tr class="wsHeaderRow"><td class="wsDamageWidth wsHeaderCell">Wounds Suffered</td><td class="wsDamageWidth wsHeaderCell">Move</td><td class="wsDamageWidth wsHeaderCell">Raking Claws</td><td class="wsDamageWidth wsHeaderCell">Amethyst Fangs</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">0-3</td><td class="wsDamageWidth wsDataCell">16"</td><td class="wsDamageWidth wsDataCell">8</td><td class="wsDamageWidth wsDataCell">2+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">4-6</td><td class="wsDamageWidth wsDataCell">14"</td><td class="wsDamageWidth wsDataCell">7</td><td class="wsDamageWidth wsDataCell">3+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">7-9</td><td class="wsDamageWidth wsDataCell">11"</td><td class="wsDamageWidth wsDataCell">6</td><td class="wsDamageWidth wsDataCell">4+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsDataCell">10-12</td><td class="wsDamageWidth wsDataCell">9"</td><td class="wsDamageWidth wsDataCell">5</td><td class="wsDamageWidth wsDataCell">5+</td></tr><tr class="wsDataRow"><td class="wsDamageWidth wsLastDataCell">13+</td><td class="wsDamageWidth wsLastDataCell">6"</td><td class="wsDamageWidth wsLastDataCell">4</td><td class="wsDamageWidth wsLastDataCell">6+</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/matched-play-games/index-1.htm#Pitched-Battles-2020-"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>440<br><span class="redfont">Battlefield Role</span><b>: </b>Behemoth<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>100mm</span><br class="ShowBaseSize"></div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">A Carmine Dragon is a single model armed with Raking Claws, Amethyst Fangs and a Soul-sheering Blast.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">FLY</span><b>: </b>This model can <span class="tooltip" data-tooltip-content="#tooltip_content00177"><span class="tt kwbu">fly</span></span>.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Deathly Dark Scales</span><b>: </b><span class="ShowFluff legend4">The Carmine Dragon’s hide is nigh-on impenetrable to all but the strongest of blows.<br><div class="spc"></div></span>Roll a dice each time you allocate a <span class="tooltip" data-tooltip-content="#tooltip_content00178"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wound</span></span> to this unit. On a 5+, that mortal wound is negated.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Soul-sheering Blast</span><b>: </b><span class="ShowFluff legend4">Gouts of amethyst flame erupt from the Carmine Dragon’s open maw, sheering souls from their mortal forms and leaving bodies rendered to nothing more than a purpleglowing pile of ash.<br><div class="spc"></div></span>Do not use the attack sequence for an attack made with a Soul-sheering Blast. Instead roll a dice. On a 5+, the target unit suffers D6 <span class="tooltip" data-tooltip-content="#tooltip_content00179"><span class="tt kwbu">mortal</span> <span class="tt kwbu">wounds</span></span>.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">Spell Devourer</span><b>: </b><span class="ShowFluff legend4">With the amethyst energies of the Realm of Endings coalescing through its body, the Carmine Dragon can force a magical effect to die off with a single pulse of thought.<br><div class="spc"></div></span>Each time this model is affected by a <a href="../../the-rules/the-core-rules/index-1.htm#Spell-Lores">spell</a> or <a href="../../the-rules/conquest-unbound/index-1.htm#ENDLESS-SPELLS">endless spell</a>, you can roll a dice. If you do so, on a 4+, ignore the effects of that spell on this model.</div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentORDER" data-tooltip-anchor="#tooltip_contentORDER"><span class="tt kwbu">ORDER</span></span>, <span class="tt">DRAGON</span>, <span class="tt">MONSTER</span>, <span class="tt">CARMINE</span> <span class="tt">DRAGON</span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00177"><div class="tooltip_header">Flying</div><a href="../../the-rules/the-core-rules/index-1.htm#Flying"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+If the <a href="../../the-rules/the-core-rules/index-1.htm#WARSCROLLS-1">warscroll</a> for a model says that the model can fly, it can pass across models and <a href="../../the-rules/the-core-rules/index-1.htm#TERRAIN">terrain</a> features as if they were not there when it makes any type of move. Any vertical distance up and/or down is ignored when measuring a flying model’s move. It cannot finish the move on top of another model.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00178"><div class="tooltip_header">Mortal Wounds</div><a href="../../the-rules/the-core-rules/index-1.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities inflict mortal wounds. Do not make <a href="../../the-rules/the-core-rules/index-1.htm#Making-Attacks">hit, wound or save rolls</a> for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were suffered. <a href="../../the-rules/the-core-rules/index-1.htm#Allocating-Wounds">Allocate</a> any mortal wounds that are caused while a unit is attacking at the same time as any other wounds caused by the unit’s attacks, after all of the unit’s attacks have been completed. Mortal wounds caused at other times are allocated to models in the target unit as soon as they occur, in the same manner as wounds caused by damage from an attack.<br><br>After they have been allocated, a mortal wound is treated in the same manner as any other wound for all rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00179"><div class="tooltip_header">Mortal Wounds</div><a href="../../the-rules/the-core-rules/index-1.htm#Mortal-Wounds"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Some attacks, spells and abilities inflict mortal wounds. Do not make <a href="../../the-rules/the-core-rules/index-1.htm#Making-Attacks">hit, wound or save rolls</a> for mortal wounds. Instead, the damage inflicted on the target is equal to the number of mortal wounds that were suffered. <a href="../../the-rules/the-core-rules/index-1.htm#Allocating-Wounds">Allocate</a> any mortal wounds that are caused while a unit is attacking at the same time as any other wounds caused by the unit’s attacks, after all of the unit’s attacks have been completed. Mortal wounds caused at other times are allocated to models in the target unit as soon as they occur, in the same manner as wounds caused by damage from an attack.<br><br>After they have been allocated, a mortal wound is treated in the same manner as any other wound for all rules purposes.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentORDER"><b><p>The ORDER keyword is used in following Kharadron Overlords warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Endrinriggers-1.html" class="contentColor">Endrinriggers</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Grundstok-Gunhauler-1.html" class="contentColor">Grundstok Gunhauler</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Grundstok-Thunderers-1.html" class="contentColor">Grundstok Thunderers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Skywardens-1.html" class="contentColor">Skywardens</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Arkanaut-Company-1.html" class="contentColor">Arkanaut Company</a></div></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Aether-Khemist-1.html" class="contentColor">Aether-Khemist</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Aetheric-Navigator-1.html" class="contentColor">Aetheric Navigator</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Arkanaut-Admiral-1.html" class="contentColor">Arkanaut Admiral</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Bjorgen-Thundrik-1.html" class="contentColor">Bjorgen Thundrik</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Brokk-Grungsson-Lord-Magnate-of-Barak-Nar-1.html" class="contentColor">Brokk Grungsson, Lord-Magnate of Barak-Nar</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Dirigible-Suit-1.html" class="contentColor">Endrinmaster with Dirigible Suit</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Endrinharness-1.html" class="contentColor">Endrinmaster with Endrinharness</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Thundrik-s-Profiteers-1.html" class="contentColor">Thundrik’s Profiteers</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Quest: Cursed City (2nd edition)" src="../../img/expansions/CC_logo2-1.png"><a href="Dagnai-Holdenstock-1.html" class="contentColor">Dagnai Holdenstock</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Arkanaut-Frigate-1.html" class="contentColor">Arkanaut Frigate</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Arkanaut-Ironclad-1.html" class="contentColor">Arkanaut Ironclad</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Carmine-Dragon-1.html" class="contentColor">Carmine Dragon</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns2"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinriggers-1.html" class="contentColor">Endrinriggers</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Gunhauler-1.html" class="contentColor">Grundstok Gunhauler</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Thunderers-1.html" class="contentColor">Grundstok Thunderers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skywardens-1.html" class="contentColor">Skywardens</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Company-1.html" class="contentColor">Arkanaut Company</a></div></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aether-Khemist-1.html" class="contentColor">Aether-Khemist</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aetheric-Navigator-1.html" class="contentColor">Aetheric Navigator</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Admiral-1.html" class="contentColor">Arkanaut Admiral</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Bjorgen-Thundrik-1.html" class="contentColor">Bjorgen Thundrik</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Brokk-Grungsson-Lord-Magnate-of-Barak-Nar-1.html" class="contentColor">Brokk Grungsson, Lord-Magnate of Barak-Nar</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Dirigible-Suit-1.html" class="contentColor">Endrinmaster with Dirigible Suit</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Endrinmaster-with-Endrinharness-1.html" class="contentColor">Endrinmaster with Endrinharness</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Thundrik-s-Profiteers-1.html" class="contentColor">Thundrik’s Profiteers</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Warscroll. Warhammer Quest: Cursed City (2nd edition)" src="../../img/expansions/CC_logo2-1.png"><a href="Dagnai-Holdenstock-1.html" class="contentColor">Dagnai Holdenstock</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Frigate-1.html" class="contentColor">Arkanaut Frigate</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arkanaut-Ironclad-1.html" class="contentColor">Arkanaut Ironclad</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Forge World: Monstrous Arcanum (2nd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Carmine-Dragon-1.html" class="contentColor">Carmine Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grand-Armada-1.html" class="contentColor">Grand Armada</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Grundstok-Escort-Wing-1.html" class="contentColor">Grundstok Escort Wing</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Iron-Sky-Attack-Squadron-1.html" class="contentColor">Iron Sky Attack Squadron</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Iron-Sky-Command-1.html" class="contentColor">Iron Sky Command</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Be’lakor (2nd edition)" src="../../img/expansions/BR_logo2-1.png"><a href="Drongon-s-Aether-runners-1.html" class="contentColor">Drongon’s Aether-runners</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index-1.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Command-Traits" class="contentColor">Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Artefacts-of-Power" class="contentColor">Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Great-Endrinworks" class="contentColor">Great Endrinworks</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Sky-ports" class="contentColor">Sky-ports</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Be’lakor (2nd edition)" src="../../img/expansions/BR_logo2-1.png"><a href="index-1.htm#Guild-Triumphs" class="contentColor">Guild Triumphs</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY-1.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

@@ -1,0 +1,474 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Disciples of Tzeentch — Flamers of Tzeentch (stats, options, wargear, abilities and keywords).">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, CHAOS, DAEMON, FLAMERS OF TZEENTCH, TZEENTCH, FLAMER">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2-1.css">
+<link rel="stylesheet" href="../../css/main2-1.css">
+<link rel="stylesheet" href="../../css/header2-1.css">
+<link rel="stylesheet" href="../../css/profile2-1.css">
+<link rel="stylesheet" href="../../css/noprint2-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2-1.css">
+<title>Flamers of Tzeentch</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+if ($('.datasheet').is(":hidden")) {$('.datasheet').show(); $('.selectionWarning').show()} else {$('.selectionWarning').hide()}
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+<div class="NavWrapper_P">
+	<div class="NavDropdown_P">
+	<div class="NavBtn_P NavBtn_Datasheets">Warscrolls</div>
+	<div class="NavDropdown-content_P">
+		<span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Horrors-of-Tzeentch-1.html" class="contentColor">Horrors of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Screamers-of-Tzeentch-1.html" class="contentColor">Screamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Eyes-of-the-Nine-1.html" class="contentColor">The Eyes of the Nine</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-1.html" class="contentColor">Tzaangor Enlightened</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-on-Discs-of-Tzeentch-1.html" class="contentColor">Tzaangor Enlightened on Discs of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Skyfires-1.html" class="contentColor">Tzaangor Skyfires</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzeentch-Chaos-Spawn-1.html" class="contentColor">Tzeentch Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Skin-Wolves-1.html" class="contentColor">Skin Wolves</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kairic-Acolytes-1.html" class="contentColor">Kairic Acolytes</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangors-1.html" class="contentColor">Tzaangors</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Changecaster-Herald-of-Tzeentch-1.html" class="contentColor">Changecaster, Herald of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Curseling-Eye-of-Tzeentch-1.html" class="contentColor">Curseling, Eye of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fatemaster-1.html" class="contentColor">Fatemaster</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fateskimmer-Herald-of-Tzeentch-on-Burning-Chariot-1.html" class="contentColor">Fateskimmer, Herald of Tzeentch on Burning Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fluxmaster-Herald-of-Tzeentch-on-Disc-1.html" class="contentColor">Fluxmaster, Herald of Tzeentch on Disc</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gaunt-Summoner-of-Tzeentch-1.html" class="contentColor">Gaunt Summoner of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magister-1.html" class="contentColor">Magister</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magister-on-Disc-of-Tzeentch-1.html" class="contentColor">Magister on Disc of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ogroid-Thaumaturge-1.html" class="contentColor">Ogroid Thaumaturge</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Blue-Scribes-1.html" class="contentColor">The Blue Scribes</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Changeling-1.html" class="contentColor">The Changeling</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Shaman-1.html" class="contentColor">Tzaangor Shaman</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Vortemis-the-All-seeing-1.html" class="contentColor">Vortemis the All-seeing</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kairos-Fateweaver-1.html" class="contentColor">Kairos Fateweaver</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Change-1.html" class="contentColor">Lord of Change</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Exalted-Greater-Daemon-of-Tzeentch-1.html" class="contentColor">Exalted Greater Daemon of Tzeentch</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-Siege-Gargant-1.html" class="contentColor">Chaos Siege Gargant</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-War-Mammoth-1.html" class="contentColor">Chaos War Mammoth</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Curs-d-Ettin-1.html" class="contentColor">Curs’d Ettin</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Gigantic-Chaos-Spawn-1.html" class="contentColor">Gigantic Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Warpfire-Dragon-1.html" class="contentColor">Warpfire Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aether-eater-Host-1.html" class="contentColor">Aether-eater Host</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Alter-kin-Coven-1.html" class="contentColor">Alter-kin Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arcanite-Cabal-1.html" class="contentColor">Arcanite Cabal</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arcanite-Cult-1.html" class="contentColor">Arcanite Cult</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Changehost-1.html" class="contentColor">Changehost</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fate-Legion-1.html" class="contentColor">Fate Legion</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Multitudinous-Host-1.html" class="contentColor">Multitudinous Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Omniscient-Oracles-1.html" class="contentColor">Omniscient Oracles</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Overseer-s-Fate-twisters-1.html" class="contentColor">Overseer’s Fate-twisters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skyshoal-Coven-1.html" class="contentColor">Skyshoal Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Coven-1.html" class="contentColor">Tzaangor Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Warpflame-Host-1.html" class="contentColor">Warpflame Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Witchfyre-Coven-1.html" class="contentColor">Witchfyre Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Be’lakor (2nd edition, version 1.1)" src="../../img/expansions/BR_logo2-1.png"><a href="Atra-zan-s-Blazing-Cavalcade-1.html" class="contentColor">Atra’zan’s Blazing Cavalcade</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Endless Spell</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Burning-Sigil-of-Tzeentch-1.html" class="contentColor">Burning Sigil of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Daemonic-Simulacrum-1.html" class="contentColor">Daemonic Simulacrum</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tome-of-Eyes-1.html" class="contentColor">Tome of Eyes</a></div></div></div></span>
+	</div>
+	</div>
+</div>
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../../the-rules/about/index-1.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="../../the-rules/playing-this-game/index-1.htm">Playing This Game</a><a href="../../the-rules/the-core-rules/index-1.htm">The Core Rules</a><a href="../../the-rules/conquest-unbound/index-1.htm">Conquest Unbound</a><a href="../../the-rules/open-play-games/index-1.htm">Open Play Games</a><a href="../../the-rules/matched-play-games/index-1.htm">Matched Play Games</a><a href="../../the-rules/narrative-play-games/index-1.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../../the-rules/broken-realms/index-1.htm">Broken Realms</a><a href="../../the-rules/soul-wars/index-1.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../cities-of-sigmar/index-1.htm">Cities of Sigmar</a><a href="../daughters-of-khaine/index-1.htm">Daughters of Khaine</a><a href="../fyreslayers/index-1.htm">Fyreslayers</a><a href="../idoneth-deepkin/index-1.htm">Idoneth Deepkin</a><a href="../kharadron-overlords/index-1.htm">Kharadron Overlords</a><a href="../lumineth-realm-lords/index-1.htm">Lumineth Realm-lords</a><a href="../seraphon/index-1.htm">Seraphon</a><a href="../stormcast-eternals/index-1.htm">Stormcast Eternals</a><a href="../sylvaneth/index-1.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../beasts-of-chaos/index-1.htm">Beasts of Chaos</a><a href="../blades-of-khorne/index-1.htm">Blades of Khorne</a><a href="index-1.htm">Disciples of Tzeentch</a><a href="../hedonites-of-slaanesh/index-1.htm">Hedonites of Slaanesh</a><a href="../legion-of-azgorh/index-1.htm">Legion of Azgorh</a><a href="../legion-of-the-first-prince/index-1.htm">Legion of the First Prince</a><a href="../maggotkin-of-nurgle/index-1.htm">Maggotkin of Nurgle</a><a href="../skaven/index-1.htm">Skaven</a><a href="../slaves-to-darkness/index-1.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../flesh-eater-courts/index-1.htm">Flesh-eater Courts</a><a href="../nighthaunt/index-1.htm">Nighthaunt</a><a href="../ossiarch-bonereapers/index-1.htm">Ossiarch Bonereapers</a><a href="../soulblight-gravelords/index-1.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../gloomspite-gitz/index-1.htm">Gloomspite Gitz</a><a href="../ogor-mawtribes/index-1.htm">Ogor Mawtribes</a><a href="../orruk-warclans/index-1.htm">Orruk Warclans</a><a href="../sons-of-behemat/index-1.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../endless-spells/index-1.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header2"><span class="page_header_span2 kwbu tooltip" data-tooltip-content="#tooltip_contentFactionRules">Disciples of Tzeentch</span><span class="page_header_span2"> – Flamers of Tzeentch</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<div class="noprint"><div class="selectionWarning"><div class="WahapediaWarningSign"></div>This warscroll does not meet the selection criteria (see <b>Settings</b> tab).</div></div>
+<div class="datasheet  " style="position:relative"><div class="AoS_profile"><div class="wsMove">9"</div><div class="wsWounds">2</div><div class="wsSave">5+</div><div class="wsBravery">10</div></div><div><div class="nails-header"><span class="nails"></span>WARSCROLL<span class="nails"></span></div><h3 class="wsHeader"><div>Flamers of Tzeentch<a title="Search for model’s image on the Internet" class="tooltip" target="_blank" href="https://www.google.com/search?tbm=isch&q=Age%20of%20Sigmar%20Disciples%20of%20Tzeentch%20Flamers%20of%20Tzeentch%20miniature"><div class="picSearch"></div></a></div></h3></div><div class="ShowFluff wsLegend">Bounding in a disturbing fashion, Flamers of Tzeentch spring towards the foe spouting the warpfires of Chaos. Yet the Changer of the Ways is fickle, and fires that have burnt out may once more leap to life, guiding even more flames to the target.</div><div class="wsTable"><table border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;border-width:0px"><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_RangedWeapons"><span class="wsHeaderCellName_short">MISSILE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Warpflame</td></tr><tr class="wsDataRow wsDataCell"><td class="wsDataCell_short"></td><td class="wsDataCell wsDataCell_long">Warpflame</td><td class="wsDataCell">18"</td><td class="wsDataCell">3</td><td class="wsDataCell">4+</td><td class="wsDataCell">3+</td><td class="wsDataCell">-</td><td class="wsDataCell">D3</td></tr><tr class="wsHeaderRow"><td class="wsHeaderCellName wsHeaderCellName_MeleeWeapons"><span class="wsHeaderCellName_short">MELEE WEAPONS</span></td><td class="wsHeaderCell">Range</td><td class="wsHeaderCell">Attacks</td><td class="wsHeaderCell">To Hit</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">To Wound</span><span class="wsHeaderCell_short">To Wnd</span></td><td class="wsHeaderCell">Rend</td><td class="wsHeaderCell"><span class="wsHeaderCell_long">Damage</span><span class="wsHeaderCell_short">Dmg</span></td></tr><tr class="wsDataRow wsDataCell_short"><td colspan="7" style="border-width:0px">Flaming Maw</td></tr><tr class="wsDataRow wsLastDataCell"><td class="wsDataCell_short"></td><td class="wsLastDataCell wsDataCell_long">Flaming Maw</td><td class="wsLastDataCell">1"</td><td class="wsLastDataCell">2</td><td class="wsLastDataCell">5+</td><td class="wsLastDataCell">3+</td><td class="wsLastDataCell">-</td><td class="wsLastDataCell">1</td></tr></table></div><div style="clear:both"></div><div class="Columns3_NoRule"><div class="BreakInsideAvoid PitchedBattleProfile ShowPitchedBattleProfile"><div class="wsAbilityHeader">PITCHED BATTLE PROFILE</div><a href="../../the-rules/the-core-rules/index-1.htm#Pitched-Battle-Profiles"><div class="tooltip_link_inline"></div></a><br><div class="BreakInsideAvoid"><span class="redfont">Unit Size</span><b>: </b>3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="redfont">Points</span><b>: </b>175<br><span class="redfont">Battlefield Role</span><b>: </b>None<br><span class="ShowBaseSize"><span class="redfont">Base size</span><b>: </b>32mm</span><br class="ShowBaseSize"><span class="redfont">Notes</span><b>: </b>Battleline in an <a href="index-1.htm#The-Eternal-Conflagration">Eternal Conflagration</a> army</div></div><div class="ShowPitchedBattleProfile"><br></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">BATTALIONS</div><br><div class="BreakInsideAvoid">This warscroll can be used in the following warscroll battalions:<br>&nbsp;•&nbsp;<a href="Changehost-1.html">Changehost</a><br>&nbsp;•&nbsp;<a href="Warpflame-Host-1.html">Warpflame Host</a><div><br></div></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">DESCRIPTION</div><br><div class="BreakInsideAvoid">A unit of Flamers of Tzeentch has any number of models, each armed with Warpflame and Flaming Maws.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">PYROCASTER</span><b>: </b>1 model in this unit can be a Pyrocaster. Add 1 to the Attacks characteristic of that model’s <span class="tooltip" data-tooltip-content="#tooltip_content00149"><span class="tt kwbu">missile</span> <span class="tt kwbu">weapon</span></span>.<div><br></div></div><div class="BreakInsideAvoid"><span class="redfont">FLY</span><b>: </b>This unit can <span class="tooltip" data-tooltip-content="#tooltip_content00415"><span class="tt kwbu">fly</span></span>.<div><br></div></div><div class="BreakInsideAvoid"><div class="wsAbilityHeader">ABILITIES</div><br><div class="BreakInsideAvoid"><span class="redfont">Capricious Warpflame</span><b>: </b><span class="ShowFluff legend4">These unnatural fires continue to burn long after they meet their target, clawing at the nearest foe as a Fury would its prey.<br><div class="spc"></div></span>Add 1 to <span class="tooltip" data-tooltip-content="#tooltip_content00416"><span class="tt kwbu">hit</span> <span class="tt kwbu">rolls</span></span> for attacks made by this unit if the target unit has 10 or more models.<div><br></div></div></div><div class="BreakInsideAvoid"><span class="redfont">Touched by Fire</span><b>: </b><span class="ShowFluff legend4">When forced to meet an enemy in hand-to-hand combat, Flamers rely on their blazing forms to repel their foe.<br><div class="spc"></div></span>Roll a dice each time you allocate a wound or mortal wound to this unit that was inflicted by a melee weapon. On a 5+, the attacking unit suffers 1 mortal wound.</div></div><div style="clear:both"><br></div><table width="100%" border="0" cellspacing="0" cellpadding="8"><tr><td class="wsKeywordHeader"><div style="font-weight:700; font-family:'Minion-Pro',serif;">KEYWORDS</div></td><td class="wsKeywordLine"><div style="font-weight:bold"><span class="tooltip" data-tooltip-content="#tooltip_contentCHAOS" data-tooltip-anchor="#tooltip_contentCHAOS"><span class="kwb kwbu">CHAOS</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentDAEMON" data-tooltip-anchor="#tooltip_contentDAEMON"><span class="kwb kwbu">DAEMON</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentFLAMER" data-tooltip-anchor="#tooltip_contentFLAMER"><span class="kwb kwbu">FLAMER</span></span>, <span class="tooltip" data-tooltip-content="#tooltip_contentTZEENTCH" data-tooltip-anchor="#tooltip_contentTZEENTCH"><span class="kwb kwbu">TZEENTCH</span></span>, <span class="kwb">FLAMERS</span> <span class="kwb2">OF</span> <span class="kwb">TZEENTCH</span></div></td></tr></table></div><div style="clear:both"></div>
+<!--noindex--><div class="tooltip_templates"><span id="tooltip_content00149"><div class="tooltip_header">13.1.1 Shooting Attacks</div><a href="../../the-rules/the-core-rules/index-1.htm#Shooting-Attacks-1"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+When a friendly unit shoots, you can make <span class="term">shooting attacks</span> with any of the missile weapons the models in the unit are armed with that they are allowed to use (including missile weapons used by <a href="../../the-rules/the-core-rules/index-1.htm#Mounts-Companions-and-Crew">mounts</a>).<br><br>The target of a shooting attack must be within a number of inches of the attacking model equal to the <span class="term">Range</span> characteristic of the weapon being used to make the attack. The range must be measured to the closest <span class="term">visible</span> model in the target unit (if you are unsure whether a model is visible, stoop down and take a look from behind the shooting model). Models can see through other models in their unit.<br><br>Some missile weapons have a Range characteristic with a <span class="term">minimum range</span> (e.g. 6"-48"). Units wholly within the minimum range cannot be targeted with these weapons.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00415"><div class="tooltip_header">9.4 Flying</div><a href="../../the-rules/the-core-rules/index-1.htm#Flying"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+If the warscroll used by a model says that it can <span class="term">fly</span>, you can ignore other models and terrain features when you trace the path of its move across the battlefield (it flies over them). In addition, when a model that can fly starts or finishes a move on a terrain feature, instead of tracing its move across the battlefield, you can trace it ‘through the air’, as shown in the diagram below.<br><br>A flying model cannot finish a move on top of another model or finish a <a href="../../the-rules/the-core-rules/index-1.htm#Normal-Move">normal move</a>, <a href="../../the-rules/the-core-rules/index-1.htm#Run">run</a> or <a href="../../the-rules/the-core-rules/index-1.htm#Retreat">retreat</a> within 3" of an enemy unit.
+</span></div><div class="tooltip_templates"><span id="tooltip_content00416"><div class="tooltip_header">Hit Roll</div><a href="../../the-rules/the-core-rules/index-1.htm#Hit-Roll"><div class="tooltip_link"></div></a><div style="clear:both"></div>
+Roll a dice. If the roll equals or beats the attacking weapon’s <span class="term">To Hit</span> characteristic, the attack scores a <span class="term">hit</span> and you must make a <span class="term">wound roll</span>. If not, the attack <span class="term">fails</span> and the attack sequence ends. An unmodified hit roll of 1 always fails and an unmodified hit roll of 6 always hits. A hit roll cannot be modified by more than +1 or -1 (this is an exception to the principle that abilities take precedence over core rules).<br><br>Sometimes an ability will allow a single hit roll to score two or more hits. If this is the case, make all of the wound and save rolls for those hits at the same time.
+</span></div><div class="tooltip_templates"><span id="tooltip_contentCHAOS"><b><p>The <span class="kwb">CHAOS</span> keyword is used in the following Disciples of Tzeentch warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Horrors-of-Tzeentch-1.html" class="contentColor">Horrors of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Screamers-of-Tzeentch-1.html" class="contentColor">Screamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Eyes-of-the-Nine-1.html" class="contentColor">The Eyes of the Nine</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-1.html" class="contentColor">Tzaangor Enlightened</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-on-Discs-of-Tzeentch-1.html" class="contentColor">Tzaangor Enlightened on Discs of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Skyfires-1.html" class="contentColor">Tzaangor Skyfires</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzeentch-Chaos-Spawn-1.html" class="contentColor">Tzeentch Chaos Spawn</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Skin-Wolves-1.html" class="contentColor">Skin Wolves</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kairic-Acolytes-1.html" class="contentColor">Kairic Acolytes</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangors-1.html" class="contentColor">Tzaangors</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Changecaster-Herald-of-Tzeentch-1.html" class="contentColor">Changecaster, Herald of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Curseling-Eye-of-Tzeentch-1.html" class="contentColor">Curseling, Eye of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fatemaster-1.html" class="contentColor">Fatemaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fateskimmer-Herald-of-Tzeentch-on-Burning-Chariot-1.html" class="contentColor">Fateskimmer, Herald of Tzeentch on Burning Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fluxmaster-Herald-of-Tzeentch-on-Disc-1.html" class="contentColor">Fluxmaster, Herald of Tzeentch on Disc</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gaunt-Summoner-of-Tzeentch-1.html" class="contentColor">Gaunt Summoner of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Magister-1.html" class="contentColor">Magister</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Magister-on-Disc-of-Tzeentch-1.html" class="contentColor">Magister on Disc of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ogroid-Thaumaturge-1.html" class="contentColor">Ogroid Thaumaturge</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Blue-Scribes-1.html" class="contentColor">The Blue Scribes</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Changeling-1.html" class="contentColor">The Changeling</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Shaman-1.html" class="contentColor">Tzaangor Shaman</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Vortemis-the-All-seeing-1.html" class="contentColor">Vortemis the All-seeing</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kairos-Fateweaver-1.html" class="contentColor">Kairos Fateweaver</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Change-1.html" class="contentColor">Lord of Change</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Exalted-Greater-Daemon-of-Tzeentch-1.html" class="contentColor">Exalted Greater Daemon of Tzeentch</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-Siege-Gargant-1.html" class="contentColor">Chaos Siege Gargant</a></div></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-War-Mammoth-1.html" class="contentColor">Chaos War Mammoth</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Curs-d-Ettin-1.html" class="contentColor">Curs’d Ettin</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Gigantic-Chaos-Spawn-1.html" class="contentColor">Gigantic Chaos Spawn</a></div><div style="clear:both"></div><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Warpfire-Dragon-1.html" class="contentColor">Warpfire Dragon</a></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentDAEMON"><b><p>The <span class="kwb">DAEMON</span> keyword is used in the following Disciples of Tzeentch warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Horrors-of-Tzeentch-1.html" class="contentColor">Horrors of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Screamers-of-Tzeentch-1.html" class="contentColor">Screamers of Tzeentch</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Changecaster-Herald-of-Tzeentch-1.html" class="contentColor">Changecaster, Herald of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fateskimmer-Herald-of-Tzeentch-on-Burning-Chariot-1.html" class="contentColor">Fateskimmer, Herald of Tzeentch on Burning Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fluxmaster-Herald-of-Tzeentch-on-Disc-1.html" class="contentColor">Fluxmaster, Herald of Tzeentch on Disc</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gaunt-Summoner-of-Tzeentch-1.html" class="contentColor">Gaunt Summoner of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Blue-Scribes-1.html" class="contentColor">The Blue Scribes</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Changeling-1.html" class="contentColor">The Changeling</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kairos-Fateweaver-1.html" class="contentColor">Kairos Fateweaver</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Change-1.html" class="contentColor">Lord of Change</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Exalted-Greater-Daemon-of-Tzeentch-1.html" class="contentColor">Exalted Greater Daemon of Tzeentch</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentFLAMER"><b><p>The <span class="kwb">FLAMER</span> keyword is used in the following Disciples of Tzeentch warscrolls:</p></b><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div style="clear:both"></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentTZEENTCH"><b><p>The <span class="kwb">TZEENTCH</span> keyword is used in the following Disciples of Tzeentch warscrolls:</p></b><div class="Columns2"><div style="clear:both; margin-bottom:8px;"><div class="BatRole">None</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Screamers-of-Tzeentch-1.html" class="contentColor">Screamers of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Eyes-of-the-Nine-1.html" class="contentColor">The Eyes of the Nine</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-1.html" class="contentColor">Tzaangor Enlightened</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-on-Discs-of-Tzeentch-1.html" class="contentColor">Tzaangor Enlightened on Discs of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Skyfires-1.html" class="contentColor">Tzaangor Skyfires</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzeentch-Chaos-Spawn-1.html" class="contentColor">Tzeentch Chaos Spawn</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Battleline</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kairic-Acolytes-1.html" class="contentColor">Kairic Acolytes</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangors-1.html" class="contentColor">Tzaangors</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Changecaster-Herald-of-Tzeentch-1.html" class="contentColor">Changecaster, Herald of Tzeentch</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Curseling-Eye-of-Tzeentch-1.html" class="contentColor">Curseling, Eye of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fatemaster-1.html" class="contentColor">Fatemaster</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fateskimmer-Herald-of-Tzeentch-on-Burning-Chariot-1.html" class="contentColor">Fateskimmer, Herald of Tzeentch on Burning Chariot</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Fluxmaster-Herald-of-Tzeentch-on-Disc-1.html" class="contentColor">Fluxmaster, Herald of Tzeentch on Disc</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Gaunt-Summoner-of-Tzeentch-1.html" class="contentColor">Gaunt Summoner of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Magister-1.html" class="contentColor">Magister</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Magister-on-Disc-of-Tzeentch-1.html" class="contentColor">Magister on Disc of Tzeentch</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Ogroid-Thaumaturge-1.html" class="contentColor">Ogroid Thaumaturge</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Blue-Scribes-1.html" class="contentColor">The Blue Scribes</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="The-Changeling-1.html" class="contentColor">The Changeling</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Tzaangor-Shaman-1.html" class="contentColor">Tzaangor Shaman</a></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Vortemis-the-All-seeing-1.html" class="contentColor">Vortemis the All-seeing</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Leader, Behemoth</div><div class="BreakInsideAvoid"><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Kairos-Fateweaver-1.html" class="contentColor">Kairos Fateweaver</a></div></div><div style="clear:both"></div><div style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><a href="Lord-of-Change-1.html" class="contentColor">Lord of Change</a></div><div style="clear:both"></div><div class="clFl sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Exalted-Greater-Daemon-of-Tzeentch-1.html" class="contentColor">Exalted Greater Daemon of Tzeentch</a></div><div style="clear:both"></div></div><div style="clear:both; margin-bottom:8px;"><div class="BatRole">Behemoth</div><div class="BreakInsideAvoid"><div class="clFl sLegendary sForgeWorld" style="padding: 1px 10px 1px 15px"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Gigantic-Chaos-Spawn-1.html" class="contentColor">Gigantic Chaos Spawn</a></div></div><div style="clear:both"></div></div></div></span></div><div class="tooltip_templates"><span id="tooltip_contentArmyList"><span class="contents"><div class="armylist_header">Army List</div><span class="datasheetsCollated"><a href="warscrolls-1.html">Warscrolls collated</a></span><div style="clear:both"></div><div class="NavColumns3"><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">None</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Burning-Chariots-of-Tzeentch-1.html" class="contentColor">Burning Chariots of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Exalted-Flamers-of-Tzeentch-1.html" class="contentColor">Exalted Flamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Flamers-of-Tzeentch-1.html" class="contentColor">Flamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Horrors-of-Tzeentch-1.html" class="contentColor">Horrors of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Screamers-of-Tzeentch-1.html" class="contentColor">Screamers of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Eyes-of-the-Nine-1.html" class="contentColor">The Eyes of the Nine</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-1.html" class="contentColor">Tzaangor Enlightened</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Enlightened-on-Discs-of-Tzeentch-1.html" class="contentColor">Tzaangor Enlightened on Discs of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Skyfires-1.html" class="contentColor">Tzaangor Skyfires</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzeentch-Chaos-Spawn-1.html" class="contentColor">Tzeentch Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Skin-Wolves-1.html" class="contentColor">Skin Wolves</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Battleline</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kairic-Acolytes-1.html" class="contentColor">Kairic Acolytes</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangors-1.html" class="contentColor">Tzaangors</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Changecaster-Herald-of-Tzeentch-1.html" class="contentColor">Changecaster, Herald of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Curseling-Eye-of-Tzeentch-1.html" class="contentColor">Curseling, Eye of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fatemaster-1.html" class="contentColor">Fatemaster</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fateskimmer-Herald-of-Tzeentch-on-Burning-Chariot-1.html" class="contentColor">Fateskimmer, Herald of Tzeentch on Burning Chariot</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fluxmaster-Herald-of-Tzeentch-on-Disc-1.html" class="contentColor">Fluxmaster, Herald of Tzeentch on Disc</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Gaunt-Summoner-of-Tzeentch-1.html" class="contentColor">Gaunt Summoner of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magister-1.html" class="contentColor">Magister</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Magister-on-Disc-of-Tzeentch-1.html" class="contentColor">Magister on Disc of Tzeentch</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Ogroid-Thaumaturge-1.html" class="contentColor">Ogroid Thaumaturge</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Blue-Scribes-1.html" class="contentColor">The Blue Scribes</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="The-Changeling-1.html" class="contentColor">The Changeling</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Shaman-1.html" class="contentColor">Tzaangor Shaman</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Vortemis-the-All-seeing-1.html" class="contentColor">Vortemis the All-seeing</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Leader, Behemoth</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Kairos-Fateweaver-1.html" class="contentColor">Kairos Fateweaver</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Lord-of-Change-1.html" class="contentColor">Lord of Change</a></div><div class="i15 ArmyType_line clFl sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Compendium: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FW_AoS_logo2-1.png"><a href="Exalted-Greater-Daemon-of-Tzeentch-1.html" class="contentColor">Exalted Greater Daemon of Tzeentch</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Behemoth</b></span></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-Siege-Gargant-1.html" class="contentColor">Chaos Siege Gargant</a></div></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Chaos-War-Mammoth-1.html" class="contentColor">Chaos War Mammoth</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Curs-d-Ettin-1.html" class="contentColor">Curs’d Ettin</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Gigantic-Chaos-Spawn-1.html" class="contentColor">Gigantic Chaos Spawn</a></div><div class="i15 ArmyType_line clFl sLegendary sForgeWorld"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Warhammer Legends: Monstrous Arcanum (3rd edition)" src="../../img/expansions/FWL_Aos_logo2-1.png"><a href="Warpfire-Dragon-1.html" class="contentColor">Warpfire Dragon</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Warscroll Battalion</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Aether-eater-Host-1.html" class="contentColor">Aether-eater Host</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Alter-kin-Coven-1.html" class="contentColor">Alter-kin Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arcanite-Cabal-1.html" class="contentColor">Arcanite Cabal</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Arcanite-Cult-1.html" class="contentColor">Arcanite Cult</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Changehost-1.html" class="contentColor">Changehost</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Fate-Legion-1.html" class="contentColor">Fate Legion</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Multitudinous-Host-1.html" class="contentColor">Multitudinous Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Omniscient-Oracles-1.html" class="contentColor">Omniscient Oracles</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Overseer-s-Fate-twisters-1.html" class="contentColor">Overseer’s Fate-twisters</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Skyshoal-Coven-1.html" class="contentColor">Skyshoal Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tzaangor-Coven-1.html" class="contentColor">Tzaangor Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Warpflame-Host-1.html" class="contentColor">Warpflame Host</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Witchfyre-Coven-1.html" class="contentColor">Witchfyre Coven</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Broken Realms: Be’lakor (2nd edition, version 1.1)" src="../../img/expansions/BR_logo2-1.png"><a href="Atra-zan-s-Blazing-Cavalcade-1.html" class="contentColor">Atra’zan’s Blazing Cavalcade</a></div></div><div style="margin-bottom:8px;"><div class="BreakInsideAvoid"><div class="i5 ArmyType_line "><span class="contentColor"><b class="BatRole">Endless Spell</b></span></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Burning-Sigil-of-Tzeentch-1.html" class="contentColor">Burning Sigil of Tzeentch</a></div></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Daemonic-Simulacrum-1.html" class="contentColor">Daemonic Simulacrum</a></div><div class="i15 ArmyType_line "><span class="bl0">•&nbsp;</span><a href="Tome-of-Eyes-1.html" class="contentColor">Tome of Eyes</a></div></div></div></span></span></div><div class="tooltip_templates"><span id="tooltip_contentFactionRules"><span class="contents"><div class="tooltip_header">Faction Rules</div><a href="index-1.htm"><div class="tooltip_link"></div></a><div style="clear:both"></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Allies" class="contentColor">Allies</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battle-Traits" class="contentColor">Battle Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Command-Traits" class="contentColor">Command Traits</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Artefacts-of-Power" class="contentColor">Artefacts of Power</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Spell-Lores" class="contentColor">Spell Lores</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Change-Covens" class="contentColor">Change Covens</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Battleplans" class="contentColor">Battleplans</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><a href="index-1.htm#Path-to-Glory" class="contentColor">Path to Glory</a></div><div class="w1 i15"><span class="bl0">•&nbsp;</span><img class="tooltip logo2" title="Expansion. Soul Wars: Wrath of the Everchosen (2nd edition, version 1.3)" src="../../img/expansions/WoE_logo2-1.png"><a href="index-1.htm#Hosts-of-Chaos" class="contentColor">Hosts of Chaos</a></div></span></span></div><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+<div class="tooltipArmyList" data-tooltip-content="#tooltip_contentArmyList" id="btnArmyList"></div>
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY-1.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

@@ -1,0 +1,463 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wahapedia: Playing This Game">
+<meta name="keywords" content="Wahapedia, Age of Sigmar, 3 edition, The Most Important Rule, Playing This Game, The Core Rules, Three Ways to Play, Open Play, Introduction, Narrative Play, Matched Play">	
+<link rel="stylesheet" type="text/css" href="../../css/fonts2-1.css">
+<link rel="stylesheet" href="../../css/main2-1.css">
+<link rel="stylesheet" href="../../css/header2-1.css">
+<link rel="stylesheet" href="../../css/profile2-1.css">
+<link rel="stylesheet" href="../../css/noprint2-1.css">
+<link rel="icon" type="image/png" href="../../img/favicon-1.png">
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/tooltipster.bundle.min-1.css">
+<script type="text/javascript" src="../../../jquery-3.4.1.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster/dist/js/tooltipster.bundle.min-1.js"></script>
+<script type="text/javascript" src="../../../tooltipster-scrollableTip/tooltipster-scrollableTip.min-1.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../../../tooltipster/dist/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min-1.css">
+<link rel="stylesheet" href="../../css/tooltipster-noir2-1.css">
+<title>Playing This Game</title>
+<script type="text/javascript">
+function switchColorTheme(){
+		var userTheme = localStorage.ColorTheme;
+		if (userTheme == undefined) {userTheme = 'default'; localStorage.ColorTheme = userTheme};
+		if ((userTheme == 'dark') || (userTheme == 'light')) {
+			document.documentElement.setAttribute('data-theme', userTheme);}
+		else if (!window.matchMedia) {
+			document.documentElement.setAttribute('data-theme', 'light');}
+		else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				document.documentElement.setAttribute('data-theme', 'dark');}
+			else {
+				document.documentElement.setAttribute('data-theme', 'light');}
+   };
+	switchColorTheme();
+$(document).ready(function(){
+	var data = localStorage.ShowFluff;
+	if (data == undefined) {data = 'true'; localStorage.ShowFluff = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowFluff').prop('checked', StrData);
+	ChangeShowFluff();
+
+	$('.ShowFluff').change(function () {
+      localStorage.ShowFluff = $(this).prop('checked');
+	   ChangeShowFluff();
+   });
+
+	function ChangeShowFluff() {
+	if (localStorage.ShowFluff == 'true')
+		{$('.ShowFluff').css('display', '');}
+	else
+		{$('.ShowFluff').css('display', 'none');}
+	}
+	var data = localStorage.ShowLegendaryDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowLegendaryDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowLegendaryDatasheets').prop('checked', StrData);
+
+	$('.ShowLegendaryDatasheets').change(function () {
+      localStorage.ShowLegendaryDatasheets = $(this).prop('checked');
+	   FilterApply(false);
+   });
+	var data = localStorage.ShowPitchedBattleProfile;
+	if (data == undefined) {data = 'true'; localStorage.ShowPitchedBattleProfile = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowPitchedBattleProfile').prop('checked', StrData);
+	ChangeShowPitchedBattleProfile();
+
+	$('.ShowPitchedBattleProfile').change(function () {
+      localStorage.ShowPitchedBattleProfile = $(this).prop('checked');
+	   ChangeShowPitchedBattleProfile();
+   });
+
+	function ChangeShowPitchedBattleProfile() {
+	if (localStorage.ShowPitchedBattleProfile == 'true')
+		{$('.ShowPitchedBattleProfile').css('display', '');}
+	else
+		{$('.ShowPitchedBattleProfile').css('display', 'none');}
+	}
+	var data = localStorage.ShowBaseSize;
+	if (data == undefined) {data = 'true'; localStorage.ShowBaseSize = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowBaseSize').prop('checked', StrData);
+	ChangeShowBaseSize();
+
+	$('.ShowBaseSize').change(function () {
+      localStorage.ShowBaseSize = $(this).prop('checked');
+	   ChangeShowBaseSize();
+   });
+
+	function ChangeShowBaseSize() {
+	if (localStorage.ShowBaseSize == 'true')
+		{$('.ShowBaseSize').css('display', '');}
+	else
+		{$('.ShowBaseSize').css('display', 'none');}
+	}
+	var data = localStorage.ShowForgeWorldDatasheets;
+	if (data == undefined) {data = 'true'; localStorage.ShowForgeWorldDatasheets = data};
+
+	var StrData; if (data == 'true') {StrData = true} else {StrData = false};
+	$('.ShowForgeWorldDatasheets').prop('checked', StrData);
+
+	$('.ShowForgeWorldDatasheets').change(function () {
+      localStorage.ShowForgeWorldDatasheets = $(this).prop('checked');
+	   FilterSelect(false);
+	   FilterApply(false);
+   });
+	$('.ColorTheme').prop('value', localStorage.ColorTheme);
+	$('.ColorTheme').change(function () {
+		localStorage.ColorTheme = $(this).prop('value');
+		switchColorTheme();
+	});	
+	$(window).on('load', function() {
+		$('.ya-site-form__input-text').addClass('ya_input');
+	});
+
+
+function FilterSelect(IsInit) {};
+function FilterApply(IsInit) {
+var clFlags = '';
+var comma = '';
+var clAllFlags = '.sLegendary, .sForgeWorld';
+if (localStorage.ShowLegendaryDatasheets == 'false') {clFlags = clFlags + comma + '.sLegendary'; comma = ', ';};
+if (localStorage.ShowForgeWorldDatasheets == 'false') {clFlags = clFlags + comma + '.sForgeWorld'; comma = ', ';};
+
+	$(clAllFlags).show();
+	$(clFlags).hide();
+
+UpdateTooltipster(IsInit);
+};
+FilterApply(true);
+
+function UpdateTooltipster(IsInit) {
+if (!IsInit) 
+	{
+	 $('.tooltip').tooltipster('destroy');
+	 $('.tooltipArmyList').tooltipster('destroy');
+	 if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+	}
+};
+if ($(window).width() >= 800) {
+	$('.no_tooltip').addClass('tooltip').removeClass('no_tooltip');
+	sidesArr = ['top', 'bottom', 'left', 'right'];
+	}
+else {
+	sidesArr = ['top', 'bottom'];
+	}
+;
+$('.tooltip_').addClass('tooltip').removeClass('tooltip_');
+$('.tooltip:hidden').addClass('tooltip_').removeClass('tooltip');
+$('.wTable:visible').each(function (index1, element1) {
+	var trg = true;
+	$(element1).children('.bkg:visible').each(function (index2, element2) {
+		if (trg) {$(element2).addClass('bkg0').removeClass('bkg1')}
+		else {$(element2).addClass('bkg1').removeClass('bkg0')};
+		trg = !trg;
+	});
+});
+
+$('.tooltip').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+contentCloning: true,
+position: sidesArr,
+restoration: 'current',
+maxWidth: 600,
+viewportAware: true,
+repositionOnScroll: false,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+$('.tooltipArmyList').tooltipster({
+functionBefore: function(instance, helper){
+$.each($.tooltipster.instances(), function(i, instance){
+	instance.close();
+});
+},
+plugins: ['sideTip', 'scrollableTip'],
+position: 'left',
+restoration: 'current',
+viewportAware: true,
+arrow: false,
+positionTracker: true,
+contentCloning: true,
+repositionOnScroll: false,
+maxWidth: 1100,
+trigger: 'custom',
+triggerOpen: {
+    mouseenter: true,
+    tap: true
+},
+triggerClose: {
+    click: true,
+	 mouseleave: true,
+    tap: true
+}
+});
+});
+$.tooltipster.setDefaults({
+arrow: true,
+delay: [200, 200],
+interactive: true,
+theme: ['tooltipster-noir', 'tooltipster-noir-customized']
+});
+</script>
+<script type="text/javascript">
+var touchHover = function() {
+    $('.tooltip').on('touchstart', function(e) {
+          e.preventDefault();
+          return false;
+    });
+};
+$(document).ready(function() { touchHover(); });
+</script>
+</head>
+
+<body>
+<!--noindex-->
+<div id="wrapper2">
+<div id="wrapper">
+<div class="noprint">
+<div style="position:relative"><a href="../../../index-1.htm"><div class="SiteHeader_wrapper"><div class="SiteHeader"></div></div></a>
+
+	<div class="NavWrapper_M">
+
+	<div class="NavDropdown_Search">
+	<div class="NavBtn_Search">&nbsp;</div>
+	<div class="NavDropdown-content_Search">
+		<div class="yandex_search_line_short"><div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script></div>
+	</div>
+	</div>
+	<div class="NavDropdown_A">
+	<div class="NavBtn_A">&nbsp;</div>
+	<div class="NavDropdown-content_A">
+		<a href="../about/index-1.htm">About</a>
+	</div>
+	</div>
+	<div class="NavDropdown_S">
+	<div class="NavBtn_S">&nbsp;</div>
+	<div class="NavDropdown-content_S">
+		<div class="armylist_header">Settings</div><div style="clear:both"></div><label class="container">
+<input checked="true" type="checkbox" class="ShowForgeWorldDatasheets">
+	<span class="checkmark"></span>Show Forge World warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowLegendaryDatasheets">
+	<span class="checkmark"></span>Show legendary warscrolls
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowFluff">
+	<span class="checkmark"></span>Show fluff text
+</label>
+<label class="container">
+<input checked="true" type="checkbox" class="ShowPitchedBattleProfile">
+	<span class="checkmark"></span>Show Pitched Battle Profile
+</label>
+<label style="margin-left:22px" class="container">
+<input checked="true" type="checkbox" class="ShowBaseSize">
+	<span class="checkmark"></span>Show base size
+</label>
+<label class="container" style="padding-left:0px">Color theme: 
+	<select class="ctrlSelect ColorTheme" size="1">
+		<option class="ctrlOption" value="default">OS default</option>
+		<option class="ctrlOption" value="light">Bright</option>
+		<option class="ctrlOption" value="dark">Dark</option>
+	</select>
+</label>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_TheRules">The Rules</div>
+	<div class="NavDropdown-content">
+		<a href="index-1.htm">Playing This Game</a><a href="../the-core-rules/index-1.htm">The Core Rules</a><a href="../conquest-unbound/index-1.htm">Conquest Unbound</a><a href="../open-play-games/index-1.htm">Open Play Games</a><a href="../matched-play-games/index-1.htm">Matched Play Games</a><a href="../narrative-play-games/index-1.htm">Narrative Play Games</a><div class="NavColumns_indent_solid"><br></div><div class="FactionHeader">Campaigns</div><a href="../broken-realms/index-1.htm">Broken Realms</a><a href="../soul-wars/index-1.htm">Soul Wars</a>
+	</div>
+	</div>
+	<div class="NavDropdown">
+	<div class="NavBtn NavBtn_Factions">Factions</div>
+	<div class="NavDropdown-content">
+		<div class="NavColumns3"><div class="BreakInsideAvoid"><div class="FactionHeader">Order</div><a href="../../factions/cities-of-sigmar/index-1.htm">Cities of Sigmar</a><a href="../../factions/daughters-of-khaine/index-1.htm">Daughters of Khaine</a><a href="../../factions/fyreslayers/index-1.htm">Fyreslayers</a><a href="../../factions/idoneth-deepkin/index-1.htm">Idoneth Deepkin</a><a href="../../factions/kharadron-overlords/index-1.htm">Kharadron Overlords</a><a href="../../factions/lumineth-realm-lords/index-1.htm">Lumineth Realm-lords</a><a href="../../factions/seraphon/index-1.htm">Seraphon</a><a href="../../factions/stormcast-eternals/index-1.htm">Stormcast Eternals</a><a href="../../factions/sylvaneth/index-1.htm">Sylvaneth</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Chaos</div><a href="../../factions/beasts-of-chaos/index-1.htm">Beasts of Chaos</a><a href="../../factions/blades-of-khorne/index-1.htm">Blades of Khorne</a><a href="../../factions/disciples-of-tzeentch/index-1.htm">Disciples of Tzeentch</a><a href="../../factions/hedonites-of-slaanesh/index-1.htm">Hedonites of Slaanesh</a><a href="../../factions/legion-of-azgorh/index-1.htm">Legion of Azgorh</a><a href="../../factions/legion-of-the-first-prince/index-1.htm">Legion of the First Prince</a><a href="../../factions/maggotkin-of-nurgle/index-1.htm">Maggotkin of Nurgle</a><a href="../../factions/skaven/index-1.htm">Skaven</a><a href="../../factions/slaves-to-darkness/index-1.htm">Slaves to Darkness</a><div class="NavColumns_indent"></div></div><div class="BreakInsideAvoid"><div class="FactionHeader">Death</div><a href="../../factions/flesh-eater-courts/index-1.htm">Flesh-eater Courts</a><a href="../../factions/nighthaunt/index-1.htm">Nighthaunt</a><a href="../../factions/ossiarch-bonereapers/index-1.htm">Ossiarch Bonereapers</a><a href="../../factions/soulblight-gravelords/index-1.htm">Soulblight Gravelords</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Destruction</div><a href="../../factions/gloomspite-gitz/index-1.htm">Gloomspite Gitz</a><a href="../../factions/ogor-mawtribes/index-1.htm">Ogor Mawtribes</a><a href="../../factions/orruk-warclans/index-1.htm">Orruk Warclans</a><a href="../../factions/sons-of-behemat/index-1.htm">Sons of Behemat</a><div class="NavColumns_indent"></div></div><div class="NavColumns_indent2"></div><div class="BreakInsideAvoid"><div class="FactionHeader">Other</div><a href="../../factions/endless-spells/index-1.htm">Endless Spells</a></div></div>
+	</div>
+	</div>
+</div>
+<div class="NavUnderline_M"></div>
+
+<div class="patreon_logoBW_float">
+<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logoBW no_tooltip" title="Become a patron"></div></a>
+<a target="_blank" href="../../../paypalme/vgmaltsev-1.html?locale.x=en_US"><div class="paypal_logoBW no_tooltip" title="Donate via PayPal"></div></a>
+</div>
+</div>
+
+<div class="yandex_search_line yandex_search_line_show">
+<div class="ya-site-form ya-site-form_inited_no" data-bem="{&quot;action&quot;:&quot;http://wahapedia.ru/aos3/search.html&quot;,&quot;arrow&quot;:false,&quot;bg&quot;:&quot;transparent&quot;,&quot;fontsize&quot;:16,&quot;fg&quot;:&quot;#000000&quot;,&quot;language&quot;:&quot;en&quot;,&quot;logo&quot;:&quot;rb&quot;,&quot;publicname&quot;:&quot;Yandex Site Search #2484164&quot;,&quot;suggest&quot;:true,&quot;target&quot;:&quot;_blank&quot;,&quot;tld&quot;:&quot;com&quot;,&quot;type&quot;:2,&quot;usebigdictionary&quot;:true,&quot;searchid&quot;:2484164,&quot;input_fg&quot;:&quot;#000000&quot;,&quot;input_bg&quot;:&quot;#ffffff&quot;,&quot;input_fontStyle&quot;:&quot;normal&quot;,&quot;input_fontWeight&quot;:&quot;normal&quot;,&quot;input_placeholder&quot;:&quot;Search this site...&quot;,&quot;input_placeholderColor&quot;:&quot;#999999&quot;,&quot;input_borderColor&quot;:&quot;#7f9db9&quot;}"><form action="https://yandex.com/search/site/" method="get" target="_blank" accept-charset="utf-8"><input type="hidden" name="searchid" value="2484164"><input type="hidden" name="l10n" value="en"><input type="hidden" name="reqenc" value=""><input type="search" name="text" value=""><input type="submit" value="Search"></form></div><style type="text/css">.ya-page_js_yes .ya-site-form_inited_no { display: none; }</style><script type="text/javascript">(function(w,d,c){var s=d.createElement('script'),h=d.getElementsByTagName('script')[0],e=d.documentElement;if((' '+e.className+' ').indexOf(' ya-page_js_yes ')===-1){e.className+=' ya-page_js_yes';}s.type='text/javascript';s.async=true;s.charset='utf-8';s.src=(d.location.protocol==='https:'?'https:':'http:')+'//site.yandex.net/v2.0/js/all.js';h.parentNode.insertBefore(s,h);(w[c]||(w[c]=[])).push(function(){Ya.Site.Form.init()})})(window,document,'yandex_site_callbacks');</script>
+</div>
+<div style="clear:both"></div>
+</div>
+<div class="page_header"><span class="page_header_span">Playing This Game</span></div>
+<div class="noprint">
+
+</div>
+<!--/noindex-->
+<p class="ShowFluff legend">The Mortal Realms are replete with tales of mighty heroes, bloodshed and betrayal, but you need not solely enjoy them through reading the narrative in our books. By using your collection of Citadel Miniatures in games of Warhammer Age of Sigmar, you can tell epic stories of your own upon the tabletop battlefield.</p><div class="Columns3"><div class="BreakInsideAvoid Corner3" style="padding:0px;max-width:390px;"><table class="frameDark collapse" border="0" cellpadding="0" cellspacing="0" width="312"><tbody><tr><td background="/aos3/img/corners/Corner3_1.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_2.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_3.png" style="width:20px;height:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_8.png" style="width:20px"></td><td bgcolor="#1d190d"><span style="font-family:georgia,serif; font-size:1em"><div class="contents_header">Contents</div><div class="mw3 i10"><a href="index-1.htm#Open-Play" class="contentColorInv"><b style="color:#f61f09">O</b>pen Play</a></div><div class="mw3 i10"><a href="index-1.htm#Narrative-Play" class="contentColorInv"><b style="color:#f61f09">N</b>arrative Play</a></div><div class="mw3 i10"><a href="index-1.htm#Matched-Play" class="contentColorInv"><b style="color:#f61f09">M</b>atched Play</a></div></span></td><td background="/aos3/img/corners/Corner3_4.png" style="width:20px"></td></tr><tr><td background="/aos3/img/corners/Corner3_7.png" style="width:20px;height:20px"></td><td background="/aos3/img/corners/Corner3_6.png" style="height:20px"></td><td background="/aos3/img/corners/Corner3_5.png" style="width:20px;height:20px"></td></tr></tbody></table></div>
+
+<hr>
+The rules on this site provide you with a framework to craft your own saga set in the Mortal Realms, and to fight glorious battles with your collection of Citadel Miniatures. Whatever your goal - whether to pitch yourself against an opponent in an evenly balanced contest, or to see just what happens when Nagash, Archaon and Alarielle come up against one another in battle - these rules allow you to play out one exciting tale of conflict after another. Each new encounter will generate spectacular war stories that you will remember for years to come. The rules for Warhammer Age of Sigmar are split into <a href="../the-core-rules/index-1.htm">the core rules</a> and the <a href="../open-play-games/index-1.htm">open play</a>, <a href="../narrative-play-games/index-1.htm">narrative play</a> and <a href="../matched-play-games/index-1.htm">matched play</a> rules. The core rules explain the fundamentals of using your collection of Citadel Miniatures to fight battles set in the Mortal Realms. They explain how to organise an army, set up the battlefield, move and fight with the warriors under your command, and what you need to do to lead your army to ultimate victory!<br><br>The core rules are common principles that are used in all games of Warhammer Age of Sigmar, but within that framework there are many different ways to play a game. To this end, the core rules are followed by three sections that describe the most popular ways in which games are played. These ‘three ways to play’ are called open play, narrative play and matched play, and they are described in more detail on the following pages. Together with the core rules, these sections provide you with a gaming toolbox that will enable you to find the way of playing games with your collection of Citadel Miniatures that suits you best.</div><div><br></div><a name="Open-Play"></a><h3 class="h3_pge  outline_header ">Open Play</h3><p><b>Open play is the default setting for games of Warhammer Age of Sigmar. It allows you to set up and play a game with the minimum amount of fuss and preparation, while providing you with almost limitless options and flexibility as to what you can include in your army.</b></p><div class="Columns3">The essence of <a href="../open-play-games/index-1.htm">open play</a> is to allow players to use any miniatures in their collection in a game. Often, this means that the players will choose their armies based purely on what looks great on the battlefield. In open play, there are no restrictions on which models you can include in your army. For example, you can field a force consisting entirely of giant monsters or elite heroes.<br><br>This freedom of choice makes open play the ideal play style if the main appeal of the hobby for you is the simple joy of collecting Citadel Miniatures, as you can field any of your models in the same army on the battlefield. The beauty of the open play format is that it is limited only by your imagination. It allows you explore the nearinfinite wonders of the Mortal Realms on the tabletop, and collect any of the amazing miniatures in the Warhammer Age of Sigmar range that you desire.</div><div><br></div><a name="Narrative-Play"></a><h3 class="h3_pge  outline_header ">Narrative Play</h3><p><b>With a cast of indomitable heroes and fearsome villains, plots of conquest, zealous loyalty and ruthless betrayal, and a near-endless array of spectacular locations, Warhammer Age of Sigmar is replete with exciting stories. Narrative play is about forging a legend for your miniatures on the tabletop.</b></p><div class="Columns3"><a href="../narrative-play-games/index-1.htm">Narrative play</a> games centre around telling stories with your Citadel Miniatures. This can be as simple as devising a reason for two armies to battle each other, such as a deep-seated rivalry, a contested territory, or a vital objective that must be secured before it falls into the wrong hands. Narrative play games can be based on a story you have read in any Warhammer Age of Sigmar book, or one you have written yourself after having been inspired by reading about the Mortal Realms. There are a number of narrative play battleplans available in our books that are based on important events that have occurred throughout the history of the Mortal Realms, and which are ready to pick up and play straight away.<br><br>By linking the battles you fight with a continuous narrative, you can grow the seed of a story into a sprawling saga in which the characters in yuui army aic the main protagonists. Each subsequent battle may continue or conclude the tale begun in the first - a warlord casts down a would-be usurper, an invasion is defeated, or a lost artefact of great power is recovered. In no time, your warriors will be taking part in an epic legend that will be retold by troubadours and chroniclers the realms over for time immemorial - though whether they are lauded as heroes or cursed as monsters is up to you!</div><div><br></div><a name="Matched-Play"></a><h3 class="h3_pge  outline_header ">Matched Play</h3><p><b>People play Warhammer Age of Sigmar for all kinds of reasons. Many want to play games that test their skill as the commander of an army, in as evenly balanced a competition as possible. If you like the thought of games like this, then matched play games will be just right for you.</b></p><div class="Columns3">There are countless benefits to <a href="../matched-play-games/index-1.htm">matched play</a> games. While narrative play games allow you to use your army to tell a story, and open play games enable you to include any models you like, matched play games give you the option to fight battles with forces that are a test of your skills as a general.<br><br>The first challenge in matched play is how to select the units in your army. Do you take mostly high-powered models and risk being overrun by a larger force of individually weaker units? Or do you build a more versatile fighting force that is capable of taking on a variety of army compositions, though at the risk of becoming a ‘jack of all trades but master of none’?<br><br>Normally in matched play games you will be required to stick with one faction, so your knowledge of the units available to you will be pivotal in this selection process. Similarly, knowledge of your opponent’s force is just as vital, as well as the aspects of different ‘match-ups’, the ways in battles between two specific factions commonly - though certainly not always - play out.<br><br>But however fascinating and enjoyable it is to design the perfect army, a true general will only be satisfied after their force has sallied forth and proven its worth on the battlefield. One of the benefits to matched play games is that once you have settled on an army to use, you essentially have a pick-up-andplay force that you can bring to any table and against any opponent. This makes matched play ideal for tournaments and leagues, as it provides clear guidelines on the size and strength of the armies taking part, as well as ensuring that all battles are as fair as they can be.</div>
+<!--noindex--><!--/noindex-->
+<div style="clear:both"></div>
+<!--noindex-->
+
+<div class="noprint"><div id="btnBackToTop" title="Back to Top"></div></div>
+
+<script type='text/javascript'>
+$(window).scroll(function() {
+if ($(this).scrollTop() >= 200) {
+$('#btnBackToTop').fadeIn(300);
+} else {
+$("#btnBackToTop").fadeOut(300);
+}
+});
+
+$('#btnBackToTop').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop_Hover.png); background-image: var(--button-to-top-hover)');
+	$(this).fadeIn(300);
+	return true;
+});
+
+$('#btnBackToTop').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ToTop.png); background-image: var(--button-to-top)');
+		$(this).fadeOut(300);
+   document.body.scrollTop = 0; // For Safari
+	document.documentElement.scrollTop = 0;
+	return true;
+});
+
+$('#btnBackToTop').on('click', function () { 
+	'use strict';
+   document.body.scrollTop = 0; // For Safari
+   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+	return true;
+});
+
+$('#btnArmyList').on('touchstart', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList_Hover.png); background-image: var(--button-army-list-hover)');
+	return true;
+});
+
+$('#btnArmyList').on('touchend', function () {
+	'use strict';
+	$(this).attr('style', 'background-image: url(/aos3/img/Button_ArmyList.png); background-image: var(--button-army-list)');
+	return true;
+});
+</script>
+</div>
+<div class="noprint">
+	<div align="center"><div class="author">© Vyacheslav Maltsev 2013-2021</div></div>
+	<div style="display:flex;justify-content:center;align-items:center;">
+		<div class="social_buttons">
+			<a target="_blank" href="../../../vgmaltsev-1.html"><div class="patreon_logo no_tooltip" title="Become a patron"></div></a>
+			<a target="_blank" href="https://vk.com/wahapedia"><div class="social_vk no_tooltip" title="Follow on VKontakte"></div></a>
+			<a target="_blank" href="../../../invite/VAXG2jRjXY-1.html"><div class="social_dd no_tooltip" title="Join Discord server"></div></a>
+			<a target="_blank" href="mailto:info@wahapedia.ru"><div class="social_email no_tooltip" title="Send e-mail"></div></a>
+		</div>		
+	</div>
+</div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-57173050-3', 'auto');
+ga('send', 'pageview');
+</script>
+<!--/noindex-->
+</body>
+</html>

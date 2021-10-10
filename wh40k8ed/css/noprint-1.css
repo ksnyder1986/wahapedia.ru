@@ -1,0 +1,17 @@
+﻿
+@media print {
+.noprint {display: none;}
+
+body {-webkit-print-color-adjust: exact;}
+
+#wrapper {border:0;}
+
+.pagebreak {page-break-inside: avoid;}
+
+#btnArmyList {display: none;}
+#btnArmyList:hover, #btnArmyList.hover {display: none;}
+
+#btnBackToTop {display: none;}
+#btnBackToTop:hover, #btnBackToTop.hover {display: none;}
+
+}
